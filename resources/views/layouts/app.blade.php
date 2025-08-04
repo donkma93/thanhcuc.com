@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'Trung Tâm Tiếng Đức Thanh Cúc - Học Tiếng Đức Chuyên Nghiệp')</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Animations -->
+    <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #13265b;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --dark-color: #0f172a;
+            --light-color: #f8fafc;
+            --navy-light: #1e3a8a;
+            --navy-lighter: #3b82f6;
+            --text-light: #64748b;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Keyframe Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40%, 43% {
+                transform: translateY(-10px);
+            }
+            70% {
+                transform: translateY(-5px);
+            }
+            90% {
+                transform: translateY(-2px);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        @keyframes blink {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: var(--primary-color);
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Initial hidden state for animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger animation delays */
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-brand .logo-img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .navbar-brand:hover .logo-img {
+            transform: scale(1.1);
+        }
+        
+        /* Footer logo */
+        .footer-logo {
+            height: 32px;
+            width: auto;
+            filter: brightness(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+        }
+        
+        /* Responsive logo */
+        @media (max-width: 768px) {
+            .navbar-brand .logo-img {
+                height: 32px;
+            }
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+            .footer-logo {
+                height: 28px;
+            }
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), #374151);
+            background-size: 200% 200%;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform: perspective(1px) translateZ(0);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover {
+            background-position: 100% 0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--secondary-color), #dc2626);
+            background-size: 200% 200%;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-position: 100% 0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-outline-primary:hover {
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-primary:hover::before {
+            left: 0;
+        }
+        
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+        
+        .text-accent-color {
+            color: var(--accent-color) !important;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #374151 50%, var(--secondary-color) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+        
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .feature-card .card-body {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card i {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--primary-color);
+        }
+        
+        .teacher-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .teacher-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .teacher-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .teacher-card:hover::after {
+            opacity: 0.1;
+        }
+        
+        .teacher-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .teacher-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .course-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .stats-section {
+            background-color: var(--light-color);
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .navbar-nav .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .dropdown-item {
+            transition: all 0.3s ease;
+            padding: 0.5rem 1.5rem;
+            position: relative;
+        }
+        
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(19, 38, 91, 0.1);
+            color: var(--primary-color);
+            padding-left: 2rem;
+        }
+        
+        .dropdown-item:hover::before {
+            transform: scaleY(1);
+        }
+        
+        /* Social Media Icons Animation */
+        .footer .text-light {
+            transition: all 0.3s ease;
+        }
+        
+        .footer a.text-light {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a.text-light:hover {
+            color: var(--secondary-color) !important;
+            transform: translateY(-3px) scale(1.2);
+        }
+        
+        .footer a.text-light i {
+            transition: all 0.3s ease;
+        }
+        
+        .footer a.text-light:hover i {
+            animation: bounce 1s ease;
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Loading animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Parallax effect */
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* Text reveal animation */
+        .text-reveal {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .text-reveal .text-content {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: textReveal 0.8s ease-out forwards;
+        }
+        
+        @keyframes textReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Counter animation */
+        .counter {
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        
+        /* Glowing effect */
+        .glow-effect {
+            position: relative;
+        }
+        
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            border-radius: inherit;
+            opacity: 0;
+            filter: blur(10px);
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .glow-effect:hover::before {
+            opacity: 0.7;
+        }
+    </style>
+    
+    @stack('styles')
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="logo-img me-2">
+                Thanh Cúc
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">Trang Chủ</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('about') }}">Về Chúng Tôi</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('schedule') }}">Lịch Khai Giảng</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('exam-schedule') }}">Lịch Thi</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('results') }}">Kết Quả Học Viên</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('contact') }}">Liên Hệ</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex">
+                    <a href="tel:0975186230" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-phone me-1"></i>Hotline
+                    </a>
+                    <a href="{{ route('contact') }}" class="btn btn-primary">Đăng Ký Ngay</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white mb-3 d-flex align-items-center">
+                        <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="footer-logo me-2">
+                        Thanh Cúc
+                    </h5>
+                    <p class="text-light">
+                        Trung tâm Tiếng Đức Thanh Cúc - Nơi giúp bạn chinh phục tiếng Đức một cách chuyên nghiệp và hiệu quả với đội ngũ giảng viên bản ngữ.
+                    </p>
+                    <div class="d-flex">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Trang Chính</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('home') }}" class="text-light text-decoration-none">Trang Chủ</a></li>
+                        <li><a href="{{ route('about') }}" class="text-light text-decoration-none">Về Chúng Tôi</a></li>
+                        <li><a href="{{ route('schedule') }}" class="text-light text-decoration-none">Lịch Khai Giảng</a></li>
+                        <li><a href="{{ route('exam-schedule') }}" class="text-light text-decoration-none">Lịch Thi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Dịch Vụ</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('results') }}" class="text-light text-decoration-none">Kết Quả Học Viên</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-light text-decoration-none">Liên Hệ</a></li>
+                        <li><a href="tel:0975186230" class="text-light text-decoration-none">Hotline: 0975.186.230</a></li>
+                        <li><a href="mailto:info@thanhcuc.edu.vn" class="text-light text-decoration-none">Email</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h6 class="text-white mb-3">Liên Hệ</h6>
+                    <div class="text-light">
+                        <p><i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC, Quận XYZ, Hà Nội</p>
+                        <p><i class="fas fa-phone me-2"></i>0975.186.230</p>
+                        <p><i class="fas fa-envelope me-2"></i>info@thanhcuc.edu.vn</p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4 border-light">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-light mb-0">&copy; 2024 Trung Tâm Tiếng Đức Thanh Cúc. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light text-decoration-none me-3">Chính Sách Bảo Mật</a>
+                    <a href="#" class="text-light text-decoration-none">Điều Khoản Sử Dụng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Advanced Animations -->
+    <script src="{{ asset('js/advanced-animations.js') }}"></script>
+    
+    <!-- Animation and Interaction Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements with animate-on-scroll class
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Scroll to top button functionality
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+                
+                // Parallax effect for hero section
+                const hero = document.querySelector('.hero-section');
+                if (hero) {
+                    const scrolled = window.pageYOffset;
+                    const parallax = scrolled * 0.5;
+                    hero.style.transform = `translateY(${parallax}px)`;
+                }
+                
+                // Parallax effect for other elements
+                document.querySelectorAll('.parallax-element').forEach(element => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.3;
+                    element.style.transform = `translateY(${rate}px)`;
+                });
+            });
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Counter animation
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                
+                function updateCounter() {
+                    start += increment;
+                    if (start < target) {
+                        element.textContent = Math.floor(start);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                }
+                updateCounter();
+            }
+            
+            // Observe counters
+            const counterObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        animateCounter(counter, target);
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.counter').forEach(counter => {
+                counterObserver.observe(counter);
+            });
+            
+            // Typing animation
+            function typeWriter(element, text, speed = 100) {
+                let i = 0;
+                element.innerHTML = '';
+                
+                function type() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    }
+                }
+                type();
+            }
+            
+            // Initialize typing animation for elements with data-typewriter
+            document.querySelectorAll('[data-typewriter]').forEach(element => {
+                const text = element.getAttribute('data-typewriter');
+                const speed = parseInt(element.getAttribute('data-speed')) || 100;
+                
+                const typingObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            typeWriter(entry.target, text, speed);
+                            typingObserver.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                typingObserver.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Add loading animation to buttons on click
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!this.classList.contains('loading')) {
+                        const originalText = this.innerHTML;
+                        this.classList.add('loading');
+                        this.innerHTML = '<span class="loading-spinner"></span> Loading...';
+                        
+                        // Remove loading state after 2 seconds (adjust as needed)
+                        setTimeout(() => {
+                            this.classList.remove('loading');
+                            this.innerHTML = originalText;
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Mouse parallax effect removed per user request
+            
+            // Add stagger animation to cards
+            function addStaggerAnimation(selector, animationClass, delay = 100) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add(animationClass);
+                    }, index * delay);
+                });
+            }
+            
+            // Initialize stagger animations when elements come into view
+            const staggerObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const container = entry.target;
+                        const cards = container.querySelectorAll('.feature-card, .teacher-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate-fade-in-up');
+                            }, index * 150);
+                        });
+                        staggerObserver.unobserve(container);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.row').forEach(row => {
+                if (row.querySelector('.feature-card, .teacher-card')) {
+                    staggerObserver.observe(row);
+                }
+            });
+            
+            // Add hover sound effect (optional)
+            function playHoverSound() {
+                // You can add audio files and play them on hover
+                // const audio = new Audio('/sounds/hover.mp3');
+                // audio.volume = 0.1;
+                // audio.play().catch(() => {}); // Ignore errors if audio fails
+            }
+            
+            // Add hover effects to interactive elements
+            document.querySelectorAll('.btn, .feature-card, .teacher-card').forEach(element => {
+                element.addEventListener('mouseenter', playHoverSound);
+            });
+            
+            // Page transition effect
+            window.addEventListener('beforeunload', function() {
+                document.body.style.opacity = '0';
+                document.body.style.transform = 'scale(0.95)';
+            });
+            
+            // Initialize page with fade in
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+                document.body.style.transform = 'scale(1)';
+            }, 100);
+        });
+        
+        // Utility function to add animation classes
+        function addAnimationClass(element, animationClass, delay = 0) {
+            setTimeout(() => {
+                element.classList.add(animationClass);
+            }, delay);
+        }
+        
+        // Function to create floating particles (optional)
+        function createFloatingParticles(container, count = 20) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: rgba(37, 99, 235, 0.3);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: float ${3 + Math.random() * 4}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                `;
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize floating particles for hero section
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.position = 'relative';
+                createFloatingParticles(heroSection, 15);
+            }
+        });
+    </script>
+    
+    @stack('scripts')
+</body>
+</html>

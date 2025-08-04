@@ -1,0 +1,63 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ieltsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34d399;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="40" cy="40" r="35" fill="url(#ieltsGradient)" filter="url(#shadow)"/>
+  
+  <!-- IELTS badge -->
+  <g transform="translate(12, 12)">
+    <!-- Main badge -->
+    <ellipse cx="28" cy="28" rx="25" ry="25" fill="white" stroke="#13265b" stroke-width="2"/>
+    
+    <!-- Inner circle -->
+    <circle cx="28" cy="28" r="18" fill="#13265b"/>
+    
+    <!-- IELTS text -->
+    <text x="28" y="22" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8" font-weight="bold">IELTS</text>
+    
+    <!-- Score bands -->
+    <g transform="translate(28, 32)">
+      <rect x="-8" y="0" width="4" height="6" fill="#10b981"/>
+      <rect x="-3" y="-2" width="4" height="8" fill="#34d399"/>
+      <rect x="2" y="-1" width="4" height="7" fill="#6ee7b7"/>
+      <text x="0" y="12" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="5">6.5+</text>
+    </g>
+    
+    <!-- Four skills icons -->
+    <g fill="white" font-family="Arial, sans-serif" font-size="4">
+      <!-- Listening -->
+      <circle cx="15" cy="15" r="3" fill="#f59e0b"/>
+      <text x="15" y="17" text-anchor="middle">L</text>
+      
+      <!-- Reading -->
+      <circle cx="41" cy="15" r="3" fill="#f59e0b"/>
+      <text x="41" y="17" text-anchor="middle">R</text>
+      
+      <!-- Writing -->
+      <circle cx="15" cy="41" r="3" fill="#f59e0b"/>
+      <text x="15" y="43" text-anchor="middle">W</text>
+      
+      <!-- Speaking -->
+      <circle cx="41" cy="41" r="3" fill="#f59e0b"/>
+      <text x="41" y="43" text-anchor="middle">S</text>
+    </g>
+  </g>
+  
+  <!-- Decorative stars -->
+  <g fill="#fbbf24" opacity="0.8">
+    <polygon points="65,15 67,20 72,20 68,24 70,29 65,26 60,29 62,24 58,20 63,20">
+      <animateTransform attributeName="transform" type="rotate" values="0 65 22;360 65 22" dur="4s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="15,65 16,67 19,67 17,69 18,72 15,70 12,72 13,69 11,67 14,67">
+      <animateTransform attributeName="transform" type="rotate" values="0 15 69;360 15 69" dur="3s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+</svg>

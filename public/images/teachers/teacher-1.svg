@@ -1,0 +1,101 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#13265b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a2f6b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="300" fill="url(#bgGradient1)"/>
+  
+  <!-- Teacher illustration -->
+  <g transform="translate(150, 150)">
+    <!-- Head -->
+    <circle cx="0" cy="-40" r="35" fill="#fbbf24"/>
+    
+    <!-- Hair -->
+    <path d="M -30 -65 Q 0 -75 30 -65 Q 35 -50 30 -40 Q 0 -45 -30 -40 Q -35 -50 -30 -65" fill="#92400e"/>
+    
+    <!-- Eyes -->
+    <circle cx="-12" cy="-45" r="3" fill="white"/>
+    <circle cx="12" cy="-45" r="3" fill="white"/>
+    <circle cx="-12" cy="-45" r="2" fill="#13265b"/>
+    <circle cx="12" cy="-45" r="2" fill="#13265b"/>
+    
+    <!-- Nose -->
+    <ellipse cx="0" cy="-35" rx="2" ry="4" fill="#f59e0b"/>
+    
+    <!-- Mouth -->
+    <path d="M -8 -25 Q 0 -20 8 -25" stroke="#13265b" stroke-width="2" fill="none"/>
+    
+    <!-- Glasses -->
+    <g stroke="#13265b" stroke-width="2" fill="none">
+      <circle cx="-12" cy="-45" r="8"/>
+      <circle cx="12" cy="-45" r="8"/>
+      <line x1="-4" y1="-45" x2="4" y2="-45"/>
+    </g>
+    
+    <!-- Body -->
+    <rect x="-25" y="-5" width="50" height="60" rx="5" fill="white"/>
+    
+    <!-- Tie -->
+    <polygon points="0,-5 -8,10 8,10" fill="#ef4444"/>
+    <rect x="-3" y="-5" width="6" height="15" fill="#ef4444"/>
+    
+    <!-- Arms -->
+    <ellipse cx="-35" cy="15" rx="8" ry="25" fill="#fbbf24"/>
+    <ellipse cx="35" cy="15" rx="8" ry="25" fill="#fbbf24"/>
+    
+    <!-- Hands -->
+    <circle cx="-35" cy="35" r="6" fill="#fbbf24"/>
+    <circle cx="35" cy="35" r="6" fill="#fbbf24"/>
+    
+    <!-- Book in hand -->
+    <rect x="28" y="30" width="8" height="12" fill="#10b981"/>
+    <line x1="30" y1="32" x2="34" y2="32" stroke="white" stroke-width="1"/>
+    <line x1="30" y1="35" x2="34" y2="35" stroke="white" stroke-width="1"/>
+    <line x1="30" y1="38" x2="34" y2="38" stroke="white" stroke-width="1"/>
+    
+    <!-- Legs -->
+    <rect x="-15" y="55" width="12" height="30" fill="#13265b"/>
+    <rect x="3" y="55" width="12" height="30" fill="#13265b"/>
+    
+    <!-- Shoes -->
+    <ellipse cx="-9" cy="90" rx="8" ry="4" fill="#000000"/>
+    <ellipse cx="9" cy="90" rx="8" ry="4" fill="#000000"/>
+  </g>
+  
+  <!-- Floating elements -->
+  <g fill="#f59e0b" opacity="0.6">
+    <circle cx="50" cy="50" r="3">
+      <animate attributeName="cy" values="50;45;50" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="80" r="2">
+      <animate attributeName="cy" values="80;75;80" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Academic elements -->
+  <g transform="translate(50, 250)">
+    <!-- Books -->
+    <rect x="0" y="0" width="6" height="20" fill="#ef4444"/>
+    <rect x="8" y="0" width="6" height="20" fill="#10b981"/>
+    <rect x="16" y="0" width="6" height="20" fill="#f59e0b"/>
+    
+    <!-- Graduation cap -->
+    <g transform="translate(180, -30)">
+      <ellipse cx="15" cy="15" rx="20" ry="5" fill="#13265b"/>
+      <rect x="0" y="10" width="30" height="5" fill="#13265b"/>
+      <polygon points="30,12 40,8 40,17" fill="#f59e0b"/>
+    </g>
+  </g>
+  
+  <!-- Name placeholder -->
+  <rect x="50" y="20" width="200" height="30" fill="rgba(255,255,255,0.9)" rx="5"/>
+  <text x="150" y="32" text-anchor="middle" fill="#13265b" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Thầy Nguyễn Văn A</text>
+  <text x="150" y="45" text-anchor="middle" fill="#f59e0b" font-family="Arial, sans-serif" font-size="10">Giảng viên TOEIC</text>
+</svg>

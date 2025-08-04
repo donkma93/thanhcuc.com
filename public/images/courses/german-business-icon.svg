@@ -1,0 +1,71 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="germanBusinessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#374151;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="40" cy="40" r="35" fill="url(#germanBusinessGradient)" filter="url(#shadow)"/>
+  
+  <!-- Business briefcase -->
+  <g transform="translate(20, 20)">
+    <rect x="5" y="15" width="30" height="20" rx="3" fill="#dc2626"/>
+    <rect x="7" y="17" width="26" height="16" rx="2" fill="#000000"/>
+    <rect x="17" y="12" width="6" height="6" fill="#dc2626"/>
+    <circle cx="20" cy="25" r="2" fill="#fbbf24"/>
+    
+    <!-- Business documents -->
+    <rect x="10" y="20" width="8" height="10" fill="white"/>
+    <line x1="12" y1="22" x2="16" y2="22" stroke="#000000" stroke-width="0.5"/>
+    <line x1="12" y1="24" x2="16" y2="24" stroke="#000000" stroke-width="0.5"/>
+    <line x1="12" y1="26" x2="16" y2="26" stroke="#000000" stroke-width="0.5"/>
+    
+    <rect x="22" y="20" width="8" height="10" fill="white"/>
+    <line x1="24" y1="22" x2="28" y2="22" stroke="#000000" stroke-width="0.5"/>
+    <line x1="24" y1="24" x2="28" y2="24" stroke="#000000" stroke-width="0.5"/>
+    <line x1="24" y1="26" x2="28" y2="26" stroke="#000000" stroke-width="0.5"/>
+  </g>
+  
+  <!-- German business terms -->
+  <g transform="translate(15, 45)">
+    <rect x="0" y="0" width="50" height="25" rx="3" fill="white" stroke="#000000" stroke-width="1"/>
+    <text x="25" y="8" text-anchor="middle" fill="#000000" font-family="Arial, sans-serif" font-size="5" font-weight="bold">Geschäft</text>
+    <text x="25" y="15" text-anchor="middle" fill="#dc2626" font-family="Arial, sans-serif" font-size="4">Business German</text>
+    <text x="25" y="21" text-anchor="middle" fill="#000000" font-family="Arial, sans-serif" font-size="4">Wirtschaft</text>
+  </g>
+  
+  <!-- German flag -->
+  <g transform="translate(55, 15)">
+    <rect x="0" y="0" width="12" height="8" fill="#000000"/>
+    <rect x="0" y="3" width="12" height="2" fill="#dc2626"/>
+    <rect x="0" y="6" width="12" height="2" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Business chart -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="10" width="3" height="8" fill="#10b981"/>
+    <rect x="5" y="7" width="3" height="11" fill="#fbbf24"/>
+    <rect x="10" y="4" width="3" height="14" fill="#dc2626"/>
+    <line x1="0" y1="18" x2="13" y2="18" stroke="#000000" stroke-width="1"/>
+    <line x1="0" y1="18" x2="0" y2="0" stroke="#000000" stroke-width="1"/>
+  </g>
+  
+  <!-- Floating elements -->
+  <circle cx="15" cy="15" r="2" fill="#fbbf24" opacity="0.8">
+    <animate attributeName="cy" values="15;10;15" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="65" cy="65" r="1.5" fill="#dc2626" opacity="0.6">
+    <animate attributeName="cy" values="65;60;65" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Business German words -->
+  <g fill="#fbbf24" font-family="Arial, sans-serif" font-size="4" font-weight="bold" opacity="0.7">
+    <text x="5" y="75">Firma</text>
+    <text x="55" y="10">Büro</text>
+  </g>
+</svg>

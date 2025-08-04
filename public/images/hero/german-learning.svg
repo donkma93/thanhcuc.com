@@ -1,0 +1,100 @@
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="500" height="400" fill="url(#heroGradient)"/>
+  
+  <!-- German flag elements -->
+  <rect x="0" y="0" width="500" height="133" fill="#000000" opacity="0.3"/>
+  <rect x="0" y="133" width="500" height="134" fill="#dc2626" opacity="0.3"/>
+  <rect x="0" y="267" width="500" height="133" fill="#fbbf24" opacity="0.3"/>
+  
+  <!-- Floating elements -->
+  <circle cx="80" cy="60" r="3" fill="#fbbf24" opacity="0.8">
+    <animate attributeName="cy" values="60;50;60" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="420" cy="80" r="2" fill="#dc2626" opacity="0.7">
+    <animate attributeName="cy" values="80;70;80" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="450" cy="150" r="2.5" fill="#fbbf24" opacity="0.6">
+    <animate attributeName="cy" values="150;140;150" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Main illustration -->
+  <g transform="translate(100, 80)">
+    <!-- German book -->
+    <rect x="50" y="120" width="200" height="140" rx="10" fill="url(#bookGradient)" stroke="#000000" stroke-width="2"/>
+    <rect x="60" y="130" width="180" height="120" rx="5" fill="white"/>
+    
+    <!-- Book pages with German text -->
+    <line x1="70" y1="150" x2="230" y2="150" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="70" y1="170" x2="200" y2="170" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="70" y1="190" x2="220" y2="190" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="70" y1="210" x2="180" y2="210" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="70" y1="230" x2="210" y2="230" stroke="#d1d5db" stroke-width="1"/>
+    
+    <!-- German text on book -->
+    <text x="150" y="145" text-anchor="middle" fill="#000000" font-family="Arial, sans-serif" font-size="12" font-weight="bold">DEUTSCH</text>
+    
+    <!-- Graduation cap -->
+    <g transform="translate(120, 50)">
+      <ellipse cx="30" cy="40" rx="35" ry="8" fill="#000000"/>
+      <rect x="10" y="32" width="40" height="8" fill="#000000"/>
+      <polygon points="50,36 60,30 60,42" fill="#fbbf24"/>
+      <line x1="60" y1="36" x2="70" y2="30" stroke="#fbbf24" stroke-width="2"/>
+    </g>
+    
+    <!-- Speech bubbles with German words -->
+    <g transform="translate(20, 20)">
+      <ellipse cx="30" cy="25" rx="25" ry="15" fill="white" stroke="#000000" stroke-width="2"/>
+      <polygon points="20,35 15,45 25,40" fill="white" stroke="#000000" stroke-width="2"/>
+      <text x="30" y="30" text-anchor="middle" fill="#000000" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Hallo!</text>
+    </g>
+    
+    <g transform="translate(200, 30)">
+      <ellipse cx="30" cy="25" rx="35" ry="15" fill="white" stroke="#dc2626" stroke-width="2"/>
+      <polygon points="40,35 45,45 35,40" fill="white" stroke="#dc2626" stroke-width="2"/>
+      <text x="30" y="30" text-anchor="middle" fill="#dc2626" font-family="Arial, sans-serif" font-size="9" font-weight="bold">Wunderbar!</text>
+    </g>
+    
+    <!-- German flag -->
+    <g transform="translate(260, 100)">
+      <rect x="0" y="0" width="30" height="20" fill="#000000"/>
+      <rect x="0" y="7" width="30" height="6" fill="#dc2626"/>
+      <rect x="0" y="14" width="30" height="6" fill="#fbbf24"/>
+      <line x1="0" y1="0" x2="0" y2="25" stroke="#8b5cf6" stroke-width="2"/>
+    </g>
+    
+    <!-- Stars -->
+    <g fill="#fbbf24">
+      <polygon points="280,60 285,70 295,70 287,78 290,88 280,83 270,88 273,78 265,70 275,70" opacity="0.8">
+        <animateTransform attributeName="transform" type="rotate" values="0 280 74;360 280 74" dur="4s" repeatCount="indefinite"/>
+      </polygon>
+      <polygon points="40,280 43,286 50,286 45,291 47,298 40,294 33,298 35,291 30,286 37,286" opacity="0.6">
+        <animateTransform attributeName="transform" type="rotate" values="0 40 289;360 40 289" dur="5s" repeatCount="indefinite"/>
+      </polygon>
+    </g>
+    
+    <!-- Progress arrows -->
+    <g stroke="#dc2626" stroke-width="3" fill="none" opacity="0.7">
+      <path d="M 280 150 Q 290 140 300 150">
+        <animate attributeName="stroke-dasharray" values="0,20;20,0;0,20" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <polygon points="295,145 305,150 295,155" fill="#dc2626"/>
+    </g>
+  </g>
+  
+  <!-- Bottom text -->
+  <text x="250" y="370" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Thanh Cúc German Center</text>
+  <text x="250" y="390" text-anchor="middle" fill="#fbbf24" font-family="Arial, sans-serif" font-size="12">Professionell • Effektiv • Erfolgreich</text>
+</svg>
