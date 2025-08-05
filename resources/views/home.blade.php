@@ -15,23 +15,23 @@
         <div class="carousel-inner">
             <!-- Slide 1: Du học Đức -->
             <div class="carousel-item active">
-                <div class="hero-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="hero-slide" style="background: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);">
                     <div class="container">
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-6">
                                 <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
                                         CHINH PHỤC TIẾNG ĐỨC CÙNG THANH CÚC
                                     </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
                                         Ra đời từ năm 2020, Trung tâm Tiếng Đức Thanh Cúc đã trở thành điểm đến tin cậy của hàng ngàn học viên. 
                                         Với đội ngũ giảng viên bản ngữ và phương pháp giảng dạy hiện đại.
                                     </p>
                                     <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('contact') }}" class="btn btn-light btn-lg btn-liquid">
+                                        <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
                                             <i class="fas fa-play me-2"></i>Học Thử Miễn Phí
                                         </a>
-                                        <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
+                                        <a href="tel:0975186230" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
                                             <i class="fas fa-phone me-2"></i>0975.186.230
                                         </a>
                                     </div>
@@ -48,23 +48,23 @@
             
             <!-- Slide 2: Học tập tại Đức -->
             <div class="carousel-item">
-                <div class="hero-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="hero-slide" style="background: linear-gradient(135deg, #CADD2D 0%, #3EB850 100%);">
                     <div class="container">
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-6">
                                 <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
                                         HỌC TẬP TẠI ĐỨC
                                     </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
                                         Trải nghiệm môi trường học tập hiện đại và chuyên nghiệp tại các trường đại học hàng đầu Đức. 
                                         Phát triển kỹ năng và kiến thức với chất lượng giáo dục đẳng cấp thế giới.
                                     </p>
                                     <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('contact') }}" class="btn btn-light btn-lg btn-liquid">
+                                        <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
                                             <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Du Học
                                         </a>
-                                        <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg">
+                                        <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
                                             <i class="fas fa-info-circle me-2"></i>Tìm Hiểu Thêm
                                         </a>
                                     </div>
@@ -81,23 +81,23 @@
             
             <!-- Slide 3: Tốt nghiệp thành công -->
             <div class="carousel-item">
-                <div class="hero-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="hero-slide" style="background: linear-gradient(135deg, #3EB850 0%, #015862 100%);">
                     <div class="container">
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-6">
                                 <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
                                         TỐT NGHIỆP THÀNH CÔNG
                                     </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">
                                         Nhận bằng cấp được công nhận quốc tế và mở ra cơ hội nghề nghiệp rộng lớn. 
                                         95% học viên của chúng tôi đã thành công trong hành trình du học và làm việc tại Đức.
                                     </p>
                                     <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('results') }}" class="btn btn-light btn-lg btn-liquid">
+                                        <a href="{{ route('results') }}" class="btn btn-warning btn-lg btn-liquid" style="background: #F9D200; border-color: #F9D200; color: #015862; font-weight: bold;">
                                             <i class="fas fa-trophy me-2"></i>Xem Kết Quả
                                         </a>
-                                        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
+                                        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg" style="border-color: #F9D200; color: #F9D200; background: rgba(249, 210, 0, 0.1);">
                                             <i class="fas fa-rocket me-2"></i>Bắt Đầu Ngay
                                         </a>
                                     </div>

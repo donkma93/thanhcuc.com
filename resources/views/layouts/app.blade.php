@@ -17,16 +17,41 @@
     
     <style>
         :root {
-            --primary-color: #13265b;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --dark-color: #0f172a;
-            --light-color: #f8fafc;
-            --navy-light: #1e3a8a;
-            --navy-lighter: #3b82f6;
-            --text-light: #64748b;
+            /* New Vibrant Color Palette */
+            --primary-color: #F9D200;
+            --primary-color-rgb: 249, 210, 0;
+            --secondary-color: #F57F25;
+            --secondary-color-rgb: 245, 127, 37;
+            --accent-color: #CADD2D;
+            --accent-color-rgb: 202, 221, 45;
+            --success-color: #3EB850;
+            --success-color-rgb: 62, 184, 80;
+            --dark-color: #015862;
+            --dark-color-rgb: 1, 88, 98;
+            
+            /* Derived Colors */
+            --warning-color: #F57F25;
+            --danger-color: #dc3545;
+            --info-color: #3EB850;
+            --light-color: #f8f9fa;
+            
+            /* Text Colors */
+            --text-primary: #015862;
+            --text-secondary: #2c5530;
+            --text-muted: #6c757d;
+            --text-light: #ffffff;
+            
+            /* Background Gradients */
+            --bg-primary: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);
+            --bg-secondary: linear-gradient(135deg, #CADD2D 0%, #3EB850 100%);
+            --bg-accent: linear-gradient(135deg, #3EB850 0%, #015862 100%);
+            --bg-warm: linear-gradient(135deg, #F57F25 0%, #CADD2D 100%);
+            --bg-cool: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+            
+            /* Legacy support */
+            --navy-light: #015862;
+            --navy-lighter: #3EB850;
+            --text-light: #6c757d;
         }
         
         * {
@@ -418,6 +443,7 @@
             justify-content: center;
             margin: 0 auto;
             animation: modalIconPulse 2s infinite;
+            box-shadow: 0 8px 25px rgba(249, 210, 0, 0.3);
         }
         
         .modal-icon i {
@@ -443,17 +469,19 @@
         }
         
         .urgency-banner {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            background: linear-gradient(135deg, rgba(249, 210, 0, 0.1) 0%, rgba(245, 127, 37, 0.1) 100%);
             border-radius: 15px;
             padding: 15px;
-            border-left: 4px solid #f39c12;
+            border-left: 4px solid var(--secondary-color);
+            border: 2px solid rgba(245, 127, 37, 0.2);
         }
         
         .modal-registration-form .input-group-text {
             background: var(--primary-color);
-            color: white;
+            color: var(--dark-color);
             border: none;
             border-radius: 10px 0 0 10px;
+            font-weight: 600;
         }
         
         .modal-registration-form .form-control,
@@ -468,7 +496,7 @@
         .modal-registration-form .form-control:focus,
         .modal-registration-form .form-select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(249, 210, 0, 0.25);
             outline: none;
         }
         
@@ -482,31 +510,39 @@
         
         .modal-registration-form textarea.form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(249, 210, 0, 0.25);
             outline: none;
         }
         
         .btn-pulse {
             animation: btnPulse 2s infinite;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #e74c3c 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             border: none;
             border-radius: 25px;
             padding: 15px 30px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 10px 30px rgba(245, 127, 37, 0.4);
+            color: var(--dark-color);
         }
         
         .btn-pulse:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.4);
-            background: linear-gradient(135deg, #e74c3c 0%, var(--primary-color) 100%);
+            box-shadow: 0 15px 40px rgba(245, 127, 37, 0.6);
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            color: var(--dark-color);
         }
         
         @keyframes btnPulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3); }
-            50% { box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5); }
+            0%, 100% { 
+                box-shadow: 0 10px 30px rgba(245, 127, 37, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 15px 40px rgba(245, 127, 37, 0.6);
+                transform: scale(1.02);
+            }
         }
         
         /* Modal Alert Styles */
@@ -1281,8 +1317,8 @@
                 // Show modal after 5 seconds
                 setTimeout(function() {
                     const registrationModal = new bootstrap.Modal(document.getElementById('registrationModal'), {
-                        backdrop: 'static',
-                        keyboard: false
+                        backdrop: true,
+                        keyboard: true
                     });
                     registrationModal.show();
                     
@@ -1314,6 +1350,44 @@
                     localStorage.setItem('registrationModalLastShown', now.toString());
                 });
             }
+            
+            // Handle browser back button when modal is open
+            let modalInstance = null;
+            let historyPushed = false;
+            
+            // Store modal instance when shown
+            if (modalElement) {
+                modalElement.addEventListener('shown.bs.modal', function() {
+                    modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    
+                    // Add history state when modal opens
+                    if (!historyPushed) {
+                        window.history.pushState({modal: 'registration'}, '', window.location.href);
+                        historyPushed = true;
+                    }
+                });
+                
+                modalElement.addEventListener('hidden.bs.modal', function() {
+                    modalInstance = null;
+                    
+                    // Reset history flag when modal closes
+                    if (historyPushed) {
+                        historyPushed = false;
+                    }
+                });
+            }
+            
+            // Handle popstate (back button) event
+            window.addEventListener('popstate', function(event) {
+                if (modalInstance && modalElement && modalElement.classList.contains('show')) {
+                    // Close modal when back button is pressed
+                    modalInstance.hide();
+                    // Don't prevent default - let normal navigation continue
+                } else if (event.state && event.state.modal === 'registration') {
+                    // If we're going back to a modal state, prevent it
+                    window.history.forward();
+                }
+            });
             
             // Add click tracking for analytics (optional)
             const submitButton = document.querySelector('.modal-registration-form button[type="submit"]');

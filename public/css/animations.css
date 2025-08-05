@@ -1,10 +1,12 @@
 /* Advanced Animations and Effects for Anh Ngữ SEC */
 
-/* Updated color variables for German theme */
+/* Updated color variables for vibrant German theme */
 :root {
-    --primary-color: #000000;
-    --secondary-color: #dc2626;
-    --accent-color: #fbbf24;
+    --primary-color: #F9D200;
+    --secondary-color: #F57F25;
+    --accent-color: #CADD2D;
+    --success-color: #3EB850;
+    --dark-color: #015862;
 }
 
 /* Morphing Button Effects */
