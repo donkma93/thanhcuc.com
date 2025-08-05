@@ -284,17 +284,17 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="course" class="form-label">Khóa học quan tâm *</label>
+                                <label for="program" class="form-label">Chương trình quan tâm *</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="fas fa-book"></i></span>
-                                    <select class="form-select" id="course" name="course" required>
-                                        <option value="">Chọn khóa học</option>
-                                        <option value="A1-A2">Cơ bản A1-A2</option>
-                                        <option value="B1-B2">Trung cấp B1-B2</option>
-                                        <option value="C1-C2">Nâng cao C1-C2</option>
-                                        <option value="Business">Tiếng Đức thương mại</option>
-                                        <option value="Exam">Luyện thi chứng chỉ</option>
-                                        <option value="Online">Học online</option>
+                                    <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+                                    <select class="form-select" id="program" name="program" required>
+                                        <option value="">Chọn chương trình</option>
+                                        <option value="IT">IT & Công nghệ</option>
+                                        <option value="Healthcare">Y tế & Chăm sóc</option>
+                                        <option value="Engineering">Kỹ thuật & Cơ khí</option>
+                                        <option value="Hospitality">Khách sạn & Ẩm thực</option>
+                                        <option value="Business">Kinh doanh & Quản lý</option>
+                                        <option value="Other">Ngành khác</option>
                                     </select>
                                 </div>
                             </div>

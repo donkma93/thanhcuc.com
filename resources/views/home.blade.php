@@ -21,15 +21,15 @@
                             <div class="col-lg-6">
                                 <div class="hero-content">
                                     <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
-                                        CHINH PHỤC TIẾNG ĐỨC CÙNG THANH CÚC
+                                        DU HỌC NGHỀ ĐỨC - TƯƠNG LAI RỘNG MỞ
                                     </h1>
                                     <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
-                                        Ra đời từ năm 2020, Trung tâm Tiếng Đức Thanh Cúc đã trở thành điểm đến tin cậy của hàng ngàn học viên. 
-                                        Với đội ngũ giảng viên bản ngữ và phương pháp giảng dạy hiện đại.
+                                        Thanh Cúc - Đơn vị tư vấn du học nghề Đức uy tín từ năm 2020. Chương trình Ausbildung với mức lương hấp dẫn, 
+                                        cơ hội định cư và phát triển sự nghiệp tại châu Âu.
                                     </p>
                                     <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
                                         <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
-                                            <i class="fas fa-play me-2"></i>Học Thử Miễn Phí
+                                            <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí
                                         </a>
                                         <a href="tel:0975186230" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
                                             <i class="fas fa-phone me-2"></i>0975.186.230
@@ -54,15 +54,15 @@
                             <div class="col-lg-6">
                                 <div class="hero-content">
                                     <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
-                                        HỌC TẬP TẠI ĐỨC
+                                        AUSBILDUNG - HỌC NGHỀ CÓ LƯƠNG
                                     </h1>
                                     <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
-                                        Trải nghiệm môi trường học tập hiện đại và chuyên nghiệp tại các trường đại học hàng đầu Đức. 
-                                        Phát triển kỹ năng và kiến thức với chất lượng giáo dục đẳng cấp thế giới.
+                                        Chương trình đào tạo nghề 3 năm tại Đức với mức lương từ 515-1.500€/tháng. 
+                                        Kết hợp lý thuyết và thực hành, đảm bảo việc làm sau tốt nghiệp với mức lương cao.
                                     </p>
                                     <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
                                         <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
-                                            <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Du Học
+                                            <i class="fas fa-euro-sign me-2"></i>Xem Mức Lương
                                         </a>
                                         <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
                                             <i class="fas fa-info-circle me-2"></i>Tìm Hiểu Thêm
@@ -87,15 +87,15 @@
                             <div class="col-lg-6">
                                 <div class="hero-content">
                                     <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
-                                        TỐT NGHIỆP THÀNH CÔNG
+                                        ĐỊNH CƯ & PHÁT TRIỂN SỰ NGHIỆP
                                     </h1>
                                     <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">
-                                        Nhận bằng cấp được công nhận quốc tế và mở ra cơ hội nghề nghiệp rộng lớn. 
-                                        95% học viên của chúng tôi đã thành công trong hành trình du học và làm việc tại Đức.
+                                        Sau khi hoàn thành Ausbildung, bạn có thể xin thường trú, mang gia đình sang Đức. 
+                                        95% học viên của chúng tôi đã thành công định cư và có cuộc sống ổn định tại Đức.
                                     </p>
                                     <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
                                         <a href="{{ route('results') }}" class="btn btn-warning btn-lg btn-liquid" style="background: #F9D200; border-color: #F9D200; color: #015862; font-weight: bold;">
-                                            <i class="fas fa-trophy me-2"></i>Xem Kết Quả
+                                            <i class="fas fa-home me-2"></i>Câu Chuyện Thành Công
                                         </a>
                                         <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg" style="border-color: #F9D200; color: #F9D200; background: rgba(249, 210, 0, 0.1);">
                                             <i class="fas fa-rocket me-2"></i>Bắt Đầu Ngay
@@ -241,12 +241,12 @@
     </div>
 </section>
 
-<!-- Courses Section -->
+<!-- Ausbildung Programs Section -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">KHÓA HỌC TIẾNG ĐỨC</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Lộ trình học tập toàn diện từ cơ bản đến nâng cao theo khung CEFR</p>
+            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">CHƯƠNG TRÌNH AUSBILDUNG PHỔ BIẾN</h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">Các ngành nghề được yêu thích nhất với mức lương hấp dẫn tại Đức</p>
         </div>
         
         <div class="row">
@@ -254,12 +254,11 @@
                 <div class="card feature-card h-100 text-center card-3d">
                     <div class="card-body p-4">
                         <div class="mb-3">
-                            <img src="{{ asset('images/courses/german-a1a2-icon.svg') }}" 
-                                 alt="German A1-A2" class="rounded animate-on-scroll" width="80" height="80">
+                            <i class="fas fa-laptop-code fa-3x text-primary"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Cơ Bản A1-A2</h5>
-                        <p class="text-muted mb-3">Khóa học dành cho người mới bắt đầu<br>Thời gian: 6-8 tháng</p>
-                        <a href="{{ route('courses.foundation') }}" class="btn btn-primary btn-morph">Xem thêm</a>
+                        <h5 class="fw-bold mb-3">IT & Công Nghệ</h5>
+                        <p class="text-muted mb-3">Lập trình viên, Quản trị mạng<br>Lương: 1.200-1.500€/tháng</p>
+                        <a href="{{ route('schedule') }}" class="btn btn-primary btn-morph">Tìm hiểu thêm</a>
                     </div>
                 </div>
             </div>
@@ -268,12 +267,11 @@
                 <div class="card feature-card h-100 text-center card-3d">
                     <div class="card-body p-4">
                         <div class="mb-3">
-                            <img src="{{ asset('images/courses/german-b1b2-icon.svg') }}" 
-                                 alt="German B1-B2" class="rounded animate-on-scroll animate-delay-1" width="80" height="80">
+                            <i class="fas fa-user-nurse fa-3x text-success"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Trung Cấp B1-B2</h5>
-                        <p class="text-muted mb-3">Phát triển kỹ năng giao tiếp<br>Thời gian: 8-10 tháng</p>
-                        <a href="{{ route('courses.intermediate') }}" class="btn btn-primary btn-morph">Xem thêm</a>
+                        <h5 class="fw-bold mb-3">Y Tế & Chăm Sóc</h5>
+                        <p class="text-muted mb-3">Điều dưỡng, Chăm sóc người già<br>Lương: 1.000-1.300€/tháng</p>
+                        <a href="{{ route('schedule') }}" class="btn btn-primary btn-morph">Tìm hiểu thêm</a>
                     </div>
                 </div>
             </div>
@@ -282,12 +280,11 @@
                 <div class="card feature-card h-100 text-center card-3d">
                     <div class="card-body p-4">
                         <div class="mb-3">
-                            <img src="{{ asset('images/courses/german-c1c2-icon.svg') }}" 
-                                 alt="German C1-C2" class="rounded animate-on-scroll animate-delay-2" width="80" height="80">
+                            <i class="fas fa-wrench fa-3x text-warning"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Nâng Cao C1-C2</h5>
-                        <p class="text-muted mb-3">Thành thạo như người bản ngữ<br>Thời gian: 10-12 tháng</p>
-                        <a href="{{ route('courses.advanced') }}" class="btn btn-primary btn-morph">Xem thêm</a>
+                        <h5 class="fw-bold mb-3">Kỹ Thuật & Cơ Khí</h5>
+                        <p class="text-muted mb-3">Thợ máy, Kỹ thuật ô tô<br>Lương: 1.100-1.400€/tháng</p>
+                        <a href="{{ route('schedule') }}" class="btn btn-primary btn-morph">Tìm hiểu thêm</a>
                     </div>
                 </div>
             </div>
@@ -296,12 +293,11 @@
                 <div class="card feature-card h-100 text-center card-3d">
                     <div class="card-body p-4">
                         <div class="mb-3">
-                            <img src="{{ asset('images/courses/german-business-icon.svg') }}" 
-                                 alt="German Business" class="rounded animate-on-scroll animate-delay-3" width="80" height="80">
+                            <i class="fas fa-utensils fa-3x text-danger"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Tiếng Đức Thương Mại</h5>
-                        <p class="text-muted mb-3">Chuyên ngành kinh doanh<br>Thời gian: 4-6 tháng</p>
-                        <a href="{{ route('courses.business') }}" class="btn btn-primary btn-morph">Xem thêm</a>
+                        <h5 class="fw-bold mb-3">Khách Sạn & Ẩm Thực</h5>
+                        <p class="text-muted mb-3">Đầu bếp, Quản lý khách sạn<br>Lương: 900-1.200€/tháng</p>
+                        <a href="{{ route('schedule') }}" class="btn btn-primary btn-morph">Tìm hiểu thêm</a>
                     </div>
                 </div>
             </div>
@@ -309,12 +305,12 @@
     </div>
 </section>
 
-<!-- Teachers Section -->
+<!-- Consultants Section -->
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">ĐỘI NGŨ GIẢNG VIÊN</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Giảng viên bản ngữ Đức với kinh nghiệm giảng dạy chuyên nghiệp</p>
+            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">ĐỘI NGŨ TƯ VẤN VIÊN</h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">Tư vấn viên chuyên nghiệp với kinh nghiệm du học và làm việc tại Đức</p>
         </div>
         
         <div class="row">
@@ -325,9 +321,9 @@
                             <img src="{{ asset('images/teachers/teacher-1.svg') }}" 
                                  alt="Herr Schmidt" class="rounded-circle" width="80" height="80">
                         </div>
-                        <h6 class="fw-bold text-uppercase mb-2">Herr Schmidt</h6>
-                        <p class="text-muted small mb-2">Giảng viên bản ngữ</p>
-                        <span class="course-badge">Goethe Institut</span>
+                        <h6 class="fw-bold text-uppercase mb-2">Anh Minh</h6>
+                        <p class="text-muted small mb-2">Tư vấn trưởng</p>
+                        <span class="course-badge">5 năm kinh nghiệm</span>
                     </div>
                 </div>
             </div>
@@ -339,9 +335,9 @@
                             <img src="{{ asset('images/teachers/teacher-2.svg') }}" 
                                  alt="Frau Müller" class="rounded-circle" width="80" height="80">
                         </div>
-                        <h6 class="fw-bold text-uppercase mb-2">Frau Müller</h6>
-                        <p class="text-muted small mb-2">Giảng viên bản ngữ</p>
-                        <span class="course-badge">TestDaF</span>
+                        <h6 class="fw-bold text-uppercase mb-2">Chị Lan</h6>
+                        <p class="text-muted small mb-2">Chuyên viên visa</p>
+                        <span class="course-badge">Du học sinh Đức</span>
                     </div>
                 </div>
             </div>
@@ -355,9 +351,9 @@
                                 <i class="fas fa-user fa-2x text-white"></i>
                             </div>
                         </div>
-                        <h6 class="fw-bold text-uppercase mb-2">Herr Weber</h6>
-                        <p class="text-muted small mb-2">Giảng viên bản ngữ</p>
-                        <span class="course-badge">DSH</span>
+                        <h6 class="fw-bold text-uppercase mb-2">Anh Tuấn</h6>
+                        <p class="text-muted small mb-2">Chuyên viên Ausbildung</p>
+                        <span class="course-badge">Cựu du học sinh</span>
                     </div>
                 </div>
             </div>
@@ -371,102 +367,320 @@
                                 <i class="fas fa-user fa-2x text-white"></i>
                             </div>
                         </div>
-                        <h6 class="fw-bold text-uppercase mb-2">Frau Fischer</h6>
-                        <p class="text-muted small mb-2">Giảng viên bản ngữ</p>
-                        <span class="course-badge">Business German</span>
+                        <h6 class="fw-bold text-uppercase mb-2">Chị Hương</h6>
+                        <p class="text-muted small mb-2">Chuyên viên hỗ trợ</p>
+                        <span class="course-badge">Định cư Đức</span>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="text-center mt-4">
-            <a href="{{ route('teachers') }}" class="btn btn-outline-primary btn-lg">
-                Xem tất cả giảng viên
+            <a href="{{ route('about') }}" class="btn btn-outline-primary btn-lg">
+                Tìm hiểu về đội ngũ
             </a>
         </div>
     </div>
 </section>
 
-<!-- Testimonials Section -->
+<!-- Testimonials Slider Section -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">HỌC VIÊN NÓI GÌ VỀ CHÚNG TÔI</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những chia sẻ chân thực từ học viên</p>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">Những chia sẻ chân thực từ các bạn đã thành công du học nghề Đức</p>
         </div>
         
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-quote-left fa-2x text-primary"></i>
-                        </div>
-                        <p class="text-muted mb-4">
-                            "Tôi đã học tiếng Đức tại Thanh Cúc được 1 năm và đã đạt chứng chỉ B2. 
-                            Giảng viên rất tận tâm và phương pháp giảng dạy hiệu quả."
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 50px; height: 50px;">
-                                <i class="fas fa-user text-white"></i>
+        <!-- Testimonials Carousel -->
+        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2"></button>
+            </div>
+            
+            <div class="carousel-inner">
+                <!-- Slide 1: 3 testimonials -->
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Nguyễn Minh Anh" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Nhờ Thanh Cúc, tôi đã thành công xin được Ausbildung IT tại Munich với lương 1.400€/tháng."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Nguyễn Minh Anh</h6>
+                                    <small class="text-muted">IT - Munich, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-success">Thành công 2023</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h6 class="mb-0">Nguyễn Văn A</h6>
-                                <small class="text-muted">Học viên khóa B2</small>
+                        </div>
+                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Trần Thị Lan" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-secondary opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Hoàn thành Ausbildung điều dưỡng tại Berlin, lương 1.200€/tháng và đã mang gia đình định cư."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Trần Thị Lan</h6>
+                                    <small class="text-muted">Điều dưỡng - Berlin, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-info">Định cư thành công</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Lê Văn Hùng" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-warning opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Từ kỹ sư cơ khí VN, giờ làm tại nhà máy ô tô Stuttgart với lương 1.500€/tháng."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Lê Văn Hùng</h6>
+                                    <small class="text-muted">Kỹ thuật ô tô - Stuttgart, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-warning">Lương cao nhất</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2: 3 more testimonials -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Phạm Thị Mai" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-success opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Ausbildung khách sạn tại Hamburg đã mở ra cơ hội mới. Hiện quản lý khách sạn 4 sao với lương 1.300€/tháng."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Phạm Thị Mai</h6>
+                                    <small class="text-muted">Quản lý khách sạn - Hamburg, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-primary">Thăng tiến nhanh</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Đỗ Minh Tuấn" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-danger opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Từ đầu bếp VN, giờ làm tại nhà hàng Michelin star ở Frankfurt. Ước mơ đã thành hiện thực."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Đỗ Minh Tuấn</h6>
+                                    <small class="text-muted">Đầu bếp - Frankfurt, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-danger">Michelin Star</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Nguyễn Thị Hoa" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-info opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Ausbildung chăm sóc người già tại Cologne. Công việc ý nghĩa với lương 1.100€/tháng và được tôn trọng."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Nguyễn Thị Hoa</h6>
+                                    <small class="text-muted">Chăm sóc người già - Cologne, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-info">Công việc ý nghĩa</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: 3 final testimonials -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Võ Minh Đức" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-dark opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Ausbildung thợ điện tại Dresden. Từ thợ phụ VN thành thợ chính với lương 1.350€/tháng."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Võ Minh Đức</h6>
+                                    <small class="text-muted">Thợ điện - Dresden, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-dark">Thợ chính</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Lý Thị Kim" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-purple opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Ausbildung dược sĩ tại Düsseldorf. Từ sinh viên dược VN thành dược sĩ Đức với lương 1.250€/tháng."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Lý Thị Kim</h6>
+                                    <small class="text-muted">Dược sĩ - Düsseldorf, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge" style="background-color: #6f42c1;">Dược sĩ</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face&auto=format" 
+                                         alt="Hoàng Văn Nam" class="rounded-circle testimonial-avatar mb-3" 
+                                         width="80" height="80">
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-success opacity-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-3 fst-italic">
+                                        "Ausbildung logistics tại Hannover. Quản lý kho hàng lớn với lương 1.200€/tháng và cơ hội thăng tiến."
+                                    </p>
+                                    <h6 class="fw-bold text-primary mb-1">Hoàng Văn Nam</h6>
+                                    <small class="text-muted">Logistics - Hannover, Đức</small>
+                                    <div class="mt-2">
+                                        <span class="badge bg-success">Quản lý kho</span>
+                                    </div>
+                                    <div class="text-warning mt-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-1">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-quote-left fa-2x text-secondary"></i>
-                        </div>
-                        <p class="text-muted mb-4">
-                            "Nhờ có Thanh Cúc mà tôi đã thành công trong kỳ thi Goethe C1 và hiện đang du học tại Đức. 
-                            Cảm ơn các thầy cô rất nhiều!"
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 50px; height: 50px;">
-                                <i class="fas fa-user text-white"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-0">Trần Thị B</h6>
-                                <small class="text-muted">Du học sinh tại Đức</small>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                <div class="carousel-control-icon">
+                    <i class="fas fa-chevron-left fa-2x text-primary"></i>
                 </div>
-            </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-2">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-quote-left fa-2x text-accent-color"></i>
-                        </div>
-                        <p class="text-muted mb-4">
-                            "Môi trường học tập tại Thanh Cúc rất chuyên nghiệp. 
-                            Tôi đã từ không biết gì về tiếng Đức đến có thể giao tiếp thành thạo."
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 50px; height: 50px;">
-                                <i class="fas fa-user text-white"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-0">Lê Văn C</h6>
-                                <small class="text-muted">Học viên khóa A2</small>
-                            </div>
-                        </div>
-                    </div>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                <div class="carousel-control-icon">
+                    <i class="fas fa-chevron-right fa-2x text-primary"></i>
                 </div>
-            </div>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </section>
