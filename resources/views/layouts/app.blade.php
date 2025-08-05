@@ -338,17 +338,19 @@
             background-color: var(--primary-color) !important;
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #374151 50%, var(--secondary-color) 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            color: white;
-            padding: 100px 0;
+        /* Hero Slider Styles */
+        .hero-slider-section {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-slide {
+            min-height: 100vh;
             position: relative;
             overflow: hidden;
         }
         
-        .hero-section::before {
+        .hero-slide::before {
             content: '';
             position: absolute;
             top: 0;
@@ -357,6 +359,228 @@
             bottom: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
             pointer-events: none;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .carousel-indicators {
+            bottom: 30px;
+            z-index: 3;
+        }
+        
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .carousel-indicators button.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            z-index: 3;
+        }
+        
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 30px;
+            height: 30px;
+            background-size: 100%;
+        }
+        
+        /* Registration Modal Styles */
+        .registration-modal-content {
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            animation: modalIconPulse 2s infinite;
+        }
+        
+        .modal-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        @keyframes modalIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefits-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .urgency-banner {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-radius: 15px;
+            padding: 15px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .modal-registration-form .input-group-text {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px 0 0 10px;
+        }
+        
+        .modal-registration-form .form-control,
+        .modal-registration-form .form-select {
+            border: 2px solid #e9ecef;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-registration-form .form-control:focus,
+        .modal-registration-form .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+            outline: none;
+        }
+        
+        .modal-registration-form textarea.form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            resize: vertical;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-registration-form textarea.form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+            outline: none;
+        }
+        
+        .btn-pulse {
+            animation: btnPulse 2s infinite;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #e74c3c 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-pulse:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #e74c3c 0%, var(--primary-color) 100%);
+        }
+        
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3); }
+            50% { box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5); }
+        }
+        
+        /* Modal Alert Styles */
+        .registration-modal-content .alert {
+            border-radius: 15px;
+            border: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .registration-modal-content .alert-success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+        }
+        
+        .registration-modal-content .alert-danger {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            color: #721c24;
+        }
+        
+        .registration-modal-content .alert ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        
+        /* Navbar z-index fix */
+        .navbar {
+            z-index: 1030 !important;
+        }
+        
+        /* Modal Responsive */
+        @media (max-width: 991.98px) {
+            .modal-dialog {
+                margin: 15px;
+            }
+            
+            .registration-modal-content {
+                border-radius: 20px;
+            }
+            
+            .modal-body .row {
+                flex-direction: column-reverse;
+            }
+            
+            .benefits-section {
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .modal-dialog {
+                margin: 10px;
+            }
+            
+            .modal-body {
+                padding: 20px 15px;
+            }
+            
+            .modal-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .modal-icon i {
+                font-size: 2rem;
+            }
+            
+            .modal-title {
+                font-size: 1.2rem;
+            }
+            
+            .benefits-list li {
+                font-size: 13px;
+            }
         }
         
         .feature-card {
@@ -1041,6 +1265,69 @@
             if (heroSection) {
                 heroSection.style.position = 'relative';
                 createFloatingParticles(heroSection, 15);
+            }
+        });
+    </script>
+    
+    <!-- Registration Modal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if modal has been shown before (using localStorage)
+            const modalShown = localStorage.getItem('registrationModalShown');
+            const modalDismissed = sessionStorage.getItem('registrationModalDismissed');
+            
+            // Only show modal if it hasn't been shown before and not dismissed in this session
+            if (!modalShown && !modalDismissed) {
+                // Show modal after 5 seconds
+                setTimeout(function() {
+                    const registrationModal = new bootstrap.Modal(document.getElementById('registrationModal'), {
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    registrationModal.show();
+                    
+                    // Mark as shown
+                    localStorage.setItem('registrationModalShown', 'true');
+                }, 5000);
+            }
+            
+            // Handle modal dismiss
+            const modalElement = document.getElementById('registrationModal');
+            if (modalElement) {
+                modalElement.addEventListener('hidden.bs.modal', function() {
+                    // Mark as dismissed for this session
+                    sessionStorage.setItem('registrationModalDismissed', 'true');
+                });
+                
+                // Reset localStorage after 24 hours (show modal again tomorrow)
+                const lastShown = localStorage.getItem('registrationModalLastShown');
+                const now = new Date().getTime();
+                const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+                
+                if (lastShown && (now - parseInt(lastShown)) > oneDay) {
+                    localStorage.removeItem('registrationModalShown');
+                    localStorage.removeItem('registrationModalLastShown');
+                }
+                
+                // Set last shown time when modal is displayed
+                modalElement.addEventListener('shown.bs.modal', function() {
+                    localStorage.setItem('registrationModalLastShown', now.toString());
+                });
+            }
+            
+            // Add click tracking for analytics (optional)
+            const submitButton = document.querySelector('.modal-registration-form button[type="submit"]');
+            if (submitButton) {
+                submitButton.addEventListener('click', function() {
+                    // Track modal form submission
+                    console.log('Modal registration form submitted');
+                    
+                    // You can add Google Analytics or other tracking here
+                    // gtag('event', 'modal_registration_submit', {
+                    //     'event_category': 'engagement',
+                    //     'event_label': 'registration_modal'
+                    // });
+                });
             }
         });
     </script>

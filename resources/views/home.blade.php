@@ -3,33 +3,126 @@
 @section('title', 'Trung Tâm Tiếng Đức Thanh Cúc - Học Tiếng Đức Chuyên Nghiệp')
 
 @section('content')
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4 animate-fade-in-up">
-                    CHINH PHỤC TIẾNG ĐỨC CÙNG THANH CÚC
-                </h1>
-                <p class="lead mb-4 animate-fade-in-up animate-delay-1">
-                    Ra đời từ năm 2020, Trung tâm Tiếng Đức Thanh Cúc đã trở thành điểm đến tin cậy của hàng ngàn học viên. 
-                    Với đội ngũ giảng viên bản ngữ và phương pháp giảng dạy hiện đại, chúng tôi giúp bạn thành thạo tiếng Đức từ A1 đến C2.
-                </p>
-                <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                    <a href="{{ route('contact') }}" class="btn btn-light btn-lg btn-liquid">
-                        <i class="fas fa-play me-2"></i>Học Thử Miễn Phí
-                    </a>
-                    <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-phone me-2"></i>0975.186.230
-                    </a>
+<!-- Hero Slider Section -->
+<section class="hero-slider-section">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        
+        <div class="carousel-inner">
+            <!-- Slide 1: Du học Đức -->
+            <div class="carousel-item active">
+                <div class="hero-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-100">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                                        CHINH PHỤC TIẾNG ĐỨC CÙNG THANH CÚC
+                                    </h1>
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
+                                        Ra đời từ năm 2020, Trung tâm Tiếng Đức Thanh Cúc đã trở thành điểm đến tin cậy của hàng ngàn học viên. 
+                                        Với đội ngũ giảng viên bản ngữ và phương pháp giảng dạy hiện đại.
+                                    </p>
+                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                        <a href="{{ route('contact') }}" class="btn btn-light btn-lg btn-liquid">
+                                            <i class="fas fa-play me-2"></i>Học Thử Miễn Phí
+                                        </a>
+                                        <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
+                                            <i class="fas fa-phone me-2"></i>0975.186.230
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <img src="{{ asset('images/hero/study-abroad-1.svg') }}" 
+                                     alt="Du học Đức - Cơ hội vàng" class="img-fluid animate-float">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6 text-center">
-                <img src="{{ asset('images/hero/german-learning.svg') }}" 
-                     alt="Thanh Cúc German Center" class="img-fluid rounded shadow-lg animate-float">
+            
+            <!-- Slide 2: Học tập tại Đức -->
+            <div class="carousel-item">
+                <div class="hero-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-100">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                                        HỌC TẬP TẠI ĐỨC
+                                    </h1>
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
+                                        Trải nghiệm môi trường học tập hiện đại và chuyên nghiệp tại các trường đại học hàng đầu Đức. 
+                                        Phát triển kỹ năng và kiến thức với chất lượng giáo dục đẳng cấp thế giới.
+                                    </p>
+                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                        <a href="{{ route('contact') }}" class="btn btn-light btn-lg btn-liquid">
+                                            <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Du Học
+                                        </a>
+                                        <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg">
+                                            <i class="fas fa-info-circle me-2"></i>Tìm Hiểu Thêm
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <img src="{{ asset('images/hero/study-abroad-2.svg') }}" 
+                                     alt="Học tập tại Đức" class="img-fluid animate-float">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: Tốt nghiệp thành công -->
+            <div class="carousel-item">
+                <div class="hero-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-100">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                                        TỐT NGHIỆP THÀNH CÔNG
+                                    </h1>
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
+                                        Nhận bằng cấp được công nhận quốc tế và mở ra cơ hội nghề nghiệp rộng lớn. 
+                                        95% học viên của chúng tôi đã thành công trong hành trình du học và làm việc tại Đức.
+                                    </p>
+                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                        <a href="{{ route('results') }}" class="btn btn-light btn-lg btn-liquid">
+                                            <i class="fas fa-trophy me-2"></i>Xem Kết Quả
+                                        </a>
+                                        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
+                                            <i class="fas fa-rocket me-2"></i>Bắt Đầu Ngay
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <img src="{{ asset('images/hero/study-abroad-3.svg') }}" 
+                                     alt="Tốt nghiệp thành công" class="img-fluid animate-float">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
+
 </section>
 
 <!-- Stats Section -->
@@ -395,4 +488,126 @@
         </div>
     </div>
 </section>
+
+<!-- Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content registration-modal-content">
+            <div class="modal-header border-0 text-center">
+                <div class="w-100">
+                    <div class="modal-icon mb-3">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="modal-title fw-bold text-primary" id="registrationModalLabel">
+                        🎓 CƠHỘI VÀNG - HỌC THỬ MIỄN PHÍ!
+                    </h4>
+                    <p class="text-muted mb-0">Đăng ký ngay để nhận ưu đãi đặc biệt</p>
+                </div>
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 15px; right: 15px;"></button>
+            </div>
+            
+            <div class="modal-body px-4 pb-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="benefits-section">
+                            <h5 class="fw-bold text-primary mb-3">
+                                <i class="fas fa-star me-2"></i>Ưu đãi đặc biệt:
+                            </h5>
+                            <ul class="benefits-list">
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Học thử 1 buổi hoàn toàn MIỄN PHÍ</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Tặng tài liệu học tập trị giá 500K</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Giảm 20% học phí khóa đầu tiên</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Tư vấn lộ trình học 1-1 miễn phí</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Cam kết đầu ra hoặc học lại miễn phí</li>
+                            </ul>
+                            
+                            <div class="urgency-banner mt-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-clock text-warning me-2"></i>
+                                    <span class="fw-bold text-warning">Chỉ còn 3 ngày!</span>
+                                </div>
+                                <small class="text-muted">Ưu đãi có hạn, đăng ký ngay!</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="registration-form-section">
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            @endif
+                            
+                            @if($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <ul class="mb-0">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            @endif
+                            
+                            <form action="{{ route('contact.submit') }}" method="POST" class="modal-registration-form">
+                                @csrf
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" name="name" placeholder="Họ và tên *" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        <input type="tel" class="form-control" name="phone" placeholder="Số điện thoại *" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control" name="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-book"></i></span>
+                                        <select class="form-select" name="course" required>
+                                            <option value="">Chọn khóa học quan tâm *</option>
+                                            <option value="A1-A2">Cơ bản A1-A2</option>
+                                            <option value="B1-B2">Trung cấp B1-B2</option>
+                                            <option value="C1-C2">Nâng cao C1-C2</option>
+                                            <option value="Business">Tiếng Đức thương mại</option>
+                                            <option value="Study-abroad">Tư vấn du học</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <textarea class="form-control" name="message" rows="2" placeholder="Ghi chú thêm (không bắt buộc)"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100 btn-lg btn-pulse">
+                                    <i class="fas fa-rocket me-2"></i>ĐĂNG KÝ NGAY - NHẬN ưu ĐÃI
+                                </button>
+                                
+                                <div class="text-center mt-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-shield-alt me-1"></i>Thông tin được bảo mật 100%
+                                    </small>
+                                    <br>
+                                    <small class="text-success fw-bold">
+                                        <i class="fas fa-phone me-1"></i>Hotline: 0975.186.230
+                                    </small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

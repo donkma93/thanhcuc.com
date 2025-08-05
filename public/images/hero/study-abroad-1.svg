@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buildingGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky Background -->
+  <rect width="800" height="400" fill="url(#skyGradient)"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="400" width="800" height="200" fill="#90EE90"/>
+  
+  <!-- German University Building -->
+  <rect x="200" y="200" width="400" height="200" fill="url(#buildingGradient)"/>
+  <rect x="220" y="220" width="60" height="80" fill="#4169E1"/>
+  <rect x="300" y="220" width="60" height="80" fill="#4169E1"/>
+  <rect x="380" y="220" width="60" height="80" fill="#4169E1"/>
+  <rect x="460" y="220" width="60" height="80" fill="#4169E1"/>
+  <rect x="540" y="220" width="60" height="80" fill="#4169E1"/>
+  
+  <!-- Roof -->
+  <polygon points="180,200 400,120 620,200" fill="#8B0000"/>
+  
+  <!-- Flag -->
+  <rect x="380" y="80" width="40" height="30" fill="#000000"/>
+  <rect x="380" y="90" width="40" height="10" fill="#FF0000"/>
+  <rect x="380" y="100" width="40" height="10" fill="#FFFF00"/>
+  
+  <!-- Students -->
+  <circle cx="150" cy="350" r="20" fill="#FDBCB4"/>
+  <rect x="140" y="370" width="20" height="30" fill="#4169E1"/>
+  <rect x="135" y="375" width="30" height="15" fill="#8B4513"/>
+  
+  <circle cx="650" cy="360" r="20" fill="#FDBCB4"/>
+  <rect x="640" y="380" width="20" height="30" fill="#FF69B4"/>
+  <rect x="635" y="385" width="30" height="15" fill="#8B4513"/>
+  
+  <!-- Books -->
+  <rect x="130" y="385" width="8" height="12" fill="#FF0000"/>
+  <rect x="138" y="385" width="8" height="12" fill="#00FF00"/>
+  <rect x="146" y="385" width="8" height="12" fill="#0000FF"/>
+  
+  <!-- Trees -->
+  <circle cx="100" cy="350" r="30" fill="#228B22"/>
+  <rect x="95" y="380" width="10" height="20" fill="#8B4513"/>
+  
+  <circle cx="700" cy="340" r="25" fill="#228B22"/>
+  <rect x="695" y="365" width="10" height="20" fill="#8B4513"/>
+  
+  <!-- Clouds -->
+  <circle cx="150" cy="100" r="20" fill="white" opacity="0.8"/>
+  <circle cx="170" cy="100" r="25" fill="white" opacity="0.8"/>
+  <circle cx="190" cy="100" r="20" fill="white" opacity="0.8"/>
+  
+  <circle cx="600" cy="80" r="15" fill="white" opacity="0.8"/>
+  <circle cx="615" cy="80" r="20" fill="white" opacity="0.8"/>
+  <circle cx="630" cy="80" r="15" fill="white" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="400" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">Du Học Đức - Cơ Hội Vàng</text>
+  <text x="400" y="530" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#34495E">Khám phá nền giáo dục hàng đầu thế giới</text>
+</svg>

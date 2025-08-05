@@ -89,12 +89,22 @@ class HomeController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'nullable|email|max:255',
+            'course' => 'required|string|max:100',
             'message' => 'nullable|string|max:1000',
         ]);
         
         // Xử lý lưu thông tin liên hệ hoặc gửi email
         // Có thể tạo model ContactForm hoặc gửi email trực tiếp
         
-        return back()->with('success', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
+        // Log thông tin để debug (có thể xóa sau)
+        \Log::info('Contact form submitted', [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'course' => $request->course,
+            'message' => $request->message,
+        ]);
+        
+        return back()->with('success', 'Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất để tư vấn về khóa học ' . $request->course . '.');
     }
 }
