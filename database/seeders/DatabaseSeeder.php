@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Tạo admin users
+        $this->call(AdminUserSeeder::class);
+        
         // Tạo dữ liệu mẫu cho Teachers
         \App\Models\Teacher::create([
             'name' => 'Nguyễn Tiến Đạt',

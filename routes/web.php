@@ -64,3 +64,49 @@ Route::get('/lien-he', [HomeController::class, 'contactPage'])->name('contact');
 
 // Form liên hệ
 Route::post('/lien-he', [HomeController::class, 'contactSubmit'])->name('contact.submit');
+
+// Trang học thử miễn phí
+Route::get('/hoc-thu-mien-phi', [HomeController::class, 'trial'])->name('trial');
+Route::post('/hoc-thu-mien-phi', [HomeController::class, 'trialSubmit'])->name('trial.submit');
+
+// Trang kiểm tra trình độ online
+Route::get('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTest'])->name('online-test');
+Route::post('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTestSubmit'])->name('online-test.submit');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ContactController;
+
+// Admin Authentication Routes (không cần middleware)
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// Admin Protected Routes (cần middleware admin.auth)
+Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
+    // Dashboard
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.index');
+    
+    // Profile
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+    Route::put('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
+    
+    // Contacts Management
+    Route::prefix('contacts')->name('contacts.')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('index');
+        Route::get('/{contact}', [ContactController::class, 'show'])->name('show');
+        Route::put('/{contact}/status', [ContactController::class, 'updateStatus'])->name('update-status');
+        Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('destroy');
+        Route::post('/bulk-action', [ContactController::class, 'bulkAction'])->name('bulk-action');
+        Route::get('/export/csv', [ContactController::class, 'export'])->name('export');
+    });
+});
