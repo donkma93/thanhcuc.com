@@ -230,6 +230,51 @@
                                 @endif
                             </a>
                         </li>
+                        
+                        <li class="nav-item mt-2">
+                            <small class="text-white-50 px-3">QUẢN LÝ NỘI DUNG</small>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.sliders*') ? 'active' : '' }}" 
+                               href="{{ route('admin.sliders.index') }}">
+                                <i class="fas fa-images"></i>
+                                Slider trang chủ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.testimonials*') ? 'active' : '' }}" 
+                               href="{{ route('admin.testimonials.index') }}">
+                                <i class="fas fa-quote-right"></i>
+                                Nhận xét học viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.programs*') ? 'active' : '' }}" 
+                               href="{{ route('admin.programs.index') }}">
+                                <i class="fas fa-graduation-cap"></i>
+                                Chương trình Ausbildung
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.reasons*') ? 'active' : '' }}" 
+                               href="{{ route('admin.reasons.index') }}">
+                                <i class="fas fa-heart"></i>
+                                Lý do chọn Thanh Cúc
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}" 
+                               href="{{ route('admin.settings.index') }}">
+                                <i class="fas fa-cogs"></i>
+                                Cài đặt website
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item mt-2">
+                            <small class="text-white-50 px-3">TÀI KHOẢN</small>
+                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.profile*') ? 'active' : '' }}" 
                                href="{{ route('admin.profile') }}">

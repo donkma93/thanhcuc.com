@@ -109,4 +109,30 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
         Route::post('/bulk-action', [ContactController::class, 'bulkAction'])->name('bulk-action');
         Route::get('/export/csv', [ContactController::class, 'export'])->name('export');
     });
+    
+    // Content Management
+    Route::resource('sliders', \App\Http\Controllers\Admin\SliderController::class);
+    Route::post('sliders/update-order', [\App\Http\Controllers\Admin\SliderController::class, 'updateOrder'])->name('sliders.update-order');
+    Route::patch('sliders/{slider}/toggle-status', [\App\Http\Controllers\Admin\SliderController::class, 'toggleStatus'])->name('sliders.toggle-status');
+    
+    Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
+    Route::post('testimonials/update-order', [\App\Http\Controllers\Admin\TestimonialController::class, 'updateOrder'])->name('testimonials.update-order');
+    Route::patch('testimonials/{testimonial}/toggle-status', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleStatus'])->name('testimonials.toggle-status');
+    Route::patch('testimonials/{testimonial}/toggle-featured', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleFeatured'])->name('testimonials.toggle-featured');
+    
+    Route::resource('programs', \App\Http\Controllers\Admin\ProgramController::class);
+    Route::post('programs/update-order', [\App\Http\Controllers\Admin\ProgramController::class, 'updateOrder'])->name('programs.update-order');
+    Route::patch('programs/{program}/toggle-status', [\App\Http\Controllers\Admin\ProgramController::class, 'toggleStatus'])->name('programs.toggle-status');
+    Route::patch('programs/{program}/toggle-featured', [\App\Http\Controllers\Admin\ProgramController::class, 'toggleFeatured'])->name('programs.toggle-featured');
+    
+    Route::get('reasons', [\App\Http\Controllers\Admin\ReasonController::class, 'index'])->name('reasons.index');
+    Route::get('reasons/create', [\App\Http\Controllers\Admin\ReasonController::class, 'create'])->name('reasons.create');
+    Route::post('reasons', [\App\Http\Controllers\Admin\ReasonController::class, 'store'])->name('reasons.store');
+    Route::get('reasons/{reason}/edit', [\App\Http\Controllers\Admin\ReasonController::class, 'edit'])->name('reasons.edit');
+    Route::put('reasons/{reason}', [\App\Http\Controllers\Admin\ReasonController::class, 'update'])->name('reasons.update');
+    Route::delete('reasons/{reason}', [\App\Http\Controllers\Admin\ReasonController::class, 'destroy'])->name('reasons.destroy');
+    Route::post('reasons/update-order', [\App\Http\Controllers\Admin\ReasonController::class, 'updateOrder'])->name('reasons.update-order');
+    
+    Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 });
