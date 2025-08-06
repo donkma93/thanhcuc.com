@@ -2,11 +2,19 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Trung Tâm Tiếng Đức Thanh Cúc - Học Tiếng Đức & Luyện Thi Chứng Chỉ')</title>
     <meta name="description" content="@yield('description', 'Trung tâm tiếng Đức Thanh Cúc - Học tiếng Đức chuyên nghiệp, luyện thi chứng chỉ Goethe, TestDaF. Lịch khai giảng, lịch thi và kết quả học viên.')">
     <meta name="keywords" content="học tiếng Đức, luyện thi Goethe, TestDaF, chứng chỉ tiếng Đức, trung tâm tiếng Đức, lịch khai giảng, lịch thi">
+    
+    <!-- Mobile optimization meta tags -->
+    <meta name="theme-color" content="#015862">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Thanh Cúc">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=yes">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -244,10 +252,10 @@
         }
         
         .navbar-brand .logo-img {
-            height: 45px;
+            height: 55px;
             width: auto;
             transition: transform 0.3s ease;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
         }
         
         .navbar-brand:hover .logo-img {
@@ -262,9 +270,15 @@
         }
         
         /* Responsive design */
+        @media (max-width: 992px) and (min-width: 769px) {
+            .navbar-brand .logo-img {
+                height: 50px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .navbar-brand .logo-img {
-                height: 38px;
+                height: 45px;
             }
             .footer-logo {
                 height: 35px;
@@ -280,6 +294,40 @@
             }
             .navbar-nav {
                 gap: 0.1rem;
+            }
+            
+            /* Mobile viewport optimization */
+            body {
+                font-size: 16px !important; /* Prevent zoom on iOS */
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+            
+            /* Mobile touch improvements */
+            * {
+                -webkit-tap-highlight-color: rgba(1, 88, 98, 0.2);
+            }
+            
+            /* Smooth scrolling for mobile */
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Mobile container improvements */
+            .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            /* Mobile modal improvements */
+            .modal {
+                padding: 0 !important;
+            }
+            
+            .modal-dialog {
+                margin: 10px;
+                max-width: calc(100vw - 20px);
             }
         }
         
@@ -585,7 +633,7 @@
         /* Navbar z-index fix */
         .navbar {
             z-index: 1030 !important;
-            padding: 0.75rem 0;
+            padding: 0.9rem 0;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
         
@@ -1236,7 +1284,7 @@
             
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="text-light mb-0">&copy; 2024 Trung Tâm Tiếng Đức Thanh Cúc. All rights reserved.</p>
+                    <p class="text-light mb-0">&copy; 2025 Trung Tâm Tiếng Đức Thanh Cúc. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="#" class="text-light text-decoration-none me-3">Chính Sách Bảo Mật</a>

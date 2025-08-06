@@ -2072,6 +2072,343 @@
     position: relative;
     z-index: 2;
 }
+
+/* ===== MOBILE-FIRST RESPONSIVE IMPROVEMENTS ===== */
+
+/* Enhanced Mobile Hero Section */
+@media (max-width: 768px) {
+    /* Hero Section Mobile Optimization */
+    .hero-slide {
+        min-height: 100vh !important;
+        padding: 2rem 0 !important;
+    }
+    
+    .hero-slide .container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .hero-slide .row {
+        min-height: auto !important;
+        align-items: center !important;
+    }
+    
+    .hero-content {
+        text-align: center !important;
+        padding: 2rem 1rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1.5rem !important;
+        word-wrap: break-word;
+    }
+    
+    .hero-content p.lead {
+        font-size: 1.1rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 2rem !important;
+        padding: 0 0.5rem;
+    }
+    
+    /* Mobile-Optimized Buttons */
+    .hero-content .d-flex {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        align-items: center;
+    }
+    
+    .hero-content .btn {
+        width: 100% !important;
+        max-width: 280px !important;
+        padding: 1rem 1.5rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        border-radius: 50px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .hero-content .btn:active {
+        transform: scale(0.98) !important;
+    }
+    
+    /* Hero Image Mobile */
+    .hero-slide .col-lg-6:last-child {
+        margin-top: 2rem;
+        order: -1; /* Image first on mobile */
+    }
+    
+    .hero-slide img {
+        max-width: 250px !important;
+        height: auto !important;
+        margin: 0 auto 1rem auto !important;
+    }
+}
+
+/* Enhanced Mobile Navigation */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 0 !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    .navbar-toggler {
+        border: none !important;
+        padding: 0.5rem !important;
+        font-size: 1.5rem !important;
+        border-radius: 8px !important;
+        background: rgba(1, 88, 98, 0.1) !important;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(1, 88, 98, 0.2) !important;
+    }
+    
+    .navbar-collapse {
+        background: white !important;
+        margin-top: 1rem !important;
+        border-radius: 15px !important;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1) !important;
+        padding: 1rem !important;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 1rem 1.5rem !important;
+        margin: 0.25rem 0 !important;
+        border-radius: 10px !important;
+        font-size: 1.1rem !important;
+        font-weight: 500 !important;
+        color: #333 !important;
+        transition: all 0.3s ease !important;
+        border-left: 4px solid transparent !important;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+        background: linear-gradient(135deg, rgba(1, 88, 98, 0.1), rgba(249, 210, 0, 0.1)) !important;
+        border-left-color: #015862 !important;
+        transform: translateX(5px) !important;
+    }
+    
+    .navbar-nav .nav-link i {
+        width: 20px !important;
+        margin-right: 0.75rem !important;
+        color: #015862 !important;
+    }
+}
+
+/* Mobile Content Sections */
+@media (max-width: 768px) {
+    /* Section Spacing */
+    section {
+        padding: 3rem 0 !important;
+    }
+    
+    .container {
+        padding: 0 1rem !important;
+    }
+    
+    /* Typography Mobile */
+    h1, .h1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    h2, .h2 {
+        font-size: 1.8rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    h3, .h3 {
+        font-size: 1.4rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    p, .lead {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* Cards Mobile */
+    .card {
+        border-radius: 15px !important;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+        margin-bottom: 1.5rem !important;
+        border: none !important;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    /* Feature Cards Mobile */
+    .feature-card {
+        margin-bottom: 2rem !important;
+        transform: none !important; /* Disable hover transforms on mobile */
+    }
+    
+    .feature-card:hover {
+        transform: none !important;
+    }
+    
+    .feature-card i {
+        font-size: 2.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+/* Mobile Touch Improvements */
+@media (max-width: 768px) {
+    /* Larger Touch Targets */
+    .btn {
+        min-height: 48px !important;
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+        border-radius: 25px !important;
+        font-weight: 500 !important;
+    }
+    
+    .btn-lg {
+        min-height: 56px !important;
+        padding: 1rem 2rem !important;
+        font-size: 1.1rem !important;
+    }
+    
+    /* Links */
+    a:not(.btn) {
+        min-height: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        padding: 0.5rem !important;
+        margin: -0.5rem !important;
+    }
+    
+    /* Form Controls */
+    .form-control {
+        min-height: 48px !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Carousel Controls Mobile */
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 50px !important;
+        height: 50px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        background: rgba(1, 88, 98, 0.8) !important;
+        border-radius: 50% !important;
+        border: 3px solid white !important;
+    }
+    
+    .carousel-indicators {
+        bottom: 20px !important;
+    }
+    
+    .carousel-indicators [data-bs-target] {
+        width: 15px !important;
+        height: 15px !important;
+        margin: 0 8px !important;
+    }
+}
+
+/* Mobile Specific Features */
+@media (max-width: 768px) {
+    /* Sticky CTA Button */
+    .mobile-cta-sticky {
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 20px !important;
+        right: 20px !important;
+        z-index: 1040 !important;
+        background: linear-gradient(135deg, #015862, #F9D200) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 50px !important;
+        padding: 1rem 2rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        box-shadow: 0 8px 25px rgba(1, 88, 98, 0.3) !important;
+        animation: pulse-cta 2s infinite !important;
+    }
+    
+    /* Floating Phone Button */
+    .mobile-phone-float {
+        position: fixed !important;
+        bottom: 100px !important;
+        right: 20px !important;
+        width: 60px !important;
+        height: 60px !important;
+        background: #25D366 !important;
+        color: white !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.5rem !important;
+        z-index: 1040 !important;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4) !important;
+        animation: bounce-phone 2s infinite !important;
+    }
+    
+    /* Swipe Indicators */
+    .swipe-indicator {
+        position: absolute !important;
+        bottom: 80px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        color: rgba(255,255,255,0.8) !important;
+        font-size: 0.9rem !important;
+        animation: fade-in-out 3s infinite !important;
+    }
+}
+
+/* Mobile Animations */
+@keyframes pulse-cta {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes bounce-phone {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes fade-in-out {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+    /* Reduce animations for better performance */
+    .animate-float {
+        animation: none !important;
+    }
+    
+    /* Optimize images */
+    img {
+        image-rendering: optimizeQuality !important;
+        image-rendering: -webkit-optimize-contrast !important;
+    }
+    
+    /* Reduce shadows for performance */
+    .card,
+    .btn,
+    .feature-card {
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+}
 </style>
 @endpush
 
@@ -2255,8 +2592,71 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Mobile-specific features
+function initMobileFeatures() {
+    if (window.innerWidth <= 768) {
+        // Add mobile CTA button
+        if (!document.querySelector('.mobile-cta-sticky')) {
+            const mobileCTA = document.createElement('a');
+            mobileCTA.href = '{{ route("contact") }}';
+            mobileCTA.className = 'mobile-cta-sticky d-md-none';
+            mobileCTA.innerHTML = '<i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí';
+            document.body.appendChild(mobileCTA);
+        }
+        
+        // Add floating phone button
+        if (!document.querySelector('.mobile-phone-float')) {
+            const phoneFloat = document.createElement('a');
+            phoneFloat.href = 'tel:0975186230';
+            phoneFloat.className = 'mobile-phone-float d-md-none';
+            phoneFloat.innerHTML = '<i class="fas fa-phone"></i>';
+            phoneFloat.title = 'Gọi ngay: 0975.186.230';
+            document.body.appendChild(phoneFloat);
+        }
+        
+        // Add swipe indicators to hero carousel
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        carouselItems.forEach(item => {
+            if (!item.querySelector('.swipe-indicator')) {
+                const swipeIndicator = document.createElement('div');
+                swipeIndicator.className = 'swipe-indicator d-md-none';
+                swipeIndicator.innerHTML = '<i class="fas fa-chevron-left me-2"></i>Vuốt để xem thêm<i class="fas fa-chevron-right ms-2"></i>';
+                item.appendChild(swipeIndicator);
+            }
+        });
+        
+        // Optimize touch scrolling
+        document.body.style.webkitOverflowScrolling = 'touch';
+        
+        // Add touch feedback to buttons
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    }
+}
+
+// Initialize mobile features
+initMobileFeatures();
+
+// Re-initialize on resize
+window.addEventListener('resize', initMobileFeatures);
 </script>
 @endpush
+
+<!-- Mobile-only elements -->
+<div class="d-md-none">
+    <!-- Mobile sticky CTA will be added by JavaScript -->
+    <!-- Mobile floating phone will be added by JavaScript -->
+</div>
 
 @endsection
 
