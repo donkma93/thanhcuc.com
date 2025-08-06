@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Program;
 use App\Models\Teacher;
 use App\Models\News;
 use App\Models\Contact;
+use App\Models\Schedule;
 
 class HomeController extends Controller
 {
@@ -15,6 +17,11 @@ class HomeController extends Controller
         $featuredCourses = Course::where('is_active', true)
             ->orderBy('sort_order')
             ->take(4)
+            ->get();
+            
+        $featuredPrograms = Program::where('is_active', true)
+            ->orderBy('sort_order')
+            ->take(8)
             ->get();
             
         $featuredTeachers = Teacher::where('is_featured', true)
@@ -28,7 +35,7 @@ class HomeController extends Controller
             ->take(3)
             ->get();
             
-        return view('home', compact('featuredCourses', 'featuredTeachers', 'latestNews'));
+        return view('home', compact('featuredCourses', 'featuredPrograms', 'featuredTeachers', 'latestNews'));
     }
     
     public function about()
@@ -56,7 +63,38 @@ class HomeController extends Controller
     
     public function schedule()
     {
-        return view('schedule');
+        // Get published schedules ordered by start date
+        $schedules = Schedule::published()
+            ->available()
+            ->orderBy('start_date')
+            ->orderBy('sort_order')
+            ->get();
+            
+        // Get featured schedules for highlights
+        $featuredSchedules = Schedule::published()
+            ->featured()
+            ->available()
+            ->orderBy('sort_order')
+            ->take(3)
+            ->get();
+            
+        // Get popular schedules
+        $popularSchedules = Schedule::published()
+            ->popular()
+            ->available()
+            ->orderBy('sort_order')
+            ->take(3)
+            ->get();
+            
+        // Get schedules starting soon (within 7 days)
+        $upcomingSchedules = Schedule::published()
+            ->available()
+            ->where('start_date', '<=', now()->addDays(7))
+            ->where('start_date', '>=', now())
+            ->orderBy('start_date')
+            ->get();
+            
+        return view('schedule', compact('schedules', 'featuredSchedules', 'popularSchedules', 'upcomingSchedules'));
     }
     
     public function results()

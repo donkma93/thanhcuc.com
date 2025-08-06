@@ -18,26 +18,6 @@ class CourseController extends Controller
         return view('courses.index', compact('courses'));
     }
     
-    public function toeic()
-    {
-        $courses = Course::where('category', 'TOEIC')
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->get();
-            
-        return view('courses.toeic', compact('courses'));
-    }
-    
-    public function ielts()
-    {
-        $courses = Course::where('category', 'IELTS')
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->get();
-            
-        return view('courses.ielts', compact('courses'));
-    }
-    
     public function conversation()
     {
         $courses = Course::where('category', 'Giao tiếp')
@@ -46,16 +26,6 @@ class CourseController extends Controller
             ->get();
             
         return view('courses.conversation', compact('courses'));
-    }
-    
-    public function vstep()
-    {
-        $courses = Course::where('category', 'VSTEP')
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->get();
-            
-        return view('courses.vstep', compact('courses'));
     }
     
     public function foundation()
@@ -90,7 +60,7 @@ class CourseController extends Controller
     
     public function business()
     {
-        $courses = Course::where('category', 'Business German')
+        $courses = Course::where('category', 'Chuyên ngành')
             ->where('is_active', true)
             ->orderBy('sort_order')
             ->get();
@@ -100,7 +70,7 @@ class CourseController extends Controller
     
     public function exam()
     {
-        $courses = Course::where('category', 'Exam Preparation')
+        $courses = Course::where('category', 'Luyện thi')
             ->where('is_active', true)
             ->orderBy('sort_order')
             ->get();

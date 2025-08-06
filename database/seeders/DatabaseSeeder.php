@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
         // Tạo admin users
         $this->call(AdminUserSeeder::class);
         
+        // Tạo dữ liệu mẫu cho Programs
+        $this->call(ProgramSeeder::class);
+        
         // Tạo dữ liệu mẫu cho Teachers
         \App\Models\Teacher::create([
             'name' => 'Nguyễn Tiến Đạt',
@@ -115,73 +118,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Tạo dữ liệu mẫu cho Courses
-        \App\Models\Course::create([
-            'name' => 'TOEIC 500 - 800+ (L&R)',
-            'slug' => 'toeic-500-800-lr',
-            'description' => 'Khóa học TOEIC Listening & Reading từ 500 đến 800+ điểm',
-            'short_description' => 'Nâng cao điểm TOEIC L&R hiệu quả',
-            'category' => 'TOEIC',
-            'level' => 'Intermediate',
-            'price' => 2500000,
-            'duration_hours' => 60,
-            'target_score' => '500-800+',
-            'features' => json_encode(['Luyện nghe chuyên sâu', 'Đọc hiểu nâng cao', 'Bài tập thực hành', 'Mock test']),
-            'is_active' => true,
-            'sort_order' => 1,
-        ]);
-
-        \App\Models\Course::create([
-            'name' => 'TOEIC 240 - 320+ (S&W)',
-            'slug' => 'toeic-240-320-sw',
-            'description' => 'Khóa học TOEIC Speaking & Writing từ 240 đến 320+ điểm',
-            'short_description' => 'Phát triển kỹ năng nói và viết TOEIC',
-            'category' => 'TOEIC',
-            'level' => 'Intermediate',
-            'price' => 2800000,
-            'duration_hours' => 50,
-            'target_score' => '240-320+',
-            'features' => json_encode(['Luyện nói chuyên sâu', 'Kỹ năng viết', 'Phát âm chuẩn', 'Thực hành thường xuyên']),
-            'is_active' => true,
-            'sort_order' => 2,
-        ]);
-
-        \App\Models\Course::create([
-            'name' => 'IELTS 5.5 - 6.5+',
-            'slug' => 'ielts-55-65',
-            'description' => 'Khóa học IELTS từ 5.5 đến 6.5+ band điểm',
-            'short_description' => 'Đạt band điểm IELTS mong muốn',
-            'category' => 'IELTS',
-            'level' => 'Intermediate',
-            'price' => 3000000,
-            'duration_hours' => 80,
-            'target_score' => '5.5-6.5+',
-            'features' => json_encode(['4 kỹ năng IELTS', 'Chiến thuật làm bài', 'Từ vựng chuyên sâu', 'Writing task 1&2']),
-            'is_active' => true,
-            'sort_order' => 1,
-        ]);
-
-        \App\Models\Course::create([
-            'name' => 'Giao Tiếp Ứng Dụng',
-            'slug' => 'giao-tiep-ung-dung',
-            'description' => 'Khóa học giao tiếp tiếng Anh thực tế',
-            'short_description' => 'Giao tiếp tự tin trong mọi tình huống',
-            'category' => 'Giao tiếp',
-            'level' => 'All levels',
-            'price' => 2000000,
-            'duration_hours' => 40,
-            'target_score' => null,
-            'features' => json_encode(['Phát âm chuẩn', 'Giao tiếp thực tế', 'Từ vựng hàng ngày', 'Thực hành nhiều']),
-            'is_active' => true,
-            'sort_order' => 1,
-        ]);
+        $this->call(CourseSeeder::class);
 
         // Tạo dữ liệu mẫu cho Job Postings
         \App\Models\JobPosting::create([
-            'title' => 'Giảng viên TOEIC',
-            'slug' => 'giang-vien-toeic',
-            'description' => 'Tuyển dụng giảng viên TOEIC có kinh nghiệm',
-            'requirements' => 'TOEIC 950+, kinh nghiệm giảng dạy 2+ năm',
-            'benefits' => 'Lương cạnh tranh, môi trường chuyên nghiệp',
+            'title' => 'Giảng viên tiếng Đức',
+            'slug' => 'giang-vien-tieng-duc',
+            'description' => 'Tuyển dụng giảng viên tiếng Đức có kinh nghiệm',
+            'requirements' => 'Goethe C1+, kinh nghiệm giảng dạy 2+ năm, từng học tập hoặc làm việc tại Đức',
+            'benefits' => 'Lương cạnh tranh, môi trường chuyên nghiệp, cơ hội phát triển',
             'salary_range' => '15-25 triệu',
             'location' => 'Hà Nội',
             'employment_type' => 'Full-time',

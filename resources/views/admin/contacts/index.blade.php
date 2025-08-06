@@ -2,36 +2,39 @@
 
 @section('title', 'Quản lý liên hệ')
 
-@section('header')
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h1 class="h3 mb-0">
-            <i class="fas fa-envelope me-2"></i>
-            Quản lý liên hệ
-        </h1>
-        <p class="text-muted mb-0">Danh sách tất cả liên hệ từ website</p>
+        <h1 class="h3 mb-0 text-gray-800">Quản lý liên hệ</h1>
+        <p class="text-muted">Danh sách tất cả liên hệ từ website</p>
     </div>
     <div>
         <a href="{{ route('admin.contacts.export', request()->query()) }}" class="btn btn-success me-2">
-            <i class="fas fa-download me-1"></i>
-            Xuất CSV
+            <i class="fas fa-download me-2"></i>Xuất CSV
         </a>
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                <i class="fas fa-filter me-1"></i>
-                Lọc
+                <i class="fas fa-filter me-2"></i>Lọc
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ route('admin.contacts.index') }}">Tất cả</a></li>
-                <li><a class="dropdown-item" href="{{ route('admin.contacts.index', ['status' => 'new']) }}">Mới</a></li>
-                <li><a class="dropdown-item" href="{{ route('admin.contacts.index', ['status' => 'contacted']) }}">Đã liên hệ</a></li>
-                <li><a class="dropdown-item" href="{{ route('admin.contacts.index', ['status' => 'completed']) }}">Hoàn thành</a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.contacts.index') }}">
+                    <i class="fas fa-list me-2"></i>Tất cả
+                </a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.contacts.index', ['status' => 'new']) }}">
+                    <i class="fas fa-circle text-warning me-2"></i>Mới
+                </a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.contacts.index', ['status' => 'contacted']) }}">
+                    <i class="fas fa-circle text-info me-2"></i>Đã liên hệ
+                </a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.contacts.index', ['status' => 'completed']) }}">
+                    <i class="fas fa-circle text-success me-2"></i>Hoàn thành
+                </a></li>
             </ul>
         </div>
     </div>
-@endsection
+</div>
 
-@section('content')
-    <!-- Filters -->
+<!-- Filters -->
     <div class="card mb-4">
         <div class="card-body">
             <form method="GET" action="{{ route('admin.contacts.index') }}" class="row g-3">
@@ -49,14 +52,12 @@
                         <option value="completed" {{ request('status') === 'completed' ? 'selected' : '' }}>Hoàn thành</option>
                     </select>
                 </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary me-2">
-                        <i class="fas fa-search me-1"></i>
-                        Tìm kiếm
+                <div class="col-md-5 d-flex align-items-end gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search me-2"></i>Tìm kiếm
                     </button>
                     <a href="{{ route('admin.contacts.index') }}" class="btn btn-outline-secondary">
-                        <i class="fas fa-times me-1"></i>
-                        Xóa bộ lọc
+                        <i class="fas fa-times me-2"></i>Xóa bộ lọc
                     </a>
                 </div>
             </form>
@@ -81,8 +82,7 @@
                         </div>
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-warning" onclick="return confirmBulkAction()">
-                                <i class="fas fa-bolt me-1"></i>
-                                Thực hiện
+                                <i class="fas fa-bolt me-2"></i>Thực hiện
                             </button>
                         </div>
                         <div class="col-md-6 text-end">
@@ -99,26 +99,25 @@
     <!-- Contacts Table -->
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">
-                <i class="fas fa-list me-2"></i>
-                Danh sách liên hệ ({{ $contacts->total() }} kết quả)
+            <h5 class="card-title mb-0">
+                <i class="fas fa-envelope me-2"></i>Danh sách liên hệ
+                <span class="badge bg-primary ms-2">{{ $contacts->total() }}</span>
             </h5>
         </div>
-        <div class="card-body">
+        <div class="card-body p-0">
             @if($contacts->count() > 0)
                 <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
                             <tr>
                                 <th width="50">
                                     <input type="checkbox" id="selectAll" class="form-check-input">
                                 </th>
-                                <th>Họ tên</th>
-                                <th>Liên hệ</th>
+                                <th>Thông tin liên hệ</th>
                                 <th>Chương trình</th>
                                 <th>Trạng thái</th>
                                 <th>Thời gian</th>
-                                <th width="120">Thao tác</th>
+                                <th width="150">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,60 +128,56 @@
                                                value="{{ $contact->id }}" class="form-check-input contact-checkbox">
                                     </td>
                                     <td>
-                                        <div>
-                                            <strong>{{ $contact->name }}</strong>
-                                            @if($contact->message)
-                                                <br>
-                                                <small class="text-muted">
-                                                    {{ Str::limit($contact->message, 50) }}
-                                                </small>
-                                            @endif
+                                        <div class="d-flex align-items-start">
+                                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; min-width: 40px;">
+                                                <i class="fas fa-user text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-1 fw-bold">{{ $contact->name }}</h6>
+                                                <div class="mb-1">
+                                                    <a href="tel:{{ $contact->phone }}" class="text-decoration-none text-muted small">
+                                                        <i class="fas fa-phone me-1"></i>{{ $contact->phone }}
+                                                    </a>
+                                                </div>
+                                                @if($contact->email)
+                                                    <div class="mb-1">
+                                                        <a href="mailto:{{ $contact->email }}" class="text-decoration-none text-muted small">
+                                                            <i class="fas fa-envelope me-1"></i>{{ Str::limit($contact->email, 25) }}
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                                @if($contact->message)
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-comment me-1"></i>{{ Str::limit($contact->message, 40) }}
+                                                    </small>
+                                                @endif
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div>
-                                            <a href="tel:{{ $contact->phone }}" class="text-decoration-none">
-                                                <i class="fas fa-phone me-1"></i>
-                                                {{ $contact->phone }}
-                                            </a>
-                                            @if($contact->email)
-                                                <br>
-                                                <a href="mailto:{{ $contact->email }}" class="text-decoration-none">
-                                                    <i class="fas fa-envelope me-1"></i>
-                                                    {{ $contact->email }}
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-light text-dark">
-                                            {{ $contact->program }}
+                                        <span class="badge bg-secondary text-white">
+                                            <i class="fas fa-graduation-cap me-1"></i>{{ Str::limit($contact->program, 20) }}
                                         </span>
                                     </td>
                                     <td>
-                                        {!! $contact->status_badge !!}
-                                        @if($contact->contacted_at)
-                                            <br>
-                                            <small class="text-muted">
-                                                {{ $contact->contacted_at->format('d/m/Y H:i') }}
-                                            </small>
-                                        @endif
-                                    </td>
-                                    <td>
                                         <div>
-                                            <small class="text-muted">
-                                                {{ $contact->created_at->format('d/m/Y H:i') }}
-                                            </small>
-                                            <br>
-                                            <small class="text-muted">
-                                                {{ $contact->created_at->diffForHumans() }}
-                                            </small>
+                                            {!! $contact->status_badge !!}
+                                            @if($contact->contacted_at)
+                                                <br><small class="text-muted">{{ $contact->contacted_at->format('d/m H:i') }}</small>
+                                            @endif
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="btn-group btn-group-sm">
+                                        <div>
+                                            <div class="fw-bold small">{{ $contact->created_at->format('d/m/Y') }}</div>
+                                            <small class="text-muted">{{ $contact->created_at->format('H:i') }}</small>
+                                            <br><small class="text-muted">{{ $contact->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
                                             <a href="{{ route('admin.contacts.show', $contact) }}" 
-                                               class="btn btn-outline-primary" title="Xem chi tiết">
+                                               class="btn btn-sm btn-outline-info" title="Xem chi tiết">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             @if($contact->status === 'new')
@@ -191,22 +186,42 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="contacted">
-                                                    <button type="submit" class="btn btn-outline-success" 
+                                                    <button type="submit" class="btn btn-sm btn-outline-success" 
                                                             title="Đánh dấu đã liên hệ">
                                                         <i class="fas fa-phone"></i>
                                                     </button>
                                                 </form>
                                             @endif
-                                            <form action="{{ route('admin.contacts.destroy', $contact) }}" 
-                                                  method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger" 
-                                                        title="Xóa"
-                                                        onclick="return confirm('Bạn có chắc muốn xóa liên hệ này?')">
-                                                    <i class="fas fa-trash"></i>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <i class="fas fa-ellipsis-v"></i>
                                                 </button>
-                                            </form>
+                                                <ul class="dropdown-menu">
+                                                    @if($contact->status !== 'completed')
+                                                        <li>
+                                                            <form action="{{ route('admin.contacts.update-status', $contact) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="status" value="completed">
+                                                                <button type="submit" class="dropdown-item text-success">
+                                                                    <i class="fas fa-check me-2"></i>Hoàn thành
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                        <li><hr class="dropdown-divider"></li>
+                                                    @endif
+                                                    <li>
+                                                        <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item text-danger" 
+                                                                    onclick="return confirm('Bạn có chắc muốn xóa liên hệ này?')">
+                                                                <i class="fas fa-trash me-2"></i>Xóa
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -216,20 +231,28 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                    <div>
-                        <small class="text-muted">
-                            Hiển thị {{ $contacts->firstItem() }} - {{ $contacts->lastItem() }} 
-                            trong tổng số {{ $contacts->total() }} kết quả
-                        </small>
-                    </div>
-                    <div>
-                        {{ $contacts->appends(request()->query())->links() }}
+                <div class="card-footer bg-white border-top">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <small class="text-muted">
+                                @if($contacts->total() > 0)
+                                    Hiển thị {{ $contacts->firstItem() }} - {{ $contacts->lastItem() }} 
+                                    trong tổng số {{ $contacts->total() }} kết quả
+                                @else
+                                    Không có kết quả nào
+                                @endif
+                            </small>
+                        </div>
+                        <div>
+                            @if($contacts->hasPages())
+                                {{ $contacts->appends(request()->query())->links('pagination.bootstrap-4') }}
+                            @endif
+                        </div>
                     </div>
                 </div>
             @else
                 <div class="text-center py-5">
-                    <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                    <i class="fas fa-envelope-open fa-3x text-muted mb-3"></i>
                     <h5 class="text-muted">Không có liên hệ nào</h5>
                     <p class="text-muted">
                         @if(request()->hasAny(['search', 'status']))
@@ -240,8 +263,7 @@
                     </p>
                     @if(request()->hasAny(['search', 'status']))
                         <a href="{{ route('admin.contacts.index') }}" class="btn btn-primary">
-                            <i class="fas fa-times me-1"></i>
-                            Xóa bộ lọc
+                            <i class="fas fa-times me-2"></i>Xóa bộ lọc
                         </a>
                     @endif
                 </div>
@@ -321,4 +343,78 @@
         return confirm(message);
     }
 </script>
+@endpush
+
+@push('styles')
+<style>
+/* Pagination Styling */
+.pagination {
+    margin-bottom: 0;
+    gap: 4px;
+}
+
+.pagination .page-item {
+    margin: 0;
+}
+
+.pagination .page-link {
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    min-width: 40px;
+    text-align: center;
+}
+
+.pagination .page-link:hover {
+    color: #495057;
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    text-decoration: none;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #adb5bd;
+    background-color: #fff;
+    border-color: #dee2e6;
+    cursor: not-allowed;
+}
+
+.pagination .page-link i {
+    font-size: 0.75rem;
+}
+
+/* Card Footer Styling */
+.card-footer {
+    padding: 1rem 1.25rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.card-footer.bg-white {
+    background-color: #fff !important;
+}
+
+/* Responsive pagination */
+@media (max-width: 576px) {
+    .pagination {
+        justify-content: center;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+</style>
 @endpush

@@ -38,9 +38,7 @@ Route::prefix('khoa-hoc')->name('courses.')->group(function () {
     Route::get('/luyen-thi-chung-chi', [CourseController::class, 'exam'])->name('exam');
     
     // Giữ lại các routes cũ để tránh 404 (có thể redirect sau)
-    Route::get('/toeic', [CourseController::class, 'foundation'])->name('toeic');
-    Route::get('/ielts', [CourseController::class, 'intermediate'])->name('ielts');
-    Route::get('/vstep', [CourseController::class, 'advanced'])->name('vstep');
+    // German course routes will be added here if needed
     Route::get('/kien-thuc-nen', [CourseController::class, 'foundation'])->name('foundation_old');
     Route::get('/thcs-thpt', [CourseController::class, 'intermediate'])->name('secondary');
 });
@@ -135,4 +133,16 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     
     Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+    
+    // Schedule Management
+    Route::resource('schedules', \App\Http\Controllers\Admin\ScheduleController::class);
+    Route::post('schedules/bulk-action', [\App\Http\Controllers\Admin\ScheduleController::class, 'bulkAction'])->name('schedules.bulk-action');
+    Route::post('schedules/{schedule}/duplicate', [\App\Http\Controllers\Admin\ScheduleController::class, 'duplicate'])->name('schedules.duplicate');
+    Route::post('schedules/{id}/restore', [\App\Http\Controllers\Admin\ScheduleController::class, 'restore'])->name('schedules.restore');
+    Route::delete('schedules/{id}/force-delete', [\App\Http\Controllers\Admin\ScheduleController::class, 'forceDelete'])->name('schedules.force-delete');
+    
+    // Course Management
+    Route::resource('courses', \App\Http\Controllers\Admin\CourseController::class);
+    Route::post('courses/bulk-action', [\App\Http\Controllers\Admin\CourseController::class, 'bulkAction'])->name('courses.bulk-action');
+    Route::post('courses/update-sort-order', [\App\Http\Controllers\Admin\CourseController::class, 'updateSortOrder'])->name('courses.update-sort-order');
 });

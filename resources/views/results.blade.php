@@ -6,21 +6,47 @@
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center">
+        <div class="row align-items-center min-vh-75">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
+                <div class="hero-content">
+                    <div class="hero-badge mb-4 animate-fade-in-up">
+                        <i class="fas fa-trophy me-2"></i>
+                        <span>Thành Tích Xuất Sắc</span>
+                    </div>
+                    <h1 class="hero-title mb-4 animate-fade-in-up animate-delay-1">
                     KẾT QUẢ HỌC VIÊN
+                        <span class="text-gradient">THANH CÚC</span>
                 </h1>
-                <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
-                    Những thành tích xuất sắc của học viên Thanh Cúc trong hành trình chinh phục tiếng Đức
-                </p>
-                <div class="d-flex justify-content-center gap-3 animate-fade-in-up animate-delay-2">
-                    <a href="{{ route('contact') }}" class="btn btn-light btn-lg btn-liquid">
-                        <i class="fas fa-graduation-cap me-2"></i>Đăng Ký Ngay
+                    <p class="hero-subtitle mb-5 animate-fade-in-up animate-delay-2">
+                        Những thành tích đáng tự hào và câu chuyện truyền cảm hứng từ hành trình 
+                        chinh phục tiếng Đức của các học viên Thanh Cúc
+                    </p>
+                    <div class="hero-stats d-flex justify-content-center gap-4 mb-5 animate-fade-in-up animate-delay-3">
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Tỷ lệ đậu</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">2000+</div>
+                            <div class="stat-label">Học viên</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Du học</div>
+                        </div>
+                    </div>
+                    <div class="hero-actions animate-fade-in-up animate-delay-4">
+                        <a href="#success-stories" class="btn btn-hero-primary btn-lg me-3">
+                            <i class="fas fa-star me-2"></i>
+                            Xem Thành Tích
+                        </a>
+                        <a href="#cta-section" class="btn btn-hero-outline btn-lg">
+                            <i class="fas fa-rocket me-2"></i>
+                            Bắt Đầu Ngay
                     </a>
-                    <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-phone me-2"></i>Tư Vấn Miễn Phí
-                    </a>
+                                    </div>
                 </div>
             </div>
         </div>
@@ -28,59 +54,71 @@
 </section>
 
 <!-- Statistics Section -->
-<section class="py-5 bg-light">
+<section class="py-5 stats-section">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">THỐNG KÊ THÀNH TÍCH</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những con số ấn tượng từ học viên Thanh Cúc</p>
+            <h2 class="section-title animate-on-scroll">
+                <span class="title-highlight">THỐNG KÊ</span> THÀNH TÍCH
+            </h2>
+            <p class="section-subtitle animate-on-scroll animate-delay-1">
+                Những con số ấn tượng chứng minh chất lượng giảng dạy
+            </p>
         </div>
         
-        <div class="row text-center">
+        <div class="row">
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-trophy fa-3x text-warning"></i>
+                <div class="stats-card animate-on-scroll">
+                    <div class="stats-icon">
+                        <i class="fas fa-trophy"></i>
                         </div>
-                        <h3 class="display-4 fw-bold text-primary counter" data-target="95">0</h3>
-                        <p class="text-muted">% Tỷ lệ đậu chứng chỉ</p>
+                    <div class="stats-content">
+                        <div class="stats-number counter" data-target="95">0</div>
+                        <div class="stats-unit">%</div>
+                        <div class="stats-label">Tỷ lệ đậu chứng chỉ</div>
                     </div>
+                    <div class="stats-decoration"></div>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-1">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-users fa-3x text-success"></i>
+                <div class="stats-card animate-on-scroll animate-delay-1">
+                    <div class="stats-icon">
+                        <i class="fas fa-users"></i>
                         </div>
-                        <h3 class="display-4 fw-bold text-primary counter" data-target="2000">0</h3>
-                        <p class="text-muted">Học viên đã tốt nghiệp</p>
+                    <div class="stats-content">
+                        <div class="stats-number counter" data-target="2000">0</div>
+                        <div class="stats-unit">+</div>
+                        <div class="stats-label">Học viên đã tốt nghiệp</div>
                     </div>
+                    <div class="stats-decoration"></div>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-2">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-plane fa-3x text-info"></i>
+                <div class="stats-card animate-on-scroll animate-delay-2">
+                    <div class="stats-icon">
+                        <i class="fas fa-plane"></i>
                         </div>
-                        <h3 class="display-4 fw-bold text-primary counter" data-target="150">0</h3>
-                        <p class="text-muted">Học viên du học thành công</p>
+                    <div class="stats-content">
+                        <div class="stats-number counter" data-target="150">0</div>
+                        <div class="stats-unit">+</div>
+                        <div class="stats-label">Học viên du học thành công</div>
                     </div>
+                    <div class="stats-decoration"></div>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-3">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-briefcase fa-3x text-secondary"></i>
+                <div class="stats-card animate-on-scroll animate-delay-3">
+                    <div class="stats-icon">
+                        <i class="fas fa-briefcase"></i>
                         </div>
-                        <h3 class="display-4 fw-bold text-primary counter" data-target="80">0</h3>
-                        <p class="text-muted">% Có việc làm sau tốt nghiệp</p>
+                    <div class="stats-content">
+                        <div class="stats-number counter" data-target="80">0</div>
+                        <div class="stats-unit">%</div>
+                        <div class="stats-label">Có việc làm sau tốt nghiệp</div>
                     </div>
+                    <div class="stats-decoration"></div>
                 </div>
             </div>
         </div>
@@ -88,84 +126,162 @@
 </section>
 
 <!-- Success Stories Section -->
-<section class="py-5">
+<section class="py-5 success-stories-section" id="success-stories">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">CÂU CHUYỆN THÀNH CÔNG</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những hành trình truyền cảm hứng từ học viên Thanh Cúc</p>
+            <h2 class="section-title animate-on-scroll">
+                CÂU CHUYỆN <span class="title-highlight">THÀNH CÔNG</span>
+            </h2>
+            <p class="section-subtitle animate-on-scroll animate-delay-1">
+                Những hành trình truyền cảm hứng từ học viên Thanh Cúc
+            </p>
         </div>
         
         <div class="row">
             <div class="col-lg-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 60px; height: 60px;">
-                                <i class="fas fa-user fa-2x text-white"></i>
+                <div class="success-card animate-on-scroll">
+                    <div class="success-header">
+                        <div class="success-avatar">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&auto=format" 
+                                 alt="Nguyễn Minh Anh" class="avatar-img">
+                            <div class="success-badge">
+                                <i class="fas fa-crown"></i>
                             </div>
-                            <div>
-                                <h5 class="mb-0">Nguyễn Minh Anh</h5>
-                                <small class="text-muted">Goethe C1 - Du học Đức</small>
                             </div>
+                        <div class="success-info">
+                            <h5 class="success-name">Nguyễn Minh Anh</h5>
+                            <p class="success-title">Goethe C1 - Du học Đức</p>
+                            <div class="success-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                         </div>
-                        <p class="text-muted mb-3">
+                        </div>
+                    </div>
+                    <div class="success-content">
+                        <p class="success-quote">
                             "Sau 18 tháng học tại Thanh Cúc, tôi đã đạt chứng chỉ Goethe C1 và hiện đang học thạc sĩ 
                             tại Đại học Technical University of Munich. Cảm ơn các thầy cô đã hỗ trợ tôi rất nhiều!"
                         </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-success">Goethe C1</span>
-                            <small class="text-muted">2023</small>
+                        <div class="success-achievements">
+                            <span class="achievement-tag">Goethe C1</span>
+                            <span class="achievement-tag">Munich University</span>
+                            <span class="achievement-year">2023</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-lg-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-1">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 60px; height: 60px;">
-                                <i class="fas fa-user fa-2x text-white"></i>
+                <div class="success-card animate-on-scroll animate-delay-1">
+                    <div class="success-header">
+                        <div class="success-avatar">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format" 
+                                 alt="Trần Văn Hùng" class="avatar-img">
+                            <div class="success-badge">
+                                <i class="fas fa-medal"></i>
                             </div>
-                            <div>
-                                <h5 class="mb-0">Trần Văn Hùng</h5>
-                                <small class="text-muted">TestDaF - Làm việc tại Đức</small>
                             </div>
+                        <div class="success-info">
+                            <h5 class="success-name">Trần Văn Hùng</h5>
+                            <p class="success-title">TestDaF - Làm việc tại Đức</p>
+                            <div class="success-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                         </div>
-                        <p class="text-muted mb-3">
+                        </div>
+                    </div>
+                    <div class="success-content">
+                        <p class="success-quote">
                             "Tôi đã đạt TestDaF 4x4 và hiện đang làm kỹ sư tại một công ty lớn ở Berlin. 
                             Phương pháp giảng dạy của Thanh Cúc rất thực tế và hiệu quả."
                         </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-info">TestDaF 4x4</span>
-                            <small class="text-muted">2023</small>
+                        <div class="success-achievements">
+                            <span class="achievement-tag">TestDaF 4x4</span>
+                            <span class="achievement-tag">Berlin Engineer</span>
+                            <span class="achievement-year">2023</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-lg-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm animate-on-scroll animate-delay-2">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 60px; height: 60px;">
-                                <i class="fas fa-user fa-2x text-white"></i>
+                <div class="success-card animate-on-scroll animate-delay-2">
+                    <div class="success-header">
+                        <div class="success-avatar">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face&auto=format" 
+                                 alt="Lê Thị Mai" class="avatar-img">
+                            <div class="success-badge">
+                                <i class="fas fa-award"></i>
                             </div>
-                            <div>
-                                <h5 class="mb-0">Lê Thị Mai</h5>
-                                <small class="text-muted">DSH - Học bác sĩ tại Đức</small>
                             </div>
+                        <div class="success-info">
+                            <h5 class="success-name">Lê Thị Mai</h5>
+                            <p class="success-title">DSH - Học bác sĩ tại Đức</p>
+                            <div class="success-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                         </div>
-                        <p class="text-muted mb-3">
+                        </div>
+                    </div>
+                    <div class="success-content">
+                        <p class="success-quote">
                             "Từ A1 đến DSH chỉ trong 2 năm! Giờ tôi đang học y khoa tại Đại học Heidelberg. 
                             Cảm ơn Thanh Cúc đã giúp tôi thực hiện ước mơ."
                         </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary">DSH-2</span>
-                            <small class="text-muted">2024</small>
+                        <div class="success-achievements">
+                            <span class="achievement-tag">DSH-2</span>
+                            <span class="achievement-tag">Heidelberg Medical</span>
+                            <span class="achievement-year">2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Additional Success Stories -->
+        <div class="row mt-4">
+            <div class="col-lg-6 mb-4">
+                <div class="success-card-horizontal animate-on-scroll">
+                    <div class="success-avatar-small">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face&auto=format" 
+                             alt="Phạm Thị Lan" class="avatar-img">
+                    </div>
+                    <div class="success-content-horizontal">
+                        <h6 class="success-name-small">Phạm Thị Lan</h6>
+                        <p class="success-quote-small">
+                            "Đạt Goethe B2 sau 12 tháng học. Hiện đang làm việc tại công ty Đức ở Việt Nam."
+                        </p>
+                        <div class="success-tags-small">
+                            <span class="tag-small">Goethe B2</span>
+                            <span class="tag-small">2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="success-card-horizontal animate-on-scroll animate-delay-1">
+                    <div class="success-avatar-small">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face&auto=format" 
+                             alt="Hoàng Văn Nam" class="avatar-img">
+                    </div>
+                    <div class="success-content-horizontal">
+                        <h6 class="success-name-small">Hoàng Văn Nam</h6>
+                        <p class="success-quote-small">
+                            "Từ zero đến TestDaF trong 20 tháng. Giờ đang học thạc sĩ tại TU Dresden."
+                        </p>
+                        <div class="success-tags-small">
+                            <span class="tag-small">TestDaF</span>
+                            <span class="tag-small">2024</span>
                         </div>
                     </div>
                 </div>
@@ -175,62 +291,141 @@
 </section>
 
 <!-- Certificates Gallery Section -->
-<section class="py-5 bg-light">
+<section class="py-5 certificates-section">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">BẰNG CẤP & CHỨNG CHỈ</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những thành tích đáng tự hào của học viên</p>
+            <h2 class="section-title animate-on-scroll">
+                BẰNG CẤP & <span class="title-highlight">CHỨNG CHỈ</span>
+            </h2>
+            <p class="section-subtitle animate-on-scroll animate-delay-1">
+                Những thành tích đáng tự hào của học viên
+            </p>
         </div>
         
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card certificate-card h-100 animate-on-scroll">
-                    <div class="card-body text-center p-4">
-                        <div class="certificate-icon mb-3">
-                            <i class="fas fa-certificate fa-4x text-primary"></i>
+                <div class="certificate-card animate-on-scroll">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fas fa-certificate"></i>
                         </div>
-                        <h5 class="fw-bold mb-2">Goethe Institut</h5>
-                        <p class="text-muted mb-3">Chứng chỉ tiếng Đức quốc tế được công nhận toàn cầu</p>
+                        <div class="certificate-glow"></div>
+                    </div>
+                    <div class="certificate-content">
+                        <h5 class="certificate-title">Goethe Institut</h5>
+                        <p class="certificate-desc">Chứng chỉ tiếng Đức quốc tế được công nhận toàn cầu</p>
                         <div class="certificate-stats">
-                            <span class="badge bg-success me-2">A1: 98%</span>
-                            <span class="badge bg-success me-2">A2: 96%</span>
-                            <span class="badge bg-success me-2">B1: 94%</span>
-                            <span class="badge bg-success me-2">B2: 92%</span>
-                            <span class="badge bg-success">C1: 89%</span>
+                            <div class="stat-row">
+                                <span class="stat-level">A1</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="98"></div>
+                        </div>
+                                <span class="stat-percent">98%</span>
+                    </div>
+                            <div class="stat-row">
+                                <span class="stat-level">A2</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="96"></div>
+                                </div>
+                                <span class="stat-percent">96%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-level">B1</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="94"></div>
+                                </div>
+                                <span class="stat-percent">94%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-level">B2</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="92"></div>
+                                </div>
+                                <span class="stat-percent">92%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-level">C1</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="89"></div>
+                                </div>
+                                <span class="stat-percent">89%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card certificate-card h-100 animate-on-scroll animate-delay-1">
-                    <div class="card-body text-center p-4">
-                        <div class="certificate-icon mb-3">
-                            <i class="fas fa-graduation-cap fa-4x text-info"></i>
+                <div class="certificate-card animate-on-scroll animate-delay-1">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <h5 class="fw-bold mb-2">TestDaF</h5>
-                        <p class="text-muted mb-3">Kỳ thi tiếng Đức cho người nước ngoài muốn du học</p>
+                        <div class="certificate-glow"></div>
+                    </div>
+                    <div class="certificate-content">
+                        <h5 class="certificate-title">TestDaF</h5>
+                        <p class="certificate-desc">Kỳ thi tiếng Đức cho người nước ngoài muốn du học</p>
                         <div class="certificate-stats">
-                            <span class="badge bg-info me-2">TDN 3: 85%</span>
-                            <span class="badge bg-info me-2">TDN 4: 78%</span>
-                            <span class="badge bg-info">TDN 5: 65%</span>
+                            <div class="stat-row">
+                                <span class="stat-level">TDN 3</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="85"></div>
+                        </div>
+                                <span class="stat-percent">85%</span>
+                    </div>
+                            <div class="stat-row">
+                                <span class="stat-level">TDN 4</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="78"></div>
+                                </div>
+                                <span class="stat-percent">78%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-level">TDN 5</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="65"></div>
+                                </div>
+                                <span class="stat-percent">65%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card certificate-card h-100 animate-on-scroll animate-delay-2">
-                    <div class="card-body text-center p-4">
-                        <div class="certificate-icon mb-3">
-                            <i class="fas fa-university fa-4x text-secondary"></i>
+                <div class="certificate-card animate-on-scroll animate-delay-2">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fas fa-university"></i>
                         </div>
-                        <h5 class="fw-bold mb-2">DSH</h5>
-                        <p class="text-muted mb-3">Kỳ thi năng lực tiếng Đức cho giáo dục đại học</p>
+                        <div class="certificate-glow"></div>
+                    </div>
+                    <div class="certificate-content">
+                        <h5 class="certificate-title">DSH</h5>
+                        <p class="certificate-desc">Kỳ thi năng lực tiếng Đức cho giáo dục đại học</p>
                         <div class="certificate-stats">
-                            <span class="badge bg-secondary me-2">DSH-1: 82%</span>
-                            <span class="badge bg-secondary me-2">DSH-2: 75%</span>
-                            <span class="badge bg-secondary">DSH-3: 68%</span>
+                            <div class="stat-row">
+                                <span class="stat-level">DSH-1</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="82"></div>
+                        </div>
+                                <span class="stat-percent">82%</span>
+                    </div>
+                            <div class="stat-row">
+                                <span class="stat-level">DSH-2</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="75"></div>
+                </div>
+                                <span class="stat-percent">75%</span>
+            </div>
+                            <div class="stat-row">
+                                <span class="stat-level">DSH-3</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" data-percent="68"></div>
+                                </div>
+                                <span class="stat-percent">68%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -240,22 +435,110 @@
 </section>
 
 <!-- Call to Action Section -->
-<section class="py-5 bg-primary text-white">
+<section class="cta-section" id="cta-section">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h3 class="fw-bold mb-3 animate-fade-in-left">Bạn cũng muốn có thành tích như vậy?</h3>
-                <p class="mb-0 animate-fade-in-left animate-delay-1">
+            <div class="col-lg-6">
+                <div class="cta-content animate-fade-in-left">
+                    <div class="cta-badge mb-3">
+                        <i class="fas fa-rocket me-2"></i>
+                        <span>Bắt Đầu Hành Trình</span>
+                    </div>
+                    <h3 class="cta-title mb-4">
+                        Bạn cũng muốn có <span class="text-gradient">thành tích</span> như vậy?
+                    </h3>
+                    <p class="cta-subtitle mb-4">
                     Hãy bắt đầu hành trình chinh phục tiếng Đức cùng Thanh Cúc ngay hôm nay!
+                        Với đội ngũ giảng viên chuyên nghiệp và phương pháp giảng dạy hiệu quả, 
+                        chúng tôi cam kết đồng hành cùng bạn đến thành công.
                 </p>
+                    <div class="cta-features mb-4">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Giảng viên bản ngữ chuyên nghiệp</span>
             </div>
-            <div class="col-lg-4 text-lg-end">
-                <a href="{{ route('contact') }}" class="btn btn-light btn-lg me-3 btn-liquid animate-fade-in-right">
-                    <i class="fas fa-rocket me-2"></i>Đăng Ký Ngay
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Phương pháp giảng dạy hiện đại</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Tỷ lệ đậu chứng chỉ cao</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cta-form-container animate-fade-in-right">
+                    <div class="cta-form-card">
+                        <div class="form-header">
+                            <h4 class="form-title">Đăng Ký Tư Vấn Miễn Phí</h4>
+                            <p class="form-subtitle">Nhận tư vấn chi tiết về lộ trình học phù hợp</p>
+                        </div>
+                        <form class="cta-form" action="{{ route('contact.submit') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-phone input-icon"></i>
+                                    <input type="tel" name="phone" class="form-control" placeholder="Số điện thoại" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-graduation-cap input-icon"></i>
+                                    <select name="course_interest" class="form-control" required>
+                                        <option value="">Chọn khóa học quan tâm</option>
+                                        <option value="A1-A2">Khóa học A1-A2 (Cơ bản)</option>
+                                        <option value="B1-B2">Khóa học B1-B2 (Trung cấp)</option>
+                                        <option value="C1-C2">Khóa học C1-C2 (Nâng cao)</option>
+                                        <option value="TestDaF">Luyện thi TestDaF</option>
+                                        <option value="DSH">Luyện thi DSH</option>
+                                        <option value="Goethe">Luyện thi Goethe</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-comment input-icon"></i>
+                                    <textarea name="message" class="form-control" rows="3" placeholder="Ghi chú thêm (không bắt buộc)"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-cta-primary w-100">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Đăng Ký Tư Vấn Miễn Phí
+                                <div class="btn-glow"></div>
+                            </button>
+                        </form>
+                        <div class="form-footer">
+                            <p class="form-note">
+                                <i class="fas fa-shield-alt me-2"></i>
+                                Thông tin của bạn được bảo mật tuyệt đối
+                            </p>
+                            <div class="contact-options">
+                                <a href="tel:0975186230" class="contact-option">
+                                    <i class="fas fa-phone"></i>
+                                    <span>0975.186.230</span>
+                                </a>
+                                <a href="mailto:info@thanhcuc.edu.vn" class="contact-option">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>info@thanhcuc.edu.vn</span>
                 </a>
-                <a href="tel:0975186230" class="btn btn-outline-light btn-lg animate-fade-in-right animate-delay-1">
-                    <i class="fas fa-phone me-2"></i>Gọi Ngay
-                </a>
+            </div>
+        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -264,32 +547,918 @@
 
 @push('styles')
 <style>
-    .certificate-card {
-        transition: all 0.3s ease;
+/* Hero Section Styles */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--bg-primary);
+    padding: 2rem 0;
+}
+
+
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.hero-content {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-stats {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.stat-item {
+    text-align: center;
+    color: white;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+.stat-divider {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.btn-hero-primary {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
         border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .certificate-card:hover {
+    color: var(--primary-color);
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(249, 210, 0, 0.4);
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(249, 210, 0, 0.6);
+    color: var(--primary-color);
+}
+
+.btn-hero-outline {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.btn-hero-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+
+
+/* Statistics Section */
+.stats-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.title-highlight {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+    height: 100%;
+}
+
+.stats-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(1, 88, 98, 0.15);
+    border-color: var(--secondary-color);
+}
+
+.stats-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover .stats-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.stats-content {
+    position: relative;
+    z-index: 2;
+}
+
+.stats-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    line-height: 1;
+    display: inline-block;
+}
+
+.stats-unit {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-left: 0.25rem;
+}
+
+.stats-label {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.stats-decoration {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    border-radius: 50%;
+    opacity: 0.1;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover .stats-decoration {
+    transform: scale(1.2);
+    opacity: 0.2;
+}
+
+/* Success Stories Section */
+.success-stories-section {
+    background: white;
+    position: relative;
+    z-index: 2;
+}
+
+.success-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+    height: 100%;
+    position: relative;
+}
+
+.success-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(1, 88, 98, 0.15);
+    border-color: var(--secondary-color);
+}
+
+.success-header {
+    padding: 2rem 2rem 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.success-avatar {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--secondary-color);
+    object-fit: cover;
+}
+
+.success-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.success-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.success-title {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.success-rating {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+}
+
+.success-content {
+    padding: 0 2rem 2rem;
+}
+
+.success-quote {
+    font-style: italic;
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.success-quote::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--secondary-color);
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    opacity: 0.3;
+}
+
+.success-achievements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.achievement-tag {
+    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.achievement-year {
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Horizontal Success Cards */
+.success-card-horizontal {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+}
+
+.success-card-horizontal:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(1, 88, 98, 0.1);
+    border-color: var(--secondary-color);
+}
+
+.success-avatar-small .avatar-img {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--secondary-color);
+}
+
+.success-name-small {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.success-quote-small {
+    font-size: 0.9rem;
+    color: #495057;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.success-tags-small {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tag-small {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* Certificates Section */
+.certificates-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    z-index: 2;
+}
+
+.certificate-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+    height: 100%;
+    position: relative;
+}
+
+.certificate-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(1, 88, 98, 0.15);
+    border-color: var(--secondary-color);
+}
+
+.certificate-header {
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
     }
     
     .certificate-icon {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
         transition: all 0.3s ease;
     }
     
     .certificate-card:hover .certificate-icon {
-        transform: scale(1.1);
+    transform: scale(1.1) rotate(10deg);
+}
+
+.certificate-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.certificate-card:hover .certificate-glow {
+    opacity: 1;
+}
+
+.certificate-content {
+    padding: 2rem;
+}
+
+.certificate-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.certificate-desc {
+    color: #6c757d;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.certificate-stats {
+    space-y: 1rem;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-level {
+    font-weight: 700;
+    color: var(--primary-color);
+    min-width: 50px;
+    font-size: 0.9rem;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-fill {
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    border-radius: 10px;
+    width: 0;
+    transition: width 2s ease;
+}
+
+.stat-percent {
+    font-weight: 700;
+    color: var(--primary-color);
+    min-width: 40px;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+/* CTA Section */
+.cta-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--bg-primary);
+    padding: 4rem 0;
+}
+
+.cta-content {
+    color: white;
+}
+
+.cta-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.cta-features {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.feature-item i {
+    color: var(--secondary-color);
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.cta-form-container {
+    /* Container for the form */
+}
+
+.cta-form-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    z-index: 2;
+}
+
+.form-control {
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(249, 210, 0, 0.25);
+    outline: none;
+}
+
+.btn-cta-primary {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    border: none;
+    color: var(--primary-color);
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(249, 210, 0, 0.4);
+    color: var(--primary-color);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.btn-cta-primary:hover .btn-glow {
+    left: 100%;
+}
+
+.form-footer {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.form-note {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.contact-options {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.contact-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-option:hover {
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
     }
     
-    .certificate-stats .badge {
-        font-size: 0.75rem;
-        margin-bottom: 5px;
+    .hero-subtitle {
+        font-size: 1.1rem;
     }
     
+    .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .stat-divider {
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .cta-title {
+        font-size: 2rem;
+    }
+    
+    .contact-options {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .cta-form-card {
+        padding: 2rem;
+    }
+    
+    .success-card-horizontal {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Counter Animation */
     .counter {
-        font-family: 'Arial', sans-serif;
+    transition: all 2s ease;
+}
+
+/* Fix for overlapping issues */
+section {
+    position: relative;
+}
+
+.stats-section,
+.success-stories-section,
+.certificates-section {
+    z-index: 1;
+}
+
+/* Ensure proper stacking context */
+.navbar {
+    z-index: 1050 !important;
+}
+
+/* Prevent content from going under navbar */
+main {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fix for backdrop-filter issues */
+.hero-badge,
+.achievement-tabs .nav-link,
+.btn-hero-outline,
+.cta-badge,
+.cta-form-card {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    will-change: transform;
+}
+
+/* Smooth transitions */
+* {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Counter Animation
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const increment = target / 100;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.ceil(current);
+                    setTimeout(updateCounter, 20);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        });
+    }
+    
+    // Certificate Stats Animation
+    function animateStats() {
+        const statFills = document.querySelectorAll('.stat-fill');
+        
+        statFills.forEach(fill => {
+            const percent = fill.getAttribute('data-percent');
+            setTimeout(() => {
+                fill.style.width = percent + '%';
+            }, 500);
+        });
+    }
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('stats-section')) {
+                    animateCounters();
+                }
+                if (entry.target.classList.contains('certificates-section')) {
+                    animateStats();
+                }
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe sections
+    document.querySelectorAll('.stats-section, .certificates-section').forEach(section => {
+        observer.observe(section);
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Form submission enhancement
+    const ctaForm = document.querySelector('.cta-form');
+    if (ctaForm) {
+        ctaForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang gửi...';
+            submitBtn.disabled = true;
+            
+            // Reset after 3 seconds (adjust based on actual form processing)
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 3000);
+        });
+    }
+});
+</script>
 @endpush

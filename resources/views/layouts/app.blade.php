@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Trung Tâm Du Học Nghề Đức Thanh Cúc - Tư Vấn Du Học Nghề Đức Uy Tín')</title>
-    <meta name="description" content="@yield('description', 'Trung tâm tư vấn du học nghề Đức uy tín. Hỗ trợ toàn diện từ hồ sơ, visa đến định cư. Cơ hội việc làm và lương cao tại Đức.')">
-    <meta name="keywords" content="du học nghề Đức, Ausbildung Đức, tư vấn du học Đức, visa du học Đức, học nghề tại Đức">
+    <title>@yield('title', 'Trung Tâm Tiếng Đức Thanh Cúc - Học Tiếng Đức & Luyện Thi Chứng Chỉ')</title>
+    <meta name="description" content="@yield('description', 'Trung tâm tiếng Đức Thanh Cúc - Học tiếng Đức chuyên nghiệp, luyện thi chứng chỉ Goethe, TestDaF. Lịch khai giảng, lịch thi và kết quả học viên.')">
+    <meta name="keywords" content="học tiếng Đức, luyện thi Goethe, TestDaF, chứng chỉ tiếng Đức, trung tâm tiếng Đức, lịch khai giảng, lịch thi">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,17 +19,17 @@
     
     <style>
         :root {
-            /* New Vibrant Color Palette */
-            --primary-color: #F9D200;
-            --primary-color-rgb: 249, 210, 0;
-            --secondary-color: #F57F25;
-            --secondary-color-rgb: 245, 127, 37;
-            --accent-color: #CADD2D;
-            --accent-color-rgb: 202, 221, 45;
+            /* New Color Palette - #015862 as Primary */
+            --primary-color: #015862;
+            --primary-color-rgb: 1, 88, 98;
+            --secondary-color: #F9D200;
+            --secondary-color-rgb: 249, 210, 0;
+            --accent-color: #F57F25;
+            --accent-color-rgb: 245, 127, 37;
             --success-color: #3EB850;
             --success-color-rgb: 62, 184, 80;
-            --dark-color: #015862;
-            --dark-color-rgb: 1, 88, 98;
+            --highlight-color: #CADD2D;
+            --highlight-color-rgb: 202, 221, 45;
             
             /* Derived Colors */
             --warning-color: #F57F25;
@@ -44,16 +44,18 @@
             --text-light: #ffffff;
             
             /* Background Gradients */
-            --bg-primary: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);
-            --bg-secondary: linear-gradient(135deg, #CADD2D 0%, #3EB850 100%);
-            --bg-accent: linear-gradient(135deg, #3EB850 0%, #015862 100%);
-            --bg-warm: linear-gradient(135deg, #F57F25 0%, #CADD2D 100%);
+            --bg-primary: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+            --bg-secondary: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);
+            --bg-accent: linear-gradient(135deg, #F57F25 0%, #CADD2D 100%);
+            --bg-warm: linear-gradient(135deg, #F57F25 0%, #F9D200 100%);
             --bg-cool: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+            --bg-highlight: linear-gradient(135deg, #CADD2D 0%, #3EB850 100%);
             
             /* Legacy support */
             --navy-light: #015862;
             --navy-lighter: #3EB850;
-            --text-light: #6c757d;
+            --dark-color: #015862;
+            --dark-color-rgb: 1, 88, 98;
         }
         
         * {
@@ -268,22 +270,28 @@
                 height: 35px;
             }
             .navbar-nav .nav-link {
-                font-size: 0.95rem;
-                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+                padding: 0.6rem 0.8rem;
+                margin: 0.1rem 0;
             }
             .navbar-nav .nav-link i {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                margin-right: 0.4rem;
+            }
+            .navbar-nav {
+                gap: 0.1rem;
             }
         }
         
         .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), #374151);
+            background: linear-gradient(45deg, var(--primary-color), var(--success-color));
             background-size: 200% 200%;
             border: none;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
             transform: perspective(1px) translateZ(0);
+            color: white;
         }
         
         .btn-primary::before {
@@ -577,6 +585,21 @@
         /* Navbar z-index fix */
         .navbar {
             z-index: 1030 !important;
+            padding: 0.75rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar .container {
+            max-width: 1200px;
+        }
+        
+        .navbar-nav {
+            margin: 0 auto;
+            gap: 0.2rem;
+        }
+        
+        .navbar-nav .nav-item {
+            margin: 0 0.1rem;
         }
         
         /* Modal Responsive */
@@ -728,19 +751,25 @@
         
         .navbar-nav .nav-link {
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.2rem;
+            margin: 0 0.1rem;
+            border-radius: 8px;
+            color: var(--dark-color) !important;
         }
         
         .navbar-nav .nav-link i {
             transition: all 0.3s ease;
             color: var(--dark-color);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+            width: 16px;
+            text-align: center;
         }
         
         .navbar-nav .nav-link::before {
@@ -749,24 +778,41 @@
             bottom: 0;
             left: 50%;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             transition: all 0.3s ease;
             transform: translateX(-50%);
+            border-radius: 2px;
         }
         
         .navbar-nav .nav-link:hover {
             color: var(--primary-color) !important;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            background-color: rgba(1, 88, 98, 0.1);
+            box-shadow: 0 2px 8px rgba(1, 88, 98, 0.2);
         }
         
         .navbar-nav .nav-link:hover i {
             color: var(--secondary-color);
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
         
         .navbar-nav .nav-link:hover::before {
-            width: 100%;
+            width: 80%;
+        }
+        
+        .navbar-nav .nav-link.active {
+            color: var(--primary-color) !important;
+            background-color: rgba(1, 88, 98, 0.15);
+            box-shadow: 0 2px 8px rgba(1, 88, 98, 0.3);
+        }
+        
+        .navbar-nav .nav-link.active i {
+            color: var(--secondary-color);
+        }
+        
+        .navbar-nav .nav-link.active::before {
+            width: 80%;
         }
         
         .dropdown-menu {
@@ -1071,7 +1117,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style="z-index: 1050;">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="logo-img">
@@ -1084,47 +1130,49 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
+                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">
                             <i class="fas fa-home me-2"></i>Trang Chủ
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about') }}">
+                        <a class="nav-link {{ Request::is('ve-chung-toi') ? 'active' : '' }}" href="{{ route('about') }}">
                             <i class="fas fa-users me-2"></i>Về Chúng Tôi
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('schedule') }}">
-                            <i class="fas fa-graduation-cap me-2"></i>Chương Trình Ausbildung
+                        <a class="nav-link {{ Request::is('lich-khai-giang') ? 'active' : '' }}" href="{{ route('schedule') }}">
+                            <i class="fas fa-calendar-alt me-2"></i>Lịch Khai Giảng
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('exam-schedule') }}">
-                            <i class="fas fa-passport me-2"></i>Thủ Tục Visa
+                        <a class="nav-link {{ Request::is('lich-thi') ? 'active' : '' }}" href="{{ route('exam-schedule') }}">
+                            <i class="fas fa-calendar-check me-2"></i>Lịch Thi
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('results') }}">
-                            <i class="fas fa-star me-2"></i>Thành Công Du Học
+                        <a class="nav-link {{ Request::is('ket-qua-hoc-vien') ? 'active' : '' }}" href="{{ route('results') }}">
+                            <i class="fas fa-trophy me-2"></i>Kết Quả Học Viên
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact') }}">
-                            <i class="fas fa-phone-alt me-2"></i>Tư Vấn Miễn Phí
+                        <a class="nav-link {{ Request::is('lien-he') ? 'active' : '' }}" href="{{ route('contact') }}">
+                            <i class="fas fa-phone-alt me-2"></i>Liên Hệ
                         </a>
                     </li>
                 </ul>
                 
-                <div class="d-flex">
-                    <a href="tel:0975186230" class="btn btn-outline-primary me-2">
+                <div class="d-flex align-items-center">
+                    <a href="tel:0975186230" class="btn btn-outline-primary me-3">
                         <i class="fas fa-phone me-1"></i>Hotline
                     </a>
-                    <a href="{{ route('contact') }}" class="btn btn-primary">Tư Vấn Du Học</a>
+                    <a href="{{ route('contact') }}" class="btn btn-primary">
+                        <i class="fas fa-envelope me-1"></i>Liên Hệ
+                    </a>
                 </div>
             </div>
         </div>
@@ -1144,7 +1192,7 @@
                         <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="footer-logo">
                     </div>
                     <p class="text-light">
-                        Trung tâm Du học Nghề Đức Thanh Cúc - Đồng hành cùng bạn trên con đường du học nghề tại Đức. Tư vấn chuyên nghiệp, hỗ trợ toàn diện từ A-Z.
+                        Trung tâm Tiếng Đức Thanh Cúc - Đồng hành cùng bạn trên con đường học tiếng Đức và luyện thi chứng chỉ. Giảng dạy chuyên nghiệp, kết quả cao.
                     </p>
                     <div class="d-flex">
                         <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
@@ -1159,16 +1207,16 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ route('home') }}" class="text-light text-decoration-none">Trang Chủ</a></li>
                         <li><a href="{{ route('about') }}" class="text-light text-decoration-none">Về Chúng Tôi</a></li>
-                        <li><a href="{{ route('schedule') }}" class="text-light text-decoration-none">Chương Trình Ausbildung</a></li>
-                        <li><a href="{{ route('exam-schedule') }}" class="text-light text-decoration-none">Thủ Tục Visa</a></li>
+                        <li><a href="{{ route('schedule') }}" class="text-light text-decoration-none">Lịch Khai Giảng</a></li>
+                        <li><a href="{{ route('exam-schedule') }}" class="text-light text-decoration-none">Lịch Thi</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h6 class="text-white mb-3">Dịch Vụ</h6>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('results') }}" class="text-light text-decoration-none">Thành Công Du Học</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-light text-decoration-none">Tư Vấn Miễn Phí</a></li>
+                        <li><a href="{{ route('results') }}" class="text-light text-decoration-none">Kết Quả Học Viên</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-light text-decoration-none">Liên Hệ</a></li>
                         <li><a href="tel:0975186230" class="text-light text-decoration-none">Hotline: 0975.186.230</a></li>
                         <li><a href="mailto:info@thanhcuc.edu.vn" class="text-light text-decoration-none">Email Tư Vấn</a></li>
                     </ul>

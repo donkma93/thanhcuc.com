@@ -2,96 +2,118 @@
 
 @section('title', 'Chi tiết liên hệ')
 
-@section('header')
-    <div>
-        <h1 class="h3 mb-0">
-            <i class="fas fa-envelope me-2"></i>
-            Chi tiết liên hệ
-        </h1>
-        <p class="text-muted mb-0">Thông tin chi tiết và quản lý liên hệ</p>
-    </div>
-    <div>
-        <a href="{{ route('admin.contacts.index') }}" class="btn btn-outline-secondary">
-            <i class="fas fa-arrow-left me-1"></i>
-            Quay lại
-        </a>
-    </div>
-@endsection
-
 @section('content')
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-0 text-gray-800">Chi tiết liên hệ</h1>
+        <p class="text-muted">Thông tin chi tiết về liên hệ từ {{ $contact->name }}</p>
+    </div>
+    <div>
+        <a href="{{ route('admin.contacts.index') }}" class="btn btn-secondary me-2">
+            <i class="fas fa-arrow-left me-2"></i>Quay lại
+        </a>
+        @if($contact->status === 'new')
+            <form action="{{ route('admin.contacts.update-status', $contact) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="status" value="contacted">
+                <button type="submit" class="btn btn-success me-2">
+                    <i class="fas fa-phone me-2"></i>Đánh dấu đã liên hệ
+                </button>
+            </form>
+        @endif
+        @if($contact->status !== 'completed')
+            <form action="{{ route('admin.contacts.update-status', $contact) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="status" value="completed">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-check me-2"></i>Hoàn thành
+                </button>
+            </form>
+        @endif
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="dropdown-item text-danger" 
+                                onclick="return confirm('Bạn có chắc muốn xóa liên hệ này?')">
+                            <i class="fas fa-trash me-2"></i>Xóa
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
     <div class="row">
         <!-- Contact Information -->
         <div class="col-lg-8">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-user me-2"></i>
-                        Thông tin liên hệ
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-user me-2"></i>Thông tin liên hệ
                     </h5>
                 </div>
                 <div class="card-body">
+                    <!-- Contact Header -->
+                    <div class="d-flex align-items-center mb-4 p-3 bg-light rounded">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-user fa-2x text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-1">{{ $contact->name }}</h4>
+                            <div class="d-flex align-items-center gap-3">
+                                <a href="tel:{{ $contact->phone }}" class="text-decoration-none">
+                                    <i class="fas fa-phone me-1"></i>{{ $contact->phone }}
+                                </a>
+                                @if($contact->email)
+                                    <a href="mailto:{{ $contact->email }}" class="text-decoration-none">
+                                        <i class="fas fa-envelope me-1"></i>{{ $contact->email }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Details -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Họ và tên:</label>
-                                <p class="mb-0">{{ $contact->name }}</p>
+                                <h6 class="text-muted mb-1">Chương trình quan tâm</h6>
+                                <span class="badge bg-secondary fs-6">
+                                    <i class="fas fa-graduation-cap me-1"></i>{{ $contact->program }}
+                                </span>
                             </div>
                             
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Số điện thoại:</label>
-                                <p class="mb-0">
-                                    <a href="tel:{{ $contact->phone }}" class="text-decoration-none">
-                                        <i class="fas fa-phone me-1"></i>
-                                        {{ $contact->phone }}
-                                    </a>
-                                </p>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Email:</label>
-                                <p class="mb-0">
-                                    @if($contact->email)
-                                        <a href="mailto:{{ $contact->email }}" class="text-decoration-none">
-                                            <i class="fas fa-envelope me-1"></i>
-                                            {{ $contact->email }}
-                                        </a>
-                                    @else
-                                        <span class="text-muted">Chưa cung cấp</span>
-                                    @endif
-                                </p>
+                                <h6 class="text-muted mb-1">Thời gian gửi</h6>
+                                <div class="fw-bold">{{ $contact->created_at->format('d/m/Y H:i:s') }}</div>
+                                <small class="text-muted">{{ $contact->created_at->diffForHumans() }}</small>
                             </div>
                         </div>
                         
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Chương trình quan tâm:</label>
-                                <p class="mb-0">
-                                    <span class="badge bg-primary fs-6">{{ $contact->program }}</span>
-                                </p>
+                                <h6 class="text-muted mb-1">Trạng thái</h6>
+                                <div>{!! $contact->status_badge !!}</div>
                             </div>
                             
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Trạng thái:</label>
-                                <p class="mb-0">{!! $contact->status_badge !!}</p>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Thời gian đăng ký:</label>
-                                <p class="mb-0">
-                                    {{ $contact->created_at->format('d/m/Y H:i:s') }}
-                                    <br>
-                                    <small class="text-muted">{{ $contact->created_at->diffForHumans() }}</small>
-                                </p>
+                                <h6 class="text-muted mb-1">ID liên hệ</h6>
+                                <code>#{{ $contact->id }}</code>
                             </div>
                             
                             @if($contact->contacted_at)
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Thời gian liên hệ:</label>
-                                    <p class="mb-0">
-                                        {{ $contact->contacted_at->format('d/m/Y H:i:s') }}
-                                        <br>
-                                        <small class="text-muted">{{ $contact->contacted_at->diffForHumans() }}</small>
-                                    </p>
+                                    <h6 class="text-muted mb-1">Thời gian liên hệ</h6>
+                                    <div class="fw-bold">{{ $contact->contacted_at->format('d/m/Y H:i:s') }}</div>
+                                    <small class="text-muted">{{ $contact->contacted_at->diffForHumans() }}</small>
                                 </div>
                             @endif
                         </div>
@@ -99,9 +121,11 @@
                     
                     @if($contact->message)
                         <div class="mt-4">
-                            <label class="form-label fw-bold">Tin nhắn:</label>
-                            <div class="bg-light p-3 rounded">
-                                {{ $contact->message }}
+                            <h6 class="text-muted mb-2">Tin nhắn</h6>
+                            <div class="bg-light p-3 rounded border-start border-primary border-4">
+                                <i class="fas fa-quote-left text-muted me-2"></i>
+                                <span>{{ $contact->message }}</span>
+                                <i class="fas fa-quote-right text-muted ms-2"></i>
                             </div>
                         </div>
                     @endif
@@ -142,39 +166,34 @@
             <!-- Quick Actions -->
             <div class="card mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-bolt me-2"></i>
-                        Thao tác nhanh
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt me-2"></i>Thao tác nhanh
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
                         <!-- Call Button -->
                         <a href="tel:{{ $contact->phone }}" class="btn btn-success">
-                            <i class="fas fa-phone me-2"></i>
-                            Gọi điện
+                            <i class="fas fa-phone me-2"></i>Gọi điện
                         </a>
                         
                         <!-- Email Button -->
                         @if($contact->email)
                             <a href="mailto:{{ $contact->email }}" class="btn btn-info">
-                                <i class="fas fa-envelope me-2"></i>
-                                Gửi email
+                                <i class="fas fa-envelope me-2"></i>Gửi email
                             </a>
                         @endif
                         
                         <!-- WhatsApp Button -->
                         <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->phone) }}" 
-                           target="_blank" class="btn btn-success">
-                            <i class="fab fa-whatsapp me-2"></i>
-                            WhatsApp
+                           target="_blank" class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp me-2"></i>WhatsApp
                         </a>
                         
                         <!-- Zalo Button -->
                         <a href="https://zalo.me/{{ preg_replace('/[^0-9]/', '', $contact->phone) }}" 
-                           target="_blank" class="btn btn-primary">
-                            <i class="fas fa-comment me-2"></i>
-                            Zalo
+                           target="_blank" class="btn btn-outline-primary">
+                            <i class="fas fa-comment me-2"></i>Zalo
                         </a>
                     </div>
                 </div>
@@ -183,34 +202,37 @@
             <!-- Status Management -->
             <div class="card mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-tasks me-2"></i>
-                        Quản lý trạng thái
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tasks me-2"></i>Quản lý trạng thái
                     </h5>
                 </div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái hiện tại</label>
+                        <div>{!! $contact->status_badge !!}</div>
+                    </div>
+                    
                     <form action="{{ route('admin.contacts.update-status', $contact) }}" method="POST">
                         @csrf
                         @method('PUT')
                         
                         <div class="mb-3">
-                            <label for="status" class="form-label">Trạng thái:</label>
+                            <label for="status" class="form-label">Cập nhật trạng thái</label>
                             <select class="form-select" id="status" name="status" required>
                                 <option value="new" {{ $contact->status === 'new' ? 'selected' : '' }}>
-                                    Mới
+                                    <i class="fas fa-circle text-warning"></i> Mới
                                 </option>
                                 <option value="contacted" {{ $contact->status === 'contacted' ? 'selected' : '' }}>
-                                    Đã liên hệ
+                                    <i class="fas fa-circle text-info"></i> Đã liên hệ
                                 </option>
                                 <option value="completed" {{ $contact->status === 'completed' ? 'selected' : '' }}>
-                                    Hoàn thành
+                                    <i class="fas fa-circle text-success"></i> Hoàn thành
                                 </option>
                             </select>
                         </div>
                         
                         <button type="submit" class="btn btn-primary w-100">
-                            <i class="fas fa-save me-1"></i>
-                            Cập nhật trạng thái
+                            <i class="fas fa-save me-2"></i>Cập nhật trạng thái
                         </button>
                     </form>
                 </div>
@@ -219,9 +241,8 @@
             <!-- Contact Timeline -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-history me-2"></i>
-                        Lịch sử
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-history me-2"></i>Lịch sử
                     </h5>
                 </div>
                 <div class="card-body">
@@ -292,40 +313,55 @@
 
 @push('styles')
 <style>
-    .timeline {
-        position: relative;
-        padding-left: 30px;
-    }
-    
-    .timeline::before {
-        content: '';
-        position: absolute;
-        left: 15px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: #dee2e6;
-    }
-    
-    .timeline-item {
-        position: relative;
-        margin-bottom: 20px;
-    }
-    
-    .timeline-marker {
-        position: absolute;
-        left: -22px;
-        top: 5px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0 0 0 2px #dee2e6;
-    }
-    
-    .timeline-content h6 {
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -22px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #e9ecef;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #dee2e6;
+}
+
+.timeline-content h6 {
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.timeline-content p {
+    margin-bottom: 0;
+}
 </style>
 @endpush

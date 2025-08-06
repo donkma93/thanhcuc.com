@@ -250,6 +250,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.courses*') ? 'active' : '' }}" 
+                               href="{{ route('admin.courses.index') }}">
+                                <i class="fas fa-book-open"></i>
+                                Quản lý khóa học
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.programs*') ? 'active' : '' }}" 
                                href="{{ route('admin.programs.index') }}">
                                 <i class="fas fa-graduation-cap"></i>
@@ -261,6 +268,13 @@
                                href="{{ route('admin.reasons.index') }}">
                                 <i class="fas fa-heart"></i>
                                 Lý do chọn Thanh Cúc
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.schedules*') ? 'active' : '' }}" 
+                               href="{{ route('admin.schedules.index') }}">
+                                <i class="fas fa-calendar-alt"></i>
+                                Lịch khai giảng
                             </a>
                         </li>
                         <li class="nav-item">
