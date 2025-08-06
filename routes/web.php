@@ -141,6 +141,11 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
     
+    // About Page Management
+    Route::get('about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
+    Route::put('about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
+    Route::get('about/reset', [\App\Http\Controllers\Admin\AboutController::class, 'reset'])->name('about.reset');
+    
     // Schedule Management
     Route::resource('schedules', \App\Http\Controllers\Admin\ScheduleController::class);
     Route::post('schedules/bulk-action', [\App\Http\Controllers\Admin\ScheduleController::class, 'bulkAction'])->name('schedules.bulk-action');
@@ -153,24 +158,19 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::post('courses/bulk-action', [\App\Http\Controllers\Admin\CourseController::class, 'bulkAction'])->name('courses.bulk-action');
     Route::post('courses/update-sort-order', [\App\Http\Controllers\Admin\CourseController::class, 'updateSortOrder'])->name('courses.update-sort-order');
     
-    // Demo Routes (for development/testing)
-    Route::prefix('demo')->name('demo.')->group(function() {
-        Route::get('messagebox', [\App\Http\Controllers\Admin\DemoController::class, 'messagebox'])->name('messagebox');
-        Route::get('messagebox/session', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxSession'])->name('messagebox.session');
-        Route::post('messagebox/ajax', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxAjax'])->name('messagebox.ajax');
-        Route::post('messagebox/form', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxForm'])->name('messagebox.form');
-        Route::get('messagebox/multiple', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxMultiple'])->name('messagebox.multiple');
-        Route::post('messagebox/validation', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxValidation'])->name('messagebox.validation');
-        Route::get('messagebox/long', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxLong'])->name('messagebox.long');
-        Route::get('messagebox/html', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxHtml'])->name('messagebox.html');
-        
-        Route::get('admin-actions', [\App\Http\Controllers\Admin\DemoController::class, 'adminActions'])->name('admin-actions');
-        Route::get('confirmation-modal', [\App\Http\Controllers\Admin\DemoController::class, 'confirmationModal'])->name('confirmation-modal');
-        Route::get('test-confirmation', function() { return view('admin.test-confirmation'); })->name('test-confirmation');
-        Route::delete('delete/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoDelete'])->name('delete');
-        Route::get('toggle/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoToggle'])->name('toggle');
-        Route::post('quick-edit/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoQuickEdit'])->name('quick-edit');
-        Route::post('auto-save/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoAutoSave'])->name('auto-save');
-        Route::post('sort-order', [\App\Http\Controllers\Admin\DemoController::class, 'demoSortOrder'])->name('sort-order');
-    });
+    // Teacher Management
+    Route::resource('teachers', \App\Http\Controllers\Admin\TeacherController::class);
+    Route::post('teachers/bulk-action', [\App\Http\Controllers\Admin\TeacherController::class, 'bulkAction'])->name('teachers.bulk-action');
+    Route::post('teachers/update-sort-order', [\App\Http\Controllers\Admin\TeacherController::class, 'updateSortOrder'])->name('teachers.update-sort-order');
+    Route::patch('teachers/{teacher}/toggle-status', [\App\Http\Controllers\Admin\TeacherController::class, 'toggleStatus'])->name('teachers.toggle-status');
+    Route::patch('teachers/{teacher}/toggle-featured', [\App\Http\Controllers\Admin\TeacherController::class, 'toggleFeatured'])->name('teachers.toggle-featured');
+    
+    // Achievement Management
+    Route::resource('achievements', \App\Http\Controllers\Admin\AchievementController::class);
+    Route::post('achievements/bulk-action', [\App\Http\Controllers\Admin\AchievementController::class, 'bulkAction'])->name('achievements.bulk-action');
+    Route::post('achievements/update-sort-order', [\App\Http\Controllers\Admin\AchievementController::class, 'updateSortOrder'])->name('achievements.update-sort-order');
+    Route::patch('achievements/{achievement}/toggle-status', [\App\Http\Controllers\Admin\AchievementController::class, 'toggleStatus'])->name('achievements.toggle-status');
+    Route::patch('achievements/{achievement}/toggle-featured', [\App\Http\Controllers\Admin\AchievementController::class, 'toggleFeatured'])->name('achievements.toggle-featured');
+    
+
 });

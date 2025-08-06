@@ -257,6 +257,20 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.teachers*') ? 'active' : '' }}" 
+                               href="{{ route('admin.teachers.index') }}">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                Quản lý giảng viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.achievements*') ? 'active' : '' }}" 
+                               href="{{ route('admin.achievements.index') }}">
+                                <i class="fas fa-trophy"></i>
+                                Bảng vàng thành tích
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.programs*') ? 'active' : '' }}" 
                                href="{{ route('admin.programs.index') }}">
                                 <i class="fas fa-graduation-cap"></i>
@@ -278,6 +292,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.about*') ? 'active' : '' }}" 
+                               href="{{ route('admin.about.index') }}">
+                                <i class="fas fa-users"></i>
+                                Về chúng tôi
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}" 
                                href="{{ route('admin.settings.index') }}">
                                 <i class="fas fa-cogs"></i>
@@ -285,29 +306,7 @@
                             </a>
                         </li>
                         
-                        @if(config('app.debug'))
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.demo.messagebox') ? 'active' : '' }}" 
-                               href="{{ route('admin.demo.messagebox') }}">
-                                <i class="fas fa-flask"></i>
-                                Demo Messagebox
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.demo.admin-actions') ? 'active' : '' }}" 
-                               href="{{ route('admin.demo.admin-actions') }}">
-                                <i class="fas fa-cogs"></i>
-                                Demo Admin Actions
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.demo.confirmation-modal') ? 'active' : '' }}" 
-                               href="{{ route('admin.demo.confirmation-modal') }}">
-                                <i class="fas fa-question-circle"></i>
-                                Demo Confirmation Modal
-                            </a>
-                        </li>
-                        @endif
+
                         
                         <li class="nav-item mt-2">
                             <small class="text-white-50 px-3">TÀI KHOẢN</small>
@@ -411,15 +410,13 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- jQuery UI for sortable -->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <!-- Messagebox AJAX Helper -->
-    <script src="{{ asset('admin/js/messagebox-ajax.js') }}"></script>
-    <!-- Admin Actions Helper -->
-    <script src="{{ asset('admin/js/admin-actions.js') }}"></script>
+
+
     <!-- Confirmation Modal Helper -->
     <script src="{{ asset('admin/js/confirmation-helpers.js') }}"></script>
     
     <script>
-        // Messagebox is now handled by the messagebox component
+        // Message notifications are handled by the messagebox component
         
         // Mobile sidebar toggle
         document.addEventListener('DOMContentLoaded', function() {

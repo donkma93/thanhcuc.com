@@ -9,6 +9,7 @@ use App\Models\Teacher;
 use App\Models\News;
 use App\Models\Contact;
 use App\Models\Schedule;
+use App\Models\Achievement;
 
 class HomeController extends Controller
 {
@@ -35,7 +36,37 @@ class HomeController extends Controller
             ->take(3)
             ->get();
             
-        return view('home', compact('featuredCourses', 'featuredPrograms', 'featuredTeachers', 'latestNews'));
+        // Get achievements for golden board
+        $monthlyAchievements = Achievement::where('category', 'monthly')
+            ->where('is_active', true)
+            ->orderBy('rank')
+            ->orderBy('sort_order')
+            ->take(3)
+            ->get();
+            
+        $examAchievements = Achievement::where('category', 'exam')
+            ->where('is_active', true)
+            ->orderBy('rank')
+            ->orderBy('sort_order')
+            ->take(3)
+            ->get();
+            
+        $scholarshipAchievements = Achievement::where('category', 'scholarship')
+            ->where('is_active', true)
+            ->orderBy('rank')
+            ->orderBy('sort_order')
+            ->take(3)
+            ->get();
+            
+        return view('home', compact(
+            'featuredCourses', 
+            'featuredPrograms', 
+            'featuredTeachers', 
+            'latestNews',
+            'monthlyAchievements',
+            'examAchievements', 
+            'scholarshipAchievements'
+        ));
     }
     
     public function about()
