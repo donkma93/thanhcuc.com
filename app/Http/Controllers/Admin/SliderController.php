@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
+    use HasMessagebox;
     public function index()
     {
         $sliders = Slider::orderBy('sort_order')->orderBy('id')->paginate(10);
@@ -48,7 +50,7 @@ class SliderController extends Controller
 
         Slider::create($data);
 
-        return redirect()->route('admin.sliders.index')->with('success', 'Tạo slider thành công!');
+        return $this->successAndRedirect('Slider đã được tạo thành công!', 'admin.sliders.index');
     }
 
     public function show(Slider $slider)
@@ -92,7 +94,7 @@ class SliderController extends Controller
 
         $slider->update($data);
 
-        return redirect()->route('admin.sliders.index')->with('success', 'Cập nhật slider thành công!');
+        return $this->successAndRedirect('Slider đã được cập nhật thành công!', 'admin.sliders.index');
     }
 
     public function destroy(Slider $slider)
@@ -104,7 +106,7 @@ class SliderController extends Controller
 
         $slider->delete();
 
-        return redirect()->route('admin.sliders.index')->with('success', 'Xóa slider thành công!');
+        return $this->successAndRedirect('Slider đã được xóa thành công!', 'admin.sliders.index');
     }
 
     public function updateOrder(Request $request)
@@ -119,7 +121,7 @@ class SliderController extends Controller
             Slider::where('id', $item['id'])->update(['sort_order' => $item['sort_order']]);
         }
 
-        return response()->json(['success' => true, 'message' => 'Cập nhật thứ tự thành công!']);
+        return $this->jsonSuccess('Cập nhật thứ tự thành công!');
     }
 
     public function toggleStatus(Slider $slider)
@@ -127,6 +129,6 @@ class SliderController extends Controller
         $slider->update(['is_active' => !$slider->is_active]);
         
         $status = $slider->is_active ? 'kích hoạt' : 'vô hiệu hóa';
-        return back()->with('success', "Đã {$status} slider thành công!");
+        return $this->successAndBack("Đã {$status} slider thành công!");
     }
 }

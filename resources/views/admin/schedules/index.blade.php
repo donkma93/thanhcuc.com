@@ -82,7 +82,9 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có chắc chắn muốn thực hiện hành động này?')">
+                    <button type="submit" class="btn btn-warning" 
+                            data-confirm="Bạn có chắc chắn muốn thực hiện hành động này?"
+                            data-confirm-type="warning">
                         <i class="fas fa-bolt me-1"></i>Thực hiện
                     </button>
                 </div>
@@ -228,7 +230,10 @@
                                                         <i class="fas fa-undo me-2"></i>Khôi phục
                                                     </a></li>
                                                     <li><hr class="dropdown-divider"></li>
-                                                    <li><a class="dropdown-item text-danger" href="{{ route('admin.schedules.force-delete', $schedule->id) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa vĩnh viễn?')">
+                                                    <li><a class="dropdown-item text-danger" 
+                                                           href="{{ route('admin.schedules.force-delete', $schedule->id) }}" 
+                                                           data-confirm="Bạn có chắc chắn muốn xóa vĩnh viễn? Hành động này không thể hoàn tác!"
+                                                           data-confirm-type="danger">
                                                         <i class="fas fa-trash-alt me-2"></i>Xóa vĩnh viễn
                                                     </a></li>
                                                 @else
@@ -329,11 +334,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Delete function
     window.deleteSchedule = function(id) {
-        if (confirm('Bạn có chắc chắn muốn xóa lịch khai giảng này?')) {
+        confirmDelete('Lịch khai giảng này', function() {
             const form = document.getElementById('deleteForm');
             form.action = `/admin/schedules/${id}`;
             form.submit();
-        }
+        });
     };
 });
 </script>

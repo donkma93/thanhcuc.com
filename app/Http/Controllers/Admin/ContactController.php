@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    use HasMessagebox;
     public function index(Request $request)
     {
         $query = Contact::query();
@@ -57,13 +59,14 @@ class ContactController extends Controller
 
         $contact->update($data);
 
-        return back()->with('success', 'Cập nhật trạng thái thành công!');
+        return $this->successAndBack('Trạng thái liên hệ đã được cập nhật thành công!');
     }
 
     public function destroy(Contact $contact)
     {
+        $contactName = $contact->name;
         $contact->delete();
-        return back()->with('success', 'Xóa liên hệ thành công!');
+        return $this->successAndBack('Đã xóa liên hệ từ "' . $contactName . '" thành công!');
     }
 
     public function bulkAction(Request $request)
@@ -94,7 +97,7 @@ class ContactController extends Controller
                 break;
         }
 
-        return back()->with('success', $message);
+        return $this->successAndBack($message);
     }
 
     public function export(Request $request)

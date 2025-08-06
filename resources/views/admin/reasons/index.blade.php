@@ -122,7 +122,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-outline-danger" 
                                                         title="Xóa"
-                                                        onclick="return confirm('Bạn có chắc muốn xóa lý do này?')">
+                                                        data-delete="Lý do: {{ $reason->title }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

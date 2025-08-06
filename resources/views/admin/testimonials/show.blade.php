@@ -296,7 +296,8 @@
                         
                         <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" 
                               method="POST" 
-                              onsubmit="return confirm('Bạn có chắc muốn xóa nhận xét này? Hành động này không thể hoàn tác!')">
+                              data-confirm="Bạn có chắc muốn xóa nhận xét này? Hành động này không thể hoàn tác!"
+                              data-confirm-type="danger">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger w-100">

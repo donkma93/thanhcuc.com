@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
+    use HasMessagebox;
     public function index(Request $request)
     {
         $query = Course::query();
@@ -116,10 +118,12 @@ class CourseController extends Controller
             $data['sort_order'] = $maxOrder + 1;
         }
 
-        Course::create($data);
+        $course = Course::create($data);
 
-        return redirect()->route('admin.courses.index')
-                        ->with('success', 'Khóa học đã được tạo thành công!');
+        return $this->successAndRedirect(
+            'Khóa học "' . $course->name . '" đã được tạo thành công!',
+            'admin.courses.index'
+        );
     }
 
     public function show(Course $course)
@@ -203,8 +207,10 @@ class CourseController extends Controller
 
         $course->update($data);
 
-        return redirect()->route('admin.courses.index')
-                        ->with('success', 'Khóa học đã được cập nhật thành công!');
+        return $this->successAndRedirect(
+            'Khóa học "' . $course->name . '" đã được cập nhật thành công!',
+            'admin.courses.index'
+        );
     }
 
     public function destroy(Course $course)
@@ -214,10 +220,13 @@ class CourseController extends Controller
             Storage::disk('public')->delete($course->image);
         }
 
+        $courseName = $course->name;
         $course->delete();
 
-        return redirect()->route('admin.courses.index')
-                        ->with('success', 'Khóa học đã được xóa thành công!');
+        return $this->successAndRedirect(
+            'Khóa học "' . $courseName . '" đã được xóa thành công!',
+            'admin.courses.index'
+        );
     }
 
     public function bulkAction(Request $request)
@@ -230,15 +239,17 @@ class CourseController extends Controller
 
         $courses = Course::whereIn('id', $request->selected_courses);
 
+        $count = count($request->selected_courses);
+        
         switch ($request->action) {
             case 'activate':
                 $courses->update(['is_active' => true]);
-                $message = 'Các khóa học đã được kích hoạt thành công!';
+                $message = "Đã kích hoạt thành công {$count} khóa học!";
                 break;
                 
             case 'deactivate':
                 $courses->update(['is_active' => false]);
-                $message = 'Các khóa học đã được vô hiệu hóa thành công!';
+                $message = "Đã vô hiệu hóa thành công {$count} khóa học!";
                 break;
                 
             case 'delete':
@@ -249,11 +260,11 @@ class CourseController extends Controller
                     }
                 }
                 $courses->delete();
-                $message = 'Các khóa học đã được xóa thành công!';
+                $message = "Đã xóa thành công {$count} khóa học!";
                 break;
         }
 
-        return redirect()->route('admin.courses.index')->with('success', $message);
+        return $this->successAndRedirect($message, 'admin.courses.index');
     }
 
     public function updateSortOrder(Request $request)
@@ -268,6 +279,6 @@ class CourseController extends Controller
             Course::where('id', $item['id'])->update(['sort_order' => $item['sort_order']]);
         }
 
-        return response()->json(['success' => true, 'message' => 'Thứ tự đã được cập nhật!']);
+        return $this->jsonSuccess('Thứ tự khóa học đã được cập nhật thành công!');
     }
 }

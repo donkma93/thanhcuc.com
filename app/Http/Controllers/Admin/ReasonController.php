@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reason;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 
 class ReasonController extends Controller
 {
+    use HasMessagebox;
     /**
      * Display a listing of the resource.
      */
@@ -54,8 +56,7 @@ class ReasonController extends Controller
 
         Reason::create($data);
 
-        return redirect()->route('admin.reasons.index')
-            ->with('success', 'Lý do đã được tạo thành công!');
+        return $this->successAndRedirect('Lý do đã được tạo thành công!', 'admin.reasons.index');
     }
 
     /**
@@ -87,8 +88,7 @@ class ReasonController extends Controller
 
         $reason->update($data);
 
-        return redirect()->route('admin.reasons.index')
-            ->with('success', 'Lý do đã được cập nhật thành công!');
+        return $this->successAndRedirect('Lý do đã được cập nhật thành công!', 'admin.reasons.index');
     }
 
     /**
@@ -98,8 +98,7 @@ class ReasonController extends Controller
     {
         $reason->delete();
 
-        return redirect()->route('admin.reasons.index')
-            ->with('success', 'Lý do đã được xóa thành công!');
+        return $this->successAndRedirect('Lý do đã được xóa thành công!', 'admin.reasons.index');
     }
 
     /**
@@ -118,9 +117,6 @@ class ReasonController extends Controller
                 ->update(['sort_order' => $item['sort_order']]);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Thứ tự lý do đã được cập nhật!'
-        ]);
+        return $this->jsonSuccess('Thứ tự lý do đã được cập nhật!');
     }
 }

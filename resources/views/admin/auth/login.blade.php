@@ -229,32 +229,7 @@
                 <div class="login-right">
                     <h2 class="form-title">Đăng nhập</h2>
                     
-                    <!-- Alerts -->
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            <i class="fas fa-check-circle me-2"></i>
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    @if(session('error'))
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-circle me-2"></i>
-                            {{ session('error') }}
-                        </div>
-                    @endif
-
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <strong>Có lỗi xảy ra:</strong>
-                            <ul class="mb-0 mt-2">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <!-- Messagebox Component handles all messages -->
                     
                     <form action="{{ route('admin.login.submit') }}" method="POST">
                         @csrf
@@ -323,5 +298,8 @@
             }
         });
     </script>
+
+    <!-- Admin Messagebox Component -->
+    @include('admin.components.messagebox')
 </body>
 </html>

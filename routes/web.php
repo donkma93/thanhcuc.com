@@ -86,13 +86,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Redirect /admin to /admin/login if not authenticated
+    Route::get('/', function() {
+        if (session('admin_user')) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('admin.login');
+    })->name('index');
 });
 
 // Admin Protected Routes (cần middleware admin.auth)
 Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     // Dashboard
-    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.index');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     
     // Profile
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
@@ -145,4 +152,25 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::resource('courses', \App\Http\Controllers\Admin\CourseController::class);
     Route::post('courses/bulk-action', [\App\Http\Controllers\Admin\CourseController::class, 'bulkAction'])->name('courses.bulk-action');
     Route::post('courses/update-sort-order', [\App\Http\Controllers\Admin\CourseController::class, 'updateSortOrder'])->name('courses.update-sort-order');
+    
+    // Demo Routes (for development/testing)
+    Route::prefix('demo')->name('demo.')->group(function() {
+        Route::get('messagebox', [\App\Http\Controllers\Admin\DemoController::class, 'messagebox'])->name('messagebox');
+        Route::get('messagebox/session', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxSession'])->name('messagebox.session');
+        Route::post('messagebox/ajax', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxAjax'])->name('messagebox.ajax');
+        Route::post('messagebox/form', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxForm'])->name('messagebox.form');
+        Route::get('messagebox/multiple', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxMultiple'])->name('messagebox.multiple');
+        Route::post('messagebox/validation', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxValidation'])->name('messagebox.validation');
+        Route::get('messagebox/long', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxLong'])->name('messagebox.long');
+        Route::get('messagebox/html', [\App\Http\Controllers\Admin\DemoController::class, 'messageboxHtml'])->name('messagebox.html');
+        
+        Route::get('admin-actions', [\App\Http\Controllers\Admin\DemoController::class, 'adminActions'])->name('admin-actions');
+        Route::get('confirmation-modal', [\App\Http\Controllers\Admin\DemoController::class, 'confirmationModal'])->name('confirmation-modal');
+        Route::get('test-confirmation', function() { return view('admin.test-confirmation'); })->name('test-confirmation');
+        Route::delete('delete/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoDelete'])->name('delete');
+        Route::get('toggle/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoToggle'])->name('toggle');
+        Route::post('quick-edit/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoQuickEdit'])->name('quick-edit');
+        Route::post('auto-save/{id}', [\App\Http\Controllers\Admin\DemoController::class, 'demoAutoSave'])->name('auto-save');
+        Route::post('sort-order', [\App\Http\Controllers\Admin\DemoController::class, 'demoSortOrder'])->name('sort-order');
+    });
 });

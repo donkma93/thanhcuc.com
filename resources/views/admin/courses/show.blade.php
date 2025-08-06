@@ -250,7 +250,8 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger" 
-                    onclick="return confirm('Bạn có chắc chắn muốn xóa khóa học này? Hành động này không thể hoàn tác!')">
+                    data-delete="Khóa học {{ $course->name }}"
+                    data-delete-message="Bạn có chắc chắn muốn xóa khóa học này? Hành động này không thể hoàn tác!">
                 <i class="fas fa-trash me-2"></i>Xóa khóa học
             </button>
         </form>

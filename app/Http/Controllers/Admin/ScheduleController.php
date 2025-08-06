@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
 {
+    use HasMessagebox;
     /**
      * Display a listing of the resource.
      */
@@ -124,8 +126,10 @@ class ScheduleController extends Controller
 
         $schedule = Schedule::create($validated);
 
-        return redirect()->route('admin.schedules.index')
-                        ->with('success', 'Lịch khai giảng đã được tạo thành công!');
+        return $this->successAndRedirect(
+            'Lịch khai giảng "' . $schedule->title . '" đã được tạo thành công!',
+            'admin.schedules.index'
+        );
     }
 
     /**
@@ -209,8 +213,10 @@ class ScheduleController extends Controller
 
         $schedule->update($validated);
 
-        return redirect()->route('admin.schedules.index')
-                        ->with('success', 'Lịch khai giảng đã được cập nhật thành công!');
+        return $this->successAndRedirect(
+            'Lịch khai giảng "' . $schedule->title . '" đã được cập nhật thành công!',
+            'admin.schedules.index'
+        );
     }
 
     /**
@@ -223,10 +229,13 @@ class ScheduleController extends Controller
             Storage::disk('public')->delete($schedule->teacher_avatar);
         }
 
+        $scheduleTitle = $schedule->title;
         $schedule->delete();
 
-        return redirect()->route('admin.schedules.index')
-                        ->with('success', 'Lịch khai giảng đã được xóa thành công!');
+        return $this->successAndRedirect(
+            'Lịch khai giảng "' . $scheduleTitle . '" đã được xóa thành công!',
+            'admin.schedules.index'
+        );
     }
 
     /**
@@ -237,8 +246,10 @@ class ScheduleController extends Controller
         $schedule = Schedule::withTrashed()->findOrFail($id);
         $schedule->restore();
 
-        return redirect()->route('admin.schedules.index')
-                        ->with('success', 'Lịch khai giảng đã được khôi phục thành công!');
+        return $this->successAndRedirect(
+            'Lịch khai giảng "' . $schedule->title . '" đã được khôi phục thành công!',
+            'admin.schedules.index'
+        );
     }
 
     /**
@@ -253,10 +264,13 @@ class ScheduleController extends Controller
             Storage::disk('public')->delete($schedule->teacher_avatar);
         }
 
+        $scheduleTitle = $schedule->title;
         $schedule->forceDelete();
 
-        return redirect()->route('admin.schedules.index')
-                        ->with('success', 'Lịch khai giảng đã được xóa vĩnh viễn!');
+        return $this->successAndRedirect(
+            'Lịch khai giảng "' . $scheduleTitle . '" đã được xóa vĩnh viễn!',
+            'admin.schedules.index'
+        );
     }
 
     /**
@@ -295,8 +309,7 @@ class ScheduleController extends Controller
                 break;
         }
 
-        return redirect()->route('admin.schedules.index')
-                        ->with('success', $message);
+        return $this->successAndRedirect($message, 'admin.schedules.index');
     }
 
     /**
@@ -311,7 +324,10 @@ class ScheduleController extends Controller
         $newSchedule->current_students = 0;
         $newSchedule->save();
 
-        return redirect()->route('admin.schedules.edit', $newSchedule)
-                        ->with('success', 'Lịch khai giảng đã được sao chép thành công!');
+        return $this->successAndRedirect(
+            'Lịch khai giảng "' . $newSchedule->title . '" đã được sao chép thành công!',
+            'admin.schedules.edit',
+            ['schedule' => $newSchedule]
+        );
     }
 }

@@ -215,7 +215,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="dropdown-item text-danger" 
-                                                                    onclick="return confirm('Bạn có chắc muốn xóa liên hệ này?')">
+                                                                    data-delete="Liên hệ từ {{ $contact->name }}">
                                                                 <i class="fas fa-trash me-2"></i>Xóa
                                                             </button>
                                                         </form>
@@ -340,7 +340,7 @@
                 break;
         }
         
-        return confirm(message);
+        return confirmAction(message);
     }
 </script>
 @endpush

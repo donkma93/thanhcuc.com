@@ -207,7 +207,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-outline-danger" 
                                                         title="Xóa"
-                                                        onclick="return confirm('Bạn có chắc muốn xóa nhận xét này?')">
+                                                        data-delete="Nhận xét của {{ $testimonial->name }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

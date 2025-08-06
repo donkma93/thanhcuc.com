@@ -219,7 +219,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="dropdown-item text-danger" 
-                                                                onclick="return confirm('Bạn có chắc muốn xóa khóa học này?')">
+                                                                data-delete="Khóa học {{ $course->name }}">
                                                             <i class="fas fa-trash me-2"></i>Xóa
                                                         </button>
                                                     </form>
@@ -343,7 +343,7 @@
                 break;
         }
         
-        return confirm(message);
+        return confirmAction(message);
     }
 </script>
 @endpush

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProgramController extends Controller
 {
+    use HasMessagebox;
     /**
      * Display a listing of the resource.
      */
@@ -81,10 +83,12 @@ class ProgramController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_active'] = $request->has('is_active');
 
-        Program::create($data);
+        $program = Program::create($data);
 
-        return redirect()->route('admin.programs.index')
-            ->with('success', 'Chương trình đã được tạo thành công!');
+        return $this->successAndRedirect(
+            'Chương trình "' . $program->name . '" đã được tạo thành công!',
+            'admin.programs.index'
+        );
     }
 
     /**
@@ -156,8 +160,10 @@ class ProgramController extends Controller
 
         $program->update($data);
 
-        return redirect()->route('admin.programs.index')
-            ->with('success', 'Chương trình đã được cập nhật thành công!');
+        return $this->successAndRedirect(
+            'Chương trình "' . $program->name . '" đã được cập nhật thành công!',
+            'admin.programs.index'
+        );
     }
 
     /**
@@ -170,10 +176,13 @@ class ProgramController extends Controller
             Storage::disk('public')->delete($program->image_path);
         }
 
+        $programName = $program->name;
         $program->delete();
 
-        return redirect()->route('admin.programs.index')
-            ->with('success', 'Chương trình đã được xóa thành công!');
+        return $this->successAndRedirect(
+            'Chương trình "' . $programName . '" đã được xóa thành công!',
+            'admin.programs.index'
+        );
     }
 
     /**
@@ -187,8 +196,7 @@ class ProgramController extends Controller
 
         $status = $program->is_active ? 'hiển thị' : 'ẩn';
         
-        return redirect()->back()
-            ->with('success', "Chương trình đã được {$status} thành công!");
+        return $this->successAndBack("Chương trình \"{$program->name}\" đã được {$status} thành công!");
     }
 
     /**
@@ -202,8 +210,7 @@ class ProgramController extends Controller
 
         $status = $program->is_featured ? 'đánh dấu nổi bật' : 'bỏ đánh dấu nổi bật';
         
-        return redirect()->back()
-            ->with('success', "Chương trình đã được {$status} thành công!");
+        return $this->successAndBack("Chương trình \"{$program->name}\" đã được {$status} thành công!");
     }
 
     /**
@@ -222,10 +229,7 @@ class ProgramController extends Controller
                 ->update(['sort_order' => $item['sort_order']]);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Thứ tự chương trình đã được cập nhật!'
-        ]);
+        return $this->jsonSuccess('Thứ tự chương trình đã được cập nhật!');
     }
 
     /**
@@ -270,6 +274,6 @@ class ProgramController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', $message);
+        return $this->successAndBack($message);
     }
 }

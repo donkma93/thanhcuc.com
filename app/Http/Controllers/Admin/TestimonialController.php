@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Testimonial;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class TestimonialController extends Controller
 {
+    use HasMessagebox;
     /**
      * Display a listing of the resource.
      */
@@ -68,10 +70,12 @@ class TestimonialController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_active'] = $request->has('is_active');
 
-        Testimonial::create($data);
+        $testimonial = Testimonial::create($data);
 
-        return redirect()->route('admin.testimonials.index')
-            ->with('success', 'Testimonial đã được tạo thành công!');
+        return $this->successAndRedirect(
+            'Testimonial từ "' . $testimonial->name . '" đã được tạo thành công!',
+            'admin.testimonials.index'
+        );
     }
 
     /**
@@ -130,8 +134,10 @@ class TestimonialController extends Controller
 
         $testimonial->update($data);
 
-        return redirect()->route('admin.testimonials.index')
-            ->with('success', 'Testimonial đã được cập nhật thành công!');
+        return $this->successAndRedirect(
+            'Testimonial từ "' . $testimonial->name . '" đã được cập nhật thành công!',
+            'admin.testimonials.index'
+        );
     }
 
     /**
@@ -146,8 +152,7 @@ class TestimonialController extends Controller
 
         $testimonial->delete();
 
-        return redirect()->route('admin.testimonials.index')
-            ->with('success', 'Testimonial đã được xóa thành công!');
+        return $this->successAndRedirect('Testimonial đã được xóa thành công!', 'admin.testimonials.index');
     }
 
     /**
@@ -161,8 +166,7 @@ class TestimonialController extends Controller
 
         $status = $testimonial->is_active ? 'hiển thị' : 'ẩn';
         
-        return redirect()->back()
-            ->with('success', "Testimonial đã được {$status} thành công!");
+        return $this->successAndBack("Testimonial đã được {$status} thành công!");
     }
 
     /**
@@ -176,8 +180,7 @@ class TestimonialController extends Controller
 
         $status = $testimonial->is_featured ? 'đánh dấu nổi bật' : 'bỏ đánh dấu nổi bật';
         
-        return redirect()->back()
-            ->with('success', "Testimonial đã được {$status} thành công!");
+        return $this->successAndBack("Testimonial đã được {$status} thành công!");
     }
 
     /**
@@ -196,10 +199,7 @@ class TestimonialController extends Controller
                 ->update(['sort_order' => $item['sort_order']]);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Thứ tự testimonial đã được cập nhật!'
-        ]);
+        return $this->jsonSuccess('Thứ tự testimonial đã được cập nhật!');
     }
 
     /**
@@ -244,6 +244,6 @@ class TestimonialController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', $message);
+        return $this->successAndBack($message);
     }
 }

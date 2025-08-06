@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\AdminUser;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    use HasMessagebox;
     public function dashboard()
     {
         // Thống kê tổng quan
@@ -81,6 +83,6 @@ class AdminController extends Controller
             'is_active' => $adminUser->is_active,
         ]]);
 
-        return back()->with('success', 'Cập nhật thông tin thành công!');
+        return $this->successAndBack('Cập nhật thông tin thành công!');
     }
 }

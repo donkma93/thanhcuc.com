@@ -299,7 +299,8 @@
                         
                         <form action="{{ route('admin.sliders.destroy', $slider) }}" 
                               method="POST" 
-                              onsubmit="return confirm('Bạn có chắc muốn xóa slider này? Hành động này không thể hoàn tác!')">
+                              data-confirm="Bạn có chắc muốn xóa slider này? Hành động này không thể hoàn tác!"
+                              data-confirm-type="danger">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger w-100">

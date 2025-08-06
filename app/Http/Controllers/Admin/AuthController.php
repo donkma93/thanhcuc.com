@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminUser;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    use HasMessagebox;
     public function showLoginForm()
     {
         // Nếu đã đăng nhập thì redirect về dashboard
@@ -33,17 +35,17 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return $this->flashValidationErrors($validator, 'Vui lòng kiểm tra lại thông tin đăng nhập.');
         }
 
         $adminUser = AdminUser::where('email', $request->email)->first();
 
         if (!$adminUser || !Hash::check($request->password, $adminUser->password)) {
-            return back()->with('error', 'Email hoặc mật khẩu không chính xác.')->withInput();
+            return $this->errorAndBack('Email hoặc mật khẩu không chính xác.')->withInput();
         }
 
         if (!$adminUser->isActive()) {
-            return back()->with('error', 'Tài khoản của bạn đã bị vô hiệu hóa.')->withInput();
+            return $this->errorAndBack('Tài khoản của bạn đã bị vô hiệu hóa.')->withInput();
         }
 
         // Lưu thông tin admin vào session
@@ -58,12 +60,12 @@ class AuthController extends Controller
         // Cập nhật last login
         $adminUser->updateLastLogin();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công!');
+        return $this->successAndRedirect('Đăng nhập thành công!', 'admin.dashboard');
     }
 
     public function logout()
     {
         session()->forget('admin_user');
-        return redirect()->route('admin.login')->with('success', 'Đăng xuất thành công!');
+        return $this->successAndRedirect('Đăng xuất thành công!', 'admin.login');
     }
 }

@@ -285,6 +285,30 @@
                             </a>
                         </li>
                         
+                        @if(config('app.debug'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.demo.messagebox') ? 'active' : '' }}" 
+                               href="{{ route('admin.demo.messagebox') }}">
+                                <i class="fas fa-flask"></i>
+                                Demo Messagebox
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.demo.admin-actions') ? 'active' : '' }}" 
+                               href="{{ route('admin.demo.admin-actions') }}">
+                                <i class="fas fa-cogs"></i>
+                                Demo Admin Actions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.demo.confirmation-modal') ? 'active' : '' }}" 
+                               href="{{ route('admin.demo.confirmation-modal') }}">
+                                <i class="fas fa-question-circle"></i>
+                                Demo Confirmation Modal
+                            </a>
+                        </li>
+                        @endif
+                        
                         <li class="nav-item mt-2">
                             <small class="text-white-50 px-3">TÀI KHOẢN</small>
                         </li>
@@ -309,7 +333,9 @@
                             <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="nav-link border-0 bg-transparent w-100 text-start" 
-                                        onclick="return confirm('Bạn có chắc muốn đăng xuất?')">
+                                        data-confirm="Bạn có chắc muốn đăng xuất?"
+                                        data-confirm-type="info"
+                                        data-confirm-title="Xác nhận đăng xuất">
                                     <i class="fas fa-sign-out-alt"></i>
                                     Đăng xuất
                                 </button>
@@ -355,35 +381,7 @@
 
                 <!-- Page content -->
                 <div class="main-content">
-                    <!-- Alerts -->
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    @endif
-
-                    @if(session('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-circle me-2"></i>
-                            {{ session('error') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    @endif
-
-                    @if($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <strong>Có lỗi xảy ra:</strong>
-                            <ul class="mb-0 mt-2">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    @endif
+                    <!-- Messagebox Component handles all messages -->
 
                     <!-- Page header -->
                     @hasSection('header')
@@ -399,20 +397,29 @@
         </div>
     </div>
 
+    <!-- Admin Messagebox Component -->
+    @include('admin.components.messagebox')
+    
+    <!-- Admin Confirmation Modal Component -->
+    @include('admin.components.confirmation-modal')
+
     <!-- Bootstrap 5.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js for dashboard -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- jQuery UI for sortable -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <!-- Messagebox AJAX Helper -->
+    <script src="{{ asset('admin/js/messagebox-ajax.js') }}"></script>
+    <!-- Admin Actions Helper -->
+    <script src="{{ asset('admin/js/admin-actions.js') }}"></script>
+    <!-- Confirmation Modal Helper -->
+    <script src="{{ asset('admin/js/confirmation-helpers.js') }}"></script>
     
     <script>
-        // Auto hide alerts after 5 seconds
-        setTimeout(function() {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(function(alert) {
-                const bsAlert = new bootstrap.Alert(alert);
-                bsAlert.close();
-            });
-        }, 5000);
+        // Messagebox is now handled by the messagebox component
         
         // Mobile sidebar toggle
         document.addEventListener('DOMContentLoaded', function() {

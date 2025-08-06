@@ -279,7 +279,8 @@
                         
                         <form action="{{ route('admin.programs.destroy', $program) }}" 
                               method="POST" 
-                              onsubmit="return confirm('Bạn có chắc muốn xóa chương trình này? Hành động này không thể hoàn tác!')">
+                              data-confirm="Bạn có chắc muốn xóa chương trình này? Hành động này không thể hoàn tác!"
+                              data-confirm-type="danger">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger w-100">

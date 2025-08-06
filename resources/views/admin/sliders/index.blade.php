@@ -181,7 +181,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-outline-danger" 
                                                         title="Xóa"
-                                                        onclick="return confirm('Bạn có chắc muốn xóa slider này?')">
+                                                        data-delete="{{ $slider->title }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

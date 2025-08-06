@@ -341,11 +341,11 @@
 @push('scripts')
 <script>
 function deleteSchedule(id) {
-    if (confirm('Bạn có chắc chắn muốn xóa lịch khai giảng này?')) {
+    confirmDelete('Lịch khai giảng này', function() {
         const form = document.getElementById('deleteForm');
         form.action = `/admin/schedules/${id}`;
         form.submit();
-    }
+    });
 }
 </script>
 @endpush

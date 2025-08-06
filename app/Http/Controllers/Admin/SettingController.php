@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
+    use HasMessagebox;
     /**
      * Display a listing of the resource.
      */
@@ -50,7 +52,6 @@ class SettingController extends Controller
             }
         }
 
-        return redirect()->route('admin.settings.index')
-            ->with('success', 'Cài đặt đã được cập nhật thành công!');
+        return $this->successAndRedirect('Cài đặt website đã được cập nhật thành công!', 'admin.settings.index');
     }
 }
