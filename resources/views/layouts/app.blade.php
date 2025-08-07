@@ -779,6 +779,29 @@
             transform: scale(1.1);
         }
         
+        .teacher-avatar {
+            object-fit: cover;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--primary-color);
+        }
+        
+        .teacher-avatar:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .teacher-avatar-placeholder {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teacher-avatar-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
         .course-badge {
             background-color: var(--secondary-color);
             color: white;
@@ -1096,7 +1119,7 @@
         }
         
         .carousel-control-icon {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 123, 255, 1);
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -1108,7 +1131,6 @@
         }
         
         .carousel-control-icon:hover {
-            background: white;
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
@@ -1120,7 +1142,7 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* Responsive testimonials */
+        /* Responsive testimonials and teachers */
         @media (max-width: 768px) {
             .testimonial-card .card-body {
                 padding: 1.5rem !important;
@@ -1129,6 +1151,21 @@
             .testimonial-avatar {
                 width: 70px !important;
                 height: 70px !important;
+            }
+            
+            /* Teacher avatar responsive */
+            .teacher-avatar {
+                width: 140px !important;
+                height: 140px !important;
+            }
+            
+            .teacher-avatar-placeholder {
+                width: 140px !important;
+                height: 140px !important;
+            }
+            
+            .teacher-avatar-placeholder i {
+                font-size: 3rem !important;
             }
             
             .carousel-indicators {
@@ -1153,6 +1190,21 @@
             .testimonial-avatar {
                 width: 60px !important;
                 height: 60px !important;
+            }
+            
+            /* Teacher avatar mobile */
+            .teacher-avatar {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            
+            .teacher-avatar-placeholder {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            
+            .teacher-avatar-placeholder i {
+                font-size: 2.5rem !important;
             }
             
             .testimonial-card p {

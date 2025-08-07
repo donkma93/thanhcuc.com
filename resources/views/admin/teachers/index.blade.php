@@ -26,11 +26,13 @@
                 <label for="specialization" class="form-label">Chuyên môn</label>
                 <select class="form-select" id="specialization" name="specialization">
                     <option value="">Tất cả</option>
-                    @foreach($specializations as $spec)
-                        <option value="{{ $spec }}" {{ request('specialization') == $spec ? 'selected' : '' }}>
-                            {{ $spec }}
-                        </option>
-                    @endforeach
+                    @if($specializations && count($specializations) > 0)
+                        @foreach($specializations as $spec)
+                            <option value="{{ $spec }}" {{ request('specialization') == $spec ? 'selected' : '' }}>
+                                {{ $spec }}
+                            </option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
             <div class="col-md-2">
@@ -61,7 +63,7 @@
     </div>
 </div>
 
-@if($teachers->count() > 0)
+@if($teachers && $teachers->count() > 0)
 <!-- Bulk Actions -->
 <div class="card mb-4">
     <div class="card-body">
@@ -195,9 +197,11 @@
         <div class="d-flex justify-content-between align-items-center mt-4">
             <div class="text-muted">
                 Hiển thị {{ $teachers->firstItem() ?? 0 }} đến {{ $teachers->lastItem() ?? 0 }} 
-                trong tổng số {{ $teachers->total() }} giảng viên
+                trong tổng số {{ $teachers->total() ?? 0 }} giảng viên
             </div>
-            {{ $teachers->links() }}
+            @if($teachers)
+                {{ $teachers->links() }}
+            @endif
         </div>
     </div>
 </div>

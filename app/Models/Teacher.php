@@ -28,4 +28,13 @@ class Teacher extends Model
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
     ];
+    
+    /**
+     * Get the achievements attribute, ensuring it's always an array
+     */
+    public function getAchievementsAttribute($value)
+    {
+        $decoded = json_decode($value, true);
+        return is_array($decoded) ? $decoded : [];
+    }
 }

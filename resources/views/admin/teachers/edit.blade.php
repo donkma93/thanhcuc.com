@@ -125,9 +125,9 @@
                         <label class="form-label">Thành tích nổi bật</label>
                         <div id="achievements-container">
                             @php
-                                $achievements = old('achievements', is_array($teacher->achievements ?? []) ? $teacher->achievements : []);
+                                $achievements = old('achievements', $teacher->achievements ?? []);
                             @endphp
-                            @if(count($achievements) > 0)
+                            @if(is_array($achievements) && count($achievements) > 0)
                                 @foreach($achievements as $index => $achievement)
                                     @if($achievement) {{-- Only show non-empty achievements --}}
                                         <div class="achievement-item mb-2">
@@ -194,6 +194,7 @@
             <div class="card-body">
                 <div class="mb-3">
                     <div class="form-check form-switch">
+                        <input type="hidden" name="is_active" value="0">
                         <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
                                value="1" {{ old('is_active', $teacher->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">
@@ -205,6 +206,7 @@
 
                 <div class="mb-3">
                     <div class="form-check form-switch">
+                        <input type="hidden" name="is_featured" value="0">
                         <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" 
                                value="1" {{ old('is_featured', $teacher->is_featured) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_featured">
@@ -283,7 +285,10 @@
     });
 
     // Achievements management
-    let achievementIndex = {{ count(old('achievements', is_array($teacher->achievements ?? []) ? $teacher->achievements : [])) }};
+    @php
+        $achievementsForJs = old('achievements', $teacher->achievements ?? []);
+    @endphp
+    let achievementIndex = {{ count($achievementsForJs) }};
 
     document.getElementById('add-achievement').addEventListener('click', function() {
         const container = document.getElementById('achievements-container');

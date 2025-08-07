@@ -47,7 +47,11 @@ class TeacherController extends Controller
                          ->orderBy('name')
                          ->paginate(15);
 
-        $specializations = Teacher::distinct()->pluck('specialization')->sort();
+        $specializations = Teacher::distinct()
+                                 ->pluck('specialization')
+                                 ->filter()
+                                 ->sort()
+                                 ->values(); // Reset array keys
 
         return view('admin.teachers.index', compact('teachers', 'specializations'));
     }
@@ -76,10 +80,10 @@ class TeacherController extends Controller
             'certification' => 'required|string|max:255',
             'experience_years' => 'nullable|integer|min:0',
             'achievements' => 'nullable|array',
-            'achievements.*' => 'string|max:255',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'is_featured' => 'boolean',
-            'is_active' => 'boolean',
+            'achievements.*' => 'nullable|string|max:255',
+            'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'is_featured' => 'nullable|boolean',
+            'is_active' => 'nullable|boolean',
             'sort_order' => 'nullable|integer|min:0'
         ]);
 
@@ -105,8 +109,10 @@ class TeacherController extends Controller
         }
 
         // Handle achievements array
-        if ($request->filled('achievements')) {
-            $data['achievements'] = array_filter($request->achievements);
+        if ($request->has('achievements') && is_array($request->achievements)) {
+            $data['achievements'] = array_values(array_filter($request->achievements, function($achievement) {
+                return !empty(trim($achievement));
+            }));
         } else {
             $data['achievements'] = [];
         }
@@ -154,10 +160,10 @@ class TeacherController extends Controller
             'certification' => 'required|string|max:255',
             'experience_years' => 'nullable|integer|min:0',
             'achievements' => 'nullable|array',
-            'achievements.*' => 'string|max:255',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'is_featured' => 'boolean',
-            'is_active' => 'boolean',
+            'achievements.*' => 'nullable|string|max:255',
+            'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'is_featured' => 'nullable|boolean',
+            'is_active' => 'nullable|boolean',
             'sort_order' => 'nullable|integer|min:0'
         ]);
 
@@ -190,8 +196,10 @@ class TeacherController extends Controller
         }
 
         // Handle achievements array
-        if ($request->filled('achievements')) {
-            $data['achievements'] = array_filter($request->achievements);
+        if ($request->has('achievements') && is_array($request->achievements)) {
+            $data['achievements'] = array_values(array_filter($request->achievements, function($achievement) {
+                return !empty(trim($achievement));
+            }));
         } else {
             $data['achievements'] = [];
         }

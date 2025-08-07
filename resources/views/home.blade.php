@@ -250,129 +250,126 @@
         </div>
         
         @if($featuredCourses->count() > 0)
-            <!-- Courses Carousel -->
-            <div id="coursesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-indicators">
-                    @for($i = 0; $i < ceil($featuredCourses->count() / 3); $i++)
-                        <button type="button" data-bs-target="#coursesCarousel" data-bs-slide-to="{{ $i }}" 
-                                class="{{ $i === 0 ? 'active' : '' }}"></button>
-                    @endfor
-                </div>
-                
-                <div class="carousel-inner">
-                    @foreach($featuredCourses->chunk(3) as $chunkIndex => $coursesChunk)
-                        <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
-                            <div class="row">
-                                @foreach($coursesChunk as $course)
-                                    <div class="col-lg-4 mb-4">
-                                        <div class="card border-0 shadow course-card h-100">
-                                            <div class="card-body p-4 text-center">
-                                                <!-- Course Icon -->
-                                                <div class="course-icon-wrapper mb-3">
-                                                    @php
-                                                        $courseIcons = [
-                                                            'A1-A2' => ['icon' => 'fas fa-seedling', 'color' => '#20c997'],
-                                                            'B1-B2' => ['icon' => 'fas fa-chart-line', 'color' => '#fd7e14'],
-                                                            'C1-C2' => ['icon' => 'fas fa-crown', 'color' => '#dc3545'],
-                                                            'Giao tiếp' => ['icon' => 'fas fa-comments', 'color' => '#ffc107'],
-                                                            'Chuyên ngành' => ['icon' => 'fas fa-briefcase', 'color' => '#6c757d'],
-                                                            'Luyện thi' => ['icon' => 'fas fa-graduation-cap', 'color' => '#e83e8c']
-                                                        ];
-                                                        $iconData = $courseIcons[$course->category] ?? ['icon' => 'fas fa-book', 'color' => '#007bff'];
-                                                    @endphp
-                                                    <i class="{{ $iconData['icon'] }} fa-3x" style="color: {{ $iconData['color'] }};"></i>
-                                                </div>
-                                                
-                                                <!-- Course Title -->
-                                                <h5 class="fw-bold text-primary mb-3">{{ $course->name }}</h5>
-                                                
-                                                <!-- Course Description -->
-                                                @if($course->short_description)
-                                                    <p class="text-muted mb-3 fst-italic">
-                                                        "{{ Str::limit($course->short_description, 100) }}"
-                                                    </p>
-                                                @endif
-                                                
-                                                <!-- Course Info -->
-                                                <div class="course-info mb-3">
-                                                    <div class="row text-center">
-                                                        <div class="col-6">
-                                                            <div class="info-item">
-                                                                <i class="fas fa-layer-group text-primary mb-1"></i>
-                                                                <small class="text-muted d-block">Trình độ</small>
-                                                                <strong class="text-dark">{{ $course->level ?? $course->category }}</strong>
+            <!-- Courses Slider -->
+            <div class="courses-slider-container position-relative">
+                <div id="coursesSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-inner">
+                        @foreach($featuredCourses->chunk(4) as $chunkIndex => $coursesChunk)
+                            <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
+                                <div class="row">
+                                    @foreach($coursesChunk as $course)
+                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
+                                            <div class="card border-0 shadow course-card h-100">
+                                                <div class="card-body p-4 text-center">
+                                                    <!-- Course Icon -->
+                                                    <div class="course-icon-wrapper mb-3">
+                                                        @php
+                                                            $courseIcons = [
+                                                                'A1-A2' => ['icon' => 'fas fa-seedling', 'color' => '#20c997'],
+                                                                'B1-B2' => ['icon' => 'fas fa-chart-line', 'color' => '#fd7e14'],
+                                                                'C1-C2' => ['icon' => 'fas fa-crown', 'color' => '#dc3545'],
+                                                                'Giao tiếp' => ['icon' => 'fas fa-comments', 'color' => '#ffc107'],
+                                                                'Chuyên ngành' => ['icon' => 'fas fa-briefcase', 'color' => '#6c757d'],
+                                                                'Luyện thi' => ['icon' => 'fas fa-graduation-cap', 'color' => '#e83e8c']
+                                                            ];
+                                                            $iconData = $courseIcons[$course->category] ?? ['icon' => 'fas fa-book', 'color' => '#007bff'];
+                                                        @endphp
+                                                        <i class="{{ $iconData['icon'] }} fa-3x" style="color: {{ $iconData['color'] }};"></i>
+                                                    </div>
+                                                    
+                                                    <!-- Course Title -->
+                                                    <h5 class="fw-bold text-primary mb-3">{{ $course->name }}</h5>
+                                                    
+                                                    <!-- Course Description -->
+                                                    @if($course->short_description)
+                                                        <p class="text-muted mb-3 fst-italic">
+                                                            "{{ Str::limit($course->short_description, 100) }}"
+                                                        </p>
+                                                    @endif
+                                                    
+                                                    <!-- Course Info -->
+                                                    <div class="course-info mb-3">
+                                                        <div class="row text-center">
+                                                            <div class="col-6">
+                                                                <div class="info-item">
+                                                                    <i class="fas fa-layer-group text-primary mb-1"></i>
+                                                                    <small class="text-muted d-block">Trình độ</small>
+                                                                    <strong class="text-dark">{{ $course->level ?? $course->category }}</strong>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="info-item">
-                                                                <i class="fas fa-clock text-info mb-1"></i>
-                                                                <small class="text-muted d-block">Thời lượng</small>
-                                                                <strong class="text-info">{{ $course->duration_hours }}h</strong>
+                                                            <div class="col-6">
+                                                                <div class="info-item">
+                                                                    <i class="fas fa-clock text-info mb-1"></i>
+                                                                    <small class="text-muted d-block">Thời lượng</small>
+                                                                    <strong class="text-info">{{ $course->duration_hours }}h</strong>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                
-                                                <!-- Course Features -->
-                                                @if($course->features && is_array($course->features))
-                                                    <div class="mb-3">
-                                                        @foreach(array_slice($course->features, 0, 2) as $feature)
-                                                            <span class="badge bg-light text-dark me-1 mb-1">
-                                                                <i class="fas fa-check text-success me-1"></i>
-                                                                {{ $feature }}
+                                                    
+                                                    <!-- Course Features -->
+                                                    @if($course->features && is_array($course->features))
+                                                        <div class="mb-3">
+                                                            @foreach(array_slice($course->features, 0, 2) as $feature)
+                                                                <span class="badge bg-light text-dark me-1 mb-1">
+                                                                    <i class="fas fa-check text-success me-1"></i>
+                                                                    {{ $feature }}
+                                                                </span>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                    
+                                                    <!-- Target Score Badge -->
+                                                    @if($course->target_score)
+                                                        <div class="mb-3">
+                                                            <span class="badge bg-success">
+                                                                <i class="fas fa-target me-1"></i>
+                                                                Mục tiêu: {{ $course->target_score }}
                                                             </span>
-                                                        @endforeach
+                                                        </div>
+                                                    @endif
+                                                    
+                                                    <!-- Action Button -->
+                                                    <div class="mt-3">
+                                                        <a href="{{ route('schedule') }}" class="btn btn-primary">
+                                                            <i class="fas fa-calendar-alt me-1"></i>
+                                                            Đăng ký học thử
+                                                        </a>
                                                     </div>
-                                                @endif
-                                                
-                                                <!-- Target Score Badge -->
-                                                @if($course->target_score)
-                                                    <div class="mb-3">
-                                                        <span class="badge bg-success">
-                                                            <i class="fas fa-target me-1"></i>
-                                                            Mục tiêu: {{ $course->target_score }}
-                                                        </span>
+                                                    
+                                                    <!-- Rating Stars -->
+                                                    <div class="text-warning mt-2">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
                                                     </div>
-                                                @endif
-                                                
-                                                <!-- Action Button -->
-                                                <div class="mt-3">
-                                                    <a href="{{ route('schedule') }}" class="btn btn-primary">
-                                                        <i class="fas fa-calendar-alt me-1"></i>
-                                                        Đăng ký học thử
-                                                    </a>
-                                                </div>
-                                                
-                                                <!-- Rating Stars (for consistency with testimonials) -->
-                                                <div class="text-warning mt-2">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    
+                    <!-- Simple Navigation Controls -->
+                    @if($featuredCourses->count() > 4)
+                        <button class="carousel-control-prev" type="button" data-bs-target="#coursesSlider" data-bs-slide="prev">
+                            <div class="slider-nav-btn">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#coursesSlider" data-bs-slide="next">
+                            <div class="slider-nav-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    @endif
                 </div>
-                
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#coursesCarousel" data-bs-slide="prev">
-                    <div class="carousel-control-icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#coursesCarousel" data-bs-slide="next">
-                    <div class="carousel-control-icon">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         @else
             <!-- Empty State -->
@@ -386,370 +383,344 @@
 </section>
 
 <!-- Teachers Section -->
-<section class="py-5">
-    <div class="container">
+<section class="py-5 teachers-section position-relative overflow-hidden">
+    <!-- Background Decorations -->
+    <div class="teachers-bg-decoration"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="container position-relative">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">ĐỘI NGŨ GIẢNG VIÊN ĐÀO TẠO</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Đức nhiều năm</p>
+            <div class="section-badge mb-3 animate-on-scroll">
+                <i class="fas fa-chalkboard-teacher me-2"></i>
+                <span>Đội Ngũ Chuyên Nghiệp</span>
+            </div>
+            <h2 class="display-4 fw-bold mb-3 animate-on-scroll animate-delay-1">
+                <span class="text-gradient">ĐỘI NGŨ GIẢNG VIÊN</span>
+                <br>
+                <span class="text-primary">ĐÀO TẠO</span>
+            </h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-2 mx-auto" style="max-width: 600px;">
+                Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Đức nhiều năm, 
+                cam kết mang đến chất lượng giáo dục tốt nhất
+            </p>
         </div>
         
-        <!-- Teachers Carousel -->
-        <div id="teachersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#teachersCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#teachersCarousel" data-bs-slide-to="1"></button>
-            </div>
-            
-            <div class="carousel-inner">
-                <!-- Slide 1: First 4 teachers -->
-                <div class="carousel-item active">
-                    <div class="teachers-grid">
-                        <div class="row">
-                            <!-- Teacher 1 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <img src="{{ asset('images/teachers/teacher-1.svg') }}" 
-                                                 alt="Thầy Minh" class="rounded-circle teacher-avatar" width="120" height="120">
-                                        </div>
-                                        <h5 class="fw-bold text-primary mb-2">Thầy Minh</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức A1-A2</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-graduation-cap text-primary me-2"></i>
-                                                <span class="small">Cử nhân Ngôn ngữ Đức</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">5 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">200+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên A1-A2</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Teacher 2 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <img src="{{ asset('images/teachers/teacher-2.svg') }}" 
-                                                 alt="Cô Lan" class="rounded-circle teacher-avatar" width="120" height="120">
-                                        </div>
-                                        <h5 class="fw-bold text-primary mb-2">Cô Lan</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức B1-B2</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-graduation-cap text-primary me-2"></i>
-                                                <span class="small">Thạc sĩ Đức học</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">7 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">300+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên B1-B2</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Teacher 3 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <div class="teacher-avatar-placeholder bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                                 style="width: 120px; height: 120px;">
-                                                <i class="fas fa-user fa-3x text-white"></i>
-                                            </div>
-                                        </div>
-                                        <h5 class="fw-bold text-primary mb-2">Thầy Tuấn</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức C1-C2</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-certificate text-primary me-2"></i>
-                                                <span class="small">Chứng chỉ Goethe C2</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">8 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">150+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên C1-C2</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Teacher 4 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <div class="teacher-avatar-placeholder bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                                 style="width: 120px; height: 120px;">
-                                                <i class="fas fa-user fa-3x text-white"></i>
-                                            </div>
-                                        </div>
-                                        <h5 class="fw-bold text-primary mb-2">Cô Hương</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức Giao tiếp</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-graduation-cap text-primary me-2"></i>
-                                                <span class="small">Cử nhân Sư phạm Đức</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">6 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">250+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên Giao tiếp</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        @if(isset($featuredTeachers) && $featuredTeachers->count() > 0)
+            <!-- Teachers Carousel -->
+            <div id="teachersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+                <div class="carousel-indicators">
+                    @for($i = 0; $i < ceil($featuredTeachers->count() / 4); $i++)
+                        <button type="button" data-bs-target="#teachersCarousel" data-bs-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"></button>
+                    @endfor
                 </div>
                 
-                <!-- Slide 2: Additional 4 teachers -->
-                <div class="carousel-item">
-                    <div class="teachers-grid">
-                        <div class="row">
-                            <!-- Teacher 5 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <div class="teacher-avatar-placeholder bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                                 style="width: 120px; height: 120px;">
-                                                <i class="fas fa-user fa-3x text-white"></i>
+                <div class="carousel-inner">
+                    @foreach($featuredTeachers->chunk(4) as $index => $teacherChunk)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                            <div class="teachers-grid">
+                                <div class="row">
+                                    @foreach($teacherChunk as $teacher)
+                                        <div class="col-lg-3 col-md-6 mb-4">
+                                            <div class="teacher-card-enhanced card h-100 border-0 position-relative overflow-hidden">
+                                                <!-- Card Background Gradient -->
+                                                <div class="card-bg-gradient"></div>
+                                                
+                                                <!-- Floating Icon -->
+                                                <div class="teacher-floating-icon">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                </div>
+                                                
+                                                <div class="card-body text-center p-4 position-relative">
+                                                    <!-- Avatar Section -->
+                                                    <div class="teacher-avatar-container mb-4">
+                                                        <div class="avatar-ring"></div>
+                                                        @if($teacher->avatar)
+                                                            <img src="{{ asset('storage/' . $teacher->avatar) }}" 
+                                                                 alt="{{ $teacher->name }}" class="teacher-avatar-enhanced rounded-circle">
+                                                        @else
+                                                            <div class="teacher-avatar-placeholder-enhanced rounded-circle d-inline-flex align-items-center justify-content-center">
+                                                                <i class="fas fa-user fa-3x text-white"></i>
+                                                            </div>
+                                                        @endif
+                                                        <!-- Status Badge -->
+                                                        <div class="teacher-status-badge">
+                                                            <i class="fas fa-check"></i>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Teacher Info -->
+                                                    <div class="teacher-info-enhanced">
+                                                        <h5 class="fw-bold mb-2 teacher-name">{{ $teacher->name }}</h5>
+                                                        <p class="text-muted mb-3 teacher-specialization">
+                                                            <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
+                                                            {{ $teacher->specialization }}
+                                                        </p>
+                                                        
+                                                        <!-- Certification Badge -->
+                                                        <div class="certification-badge mb-3">
+                                                            <i class="fas fa-certificate me-2"></i>
+                                                            <span>{{ $teacher->certification }}</span>
+                                                        </div>
+                                                        
+                                                        <!-- Experience or Rating -->
+                                                        <div class="teacher-rating mb-3">
+                                                            <div class="stars">
+                                                                <i class="fas fa-star text-warning"></i>
+                                                                <i class="fas fa-star text-warning"></i>
+                                                                <i class="fas fa-star text-warning"></i>
+                                                                <i class="fas fa-star text-warning"></i>
+                                                                <i class="fas fa-star text-warning"></i>
+                                                            </div>
+                                                            <small class="text-muted">5.0 ({{ rand(15, 50) }} đánh giá)</small>
+                                                        </div>
+                                                        
+                                                        <!-- Action Button -->
+                                                        <div class="teacher-actions">
+                                                            <a href="{{ route('teachers.show', $teacher->slug) }}" class="btn btn-teacher-primary">
+                                                                <i class="fas fa-eye me-2"></i>Xem chi tiết
+                                                                <i class="fas fa-arrow-right ms-2"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Hover Effect Overlay -->
+                                                <div class="teacher-hover-overlay"></div>
                                             </div>
                                         </div>
-                                        <h5 class="fw-bold text-primary mb-2">Thầy Nam</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức TestDaF</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-certificate text-primary me-2"></i>
-                                                <span class="small">Chứng chỉ TestDaF</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">4 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">180+ học viên</span>
-                                            </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                
+                @if($featuredTeachers->count() > 4)
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#teachersCarousel" data-bs-slide="prev">
+                        <div class="carousel-control-icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#teachersCarousel" data-bs-slide="next">
+                        <div class="carousel-control-icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                @endif
+            </div>
+        @else
+            <!-- Fallback: Hiển thị giáo viên mẫu nếu không có dữ liệu -->
+            <div class="teachers-grid">
+                <div class="row">
+                    <!-- Teacher 1 -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="teacher-card-enhanced card h-100 border-0 position-relative overflow-hidden">
+                            <div class="card-bg-gradient"></div>
+                            <div class="teacher-floating-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="card-body text-center p-4 position-relative">
+                                <div class="teacher-avatar-container mb-4">
+                                    <div class="avatar-ring"></div>
+                                    <img src="{{ asset('images/teachers/teacher-1.svg') }}" 
+                                         alt="Thầy Minh" class="teacher-avatar-enhanced rounded-circle">
+                                    <div class="teacher-status-badge">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="teacher-info-enhanced">
+                                    <h5 class="fw-bold mb-2 teacher-name">Thầy Minh</h5>
+                                    <p class="text-muted mb-3 teacher-specialization">
+                                        <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
+                                        Giảng viên tiếng Đức A1-A2
+                                    </p>
+                                    <div class="certification-badge mb-3">
+                                        <i class="fas fa-certificate me-2"></i>
+                                        <span>Cử nhân Ngôn ngữ Đức</span>
+                                    </div>
+                                    <div class="teacher-rating mb-3">
+                                        <div class="stars">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <span class="badge bg-light text-primary border">Chuyên TestDaF</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
+                                        <small class="text-muted">5.0 (32 đánh giá)</small>
+                                    </div>
+                                    <div class="teacher-actions">
+                                        <a href="#" class="btn btn-teacher-primary">
+                                            <i class="fas fa-eye me-2"></i>Xem chi tiết
+                                            <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Teacher 6 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <div class="teacher-avatar-placeholder bg-info rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                                 style="width: 120px; height: 120px;">
-                                                <i class="fas fa-user fa-3x text-white"></i>
-                                            </div>
+                            <div class="teacher-hover-overlay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teacher 2 -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="teacher-card-enhanced card h-100 border-0 position-relative overflow-hidden">
+                            <div class="card-bg-gradient"></div>
+                            <div class="teacher-floating-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="card-body text-center p-4 position-relative">
+                                <div class="teacher-avatar-container mb-4">
+                                    <div class="avatar-ring"></div>
+                                    <img src="{{ asset('images/teachers/teacher-2.svg') }}" 
+                                         alt="Cô Lan" class="teacher-avatar-enhanced rounded-circle">
+                                    <div class="teacher-status-badge">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="teacher-info-enhanced">
+                                    <h5 class="fw-bold mb-2 teacher-name">Cô Lan</h5>
+                                    <p class="text-muted mb-3 teacher-specialization">
+                                        <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
+                                        Giảng viên tiếng Đức B1-B2
+                                    </p>
+                                    <div class="certification-badge mb-3">
+                                        <i class="fas fa-certificate me-2"></i>
+                                        <span>Thạc sĩ Đức học</span>
+                                    </div>
+                                    <div class="teacher-rating mb-3">
+                                        <div class="stars">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <h5 class="fw-bold text-primary mb-2">Cô Mai</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức Doanh nghiệp</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-briefcase text-primary me-2"></i>
-                                                <span class="small">MBA Đức</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">6 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">120+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên Business</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
+                                        <small class="text-muted">5.0 (28 đánh giá)</small>
+                                    </div>
+                                    <div class="teacher-actions">
+                                        <a href="#" class="btn btn-teacher-primary">
+                                            <i class="fas fa-eye me-2"></i>Xem chi tiết
+                                            <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Teacher 7 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <div class="teacher-avatar-placeholder bg-warning rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                                 style="width: 120px; height: 120px;">
-                                                <i class="fas fa-user fa-3x text-white"></i>
-                                            </div>
+                            <div class="teacher-hover-overlay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teacher 3 -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="teacher-card-enhanced card h-100 border-0 position-relative overflow-hidden">
+                            <div class="card-bg-gradient"></div>
+                            <div class="teacher-floating-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="card-body text-center p-4 position-relative">
+                                <div class="teacher-avatar-container mb-4">
+                                    <div class="avatar-ring"></div>
+                                    <div class="teacher-avatar-placeholder-enhanced rounded-circle d-inline-flex align-items-center justify-content-center">
+                                        <i class="fas fa-user fa-3x text-white"></i>
+                                    </div>
+                                    <div class="teacher-status-badge">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="teacher-info-enhanced">
+                                    <h5 class="fw-bold mb-2 teacher-name">Thầy Tuấn</h5>
+                                    <p class="text-muted mb-3 teacher-specialization">
+                                        <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
+                                        Giảng viên tiếng Đức C1-C2
+                                    </p>
+                                    <div class="certification-badge mb-3">
+                                        <i class="fas fa-certificate me-2"></i>
+                                        <span>Chứng chỉ Goethe C2</span>
+                                    </div>
+                                    <div class="teacher-rating mb-3">
+                                        <div class="stars">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <h5 class="fw-bold text-primary mb-2">Thầy Đức</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức Thiếu nhi</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-child text-primary me-2"></i>
-                                                <span class="small">Chuyên Thiếu nhi</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">3 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">90+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên Thiếu nhi</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
+                                        <small class="text-muted">5.0 (41 đánh giá)</small>
+                                    </div>
+                                    <div class="teacher-actions">
+                                        <a href="#" class="btn btn-teacher-primary">
+                                            <i class="fas fa-eye me-2"></i>Xem chi tiết
+                                            <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Teacher 8 -->
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="teacher-card card h-100 text-center border-0 shadow">
-                                    <div class="card-body p-4">
-                                        <div class="mb-4">
-                                            <div class="teacher-avatar-placeholder bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                                 style="width: 120px; height: 120px;">
-                                                <i class="fas fa-user fa-3x text-white"></i>
-                                            </div>
+                            <div class="teacher-hover-overlay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teacher 4 -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="teacher-card-enhanced card h-100 border-0 position-relative overflow-hidden">
+                            <div class="card-bg-gradient"></div>
+                            <div class="teacher-floating-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="card-body text-center p-4 position-relative">
+                                <div class="teacher-avatar-container mb-4">
+                                    <div class="avatar-ring"></div>
+                                    <div class="teacher-avatar-placeholder-enhanced rounded-circle d-inline-flex align-items-center justify-content-center">
+                                        <i class="fas fa-user fa-3x text-white"></i>
+                                    </div>
+                                    <div class="teacher-status-badge">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="teacher-info-enhanced">
+                                    <h5 class="fw-bold mb-2 teacher-name">Cô Hương</h5>
+                                    <p class="text-muted mb-3 teacher-specialization">
+                                        <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
+                                        Giảng viên tiếng Đức Giao tiếp
+                                    </p>
+                                    <div class="certification-badge mb-3">
+                                        <i class="fas fa-certificate me-2"></i>
+                                        <span>Cử nhân Sư phạm Đức</span>
+                                    </div>
+                                    <div class="teacher-rating mb-3">
+                                        <div class="stars">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <h5 class="fw-bold text-primary mb-2">Cô Linh</h5>
-                                        <p class="text-muted mb-2">Giảng viên tiếng Đức Du học</p>
-                                        <div class="teacher-info mb-3">
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-plane text-primary me-2"></i>
-                                                <span class="small">Tư vấn Du học</span>
-                                            </div>
-                                            <div class="info-badge mb-2">
-                                                <i class="fas fa-clock text-success me-2"></i>
-                                                <span class="small">5 năm kinh nghiệm</span>
-                                            </div>
-                                            <div class="info-badge">
-                                                <i class="fas fa-users text-info me-2"></i>
-                                                <span class="small">160+ học viên</span>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-light text-primary border">Chuyên Du học</span>
-                                        
-                                        <!-- Rating Stars (for consistency) -->
-                                        <div class="text-warning mt-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
+                                        <small class="text-muted">5.0 (37 đánh giá)</small>
+                                    </div>
+                                    <div class="teacher-actions">
+                                        <a href="#" class="btn btn-teacher-primary">
+                                            <i class="fas fa-eye me-2"></i>Xem chi tiết
+                                            <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+                            <div class="teacher-hover-overlay"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#teachersCarousel" data-bs-slide="prev">
-                <div class="carousel-control-icon">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#teachersCarousel" data-bs-slide="next">
-                <div class="carousel-control-icon">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        @endif
         
-        <div class="text-center mt-4">
-            <a href="{{ route('about') }}" class="btn btn-outline-primary btn-lg">
+        <div class="text-center mt-5">
+            <a href="{{ route('about') }}" class="btn btn-view-all-teachers btn-lg">
+                <i class="fas fa-users me-2"></i>
                 Xem tất cả giảng viên
+                <i class="fas fa-arrow-right ms-2"></i>
             </a>
         </div>
     </div>
@@ -1497,13 +1468,14 @@
 
 @push('styles')
 <style>
-/* Courses Section - Consistent with Testimonials */
-.course-card {
+/* Courses Section - Slider Layout */
+.courses-slider-container .course-card {
     transition: all 0.3s ease;
     border-radius: 0.5rem;
+    height: 100%;
 }
 
-.course-card:hover {
+.courses-slider-container .course-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
@@ -1523,29 +1495,59 @@
     font-size: 1.2rem;
 }
 
-/* Carousel Controls Styling */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%;
+/* Simple Slider Navigation */
+.courses-slider-container .carousel-control-prev,
+.courses-slider-container .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
     opacity: 0.8;
 }
 
-.carousel-control-icon {
-    background: rgba(0, 123, 255, 0.8);
+.courses-slider-container .carousel-control-prev {
+    left: -25px;
+}
+
+.courses-slider-container .carousel-control-next {
+    right: -25px;
+}
+
+.slider-nav-btn {
+    background: rgba(0, 123, 255, 0.9);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-control-prev:hover .carousel-control-icon,
-.carousel-control-next:hover .carousel-control-icon {
+.slider-nav-btn:hover {
     background: rgba(0, 123, 255, 1);
     transform: scale(1.1);
+}
+
+.slider-nav-btn i {
+    font-size: 18px;
+}
+
+/* Responsive Slider */
+@media (max-width: 991.98px) {
+    .courses-slider-container .carousel-control-prev,
+    .courses-slider-container .carousel-control-next {
+        display: none;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .courses-slider-container .col-sm-6 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
 }
 
 .carousel-indicators {
@@ -1656,11 +1658,368 @@
     }
 }
 
-/* Teachers Section - Grid Layout */
+/* Enhanced Teachers Section */
+.teachers-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+}
+
+.teachers-bg-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 123, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(102, 16, 242, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.floating-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(0, 123, 255, 0.1), rgba(102, 16, 242, 0.1));
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); }
+    50% { box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4); }
+    100% { box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); }
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .teachers-grid {
     position: relative;
 }
 
+/* Enhanced Teacher Cards */
+.teacher-card-enhanced {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    overflow: hidden;
+}
+
+.teacher-card-enhanced.animate-on-scroll {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.teacher-card-enhanced:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-bg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #007bff, #6610f2, #ffc107, #28a745);
+    background-size: 300% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.teacher-floating-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    z-index: 2;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60% { transform: translateY(-3px); }
+}
+
+.teacher-avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-ring {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #007bff, #6610f2, #ffc107) border-box;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.teacher-avatar-enhanced {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.teacher-avatar-placeholder-enhanced {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.teacher-card-enhanced:hover .teacher-avatar-enhanced,
+.teacher-card-enhanced:hover .teacher-avatar-placeholder-enhanced {
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-status-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    background: #28a745;
+    border: 3px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.7rem;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.teacher-info-enhanced {
+    position: relative;
+    z-index: 1;
+}
+
+.teacher-name {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.teacher-card-enhanced:hover .teacher-name {
+    color: #007bff;
+}
+
+.teacher-specialization {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.certification-badge {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid #dee2e6;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: #495057;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.teacher-card-enhanced:hover .certification-badge {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+    transform: scale(1.05);
+}
+
+.teacher-rating {
+    margin: 1rem 0;
+}
+
+.stars {
+    margin-bottom: 0.25rem;
+}
+
+.stars i {
+    font-size: 0.9rem;
+    margin-right: 2px;
+}
+
+.btn-teacher-primary {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-teacher-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-teacher-primary:hover::before {
+    left: 100%;
+}
+
+.btn-teacher-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    color: white;
+}
+
+.teacher-hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(102, 16, 242, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.teacher-card-enhanced:hover .teacher-hover-overlay {
+    opacity: 1;
+}
+
+.btn-view-all-teachers {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-view-all-teachers::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-view-all-teachers:hover::before {
+    left: 100%;
+}
+
+.btn-view-all-teachers:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    color: white;
+}
+
+/* Legacy teacher card styles for compatibility */
 .teacher-card {
     transition: all 0.3s ease;
     border-radius: 1rem;
@@ -1671,18 +2030,6 @@
 
 .teacher-card.animate-on-scroll {
     animation: fadeInUp 0.8s ease forwards;
-}
-
-.teacher-card.animate-delay-1 {
-    animation-delay: 0.2s;
-}
-
-.teacher-card.animate-delay-2 {
-    animation-delay: 0.4s;
-}
-
-.teacher-card.animate-delay-3 {
-    animation-delay: 0.6s;
 }
 
 .teacher-card:hover {
@@ -1712,97 +2059,51 @@
     border-color: #007bff;
 }
 
-.teacher-info {
-    text-align: left;
-    background: rgba(0, 123, 255, 0.02);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin: 1rem 0;
-}
-
-.info-badge {
-    display: flex;
-    align-items: center;
-    padding: 0.25rem 0;
-}
-
-.info-badge i {
-    width: 20px;
-    flex-shrink: 0;
-}
-
-.info-badge span {
-    color: #6c757d;
-    font-weight: 500;
-}
-
-.teacher-card h5 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.teacher-card .badge {
-    font-size: 0.8rem;
-    padding: 0.5rem 1rem;
-    font-weight: 600;
-    border-radius: 1rem;
-}
-
-/* Card body enhanced */
-.teacher-card .card-body {
-    position: relative;
-    padding: 2rem 1.5rem;
-}
-
-.teacher-card .card-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #007bff, #6610f2);
-    border-radius: 1rem 1rem 0 0;
-}
-
-/* Responsive adjustments for teachers */
+/* Responsive adjustments for enhanced teachers */
 @media (max-width: 768px) {
-    .teacher-avatar,
-    .teacher-avatar-placeholder {
+    .teacher-avatar-enhanced,
+    .teacher-avatar-placeholder-enhanced {
         width: 100px !important;
         height: 100px !important;
     }
     
-    .teacher-avatar-placeholder i {
-        font-size: 2.5rem !important;
+    .teacher-floating-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
     }
     
-    .teacher-info {
-        padding: 0.75rem;
-        margin: 0.75rem 0;
+    .teacher-name {
+        font-size: 1.1rem;
     }
     
-    .teacher-card .card-body {
-        padding: 1.5rem 1rem;
+    .certification-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
     }
     
-    .info-badge {
-        padding: 0.2rem 0;
-    }
-    
-    .info-badge span {
+    .btn-teacher-primary {
+        padding: 0.6rem 1.2rem;
         font-size: 0.8rem;
     }
 }
 
 @media (max-width: 576px) {
-    .teacher-card h5 {
-        font-size: 1.1rem;
+    .teacher-card-enhanced {
+        margin-bottom: 1.5rem;
     }
     
-    .teacher-info {
-        padding: 0.5rem;
-        margin: 0.5rem 0;
+    .teacher-name {
+        font-size: 1rem;
+    }
+    
+    .teacher-specialization {
+        font-size: 0.85rem;
+    }
+    
+    .btn-view-all-teachers {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
     }
 }
 
@@ -2520,7 +2821,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add animation to cards when carousel slides
         teachersCarousel.addEventListener('slide.bs.carousel', function (e) {
             // Reset animations
-            const allCards = this.querySelectorAll('.teacher-card');
+            const allCards = this.querySelectorAll('.teacher-card, .teacher-card-enhanced');
             allCards.forEach(card => {
                 card.style.animation = 'none';
                 card.style.opacity = '0';
@@ -2531,7 +2832,7 @@ document.addEventListener('DOMContentLoaded', function() {
         teachersCarousel.addEventListener('slid.bs.carousel', function (e) {
             // Animate new active slide cards
             const activeSlide = this.querySelector('.carousel-item.active');
-            const cards = activeSlide.querySelectorAll('.teacher-card');
+            const cards = activeSlide.querySelectorAll('.teacher-card, .teacher-card-enhanced');
             
             cards.forEach((card, index) => {
                 setTimeout(() => {
@@ -2551,7 +2852,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Initialize first slide animations
-        const firstSlideCards = teachersCarousel.querySelectorAll('.carousel-item.active .teacher-card');
+        const firstSlideCards = teachersCarousel.querySelectorAll('.carousel-item.active .teacher-card, .carousel-item.active .teacher-card-enhanced');
         firstSlideCards.forEach((card, index) => {
             setTimeout(() => {
                 card.style.animation = 'fadeInUp 0.8s ease forwards';
@@ -2563,7 +2864,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const teacherObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const firstSlideCards = entry.target.querySelectorAll('.carousel-item.active .teacher-card');
+                    const firstSlideCards = entry.target.querySelectorAll('.carousel-item.active .teacher-card, .carousel-item.active .teacher-card-enhanced');
                     firstSlideCards.forEach((card, index) => {
                         setTimeout(() => {
                             card.style.animation = 'fadeInUp 0.8s ease forwards';

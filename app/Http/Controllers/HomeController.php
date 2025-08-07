@@ -17,7 +17,8 @@ class HomeController extends Controller
     {
         $featuredCourses = Course::where('is_active', true)
             ->orderBy('sort_order')
-            ->take(4)
+            ->orderBy('name')
+            ->take(8)
             ->get();
             
         $featuredPrograms = Program::where('is_active', true)
@@ -25,11 +26,25 @@ class HomeController extends Controller
             ->take(8)
             ->get();
             
+        // Get featured teachers first, then active teachers if not enough featured ones
         $featuredTeachers = Teacher::where('is_featured', true)
             ->where('is_active', true)
             ->orderBy('sort_order')
+            ->orderBy('name')
             ->take(8)
             ->get();
+            
+        // If we don't have enough featured teachers, get more active teachers
+        if ($featuredTeachers->count() < 4) {
+            $additionalTeachers = Teacher::where('is_active', true)
+                ->whereNotIn('id', $featuredTeachers->pluck('id'))
+                ->orderBy('sort_order')
+                ->orderBy('name')
+                ->take(8 - $featuredTeachers->count())
+                ->get();
+                
+            $featuredTeachers = $featuredTeachers->merge($additionalTeachers);
+        }
             
         $latestNews = News::where('is_published', true)
             ->orderBy('published_at', 'desc')
