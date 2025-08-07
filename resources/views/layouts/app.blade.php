@@ -291,7 +291,7 @@
                 height: 35px;
             }
             .navbar-nav .nav-link {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 padding: 0.6rem 0.8rem;
                 margin: 0.1rem 0;
             }
@@ -300,7 +300,7 @@
                 margin-right: 0.4rem;
             }
             .navbar-nav {
-                gap: 0.1rem;
+                /* Removed gap for mobile consistency */
             }
             
             /* Mobile viewport optimization */
@@ -645,16 +645,16 @@
         }
         
         .navbar .container {
-            max-width: 1200px;
+            /* Removed max-width for full width navbar */
         }
         
         .navbar-nav {
             margin: 0 auto;
-            gap: 0.2rem;
+            /* Removed gap for better spacing */
         }
         
         .navbar-nav .nav-item {
-            margin: 0 0.1rem;
+            margin: 0 0.3rem;
         }
         
         /* Modal Responsive */
@@ -829,14 +829,14 @@
         
         .navbar-nav .nav-link {
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
-            padding: 0.75rem 1.2rem;
-            margin: 0 0.1rem;
+            padding: 0.75rem 1rem;
+            margin: 0 0.2rem;
             border-radius: 8px;
             color: var(--dark-color) !important;
         }
@@ -959,42 +959,155 @@
             transition: all 0.3s ease;
         }
         
-        .footer a.text-light:hover i {
+                .footer a.text-light:hover i {
             animation: bounce 1s ease;
         }
+
+        /* Contact Widget - Always Visible */
+        .contact-widget {
+            position: sticky !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            z-index: 99999 !important;
+            pointer-events: none;
+            float: right;
+            margin-right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
         
-        /* Scroll to top button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
+        .contact-widget * {
+            pointer-events: auto;
+        }
+
+        .contact-btn {
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
+            text-decoration: none;
             transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: pulseGlow 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn:nth-child(1) { animation-delay: 0s; }
+        .contact-btn:nth-child(2) { animation-delay: 0.7s; }
+        .contact-btn:nth-child(3) { animation-delay: 1.4s; }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-btn:hover::before {
+            transform: scale(1);
+        }
+
+        .contact-btn.facebook {
+            background: #1877f2;
+        }
+
+        .contact-btn.zalo {
+            background: #0068ff;
+        }
+
+        .contact-btn.phone {
+            background: #25d366;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.15) translateX(-8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            animation-play-state: paused;
+        }
+
+        .contact-btn i {
+            color: white;
+            font-size: 20px;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-btn:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Pulse Glow Animation */
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .contact-btn.facebook {
+            animation: pulseGlow 2s ease-in-out infinite, float 3s ease-in-out infinite;
+        }
+
+        .contact-btn.zalo {
+            animation: pulseGlow 2s ease-in-out infinite, float 3s ease-in-out infinite 1s;
+        }
+
+        .contact-btn.phone {
+            animation: pulseGlow 2s ease-in-out infinite, float 3s ease-in-out infinite 2s;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .contact-widget {
+                bottom: 15px !important;
+                right: 0 !important;
+                position: sticky !important;
+            }
+            
+            .contact-toggle {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .contact-toggle i {
+                font-size: 20px;
+            }
+            
+            .contact-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .contact-btn i {
+                font-size: 16px;
+            }
         }
         
-        .scroll-to-top.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .scroll-to-top:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        /* Ensure widget is always on top */
+        .contact-widget {
+            transform: translateZ(0);
+            will-change: transform;
         }
         
         /* Loading animation */
@@ -1233,13 +1346,10 @@
         
         /* Ensure page content is always visible */
         html, body {
-            height: 100%;
-            min-height: 100vh;
             background-color: #ffffff;
         }
         
         .main-content {
-            min-height: 100vh;
             opacity: 1;
         }
         
@@ -1267,47 +1377,47 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="fas fa-home me-2"></i>Trang Chủ
+                            <i class="fas fa-home me-2"></i>TRANG CHỦ
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('ve-chung-toi') ? 'active' : '' }}" href="{{ route('about') }}">
-                            <i class="fas fa-users me-2"></i>Về Chúng Tôi
+                            <i class="fas fa-users me-2"></i>VỀ CHÚNG TÔI
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('lich-khai-giang') ? 'active' : '' }}" href="{{ route('schedule') }}">
-                            <i class="fas fa-calendar-alt me-2"></i>Lịch Khai Giảng
+                            <i class="fas fa-calendar-alt me-2"></i>LỊCH KHAI GIẢNG
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('lich-thi') ? 'active' : '' }}" href="{{ route('exam-schedule') }}">
-                            <i class="fas fa-calendar-check me-2"></i>Lịch Thi
+                            <i class="fas fa-calendar-check me-2"></i>LỊCH THI
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('ket-qua-hoc-vien') ? 'active' : '' }}" href="{{ route('results') }}">
-                            <i class="fas fa-trophy me-2"></i>Kết Quả Học Viên
+                            <i class="fas fa-trophy me-2"></i>KẾT QUẢ HỌC VIÊN
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('lien-he') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            <i class="fas fa-phone-alt me-2"></i>Liên Hệ
+                            <i class="fas fa-phone-alt me-2"></i>LIÊN HỆ
                         </a>
                     </li>
                 </ul>
                 
                 <div class="d-flex align-items-center">
                     <a href="tel:0975186230" class="btn btn-outline-primary me-3">
-                        <i class="fas fa-phone me-1"></i>Hotline
+                        <i class="fas fa-phone me-1"></i>HOTLINE
                     </a>
                     <a href="{{ route('contact') }}" class="btn btn-primary">
-                        <i class="fas fa-envelope me-1"></i>Liên Hệ
+                        <i class="fas fa-envelope me-1"></i>LIÊN HỆ
                     </a>
                 </div>
             </div>
@@ -1321,10 +1431,38 @@
 
     @include('partials.footer')
 
-    <!-- Scroll to top button -->
-    <button class="scroll-to-top" id="scrollToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!-- Contact Widget - Always Visible -->
+    <div class="contact-widget">
+        @if(isset($settings['facebook_url']) && $settings['facebook_url'])
+            <a href="{{ $settings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        @else
+            <a href="https://facebook.com" target="_blank" class="contact-btn facebook" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        @endif
+        
+        @if(isset($settings['zalo_url']) && $settings['zalo_url'])
+            <a href="{{ $settings['zalo_url'] }}" target="_blank" class="contact-btn zalo" title="Zalo">
+                <i class="fas fa-comments"></i>
+            </a>
+        @else
+            <a href="https://zalo.me" target="_blank" class="contact-btn zalo" title="Zalo">
+                <i class="fas fa-comments"></i>
+            </a>
+        @endif
+        
+        @if(isset($settings['phone']) && $settings['phone'])
+            <a href="tel:{{ $settings['phone'] }}" class="contact-btn phone" title="Gọi điện: {{ $settings['phone'] }}">
+                <i class="fas fa-phone"></i>
+            </a>
+        @else
+            <a href="tel:0975186230" class="contact-btn phone" title="Gọi điện: 0975186230">
+                <i class="fas fa-phone"></i>
+            </a>
+        @endif
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1376,38 +1514,7 @@
                 observer.observe(el);
             });
             
-            // Scroll to top button functionality
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    scrollToTopBtn.classList.add('show');
-                } else {
-                    scrollToTopBtn.classList.remove('show');
-                }
-                
-                // Parallax effect for hero section
-                const hero = document.querySelector('.hero-section');
-                if (hero) {
-                    const scrolled = window.pageYOffset;
-                    const parallax = scrolled * 0.5;
-                    hero.style.transform = `translateY(${parallax}px)`;
-                }
-                
-                // Parallax effect for other elements
-                document.querySelectorAll('.parallax-element').forEach(element => {
-                    const scrolled = window.pageYOffset;
-                    const rate = scrolled * -0.3;
-                    element.style.transform = `translateY(${rate}px)`;
-                });
-            });
-            
-            scrollToTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+
             
             // Counter animation
             function animateCounter(element, target, duration = 2000) {

@@ -1326,19 +1326,172 @@
     </div>
 </section>
 
-<!-- Contact Section -->
-<section class="py-5 bg-primary text-white">
+<!-- Course Registration Section -->
+<section class="py-5 bg-light position-relative registration-section">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h3 class="fw-bold mb-3 animate-fade-in-left">Sẵn sàng bắt đầu hành trình học tiếng Đức?</h3>
-                <p class="mb-0 animate-fade-in-left animate-delay-1">Đăng ký tư vấn miễn phí ngay hôm nay để nhận lộ trình học phù hợp nhất!</p>
+        <!-- Section Header -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="display-5 fw-bold text-dark mb-3">
+                    Khóa học <span class="text-primary">Tiếng Đức</span> chuyên nghiệp
+                </h2>
+                <p class="lead text-muted">Đăng ký ngay để nhận ưu đãi đặc biệt và tư vấn miễn phí</p>
             </div>
-            <div class="col-lg-4 text-lg-end">
-                <a href="{{ route('contact') }}" class="btn btn-light btn-lg me-3 btn-liquid animate-fade-in-right">Học Thử Miễn Phí</a>
-                <a href="tel:0975186230" class="btn btn-outline-light btn-lg animate-fade-in-right animate-delay-1">
-                    <i class="fas fa-phone me-2"></i>Gọi Ngay
-                </a>
+        </div>
+
+        <div class="row align-items-center">
+            <!-- Course Offers Column -->
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="offers-header mb-4">
+                    <h3 class="fw-bold text-dark mb-2">
+                        <i class="fas fa-gift text-primary me-2"></i>
+                        Ưu đãi đặc biệt khóa học Tiếng Đức
+                    </h3>
+                    <p class="text-muted">Chỉ áp dụng cho 50 học viên đăng ký đầu tiên trong tháng này!</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="offer-card h-100">
+                            <div class="offer-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
+                            <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
+                            <div class="offer-badge">
+                                <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="offer-card h-100">
+                            <div class="offer-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
+                            <p class="text-muted mb-0">Bộ sách Tiếng Đức chuyên nghiệp + Audio CD trị giá 800.000đ</p>
+                            <div class="offer-badge">
+                                <span class="badge bg-success">Miễn phí</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="offer-card h-100">
+                            <div class="offer-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
+                            <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
+                            <div class="offer-badge">
+                                <span class="badge bg-info">Không mất phí</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="offer-card h-100">
+                            <div class="offer-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
+                            <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
+                            <div class="offer-badge">
+                                <span class="badge bg-warning">Bảo đảm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="urgency-notice mt-4 p-3 bg-warning bg-opacity-10 border border-warning rounded-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-clock text-warning me-2"></i>
+                        <div>
+                            <strong class="text-warning">Ưu đãi có hạn!</strong>
+                            <span class="text-muted ms-2">Chỉ còn <strong>7 ngày</strong> để nhận ưu đãi này</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Registration Form Column -->
+            <div class="col-lg-5">
+                <div class="registration-form-card">
+                    <div class="form-header text-center mb-4">
+                        <div class="form-icon mb-3">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="fw-bold text-white mb-2">ĐĂNG KÝ KHÓA HỌC TIẾNG ĐỨC</h3>
+                        <p class="text-white-50 mb-0">Nhận tư vấn miễn phí và ưu đãi đặc biệt</p>
+                    </div>
+                    
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    @endif
+                    
+                    @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    @endif
+                    
+                    <form action="{{ route('contact.submit') }}" method="POST" class="consultation-form">
+                        @csrf
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-lg" name="name" placeholder="Họ và tên của bạn" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control form-control-lg" name="phone" placeholder="Số điện thoại" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control form-control-lg" name="email" placeholder="Địa chỉ email">
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select form-select-lg" name="course" required>
+                                <option value="">Chọn khóa học Tiếng Đức</option>
+                                <option value="Tiếng Đức A1 - Cơ bản">Tiếng Đức A1 - Cơ bản</option>
+                                <option value="Tiếng Đức A2 - Sơ cấp">Tiếng Đức A2 - Sơ cấp</option>
+                                <option value="Tiếng Đức B1 - Trung cấp">Tiếng Đức B1 - Trung cấp</option>
+                                <option value="Tiếng Đức B2 - Trung cấp cao">Tiếng Đức B2 - Trung cấp cao</option>
+                                <option value="Tiếng Đức giao tiếp">Tiếng Đức giao tiếp</option>
+                                <option value="Tư vấn chọn khóa phù hợp">Tư vấn chọn khóa phù hợp</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select class="form-select form-select-lg" name="location" required>
+                                <option value="">Chọn cơ sở học</option>
+                                <option value="Hà Nội - Cầu Giấy">Hà Nội - Cầu Giấy</option>
+                                <option value="Hà Nội - Đống Đa">Hà Nội - Đống Đa</option>
+                                <option value="TP.HCM - Quận 1">TP.HCM - Quận 1</option>
+                                <option value="TP.HCM - Quận 3">TP.HCM - Quận 3</option>
+                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                <option value="Online">Học Online</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold py-3">
+                            <i class="fas fa-paper-plane me-2"></i>ĐĂNG KÝ NGAY
+                        </button>
+                        
+                        <div class="text-center mt-3">
+                            <small class="text-white-50">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                Thông tin của bạn được bảo mật tuyệt đối
+                            </small>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -1468,6 +1621,220 @@
 
 @push('styles')
 <style>
+/* Clean Registration Section */
+.registration-section {
+    background: #f8f9fa;
+    position: relative;
+}
+
+/* Offer Cards */
+.offers-header h3 {
+    color: #2c3e50;
+}
+
+.offer-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #015862, #3EB850);
+}
+
+.offer-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #015862, #3EB850);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.offer-icon i {
+    font-size: 20px;
+    color: white;
+}
+
+.offer-card h5 {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.offer-card p {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.offer-badge {
+    margin-top: 0.5rem;
+}
+
+.offer-badge .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.urgency-notice {
+    animation: pulse-border 2s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+    0%, 100% { border-color: #ffc107; }
+    50% { border-color: #ff8c00; }
+}
+
+/* Registration Form Card */
+.registration-form-card {
+    background: linear-gradient(135deg, #015862, #3EB850);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(1, 88, 98, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.registration-form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.form-header {
+    position: relative;
+    z-index: 2;
+}
+
+.form-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-icon i {
+    font-size: 32px;
+    color: white;
+}
+
+/* Form Styles */
+.consultation-form {
+    position: relative;
+    z-index: 2;
+}
+
+.consultation-form .form-control,
+.consultation-form .form-select {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 16px;
+    height: auto;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.consultation-form .form-control:focus,
+.consultation-form .form-select:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: white;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.consultation-form .form-control::placeholder {
+    color: #6c757d;
+}
+
+.consultation-form .btn-warning {
+    background: linear-gradient(135deg, #ffc107, #ff8c00);
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+.consultation-form .btn-warning:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6);
+    background: linear-gradient(135deg, #ff8c00, #ffc107);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .offer-card {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .registration-form-card {
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .offer-icon {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0.8rem;
+    }
+    
+    .offer-icon i {
+        font-size: 18px;
+    }
+    
+    .form-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .form-icon i {
+        font-size: 24px;
+    }
+    
+    .offers-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .urgency-notice {
+        margin-top: 2rem !important;
+    }
+}
+
 /* Courses Section - Slider Layout */
 .courses-slider-container .course-card {
     transition: all 0.3s ease;
