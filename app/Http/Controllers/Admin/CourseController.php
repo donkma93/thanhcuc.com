@@ -237,9 +237,17 @@ class CourseController extends Controller
             'selected_courses.*' => 'exists:courses,id'
         ]);
 
-        $courses = Course::whereIn('id', $request->selected_courses);
+        // Ensure selected_courses is always an array
+        $selectedCourses = is_array($request->selected_courses) ? $request->selected_courses : [$request->selected_courses];
+        $selectedCourses = array_filter($selectedCourses); // Remove empty values
 
-        $count = count($request->selected_courses);
+        if (empty($selectedCourses)) {
+            return $this->errorAndBack('Vui lòng chọn ít nhất một khóa học để thực hiện hành động.');
+        }
+
+        $courses = Course::whereIn('id', $selectedCourses);
+
+        $count = count($selectedCourses);
         
         switch ($request->action) {
             case 'activate':

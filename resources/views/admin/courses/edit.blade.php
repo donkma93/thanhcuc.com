@@ -297,7 +297,7 @@
     });
 
     // Features management
-    let featureIndex = {{ count(old('features', $course->features ?? [])) }};
+    let featureIndex = {{ count(old('features', is_array($course->features ?? []) ? $course->features : [])) }};
 
     document.getElementById('add-feature').addEventListener('click', function() {
         const container = document.getElementById('features-container');

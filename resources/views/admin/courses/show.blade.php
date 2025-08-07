@@ -115,7 +115,7 @@
                     </div>
                 @endif
                 
-                @if($course->features && count($course->features) > 0)
+                @if($course->features && is_array($course->features) && count($course->features) > 0)
                     <div class="mt-4">
                         <h6 class="text-muted mb-2">Tính năng khóa học</h6>
                         <div class="row">

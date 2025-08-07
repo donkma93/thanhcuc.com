@@ -70,16 +70,19 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="course_interest" class="form-label fw-bold">Khóa Học Quan Tâm</label>
-                                <select class="form-select" id="course_interest" name="course_interest">
+                                <label for="course" class="form-label fw-bold">Khóa Học Quan Tâm <span class="text-danger">*</span></label>
+                                <select class="form-select @error('course') is-invalid @enderror" id="course" name="course" required>
                                     <option value="">-- Chọn khóa học --</option>
-                                    <option value="A1-A2">Cơ Bản A1-A2</option>
-                                    <option value="B1-B2">Trung Cấp B1-B2</option>
-                                    <option value="C1-C2">Nâng Cao C1-C2</option>
-                                    <option value="Business">Tiếng Đức Thương Mại</option>
-                                    <option value="Exam">Luyện Thi Chứng Chỉ</option>
-                                    <option value="Other">Khác</option>
+                                    <option value="A1-A2" {{ old('course') == 'A1-A2' ? 'selected' : '' }}>Cơ Bản A1-A2</option>
+                                    <option value="B1-B2" {{ old('course') == 'B1-B2' ? 'selected' : '' }}>Trung Cấp B1-B2</option>
+                                    <option value="C1-C2" {{ old('course') == 'C1-C2' ? 'selected' : '' }}>Nâng Cao C1-C2</option>
+                                    <option value="Business" {{ old('course') == 'Business' ? 'selected' : '' }}>Tiếng Đức Thương Mại</option>
+                                    <option value="Exam" {{ old('course') == 'Exam' ? 'selected' : '' }}>Luyện Thi Chứng Chỉ</option>
+                                    <option value="Other" {{ old('course') == 'Other' ? 'selected' : '' }}>Khác</option>
                                 </select>
+                                @error('course')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             
                             <div class="mb-4">
