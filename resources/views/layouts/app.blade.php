@@ -1183,68 +1183,7 @@
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="footer py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <div class="mb-3">
-                        <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="footer-logo">
-                    </div>
-                    <p class="text-light">
-                        Trung tâm Tiếng Đức Thanh Cúc - Đồng hành cùng bạn trên con đường học tiếng Đức và luyện thi chứng chỉ. Giảng dạy chuyên nghiệp, kết quả cao.
-                    </p>
-                    <div class="d-flex">
-                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="text-white mb-3">Trang Chính</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('home') }}" class="text-light text-decoration-none">Trang Chủ</a></li>
-                        <li><a href="{{ route('about') }}" class="text-light text-decoration-none">Về Chúng Tôi</a></li>
-                        <li><a href="{{ route('schedule') }}" class="text-light text-decoration-none">Lịch Khai Giảng</a></li>
-                        <li><a href="{{ route('exam-schedule') }}" class="text-light text-decoration-none">Lịch Thi</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="text-white mb-3">Dịch Vụ</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('results') }}" class="text-light text-decoration-none">Kết Quả Học Viên</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-light text-decoration-none">Liên Hệ</a></li>
-                        <li><a href="tel:0975186230" class="text-light text-decoration-none">Hotline: 0975.186.230</a></li>
-                        <li><a href="mailto:info@thanhcuc.edu.vn" class="text-light text-decoration-none">Email Tư Vấn</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-4 mb-4">
-                    <h6 class="text-white mb-3">Liên Hệ</h6>
-                    <div class="text-light">
-                        <p><i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC, Quận XYZ, Hà Nội</p>
-                        <p><i class="fas fa-phone me-2"></i>0975.186.230</p>
-                        <p><i class="fas fa-envelope me-2"></i>info@thanhcuc.edu.vn</p>
-                    </div>
-                </div>
-            </div>
-            
-            <hr class="my-4 border-light">
-            
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="text-light mb-0">&copy; 2024 Trung Tâm Tiếng Đức Thanh Cúc. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-light text-decoration-none me-3">Chính Sách Bảo Mật</a>
-                    <a href="#" class="text-light text-decoration-none">Điều Khoản Sử Dụng</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
 
     <!-- Scroll to top button -->
     <button class="scroll-to-top" id="scrollToTop">

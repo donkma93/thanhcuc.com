@@ -27,11 +27,17 @@
                                     @case('general')
                                         <i class="fas fa-globe me-2"></i>Cài đặt chung
                                         @break
+                                    @case('company')
+                                        <i class="fas fa-building me-2"></i>Thông tin công ty
+                                        @break
                                     @case('contact')
                                         <i class="fas fa-phone me-2"></i>Thông tin liên hệ
                                         @break
                                     @case('social')
                                         <i class="fas fa-share-alt me-2"></i>Mạng xã hội
+                                        @break
+                                    @case('branches')
+                                        <i class="fas fa-map-marker-alt me-2"></i>Chi nhánh
                                         @break
                                     @case('seo')
                                         <i class="fas fa-search me-2"></i>SEO

@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
         
         // Tạo dữ liệu mẫu cho Programs
         $this->call(ProgramSeeder::class);
+        $this->call(ProgramsSeeder::class);
+        
+        // Tạo settings cho footer
+        $this->call(FooterSettingsSeeder::class);
         
         // Tạo dữ liệu mẫu cho Teachers
         \App\Models\Teacher::create([
