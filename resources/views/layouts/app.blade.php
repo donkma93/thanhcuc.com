@@ -8,6 +8,13 @@
     <meta name="description" content="@yield('description', 'Trung tâm tiếng Đức Thanh Cúc - Học tiếng Đức chuyên nghiệp, luyện thi chứng chỉ Goethe, TestDaF. Lịch khai giảng, lịch thi và kết quả học viên.')">
     <meta name="keywords" content="học tiếng Đức, luyện thi Goethe, TestDaF, chứng chỉ tiếng Đức, trung tâm tiếng Đức, lịch khai giảng, lịch thi">
     
+    <!-- Cache and Navigation Meta Tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="1 day">
+    
     <!-- Mobile optimization meta tags -->
     <meta name="theme-color" content="#015862">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1211,6 +1218,35 @@
                 font-size: 0.9rem;
             }
         }
+        
+        /* Fix for browser back button white page issue */
+        body {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+            visibility: visible !important;
+        }
+        
+        body.page-loaded {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+        
+        /* Ensure page content is always visible */
+        html, body {
+            height: 100%;
+            min-height: 100vh;
+            background-color: #ffffff;
+        }
+        
+        .main-content {
+            min-height: 100vh;
+            opacity: 1;
+        }
+        
+        /* Prevent flash of unstyled content */
+        .container, .container-fluid {
+            opacity: 1;
+        }
     </style>
     
     @stack('styles')
@@ -1298,6 +1334,29 @@
     <!-- Animation and Interaction Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Fix for browser back button white page issue
+            window.addEventListener('pageshow', function(event) {
+                // Force page refresh if coming from cache (back button)
+                if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                    // Ensure page is visible
+                    document.body.style.opacity = '1';
+                    document.body.style.transform = 'scale(1)';
+                    document.body.classList.add('page-loaded');
+                    
+                    // Re-initialize any necessary components
+                    const navbar = document.querySelector('.navbar-collapse');
+                    if (navbar && navbar.classList.contains('show')) {
+                        navbar.classList.remove('show');
+                    }
+                }
+            });
+            
+            // Prevent page from being cached in a way that causes issues
+            window.addEventListener('beforeunload', function() {
+                // Don't manipulate page appearance on unload
+                // This was causing the white page issue
+            });
+            
             // Intersection Observer for scroll animations
             const observerOptions = {
                 threshold: 0.1,
@@ -1493,20 +1552,16 @@
                 element.addEventListener('mouseenter', playHoverSound);
             });
             
-            // Page transition effect
-            window.addEventListener('beforeunload', function() {
+            // Initialize page with fade in (improved for back button compatibility)
+            if (!document.body.classList.contains('page-loaded')) {
                 document.body.style.opacity = '0';
-                document.body.style.transform = 'scale(0.95)';
-            });
-            
-            // Initialize page with fade in
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-                document.body.style.transform = 'scale(1)';
-            }, 100);
+                document.body.style.transition = 'opacity 0.3s ease';
+                
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                    document.body.classList.add('page-loaded');
+                }, 50);
+            }
         });
         
         // Utility function to add animation classes
@@ -1592,41 +1647,25 @@
                 });
             }
             
-            // Handle browser back button when modal is open
+            // Handle browser back button when modal is open (simplified)
             let modalInstance = null;
-            let historyPushed = false;
             
             // Store modal instance when shown
             if (modalElement) {
                 modalElement.addEventListener('shown.bs.modal', function() {
                     modalInstance = bootstrap.Modal.getInstance(modalElement);
-                    
-                    // Add history state when modal opens
-                    if (!historyPushed) {
-                        window.history.pushState({modal: 'registration'}, '', window.location.href);
-                        historyPushed = true;
-                    }
                 });
                 
                 modalElement.addEventListener('hidden.bs.modal', function() {
                     modalInstance = null;
-                    
-                    // Reset history flag when modal closes
-                    if (historyPushed) {
-                        historyPushed = false;
-                    }
                 });
             }
             
-            // Handle popstate (back button) event
+            // Handle popstate (back button) event - simplified approach
             window.addEventListener('popstate', function(event) {
+                // Only close modal if it's open, don't manipulate history
                 if (modalInstance && modalElement && modalElement.classList.contains('show')) {
-                    // Close modal when back button is pressed
                     modalInstance.hide();
-                    // Don't prevent default - let normal navigation continue
-                } else if (event.state && event.state.modal === 'registration') {
-                    // If we're going back to a modal state, prevent it
-                    window.history.forward();
                 }
             });
             
