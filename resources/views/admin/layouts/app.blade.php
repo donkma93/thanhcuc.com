@@ -299,6 +299,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.galleries*') ? 'active' : '' }}" 
+                               href="{{ route('admin.galleries.index') }}">
+                                <i class="fas fa-photo-video"></i>
+                                Quản lý Gallery
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}" 
                                href="{{ route('admin.settings.index') }}">
                                 <i class="fas fa-cogs"></i>

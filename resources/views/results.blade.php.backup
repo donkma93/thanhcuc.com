@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Kết Quả Học Viên - Trung Tâm Tiếng Đức Thanh Cúc')
 
@@ -291,6 +291,11 @@
 </section>
 
 <!-- Certificates Gallery Section -->
+@php
+    $certificates = \App\Models\Gallery::active()->certificate()->ordered()->get();
+@endphp
+
+@if($certificates->count() > 0)
 <section class="py-5 certificates-section">
     <div class="container">
         <div class="text-center mb-5">
@@ -302,9 +307,94 @@
             </p>
         </div>
         
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="certificate-card animate-on-scroll">
+        <!-- Certificates Slider -->
+        <div class="position-relative">
+            <div class="gallery-slider" id="certificatesSlider">
+                <div class="slider-container">
+                    @foreach($certificates as $index => $certificate)
+                        <div class="slider-item" data-gallery="certificate" data-index="{{ $index }}">
+                            <div class="slider-card">
+                                <div class="slider-image-container">
+                                    <img src="{{ $certificate->image_url }}" 
+                                         alt="{{ $certificate->title }}" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <div class="slider-content">
+                                            <h6 class="text-white fw-bold mb-1">{{ $certificate->title }}</h6>
+                                            <p class="text-white-50 small mb-0">{{ $certificate->description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slider-click-overlay">
+                                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            @if($certificates->count() >= 4)
+            <button class="slider-nav slider-prev" onclick="moveSlider('certificatesSlider', -1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav slider-next" onclick="moveSlider('certificatesSlider', 1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            @endif
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Call to Action Section -->
+<section class="cta-section" id="cta-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="cta-content animate-fade-in-left">
+                    <div class="cta-badge mb-3">
+                        <i class="fas fa-rocket me-2"></i>
+                        <span>Bắt Đầu Hành Trình</span>
+                    </div>
+                    <h3 class="cta-title mb-4">
+                        Bạn cũng muốn có <span class="text-gradient">thành tích</span> như vậy?
+                    </h3>
+                    <p class="cta-desc mb-4">
+                        Đăng ký ngay để nhận tư vấn miễn phí và bắt đầu hành trình chinh phục tiếng Đức cùng SEC!
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-phone me-2"></i>Tư Vấn Miễn Phí
+                        </a>
+                        <a href="{{ route('trial') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-play me-2"></i>Học Thử Miễn Phí
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cta-image animate-fade-in-right">
+                    <div class="cta-image-container">
+                        <img src="{{ asset('images/cta-student.jpg') }}" alt="Học viên thành công" class="img-fluid">
+                        <div class="cta-floating-elements">
+                            <div class="floating-element element-1">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="floating-element element-2">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="floating-element element-3">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
                     <div class="certificate-header">
                         <div class="certificate-icon">
                             <i class="fas fa-certificate"></i>
@@ -433,6 +523,7 @@
         </div>
     </div>
 </section>
+@endif
 
 <!-- Call to Action Section -->
 <section class="cta-section" id="cta-section">

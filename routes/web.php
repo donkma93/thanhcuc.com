@@ -172,5 +172,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::patch('achievements/{achievement}/toggle-status', [\App\Http\Controllers\Admin\AchievementController::class, 'toggleStatus'])->name('achievements.toggle-status');
     Route::patch('achievements/{achievement}/toggle-featured', [\App\Http\Controllers\Admin\AchievementController::class, 'toggleFeatured'])->name('achievements.toggle-featured');
     
+    // Gallery Management
+    Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
+    Route::post('galleries/update-order', [\App\Http\Controllers\Admin\GalleryController::class, 'updateOrder'])->name('galleries.update-order');
+    Route::patch('galleries/{gallery}/toggle-status', [\App\Http\Controllers\Admin\GalleryController::class, 'toggleStatus'])->name('galleries.toggle-status');
 
 });
