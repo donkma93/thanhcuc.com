@@ -9,13 +9,7 @@
                     Liên hệ chúng tôi
                 </h5>
                 
-                <div class="mb-3">
-                    <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="footer-logo mb-3">
-                </div>
-                
-                <p class="text-light mb-3">
-                    {{ $footerSettings['company_description'] ?? 'Trung tâm Tiếng Đức Thanh Cúc - Đồng hành cùng bạn trên con đường học tiếng Đức và luyện thi chứng chỉ. Giảng dạy chuyên nghiệp, kết quả cao.' }}
-                </p>
+
                 
                 <div class="contact-info">
                     <div class="contact-item mb-2">

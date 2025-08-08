@@ -1345,7 +1345,7 @@
                 <div class="offers-header mb-4">
                     <h3 class="fw-bold text-dark mb-2">
                         <i class="fas fa-gift text-primary me-2"></i>
-                        Ưu đãi đặc biệt khóa học Tiếng Đức
+                        ƯU ĐÃI ĐẶC BIỆT KHÓA HỌC TIẾNG ĐỨC
                     </h3>
                     <p class="text-muted">Chỉ áp dụng cho 50 học viên đăng ký đầu tiên trong tháng này!</p>
                 </div>
