@@ -963,22 +963,47 @@
             animation: bounce 1s ease;
         }
 
+        /* Contact Widget Container - Independent Layer */
+        #contact-widget-container {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            pointer-events: none !important;
+            z-index: 999999 !important;
+            overflow: visible !important;
+        }
+        
         /* Contact Widget - Always Visible */
         .contact-widget {
-            position: sticky !important;
+            position: absolute !important;
             bottom: 20px !important;
             right: 20px !important;
-            z-index: 99999 !important;
+            z-index: 1 !important;
             pointer-events: none;
-            float: right;
-            margin-right: 0;
-            display: flex;
+            display: flex !important;
             flex-direction: column;
             gap: 15px;
+            margin: 0 !important;
+            padding: 0 !important;
+            float: none !important;
+            clear: none !important;
+            top: auto !important;
+            left: auto !important;
         }
         
         .contact-widget * {
             pointer-events: auto;
+        }
+        
+        /* Restore styling for contact buttons */
+        .contact-widget .contact-btn {
+            /* Reset the widget container overrides for buttons */
+            box-sizing: border-box !important;
+            border-radius: 50% !important;
+            transition: all 0.3s ease !important;
+            animation: pulseGlow 2s ease-in-out infinite, float 3s ease-in-out infinite !important;
         }
 
         .contact-btn {
@@ -1080,9 +1105,16 @@
         /* Mobile responsive */
         @media (max-width: 768px) {
             .contact-widget {
+                position: absolute !important;
                 bottom: 15px !important;
-                right: 0 !important;
-                position: sticky !important;
+                right: 15px !important;
+                gap: 10px !important;
+                z-index: 1 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                float: none !important;
+                top: auto !important;
+                left: auto !important;
             }
             
             .contact-toggle {
@@ -1104,10 +1136,52 @@
             }
         }
         
-        /* Ensure widget is always on top */
-        .contact-widget {
-            transform: translateZ(0);
-            will-change: transform;
+        /* Extra small devices */
+        @media (max-width: 576px) {
+            .contact-widget {
+                position: absolute !important;
+                bottom: 10px !important;
+                right: 10px !important;
+                gap: 8px !important;
+                z-index: 1 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                float: none !important;
+                top: auto !important;
+                left: auto !important;
+            }
+            
+            .contact-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .contact-btn i {
+                font-size: 14px;
+            }
+        }
+        
+        /* Fix layout spacing issues */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x: hidden;
+        }
+        
+        main {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* Ensure footer doesn't have extra spacing */
+        .footer {
+            margin: 0 !important;
+        }
+        
+        /* Remove any clearfix issues and ensure proper positioning */
+        .contact-widget::after,
+        .contact-widget::before {
+            display: none !important;
         }
         
         /* Loading animation */
@@ -1331,19 +1405,7 @@
                 font-size: 0.9rem;
             }
         }
-        
-        /* Fix for browser back button white page issue */
-        body {
-            opacity: 1 !important;
-            transform: scale(1) !important;
-            visibility: visible !important;
-        }
-        
-        body.page-loaded {
-            opacity: 1 !important;
-            transform: scale(1) !important;
-        }
-        
+      
         /* Ensure page content is always visible */
         html, body {
             background-color: #ffffff;
@@ -1431,8 +1493,10 @@
 
     @include('partials.footer')
 
-    <!-- Contact Widget - Always Visible -->
-    <div class="contact-widget">
+    <!-- Contact Widget Container - Completely Independent -->
+    <div id="contact-widget-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999;">
+        <!-- Contact Widget - Always Visible -->
+        <div class="contact-widget">
         @if(isset($settings['facebook_url']) && $settings['facebook_url'])
             <a href="{{ $settings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
                 <i class="fab fa-facebook-f"></i>
@@ -1462,6 +1526,7 @@
                 <i class="fas fa-phone"></i>
             </a>
         @endif
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
@@ -1472,6 +1537,50 @@
     <!-- Animation and Interaction Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure contact widget is properly positioned
+            function ensureContactWidgetPosition() {
+                const container = document.getElementById('contact-widget-container');
+                const contactWidget = document.querySelector('.contact-widget');
+                
+                if (container) {
+                    // Force container positioning
+                    container.style.position = 'fixed';
+                    container.style.top = '0';
+                    container.style.left = '0';
+                    container.style.width = '100vw';
+                    container.style.height = '100vh';
+                    container.style.pointerEvents = 'none';
+                    container.style.zIndex = '999999';
+                    container.style.overflow = 'visible';
+                }
+                
+                if (contactWidget) {
+                    // Force widget positioning within container
+                    contactWidget.style.position = 'absolute';
+                    contactWidget.style.bottom = '20px';
+                    contactWidget.style.right = '20px';
+                    contactWidget.style.zIndex = '1';
+                    contactWidget.style.display = 'flex';
+                    contactWidget.style.flexDirection = 'column';
+                    contactWidget.style.gap = '15px';
+                    contactWidget.style.margin = '0';
+                    contactWidget.style.padding = '0';
+                    contactWidget.style.float = 'none';
+                    contactWidget.style.clear = 'none';
+                    contactWidget.style.top = 'auto';
+                    contactWidget.style.left = 'auto';
+                    contactWidget.style.transform = 'translateZ(0)';
+                }
+            }
+            
+            // Run on load
+            ensureContactWidgetPosition();
+            
+            // Run on resize
+            window.addEventListener('resize', ensureContactWidgetPosition);
+            
+            // Run on scroll (in case something changes)
+            window.addEventListener('scroll', ensureContactWidgetPosition);
             // Fix for browser back button white page issue
             window.addEventListener('pageshow', function(event) {
                 // Force page refresh if coming from cache (back button)
