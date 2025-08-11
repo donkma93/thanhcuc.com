@@ -6,123 +6,87 @@
 <!-- Hero Slider Section -->
 <section class="hero-slider-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-        </div>
-        
-        <div class="carousel-inner">
-            <!-- Slide 1: Du học Đức -->
-            <div class="carousel-item active">
-                <div class="hero-slide" style="background: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);">
-                    <div class="container">
-                        <div class="row align-items-center min-vh-100">
-                            <div class="col-lg-6">
-                                <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
-                                        DU HỌC NGHỀ ĐỨC - TƯƠNG LAI RỘNG MỞ
-                                    </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
-                                        Thanh Cúc - Đơn vị tư vấn du học nghề Đức uy tín từ năm 2020. Chương trình Ausbildung với mức lương hấp dẫn, 
-                                        cơ hội định cư và phát triển sự nghiệp tại châu Âu.
-                                    </p>
-                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
-                                            <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí
-                                        </a>
-                                        <a href="tel:0975186230" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
-                                            <i class="fas fa-phone me-2"></i>0975.186.230
-                                        </a>
+        @if(isset($sliders) && $sliders->count() > 0)
+            <div class="carousel-indicators">
+                @foreach($sliders as $index => $slider)
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
+                @endforeach
+            </div>
+            <div class="carousel-inner">
+                @foreach($sliders as $index => $slider)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="hero-slide" style="background: url('{{ $slider->image_url }}') center center/cover no-repeat; min-height: 600px; position: relative;">
+                            <div class="bg-dark bg-opacity-50 position-absolute top-0 start-0 w-100 h-100" style="z-index:1;"></div>
+                            <div class="container position-relative" style="z-index:2;">
+                                <div class="row align-items-center min-vh-100">
+                                    <div class="col-lg-7">
+                                        <div class="hero-content">
+                                            <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
+                                                {{ $slider->title }}
+                                            </h1>
+                                            @if($slider->description)
+                                                <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
+                                                    {{ $slider->description }}
+                                                </p>
+                                            @endif
+                                            <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                                @if($slider->button_text && $slider->button_link)
+                                                    <a href="{{ $slider->button_link }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
+                                                        <i class="fas fa-graduation-cap me-2"></i>{{ $slider->button_text }}
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 text-center">
-                                <img src="{{ asset('images/hero/study-abroad-1.svg') }}" 
-                                     alt="Du học Đức - Cơ hội vàng" class="img-fluid animate-float">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        @else
+            <!-- Fallback: slider cũ nếu không có dữ liệu -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="hero-slide" style="background: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);">
+                        <div class="container">
+                            <div class="row align-items-center min-vh-100">
+                                <div class="col-lg-6">
+                                    <div class="hero-content">
+                                        <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
+                                            DU HỌC NGHỀ ĐỨC - TƯƠNG LAI RỘNG MỞ
+                                        </h1>
+                                        <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
+                                            Thanh Cúc - Đơn vị tư vấn du học nghề Đức uy tín từ năm 2020. Chương trình Ausbildung với mức lương hấp dẫn, cơ hội định cư và phát triển sự nghiệp tại châu Âu.
+                                        </p>
+                                        <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                            <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
+                                                <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí
+                                            </a>
+                                            <a href="tel:0975186230" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
+                                                <i class="fas fa-phone me-2"></i>0975.186.230
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                    <img src="{{ asset('images/hero/study-abroad-1.svg') }}" alt="Du học Đức - Cơ hội vàng" class="img-fluid animate-float">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Slide 2: Học tập tại Đức -->
-            <div class="carousel-item">
-                <div class="hero-slide" style="background: linear-gradient(135deg, #CADD2D 0%, #3EB850 100%);">
-                    <div class="container">
-                        <div class="row align-items-center min-vh-100">
-                            <div class="col-lg-6">
-                                <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
-                                        AUSBILDUNG - HỌC NGHỀ CÓ LƯƠNG
-                                    </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
-                                        Chương trình đào tạo nghề 3 năm tại Đức với mức lương từ 515-1.500€/tháng. 
-                                        Kết hợp lý thuyết và thực hành, đảm bảo việc làm sau tốt nghiệp với mức lương cao.
-                                    </p>
-                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
-                                            <i class="fas fa-euro-sign me-2"></i>Xem Mức Lương
-                                        </a>
-                                        <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
-                                            <i class="fas fa-info-circle me-2"></i>Tìm Hiểu Thêm
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 text-center">
-                                <img src="{{ asset('images/hero/study-abroad-2.svg') }}" 
-                                     alt="Học tập tại Đức" class="img-fluid animate-float">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 3: Tốt nghiệp thành công -->
-            <div class="carousel-item">
-                <div class="hero-slide" style="background: linear-gradient(135deg, #3EB850 0%, #015862 100%);">
-                    <div class="container">
-                        <div class="row align-items-center min-vh-100">
-                            <div class="col-lg-6">
-                                <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
-                                        ĐỊNH CƯ & PHÁT TRIỂN SỰ NGHIỆP
-                                    </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">
-                                        Sau khi hoàn thành Ausbildung, bạn có thể xin thường trú, mang gia đình sang Đức. 
-                                        95% học viên của chúng tôi đã thành công định cư và có cuộc sống ổn định tại Đức.
-                                    </p>
-                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('results') }}" class="btn btn-warning btn-lg btn-liquid" style="background: #F9D200; border-color: #F9D200; color: #015862; font-weight: bold;">
-                                            <i class="fas fa-home me-2"></i>Câu Chuyện Thành Công
-                                        </a>
-                                        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg" style="border-color: #F9D200; color: #F9D200; background: rgba(249, 210, 0, 0.1);">
-                                            <i class="fas fa-rocket me-2"></i>Bắt Đầu Ngay
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 text-center">
-                                <img src="{{ asset('images/hero/study-abroad-3.svg') }}" 
-                                     alt="Tốt nghiệp thành công" class="img-fluid animate-float">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        @endif
     </div>
-
 </section>
 
 <!-- Stats Section -->

@@ -73,6 +73,9 @@ class HomeController extends Controller
             ->take(3)
             ->get();
             
+        // Lấy slider từ database
+        $sliders = \App\Models\Slider::active()->ordered()->get();
+        
         return view('home', compact(
             'featuredCourses', 
             'featuredPrograms', 
@@ -80,7 +83,8 @@ class HomeController extends Controller
             'latestNews',
             'monthlyAchievements',
             'examAchievements', 
-            'scholarshipAchievements'
+            'scholarshipAchievements',
+            'sliders'
         ));
     }
     
