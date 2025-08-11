@@ -124,6 +124,9 @@ class DatabaseSeeder extends Seeder
         // Tạo dữ liệu mẫu cho Courses
         $this->call(CourseSeeder::class);
 
+        // Thành tích học viên (bảng vàng)
+        $this->call(AchievementSeeder::class);
+
         // Tạo dữ liệu mẫu cho Job Postings
         \App\Models\JobPosting::create([
             'title' => 'Giảng viên tiếng Đức',

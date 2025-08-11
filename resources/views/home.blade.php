@@ -731,249 +731,132 @@
             <!-- Monthly Achievements -->
             <div class="tab-pane fade show active" id="monthly" role="tabpanel">
                 <div class="row">
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-1 mb-3">
-                                    <i class="fas fa-crown"></i>
-                                    <span class="rank-number">1</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Nguyễn Thị Mai" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Nguyễn Thị Mai</h5>
-                                <p class="text-muted mb-2">Lớp A2.2</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-star text-warning me-2"></i>
-                                        <span>Điểm trung bình: 9.8/10</span>
+                    @forelse($monthlyAchievements as $achievement)
+                        @php
+                            $avatarUrl = $achievement->avatar
+                                ? asset('storage/' . $achievement->avatar)
+                                : asset('images/teachers/teacher-1.svg');
+                            $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
+                        @endphp
+                        <div class="col-lg-4 mb-4">
+                            <div class="achievement-card card border-0 shadow-lg h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
+                                        <i class="fas {{ $rankIcon }}"></i>
+                                        <span class="rank-number">{{ $achievement->rank }}</span>
                                     </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-clock text-success me-2"></i>
-                                        <span>Tháng 12/2024</span>
+                                    <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
+                                    <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
+                                    @if($achievement->class_name)
+                                        <p class="text-muted mb-2">Lớp {{ $achievement->class_name }}</p>
+                                    @endif
+                                    <div class="achievement-details mb-3">
+                                        @if(!is_null($achievement->score))
+                                            <div class="detail-item">
+                                                <i class="fas fa-star text-warning me-2"></i>
+                                                <span>Điểm trung bình: {{ number_format($achievement->score, 1) }}/10</span>
+                                            </div>
+                                        @endif
+                                        <div class="detail-item">
+                                            <i class="fas fa-clock text-success me-2"></i>
+                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                        </div>
                                     </div>
+                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                                 </div>
-                                <span class="badge bg-warning text-dark">Học viên xuất sắc nhất</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-2 mb-3">
-                                    <i class="fas fa-medal"></i>
-                                    <span class="rank-number">2</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Trần Văn Hùng" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Trần Văn Hùng</h5>
-                                <p class="text-muted mb-2">Lớp B1.1</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-star text-warning me-2"></i>
-                                        <span>Điểm trung bình: 9.5/10</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-clock text-success me-2"></i>
-                                        <span>Tháng 12/2024</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-light text-primary">Tiến bộ vượt bậc</span>
-                            </div>
+                    @empty
+                        <div class="col-12">
+                            <div class="alert alert-light text-center mb-0">Chưa có thành tích tháng nào được cập nhật.</div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-3 mb-3">
-                                    <i class="fas fa-award"></i>
-                                    <span class="rank-number">3</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Lê Thị Hoa" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Lê Thị Hoa</h5>
-                                <p class="text-muted mb-2">Lớp A1.2</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-star text-warning me-2"></i>
-                                        <span>Điểm trung bình: 9.2/10</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-clock text-success me-2"></i>
-                                        <span>Tháng 12/2024</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-light text-primary">Chăm chỉ nhất</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 
             <!-- Exam Achievements -->
             <div class="tab-pane fade" id="exam" role="tabpanel">
                 <div class="row">
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-1 mb-3">
-                                    <i class="fas fa-crown"></i>
-                                    <span class="rank-number">1</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Phạm Minh Tuấn" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Phạm Minh Tuấn</h5>
-                                <p class="text-muted mb-2">Goethe B2</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-certificate text-warning me-2"></i>
-                                        <span>Điểm: 92/100</span>
+                    @forelse($examAchievements as $achievement)
+                        @php
+                            $avatarUrl = $achievement->avatar
+                                ? asset('storage/' . $achievement->avatar)
+                                : asset('images/teachers/teacher-2.svg');
+                            $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
+                        @endphp
+                        <div class="col-lg-4 mb-4">
+                            <div class="achievement-card card border-0 shadow-lg h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
+                                        <i class="fas {{ $rankIcon }}"></i>
+                                        <span class="rank-number">{{ $achievement->rank }}</span>
                                     </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-calendar text-success me-2"></i>
-                                        <span>Kỳ thi 11/2024</span>
+                                    <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
+                                    <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
+                                    @if($achievement->certificate)
+                                        <p class="text-muted mb-2">{{ $achievement->certificate }}</p>
+                                    @endif
+                                    <div class="achievement-details mb-3">
+                                        @if(!is_null($achievement->score))
+                                            <div class="detail-item">
+                                                <i class="fas fa-certificate text-warning me-2"></i>
+                                                <span>Điểm: {{ rtrim(rtrim(number_format($achievement->score, 2), '0'), '.') }}</span>
+                                            </div>
+                                        @endif
+                                        <div class="detail-item">
+                                            <i class="fas fa-calendar text-success me-2"></i>
+                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                        </div>
                                     </div>
+                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                                 </div>
-                                <span class="badge bg-warning text-dark">Điểm cao nhất</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-2 mb-3">
-                                    <i class="fas fa-medal"></i>
-                                    <span class="rank-number">2</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Nguyễn Thị Lan" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Nguyễn Thị Lan</h5>
-                                <p class="text-muted mb-2">TestDaF</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-certificate text-warning me-2"></i>
-                                        <span>Điểm: TDN 4 (tất cả kỹ năng)</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-calendar text-success me-2"></i>
-                                        <span>Kỳ thi 10/2024</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-light text-primary">Đậu lần đầu</span>
-                            </div>
+                    @empty
+                        <div class="col-12">
+                            <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-3 mb-3">
-                                    <i class="fas fa-award"></i>
-                                    <span class="rank-number">3</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Hoàng Văn Nam" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Hoàng Văn Nam</h5>
-                                <p class="text-muted mb-2">Goethe C1</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-certificate text-warning me-2"></i>
-                                        <span>Điểm: 85/100</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-calendar text-success me-2"></i>
-                                        <span>Kỳ thi 11/2024</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-light text-primary">Tiến bộ nhanh</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 
             <!-- Scholarship Achievements -->
             <div class="tab-pane fade" id="scholarship" role="tabpanel">
                 <div class="row">
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-1 mb-3">
-                                    <i class="fas fa-crown"></i>
-                                    <span class="rank-number">1</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Nguyễn Minh Anh" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Nguyễn Minh Anh</h5>
-                                <p class="text-muted mb-2">Ausbildung IT</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-map-marker-alt text-warning me-2"></i>
-                                        <span>Munich, Đức</span>
+                    @forelse($scholarshipAchievements as $achievement)
+                        @php
+                            $avatarUrl = $achievement->avatar
+                                ? asset('storage/' . $achievement->avatar)
+                                : asset('images/teachers/teacher-1.svg');
+                            $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
+                        @endphp
+                        <div class="col-lg-4 mb-4">
+                            <div class="achievement-card card border-0 shadow-lg h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
+                                        <i class="fas {{ $rankIcon }}"></i>
+                                        <span class="rank-number">{{ $achievement->rank }}</span>
                                     </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-euro-sign text-success me-2"></i>
-                                        <span>Lương: 1.400€/tháng</span>
+                                    <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
+                                    <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
+                                    @if($achievement->university)
+                                        <p class="text-muted mb-2">{{ $achievement->university }}</p>
+                                    @endif
+                                    <div class="achievement-details mb-3">
+                                        <div class="detail-item">
+                                            <i class="fas fa-calendar text-success me-2"></i>
+                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                        </div>
                                     </div>
+                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                                 </div>
-                                <span class="badge bg-warning text-dark">Du học thành công</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-2 mb-3">
-                                    <i class="fas fa-medal"></i>
-                                    <span class="rank-number">2</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Trần Thị Hương" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Trần Thị Hương</h5>
-                                <p class="text-muted mb-2">Ausbildung Y tá</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-map-marker-alt text-warning me-2"></i>
-                                        <span>Berlin, Đức</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-euro-sign text-success me-2"></i>
-                                        <span>Lương: 1.200€/tháng</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-light text-primary">Ngành Y tế</span>
-                            </div>
+                    @empty
+                        <div class="col-12">
+                            <div class="alert alert-light text-center mb-0">Chưa có thành tích du học nào được cập nhật.</div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                <div class="achievement-rank rank-3 mb-3">
-                                    <i class="fas fa-award"></i>
-                                    <span class="rank-number">3</span>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                     alt="Lê Văn Đức" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                <h5 class="fw-bold text-primary mb-2">Lê Văn Đức</h5>
-                                <p class="text-muted mb-2">Ausbildung Cơ khí</p>
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                        <i class="fas fa-map-marker-alt text-warning me-2"></i>
-                                        <span>Stuttgart, Đức</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-euro-sign text-success me-2"></i>
-                                        <span>Lương: 1.350€/tháng</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-light text-primary">Ngành Kỹ thuật</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
