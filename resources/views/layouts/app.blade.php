@@ -466,11 +466,11 @@
 
         /* Unified hero text colors to match site palette */
         .hero-title {
-            color: var(--primary-color);
+            color: #ffc107;
             text-shadow: none !important;
         }
         .hero-desc {
-            color: var(--text-secondary);
+            color: #F57F25;
             text-shadow: none !important;
         }
         
