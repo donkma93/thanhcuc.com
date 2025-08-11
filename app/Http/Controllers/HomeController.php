@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\News;
+use App\Models\Testimonial;
 use App\Models\Contact;
 use App\Models\Schedule;
 use App\Models\Achievement;
@@ -70,6 +71,9 @@ class HomeController extends Controller
         // Lấy slider từ database
         $sliders = \App\Models\Slider::active()->ordered()->get();
         
+        // Testimonials (Học viên nói gì)
+        $testimonials = Testimonial::active()->ordered()->take(9)->get();
+        
         return view('home', compact(
             'featuredCourses', 
             'featuredTeachers', 
@@ -77,7 +81,8 @@ class HomeController extends Controller
             'monthlyAchievements',
             'examAchievements', 
             'scholarshipAchievements',
-            'sliders'
+            'sliders',
+            'testimonials'
         ));
     }
     

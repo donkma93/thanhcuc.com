@@ -44,14 +44,16 @@
                     </div>
                 @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            @if($sliders->count() > 4)
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            @endif
         @else
             <!-- Fallback: slider cũ nếu không có dữ liệu -->
             <div class="carousel-inner">
@@ -882,278 +884,54 @@
         <!-- Testimonials Carousel -->
         <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2"></button>
+                @php $slides = $testimonials->chunk(3); @endphp
+                @foreach($slides as $index => $chunk)
+                    <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
+                @endforeach
             </div>
             
             <div class="carousel-inner">
-                <!-- Slide 1: 3 testimonials -->
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Nguyễn Minh Anh" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Nhờ Thanh Cúc, tôi đã thành công xin được Ausbildung IT tại Munich với lương 1.400€/tháng."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Nguyễn Minh Anh</h6>
-                                    <small class="text-muted">IT - Munich, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-success">Thành công 2023</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                @php $slides = $testimonials->chunk(3); @endphp
+                @forelse($slides as $slideIndex => $chunk)
+                    <div class="carousel-item {{ $slideIndex === 0 ? 'active' : '' }}">
+                        <div class="row">
+                            @foreach($chunk as $testimonial)
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card border-0 shadow testimonial-card h-100">
+                                        <div class="card-body p-4 text-center">
+                                            <img src="{{ $testimonial->avatar_url }}" alt="{{ $testimonial->name }}" class="rounded-circle testimonial-avatar mb-3" width="80" height="80">
+                                            <div class="mb-3">
+                                                <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
+                                            </div>
+                                            <p class="text-muted mb-3 fst-italic">"{{ $testimonial->content }}"</p>
+                                            <h6 class="fw-bold text-primary mb-1">{{ $testimonial->name }}</h6>
+                                            <small class="text-muted">{{ $testimonial->current_job }}{{ $testimonial->location ? ' - ' . $testimonial->location : '' }}</small>
+                                            <div class="mt-2">
+                                                @if($testimonial->program)
+                                                    <span class="badge bg-info">{{ $testimonial->program }}</span>
+                                                @endif
+                                                @if($testimonial->company)
+                                                    <span class="badge bg-success ms-1">{{ $testimonial->company }}</span>
+                                                @endif
+                                            </div>
+                                            <div class="text-warning mt-2">
+                                                {!! $testimonial->stars !!}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Trần Thị Lan" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-secondary opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Hoàn thành Ausbildung điều dưỡng tại Berlin, lương 1.200€/tháng và đã mang gia đình định cư."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Trần Thị Lan</h6>
-                                    <small class="text-muted">Điều dưỡng - Berlin, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-info">Định cư thành công</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Lê Văn Hùng" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-warning opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Từ kỹ sư cơ khí VN, giờ làm tại nhà máy ô tô Stuttgart với lương 1.500€/tháng."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Lê Văn Hùng</h6>
-                                    <small class="text-muted">Kỹ thuật ô tô - Stuttgart, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-warning">Lương cao nhất</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
+                    </div>
+                @empty
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-light text-center mb-0">Chưa có nhận xét học viên nào được hiển thị.</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Slide 2: 3 more testimonials -->
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Phạm Thị Mai" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-success opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Ausbildung khách sạn tại Hamburg đã mở ra cơ hội mới. Hiện quản lý khách sạn 4 sao với lương 1.300€/tháng."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Phạm Thị Mai</h6>
-                                    <small class="text-muted">Quản lý khách sạn - Hamburg, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-primary">Thăng tiến nhanh</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Đỗ Minh Tuấn" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-danger opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Từ đầu bếp VN, giờ làm tại nhà hàng Michelin star ở Frankfurt. Ước mơ đã thành hiện thực."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Đỗ Minh Tuấn</h6>
-                                    <small class="text-muted">Đầu bếp - Frankfurt, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-danger">Michelin Star</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Nguyễn Thị Hoa" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-info opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Ausbildung chăm sóc người già tại Cologne. Công việc ý nghĩa với lương 1.100€/tháng và được tôn trọng."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Nguyễn Thị Hoa</h6>
-                                    <small class="text-muted">Chăm sóc người già - Cologne, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-info">Công việc ý nghĩa</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Slide 3: 3 final testimonials -->
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Võ Minh Đức" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-dark opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Ausbildung thợ điện tại Dresden. Từ thợ phụ VN thành thợ chính với lương 1.350€/tháng."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Võ Minh Đức</h6>
-                                    <small class="text-muted">Thợ điện - Dresden, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-dark">Thợ chính</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Lý Thị Kim" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-purple opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Ausbildung dược sĩ tại Düsseldorf. Từ sinh viên dược VN thành dược sĩ Đức với lương 1.250€/tháng."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Lý Thị Kim</h6>
-                                    <small class="text-muted">Dược sĩ - Düsseldorf, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge" style="background-color: #6f42c1;">Dược sĩ</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
-                                    <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face&auto=format" 
-                                         alt="Hoàng Văn Nam" class="rounded-circle testimonial-avatar mb-3" 
-                                         width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-success opacity-50"></i>
-                                    </div>
-                                    <p class="text-muted mb-3 fst-italic">
-                                        "Ausbildung logistics tại Hannover. Quản lý kho hàng lớn với lương 1.200€/tháng và cơ hội thăng tiến."
-                                    </p>
-                                    <h6 class="fw-bold text-primary mb-1">Hoàng Văn Nam</h6>
-                                    <small class="text-muted">Logistics - Hannover, Đức</small>
-                                    <div class="mt-2">
-                                        <span class="badge bg-success">Quản lý kho</span>
-                                    </div>
-                                    <div class="text-warning mt-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
             
             <!-- Carousel Controls -->
