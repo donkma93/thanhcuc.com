@@ -47,6 +47,14 @@ class SettingController extends Controller
                     $path = $file->storeAs('settings', $filename, 'public');
                     $value = $path;
                 }
+
+                // Normalize JSON settings from structured fields
+                if ($setting->type === 'json') {
+                    // If the incoming value is an array (e.g., branches[name,address]) encode to JSON
+                    if (is_array($value)) {
+                        $value = json_encode($value, JSON_UNESCAPED_UNICODE);
+                    }
+                }
                 
                 $setting->update(['value' => $value]);
             }

@@ -131,6 +131,26 @@
                                                    style="width: 60px; height: 40px;">
                                             @break
                                             
+                                        @case('json')
+                                            @php $current = $setting->formatted_value; @endphp
+                                            <div class="row g-2">
+                                                <div class="col-6">
+                                                    <input type="text" 
+                                                           class="form-control" 
+                                                           name="settings[{{ $setting->key }}][name]" 
+                                                           value="{{ old('settings.' . $setting->key . '.name', $current['name'] ?? '') }}" 
+                                                           placeholder="Tên">
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="text" 
+                                                           class="form-control" 
+                                                           name="settings[{{ $setting->key }}][address]" 
+                                                           value="{{ old('settings.' . $setting->key . '.address', $current['address'] ?? '') }}" 
+                                                           placeholder="Địa chỉ">
+                                                </div>
+                                            </div>
+                                            @break
+
                                         @default
                                             <input type="text" 
                                                    class="form-control @error('settings.' . $setting->key) is-invalid @enderror" 

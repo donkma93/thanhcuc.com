@@ -8,7 +8,6 @@
                     <i class="fas fa-phone-alt me-2 text-warning"></i>
                     Liên hệ chúng tôi
                 </h5>
-                <?php dd($footerSettings); ?> 
 
                 
                 <div class="contact-info">
