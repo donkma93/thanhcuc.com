@@ -15,25 +15,27 @@
             <div class="carousel-inner">
                 @foreach($sliders as $index => $slider)
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        @if($slider->button_link)
+                            <a href="{{ $slider->button_link }}" aria-label="{{ $slider->title }}" class="d-block">
+                        @endif
                         <div class="hero-slide" style="background: url('{{ $slider->image_url }}') center center/cover no-repeat; min-height: 600px; position: relative;">
-                            <div class="bg-dark bg-opacity-50 position-absolute top-0 start-0 w-100 h-100" style="z-index:1;"></div>
-                            <div class="container position-relative" style="z-index:2;">
+                            <div class="container position-relative">
                                 <div class="row align-items-center min-vh-100">
                                     <div class="col-lg-7">
                                         <div class="hero-content">
-                                            <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
+                                            <h1 class="display-4 fw-bold mb-4 animate-fade-in-up hero-title">
                                                 {{ $slider->title }}
                                             </h1>
                                             @if($slider->description)
-                                                <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
+                                                <p class="lead mb-4 animate-fade-in-up animate-delay-1 hero-desc">
                                                     {{ $slider->description }}
                                                 </p>
                                             @endif
                                             <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
                                                 @if($slider->button_text && $slider->button_link)
-                                                    <a href="{{ $slider->button_link }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
+                                                    <span class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862; pointer-events: none;">
                                                         <i class="fas fa-graduation-cap me-2"></i>{{ $slider->button_text }}
-                                                    </a>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -41,6 +43,9 @@
                                 </div>
                             </div>
                         </div>
+                        @if($slider->button_link)
+                            </a>
+                        @endif
                     </div>
                 @endforeach
             </div>

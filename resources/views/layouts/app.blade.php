@@ -444,21 +444,34 @@
             overflow: hidden;
         }
         
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-            z-index: 1;
+        /* Removed grain overlay to keep slider image crisp */
+        /* Make full-slide link look like regular content (no underline, inherit color) */
+        .hero-slider-section .carousel-item > a {
+            text-decoration: none !important;
+            color: inherit !important;
+            cursor: pointer;
+            display: block;
+        }
+        .hero-slider-section .carousel-item > a:hover,
+        .hero-slider-section .carousel-item > a:focus,
+        .hero-slider-section .carousel-item > a:active {
+            text-decoration: none !important;
+            color: inherit !important;
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
+        }
+
+        /* Unified hero text colors to match site palette */
+        .hero-title {
+            color: var(--primary-color);
+            text-shadow: none !important;
+        }
+        .hero-desc {
+            color: var(--text-secondary);
+            text-shadow: none !important;
         }
         
         .carousel-indicators {
