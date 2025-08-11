@@ -1280,7 +1280,7 @@
         }
         
         .carousel-indicators {
-            bottom: -50px;
+            bottom: 0px;
         }
         
         .carousel-indicators button {

@@ -1882,7 +1882,7 @@
 }
 
 .carousel-indicators {
-    margin-bottom: -2rem;
+    margin-bottom: 0;
 }
 
 .carousel-indicators [data-bs-target] {
