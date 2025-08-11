@@ -8,7 +8,7 @@
                     <i class="fas fa-phone-alt me-2 text-warning"></i>
                     Liên hệ chúng tôi
                 </h5>
-                
+                <?php dd($footerSettings); ?> 
 
                 
                 <div class="contact-info">
@@ -74,8 +74,8 @@
                     <i class="fas fa-building me-2 text-warning"></i>
                     Hệ thống chi nhánh
                 </h5>
-                
                 @if(isset($footerBranches) && $footerBranches->count() > 0)
+                   
                     <div class="branches-list">
                         @foreach($footerBranches as $branch)
                             <div class="branch-item mb-3 p-3 rounded" style="background: rgba(255,255,255,0.1);">

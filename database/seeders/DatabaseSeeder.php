@@ -17,9 +17,7 @@ class DatabaseSeeder extends Seeder
         // Tạo admin users
         $this->call(AdminUserSeeder::class);
         
-        // Tạo dữ liệu mẫu cho Programs
-        $this->call(ProgramSeeder::class);
-        $this->call(ProgramsSeeder::class);
+        // Bỏ seed Programs (đã loại bỏ model/programs khỏi hệ thống)
         
         // Tạo settings cho footer
         $this->call(FooterSettingsSeeder::class);
