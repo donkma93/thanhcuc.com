@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Setting;
-use App\Models\Program;
+use App\Models\Course;
 
 class FooterServiceProvider extends ServiceProvider
 {
@@ -28,7 +28,7 @@ class FooterServiceProvider extends ServiceProvider
             if (!request()->is('admin*')) {
                 $view->with([
                     'footerSettings' => $this->getFooterSettings(),
-                    'footerPrograms' => $this->getFooterPrograms(),
+                    'footerCourses' => $this->getFooterCourses(),
                     'footerBranches' => $this->getFooterBranches(),
                 ]);
             }
@@ -48,15 +48,16 @@ class FooterServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get footer programs
+     * Get footer courses
      */
-    private function getFooterPrograms()
+    private function getFooterCourses()
     {
-        return cache()->remember('footer_programs', 3600, function () {
-            return Program::active()
-                ->ordered()
+        return cache()->remember('footer_courses', 3600, function () {
+            return \App\Models\Course::where('is_active', true)
+                ->orderBy('sort_order')
+                ->orderBy('name')
                 ->limit(6)
-                ->select('id', 'name', 'slug', 'icon', 'color')
+                ->select('id', 'name', 'slug')
                 ->get();
         });
     }

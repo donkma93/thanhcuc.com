@@ -125,10 +125,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::patch('testimonials/{testimonial}/toggle-status', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleStatus'])->name('testimonials.toggle-status');
     Route::patch('testimonials/{testimonial}/toggle-featured', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleFeatured'])->name('testimonials.toggle-featured');
     
-    Route::resource('programs', \App\Http\Controllers\Admin\ProgramController::class);
-    Route::post('programs/update-order', [\App\Http\Controllers\Admin\ProgramController::class, 'updateOrder'])->name('programs.update-order');
-    Route::patch('programs/{program}/toggle-status', [\App\Http\Controllers\Admin\ProgramController::class, 'toggleStatus'])->name('programs.toggle-status');
-    Route::patch('programs/{program}/toggle-featured', [\App\Http\Controllers\Admin\ProgramController::class, 'toggleFeatured'])->name('programs.toggle-featured');
+    // Đã xóa các route liên quan đến programs
     
     Route::get('reasons', [\App\Http\Controllers\Admin\ReasonController::class, 'index'])->name('reasons.index');
     Route::get('reasons/create', [\App\Http\Controllers\Admin\ReasonController::class, 'create'])->name('reasons.create');

@@ -139,138 +139,20 @@
                     Khóa học
                 </h5>
                 
-                @if(isset($footerPrograms) && $footerPrograms->count() > 0)
+                @if(isset($footerCourses) && $footerCourses->count() > 0)
                     <div class="programs-list">
-                        @foreach($footerPrograms as $program)
+                        @foreach($footerCourses as $course)
                             <div class="program-item mb-2">
                                 <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
                                    style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                    
-                                    @if($program->icon)
-                                        <div class="program-icon me-3">
-                                            <i class="{{ $program->icon }}" style="color: {{ $program->color ?? '#F9D200' }}; font-size: 1rem;"></i>
-                                        </div>
-                                    @endif
-                                    
-                                    <div class="program-info flex-grow-1">
-                                        <span class="text-white fw-bold">{{ $program->name }}</span>
-                                    </div>
-                                    
-                                    <div class="program-arrow">
-                                        <i class="fas fa-chevron-right text-warning small"></i>
-                                    </div>
+                                    <span class="me-2"><i class="fas fa-book"></i></span>
+                                    <span>{{ $course->name }}</span>
                                 </a>
                             </div>
                         @endforeach
                     </div>
-                    
-                    <!-- Link xem tất cả khóa học -->
-                    <div class="text-center mt-4">
-                        <a href="{{ route('schedule') }}" class="btn btn-outline-warning btn-sm">
-                            <i class="fas fa-list me-2"></i>
-                            Xem tất cả khóa học
-                        </a>
-                    </div>
                 @else
-                    <!-- Default programs nếu chưa có data -->
-                    <div class="programs-list">
-                        <div class="program-item mb-2">
-                            <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                               style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                <div class="program-icon me-3">
-                                    <i class="fas fa-language" style="color: #F9D200; font-size: 1rem;"></i>
-                                </div>
-                                <div class="program-info flex-grow-1">
-                                    <span class="text-white fw-bold">Tiếng Đức A1</span>
-                                </div>
-                                <div class="program-arrow">
-                                    <i class="fas fa-chevron-right text-warning small"></i>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="program-item mb-2">
-                            <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                               style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                <div class="program-icon me-3">
-                                    <i class="fas fa-language" style="color: #F9D200; font-size: 1rem;"></i>
-                                </div>
-                                <div class="program-info flex-grow-1">
-                                    <span class="text-white fw-bold">Tiếng Đức A2</span>
-                                </div>
-                                <div class="program-arrow">
-                                    <i class="fas fa-chevron-right text-warning small"></i>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="program-item mb-2">
-                            <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                               style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                <div class="program-icon me-3">
-                                    <i class="fas fa-graduation-cap" style="color: #F9D200; font-size: 1rem;"></i>
-                                </div>
-                                <div class="program-info flex-grow-1">
-                                    <span class="text-white fw-bold">Tiếng Đức B1</span>
-                                </div>
-                                <div class="program-arrow">
-                                    <i class="fas fa-chevron-right text-warning small"></i>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="program-item mb-2">
-                            <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                               style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                <div class="program-icon me-3">
-                                    <i class="fas fa-certificate" style="color: #F9D200; font-size: 1rem;"></i>
-                                </div>
-                                <div class="program-info flex-grow-1">
-                                    <span class="text-white fw-bold">Luyện thi Goethe</span>
-                                </div>
-                                <div class="program-arrow">
-                                    <i class="fas fa-chevron-right text-warning small"></i>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="program-item mb-2">
-                            <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                               style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                <div class="program-icon me-3">
-                                    <i class="fas fa-plane" style="color: #F9D200; font-size: 1rem;"></i>
-                                </div>
-                                <div class="program-info flex-grow-1">
-                                    <span class="text-white fw-bold">Luyện thi TestDaF</span>
-                                </div>
-                                <div class="program-arrow">
-                                    <i class="fas fa-chevron-right text-warning small"></i>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="program-item mb-2">
-                            <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                               style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
-                                <div class="program-icon me-3">
-                                    <i class="fas fa-handshake" style="color: #F9D200; font-size: 1rem;"></i>
-                                </div>
-                                <div class="program-info flex-grow-1">
-                                    <span class="text-white fw-bold">Tiếng Đức Giao Tiếp</span>
-                                </div>
-                                <div class="program-arrow">
-                                    <i class="fas fa-chevron-right text-warning small"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center mt-4">
-                        <a href="{{ route('schedule') }}" class="btn btn-outline-warning btn-sm">
-                            <i class="fas fa-list me-2"></i>
-                            Xem tất cả khóa học
-                        </a>
-                    </div>
+                    <p class="text-muted">Chưa có khóa học nào</p>
                 @endif
             </div>
         </div>

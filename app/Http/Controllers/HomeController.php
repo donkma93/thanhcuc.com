@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\Program;
 use App\Models\Teacher;
 use App\Models\News;
 use App\Models\Contact;
@@ -18,11 +17,6 @@ class HomeController extends Controller
         $featuredCourses = Course::where('is_active', true)
             ->orderBy('sort_order')
             ->orderBy('name')
-            ->take(8)
-            ->get();
-            
-        $featuredPrograms = Program::where('is_active', true)
-            ->orderBy('sort_order')
             ->take(8)
             ->get();
             
@@ -78,7 +72,6 @@ class HomeController extends Controller
         
         return view('home', compact(
             'featuredCourses', 
-            'featuredPrograms', 
             'featuredTeachers', 
             'latestNews',
             'monthlyAchievements',

@@ -271,13 +271,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.programs*') ? 'active' : '' }}" 
-                               href="{{ route('admin.programs.index') }}">
-                                <i class="fas fa-graduation-cap"></i>
-                                Chương trình Ausbildung
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.reasons*') ? 'active' : '' }}" 
                                href="{{ route('admin.reasons.index') }}">
                                 <i class="fas fa-heart"></i>
