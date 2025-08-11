@@ -22,7 +22,7 @@ class FooterServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Share footer data with all views
+        // Share footer data with all non-admin views
         View::composer('*', function ($view) {
             // Only load footer data for non-admin views
             if (!request()->is('admin*')) {

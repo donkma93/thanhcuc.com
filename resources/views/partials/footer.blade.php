@@ -9,7 +9,6 @@
                     Liên hệ chúng tôi
                 </h5>
 
-                
                 <div class="contact-info">
                     <div class="contact-item mb-2">
                         <i class="fas fa-map-marker-alt me-3 text-warning"></i>
@@ -93,41 +92,7 @@
                         @endforeach
                     </div>
                 @else
-                    <!-- Default branches nếu chưa có data -->
-                    <div class="branches-list">
-                        <div class="branch-item mb-3 p-3 rounded" style="background: rgba(255,255,255,0.1);">
-                            <h6 class="text-warning mb-2 fw-bold">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                Chi nhánh Hà Nội
-                            </h6>
-                            <p class="text-light mb-0 small">
-                                <i class="fas fa-location-dot me-2"></i>
-                                123 Đường ABC, Quận XYZ, Hà Nội
-                            </p>
-                        </div>
-                        
-                        <div class="branch-item mb-3 p-3 rounded" style="background: rgba(255,255,255,0.1);">
-                            <h6 class="text-warning mb-2 fw-bold">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                Chi nhánh TP.HCM
-                            </h6>
-                            <p class="text-light mb-0 small">
-                                <i class="fas fa-location-dot me-2"></i>
-                                456 Đường DEF, Quận 1, TP.HCM
-                            </p>
-                        </div>
-                        
-                        <div class="branch-item mb-3 p-3 rounded" style="background: rgba(255,255,255,0.1);">
-                            <h6 class="text-warning mb-2 fw-bold">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                Chi nhánh Đà Nẵng
-                            </h6>
-                            <p class="text-light mb-0 small">
-                                <i class="fas fa-location-dot me-2"></i>
-                                789 Đường GHI, Quận Hải Châu, Đà Nẵng
-                            </p>
-                        </div>
-                    </div>
+                    
                 @endif
             </div>
             

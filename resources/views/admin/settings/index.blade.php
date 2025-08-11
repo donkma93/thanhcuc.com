@@ -8,7 +8,7 @@
             <i class="fas fa-cogs me-2"></i>
             Cài đặt Website
         </h1>
-        <p class="text-muted mb-0">Quản lý các cài đặt chung của website</p>
+        <p class="text-muted mb-0">Quản lý các cài đặt chung, thông tin liên hệ và chi nhánh</p>
     </div>
 @endsection
 
@@ -19,6 +19,7 @@
         
         <div class="row">
             @foreach($settings as $group => $groupSettings)
+                @if($group !== 'branches')
                 <div class="col-lg-6 mb-4">
                     <div class="card">
                         <div class="card-header">
@@ -36,7 +37,7 @@
                                     @case('social')
                                         <i class="fas fa-share-alt me-2"></i>Mạng xã hội
                                         @break
-                                    @case('branches')
+                                     @case('branches')
                                         <i class="fas fa-map-marker-alt me-2"></i>Chi nhánh
                                         @break
                                     @case('seo')
@@ -151,6 +152,26 @@
                                             </div>
                                             @break
 
+                                        @case('json')
+                                            @php $current = $setting->formatted_value; @endphp
+                                            <div class="row g-2">
+                                                <div class="col-6">
+                                                    <input type="text" 
+                                                           class="form-control" 
+                                                           name="settings[{{ $setting->key }}][name]" 
+                                                           value="{{ old('settings.' . $setting->key . '.name', $current['name'] ?? '') }}" 
+                                                           placeholder="Tên">
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="text" 
+                                                           class="form-control" 
+                                                           name="settings[{{ $setting->key }}][address]" 
+                                                           value="{{ old('settings.' . $setting->key . '.address', $current['address'] ?? '') }}" 
+                                                           placeholder="Địa chỉ">
+                                                </div>
+                                            </div>
+                                            @break
+
                                         @default
                                             <input type="text" 
                                                    class="form-control @error('settings.' . $setting->key) is-invalid @enderror" 
@@ -171,7 +192,98 @@
                         </div>
                     </div>
                 </div>
+                @endif
             @endforeach
+        </div>
+        
+        <!-- Branches management -->
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Quản lý Chi nhánh</h5>
+                        <button type="button" class="btn btn-sm btn-primary" id="add-branch">
+                            <i class="fas fa-plus me-1"></i> Thêm chi nhánh
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="branches-container">
+                            @php $branches = $settings['branches'] ?? collect(); @endphp
+                            @foreach($branches->sortBy('sort_order') as $branch)
+                                @php $data = $branch->formatted_value; @endphp
+                                <div class="branch-item border rounded p-3 mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <strong>{{ $branch->label ?? ($data['name'] ?? 'Chi nhánh') }}</strong>
+                                        <div>
+                                            <input type="number" name="branches[{{ $branch->key }}][sort_order]" class="form-control form-control-sm d-inline-block" style="width: 90px;" value="{{ $branch->sort_order }}" title="Thứ tự">
+                                            <button type="button" class="btn btn-sm btn-outline-danger ms-2 btn-remove-branch" data-branch-key="{{ $branch->key }}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Tên chi nhánh</label>
+                                            <input type="text" class="form-control" name="branches[{{ $branch->key }}][name]" value="{{ $data['name'] ?? '' }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Nhãn hiển thị</label>
+                                            <input type="text" class="form-control" name="branches[{{ $branch->key }}][label]" value="{{ $branch->label }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Địa chỉ</label>
+                                            <input type="text" class="form-control" name="branches[{{ $branch->key }}][address]" value="{{ $data['address'] ?? '' }}">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Điện thoại</label>
+                                            <input type="text" class="form-control" name="branches[{{ $branch->key }}][phone]" value="{{ $data['phone'] ?? '' }}">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Giờ làm việc</label>
+                                            <input type="text" class="form-control" name="branches[{{ $branch->key }}][working_hours]" value="{{ $data['working_hours'] ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="branches[{{ $branch->key }}][delete]" value="0">
+                                </div>
+                            @endforeach
+                        </div>
+                        <template id="branch-template">
+                            <div class="branch-item border rounded p-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Chi nhánh mới</strong>
+                                    <button type="button" class="btn btn-sm btn-outline-danger btn-delete-new-branch"><i class="fas fa-trash"></i></button>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tên chi nhánh</label>
+                                        <input type="text" class="form-control" name="new_branches[__INDEX__][name]">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Nhãn hiển thị</label>
+                                        <input type="text" class="form-control" name="new_branches[__INDEX__][label]">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-control" name="new_branches[__INDEX__][address]">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Điện thoại</label>
+                                        <input type="text" class="form-control" name="new_branches[__INDEX__][phone]">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Giờ làm việc</label>
+                                        <input type="text" class="form-control" name="new_branches[__INDEX__][working_hours]">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Thứ tự</label>
+                                        <input type="number" class="form-control" name="new_branches[__INDEX__][sort_order]" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="row">
@@ -198,55 +310,55 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
+        tooltipTriggerList.map(function (tooltipTriggerEl) { return new bootstrap.Tooltip(tooltipTriggerEl); });
+        
+        // Branches dynamic add/remove
+        const addBtn = document.getElementById('add-branch');
+        const container = document.getElementById('branches-container');
+        const tpl = document.getElementById('branch-template');
+        let idx = 0;
+        
+        addBtn && addBtn.addEventListener('click', function() {
+            const html = tpl.innerHTML.replaceAll('__INDEX__', idx++);
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html.trim();
+            container.appendChild(wrapper.firstElementChild);
         });
         
-        // Image preview for file inputs
-        const imageInputs = document.querySelectorAll('input[type="file"][accept*="image"]');
-        imageInputs.forEach(input => {
-            input.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        let preview = input.parentNode.querySelector('.preview-image');
-                        if (!preview) {
-                            preview = document.createElement('div');
-                            preview.className = 'preview-image mt-2';
-                            input.parentNode.appendChild(preview);
-                        }
-                        preview.innerHTML = `
-                            <img src="${e.target.result}" 
-                                 alt="Preview" 
-                                 class="img-thumbnail" 
-                                 style="max-width: 200px; max-height: 100px;">
-                        `;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-        
-        // Form validation
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function(e) {
-            const requiredFields = form.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('is-invalid');
-                    isValid = false;
-                } else {
-                    field.classList.remove('is-invalid');
-                }
-            });
-            
-            if (!isValid) {
-                e.preventDefault();
-                showAlert('error', 'Vui lòng điền đầy đủ các trường bắt buộc');
+        container && container.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-remove-branch')) {
+                const btn = e.target.closest('.btn-remove-branch');
+                const key = btn.getAttribute('data-branch-key');
+                const block = btn.closest('.branch-item');
+                const hidden = block.querySelector(`input[name="branches[${key}][delete]"]`);
+                if (hidden) hidden.value = '1';
+                block.style.opacity = 0.5;
+                block.style.pointerEvents = 'none';
+                return;
             }
+            if (e.target.closest('.btn-delete-new-branch')) {
+                e.target.closest('.branch-item').remove();
+                return;
+            }
+        });
+        
+        // Simple image preview (kept minimal)
+        document.querySelectorAll('input[type="file"][accept*="image"]').forEach(input => {
+            input.addEventListener('change', e => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    let preview = input.parentNode.querySelector('.preview-image');
+                    if (!preview) {
+                        preview = document.createElement('div');
+                        preview.className = 'preview-image mt-2';
+                        input.parentNode.appendChild(preview);
+                    }
+                    preview.innerHTML = `<img src="${ev.target.result}" class="img-thumbnail" style="max-width:200px; max-height:100px;">`;
+                };
+                reader.readAsDataURL(file);
+            });
         });
     });
     
