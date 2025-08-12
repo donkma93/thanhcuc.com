@@ -173,7 +173,7 @@
 @endif
 
 <!-- Features Section -->
-<section class="py-5">
+<section class="py-5 d-none d-md-block">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">TẠI SAO CHỌN THANH CÚC?</h2>
@@ -2854,41 +2854,14 @@ small, .small {
 
 /* Mobile Specific Features */
 @media (max-width: 768px) {
-    /* Sticky CTA Button */
+    /* Sticky CTA Button - Hidden on mobile */
     .mobile-cta-sticky {
-        position: fixed !important;
-        bottom: 20px !important;
-        left: 20px !important;
-        right: 20px !important;
-        z-index: 1040 !important;
-        background: linear-gradient(135deg, #015862, #F9D200) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 50px !important;
-        padding: 1rem 2rem !important;
-        font-size: var(--font-size-lg) !important;
-        font-weight: 600 !important;
-        box-shadow: 0 8px 25px rgba(1, 88, 98, 0.3) !important;
-        animation: pulse-cta 2s infinite !important;
+        display: none !important;
     }
     
-    /* Floating Phone Button */
+    /* Floating Phone Button - Hidden on mobile */
     .mobile-phone-float {
-        position: fixed !important;
-        bottom: 100px !important;
-        right: 20px !important;
-        width: 60px !important;
-        height: 60px !important;
-        background: #25D366 !important;
-        color: white !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: var(--font-size-2xl) !important;
-        z-index: 1040 !important;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4) !important;
-        animation: bounce-phone 2s infinite !important;
+        display: none !important;
     }
     
     /* Swipe Indicators */
@@ -2901,6 +2874,8 @@ small, .small {
         font-size: var(--font-size-sm) !important;
         animation: fade-in-out 3s infinite !important;
     }
+    
+
 }
 
 /* Mobile Animations */
@@ -4044,6 +4019,8 @@ function openTeacherModal(teacherId) {
     <!-- Mobile sticky CTA will be added by JavaScript -->
     <!-- Mobile floating phone will be added by JavaScript -->
 </div>
+
+
 
 @endsection
 

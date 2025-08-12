@@ -33,6 +33,10 @@
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
     <!-- Mobile Course Cards Optimization -->
     <link href="{{ asset('css/mobile-courses.css') }}" rel="stylesheet">
+    <!-- Mobile Bottom Navigation -->
+    <link href="{{ asset('css/mobile-bottom-nav.css') }}" rel="stylesheet">
+    <!-- Mobile Navigation -->
+    <link href="{{ asset('css/mobile-nav.css') }}" rel="stylesheet">
     
     <style>
         :root {
@@ -895,7 +899,6 @@
         }
         
         .navbar-nav .nav-link.active {
-            color: var(--primary-color) !important;
             background-color: rgba(1, 88, 98, 0.15);
             box-shadow: 0 2px 8px rgba(1, 88, 98, 0.3);
         }
@@ -1446,11 +1449,21 @@
                 <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="logo-img">
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-collapse" id="navbarNav">
+                <!-- Mobile Menu Header -->
+                <div class="mobile-menu-header d-lg-none">
+                    <h5>Menu Chính</h5>
+                </div>
+                
+                <!-- Close Button for Mobile -->
+                <button class="navbar-close d-lg-none" type="button" onclick="window.closeMobileMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+                
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">
@@ -1500,6 +1513,9 @@
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu Backdrop -->
+    <div class="navbar-backdrop" id="navbarBackdrop" onclick="window.closeMobileMenu()"></div>
 
     <!-- Main Content -->
     <main>
@@ -1608,10 +1624,68 @@
                     document.body.classList.add('page-loaded');
                     
                     // Re-initialize any necessary components
-                    const navbar = document.querySelector('.navbar-collapse');
+                    const navbar = document.querySelector('.navbar .navbar-collapse');
                     if (navbar && navbar.classList.contains('show')) {
                         navbar.classList.remove('show');
                     }
+                }
+            });
+            
+            // Mobile Navigation Functions
+            window.openMobileMenu = function() {
+                const navbar = document.querySelector('.navbar .navbar-collapse');
+                const backdrop = document.getElementById('navbarBackdrop');
+                const body = document.body;
+                
+                if (navbar && backdrop) {
+                    navbar.classList.add('show');
+                    backdrop.classList.add('show');
+                    body.classList.add('navbar-open');
+                }
+            };
+            
+            window.closeMobileMenu = function() {
+                const navbar = document.querySelector('.navbar .navbar-collapse');
+                const backdrop = document.getElementById('navbarBackdrop');
+                const body = document.body;
+                
+                if (navbar && backdrop) {
+                    navbar.classList.remove('show');
+                    backdrop.classList.remove('show');
+                    body.classList.remove('navbar-open');
+                }
+            };
+            
+            // Override Bootstrap's default mobile menu behavior
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            if (navbarToggler) {
+                navbarToggler.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.openMobileMenu();
+                });
+            }
+            
+            // Close menu when clicking on nav links (mobile only)
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 992) {
+                        window.closeMobileMenu();
+                    }
+                });
+            });
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    window.closeMobileMenu();
+                }
+            });
+            
+            // Close menu on window resize to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 992) {
+                    window.closeMobileMenu();
                 }
             });
             
@@ -1920,5 +1994,8 @@
     </script>
     
     @stack('scripts')
+    
+    <!-- Include Mobile Bottom Navigation -->
+    @include('partials.mobile-bottom-nav')
 </body>
 </html>
