@@ -18,7 +18,7 @@
                         @if($slider->button_link)
                             <a href="{{ $slider->button_link }}" aria-label="{{ $slider->title }}" class="d-block">
                         @endif
-                        <div class="hero-slide position-relative" style="min-height: revert-layer;">
+                        <div class="hero-slide overflow-hidden" style="min-height: revert-layer;">
                             <!-- Hero Image -->
                             <img src="{{ $slider->image_url }}" 
                                  alt="{{ $slider->title }}" 
@@ -2610,7 +2610,7 @@ small, .small {
 @media (max-width: 768px) {
     /* Hero Section Mobile Optimization */
     .hero-slide {
-        min-height: 100vh !important;
+        /* min-height: 100vh !important; */
         padding: 2rem 0 !important;
     }
     
@@ -2673,7 +2673,7 @@ small, .small {
     }
     
     .hero-slide img {
-        max-width: 250px !important;
+        max-width: 408px;
         height: auto !important;
         margin: 0 auto 1rem auto !important;
     }
@@ -2735,7 +2735,7 @@ small, .small {
 @media (max-width: 768px) {
     /* Section Spacing */
     section {
-        padding: 3rem 0 !important;
+        /* padding: 3rem 0 !important; */
     }
     
     .container {

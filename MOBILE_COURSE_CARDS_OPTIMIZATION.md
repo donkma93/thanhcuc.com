@@ -333,6 +333,12 @@ Tài liệu này mô tả các tối ưu hóa mobile cho phần hiển thị kh�
         width: 100% !important;
         margin-bottom: 0.5rem !important;
     }
+
+    .hero-slide img {
+        max-width: 590px;
+        height: auto !important;
+        margin: 0 auto 1rem auto !important;
+    }
 }
 
 /* Hide navigation on mobile */

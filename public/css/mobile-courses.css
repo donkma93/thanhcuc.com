@@ -272,7 +272,7 @@
 /* Hero Slider Base Styles */
 .hero-slide {
     transition: all 0.3s ease;
-    position: relative;
+    position: inherit;
     overflow: hidden;
 }
 
@@ -283,7 +283,7 @@
 }
 
 .hero-content-overlay {
-    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%);
+    /* background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%); */
     z-index: 2;
 }
 
@@ -412,7 +412,7 @@
 /* Mobile rất nhỏ */
 @media (max-width: 480px) {
     .hero-slide {
-        min-height: 300px !important;
+        min-height: 200px !important;
     }
     
     .hero-slide-image {
@@ -504,7 +504,7 @@
 
 /* Performance optimization cho hero slider */
 .hero-slide {
-    will-change: transform;
+
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }

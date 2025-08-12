@@ -446,7 +446,7 @@
         
         .hero-slide {
             min-height: 100vh;
-            position: relative;
+            position: initial;
             overflow: hidden;
         }
         
