@@ -229,8 +229,8 @@
                             <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                                 <div class="row">
                                     @foreach($coursesChunk as $course)
-                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
-                                            <div class="course-card-image position-relative overflow-hidden rounded shadow-lg" style="height: 280px; cursor: pointer;" 
+                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
+                                            <div class="course-card-image position-relative overflow-hidden rounded shadow-lg" style="height: 200px; cursor: pointer;" 
                                                  onclick="openCourseModal({{ $course->id }})">
                                                 <!-- Course Background Image -->
                                                 <div class="course-bg-image position-absolute top-0 start-0 w-100 h-100" 
@@ -253,8 +253,8 @@
                                                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"></div>
                                                 
                                                 <!-- Course Content -->
-                                                <div class="position-absolute bottom-0 start-0 w-100 p-3 text-white">
-                                                    <h6 class="fw-bold text-white mb-0" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 0.9rem; line-height: 1.2;">
+                                                <div class="position-absolute bottom-0 start-0 w-100 p-2 text-white">
+                                                    <h6 class="fw-bold text-white mb-0 course-title" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 0.9rem; line-height: 1.2;">
                                                         {{ $course->name }}
                                                     </h6>
                                                 </div>
@@ -1599,7 +1599,16 @@ function openCourseModal(courseId) {
 @media (max-width: 767.98px) {
     .courses-slider-container .col-sm-6 {
         flex: 0 0 auto;
-        width: 100%;
+        width: 50%;
+    }
+    
+    .courses-slider-container .course-card-image {
+        height: 160px !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.75rem !important;
+        line-height: 1.1 !important;
     }
 }
 
@@ -2797,12 +2806,32 @@ function openCourseModal(courseId) {
 
 @media (max-width: 576px) {
     .course-card-image .position-absolute h6 {
-        font-size: 0.75rem !important;
+        font-size: 0.7rem !important;
         line-height: 1.0 !important;
     }
     
     .course-card-image .position-absolute {
-        padding: 0.5rem !important;
+        padding: 0.4rem !important;
+    }
+    
+    .course-card-image {
+        height: 140px !important;
+    }
+}
+
+/* Extra Small Mobile Optimization */
+@media (max-width: 480px) {
+    .course-card-image {
+        height: 120px !important;
+    }
+    
+    .course-card-image .position-absolute h6 {
+        font-size: 0.65rem !important;
+        line-height: 1.0 !important;
+    }
+    
+    .course-card-image .position-absolute {
+        padding: 0.3rem !important;
     }
 }
 

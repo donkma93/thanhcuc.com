@@ -31,6 +31,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom Animations -->
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
+    <!-- Mobile Course Cards Optimization -->
+    <link href="{{ asset('css/mobile-courses.css') }}" rel="stylesheet">
     
     <style>
         :root {
@@ -1546,6 +1548,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Advanced Animations -->
     <script src="{{ asset('js/advanced-animations.js') }}"></script>
+    <!-- Mobile Course Cards Optimization -->
+    <script src="{{ asset('js/mobile-courses.js') }}"></script>
     
     <!-- Animation and Interaction Scripts -->
     <script>

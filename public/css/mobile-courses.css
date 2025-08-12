@@ -1,0 +1,160 @@
+/* Mobile Course Cards Optimization */
+/* Responsive design cho khóa học trên điện thoại */
+
+/* Tablet và Mobile nhỏ */
+@media (max-width: 991.98px) {
+    .courses-slider-container .course-card-image {
+        height: 180px !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.85rem !important;
+        line-height: 1.2 !important;
+    }
+}
+
+/* Mobile trung bình */
+@media (max-width: 767.98px) {
+    .courses-slider-container .col-sm-6 {
+        flex: 0 0 auto;
+        width: 50% !important;
+        padding: 0 0.25rem !important;
+    }
+    
+    .courses-slider-container .course-card-image {
+        height: 160px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.75rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .courses-slider-container .position-absolute {
+        padding: 0.5rem !important;
+    }
+    
+    /* Ẩn navigation controls trên mobile */
+    .courses-slider-container .carousel-control-prev,
+    .courses-slider-container .carousel-control-next {
+        display: none !important;
+    }
+}
+
+/* Mobile nhỏ */
+@media (max-width: 576px) {
+    .courses-slider-container .col-sm-6 {
+        width: 50% !important;
+        padding: 0 0.2rem !important;
+    }
+    
+    .courses-slider-container .course-card-image {
+        height: 140px !important;
+        margin-bottom: 0.4rem !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.7rem !important;
+        line-height: 1.0 !important;
+    }
+    
+    .courses-slider-container .position-absolute {
+        padding: 0.4rem !important;
+    }
+}
+
+/* Mobile rất nhỏ */
+@media (max-width: 480px) {
+    .courses-slider-container .col-sm-6 {
+        width: 50% !important;
+        padding: 0 0.15rem !important;
+    }
+    
+    .courses-slider-container .course-card-image {
+        height: 120px !important;
+        margin-bottom: 0.3rem !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.65rem !important;
+        line-height: 1.0 !important;
+    }
+    
+    .courses-slider-container .position-absolute {
+        padding: 0.3rem !important;
+    }
+}
+
+/* Mobile cực nhỏ */
+@media (max-width: 360px) {
+    .courses-slider-container .col-sm-6 {
+        width: 50% !important;
+        padding: 0 0.1rem !important;
+    }
+    
+    .courses-slider-container .course-card-image {
+        height: 100px !important;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.6rem !important;
+        line-height: 1.0 !important;
+    }
+    
+    .courses-slider-container .position-absolute {
+        padding: 0.25rem !important;
+    }
+}
+
+/* Landscape mode trên mobile */
+@media (max-width: 767.98px) and (orientation: landscape) {
+    .courses-slider-container .course-card-image {
+        height: 100px !important;
+    }
+    
+    .courses-slider-container .course-title {
+        font-size: 0.65rem !important;
+    }
+}
+
+/* Touch optimization */
+@media (hover: none) and (pointer: coarse) {
+    .course-card-image:hover {
+        transform: none !important;
+    }
+    
+    .course-card-image:active {
+        transform: scale(0.98) !important;
+    }
+}
+
+/* Performance optimization */
+.course-card-image {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Loading animation cho course cards */
+@keyframes courseCardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.course-card-image {
+    animation: courseCardFadeIn 0.5s ease-out;
+}
+
+/* Stagger animation cho multiple cards */
+.courses-slider-container .col-sm-6:nth-child(1) .course-card-image { animation-delay: 0.1s; }
+.courses-slider-container .col-sm-6:nth-child(2) .course-card-image { animation-delay: 0.2s; }
+.courses-slider-container .col-sm-6:nth-child(3) .course-card-image { animation-delay: 0.3s; }
+.courses-slider-container .col-sm-6:nth-child(4) .course-card-image { animation-delay: 0.4s; }
