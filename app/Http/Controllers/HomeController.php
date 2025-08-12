@@ -10,6 +10,7 @@ use App\Models\Testimonial;
 use App\Models\Contact;
 use App\Models\Schedule;
 use App\Models\Achievement;
+use App\Models\Overview;
 
 class HomeController extends Controller
 {
@@ -74,6 +75,9 @@ class HomeController extends Controller
         // Testimonials (Học viên nói gì)
         $testimonials = Testimonial::active()->ordered()->take(9)->get();
         
+        // Overview content
+        $overview = Overview::active()->first();
+        
         return view('home', compact(
             'featuredCourses', 
             'featuredTeachers', 
@@ -82,7 +86,8 @@ class HomeController extends Controller
             'examAchievements', 
             'scholarshipAchievements',
             'sliders',
-            'testimonials'
+            'testimonials',
+            'overview'
         ));
     }
     

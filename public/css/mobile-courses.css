@@ -264,3 +264,269 @@
 .courses-slider-container .col-sm-6:nth-child(2) .sec-course-card { animation-delay: 0.2s; }
 .courses-slider-container .col-sm-6:nth-child(3) .sec-course-card { animation-delay: 0.3s; }
 .courses-slider-container .col-sm-6:nth-child(4) .sec-course-card { animation-delay: 0.4s; }
+
+/* ======================================== */
+/* HERO SLIDER MOBILE OPTIMIZATION */
+/* ======================================== */
+
+/* Hero Slider Base Styles */
+.hero-slide {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slide-image {
+    transition: all 0.3s ease;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-content-overlay {
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%);
+    z-index: 2;
+}
+
+/* Hero Content Responsive */
+.hero-content {
+    transition: all 0.3s ease;
+}
+
+.hero-title {
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-desc {
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Tablet và Mobile nhỏ */
+@media (max-width: 991.98px) {
+    .hero-slide {
+        min-height: 500px !important;
+    }
+    
+    .hero-slide-image {
+        object-position: center center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-desc {
+        font-size: 1.1rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.9rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+}
+
+/* Mobile trung bình */
+@media (max-width: 767.98px) {
+    .hero-slide {
+        min-height: 400px !important;
+    }
+    
+    .hero-slide-image {
+        object-position: center center;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-desc {
+        font-size: 1rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .hero-content .d-flex {
+        gap: 0.5rem !important;
+    }
+    
+    /* Ẩn carousel controls trên mobile */
+    .hero-slider-section .carousel-control-prev,
+    .hero-slider-section .carousel-control-next {
+        display: none !important;
+    }
+    
+    /* Ẩn carousel indicators trên mobile */
+    .hero-slider-section .carousel-indicators {
+        display: none !important;
+    }
+}
+
+/* Mobile nhỏ */
+@media (max-width: 576px) {
+    .hero-slide {
+        min-height: 350px !important;
+    }
+    
+    .hero-slide-image {
+        object-position: center center;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .hero-desc {
+        font-size: 0.9rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.8rem !important;
+        padding: 0.35rem 0.7rem !important;
+    }
+    
+    .hero-content .d-flex {
+        gap: 0.4rem !important;
+        flex-direction: column !important;
+    }
+    
+    .hero-content .d-flex .btn {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+}
+
+/* Mobile rất nhỏ */
+@media (max-width: 480px) {
+    .hero-slide {
+        min-height: 300px !important;
+    }
+    
+    .hero-slide-image {
+        object-position: center center;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .hero-desc {
+        font-size: 0.85rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.75rem !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+}
+
+/* Mobile cực nhỏ */
+@media (max-width: 360px) {
+    .hero-slide {
+        min-height: 250px !important;
+    }
+    
+    .hero-slide-image {
+        object-position: center center;
+    }
+    
+    .hero-title {
+        font-size: 1.25rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .hero-desc {
+        font-size: 0.8rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+}
+
+/* Landscape mode trên mobile */
+@media (max-width: 767.98px) and (orientation: landscape) {
+    .hero-slide {
+        min-height: 200px !important;
+    }
+    
+    .hero-slide-image {
+        object-position: center center;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .hero-desc {
+        font-size: 0.9rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.8rem !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+}
+
+/* Touch optimization cho hero slider */
+@media (hover: none) and (pointer: coarse) {
+    .hero-slide-image {
+        will-change: transform;
+    }
+    
+    .hero-content .btn:active {
+        transform: scale(0.98) !important;
+    }
+}
+
+/* Performance optimization cho hero slider */
+.hero-slide {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.hero-slide-image {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Loading animation cho hero slider */
+@keyframes heroSlideFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.hero-slide {
+    animation: heroSlideFadeIn 0.6s ease-out;
+}

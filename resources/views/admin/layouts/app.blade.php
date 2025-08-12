@@ -292,6 +292,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.overviews*') ? 'active' : '' }}" 
+                               href="{{ route('admin.overviews.index') }}">
+                                <i class="fas fa-info-circle"></i>
+                                Nội dung tổng quan
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.galleries*') ? 'active' : '' }}" 
                                href="{{ route('admin.galleries.index') }}">
                                 <i class="fas fa-photo-video"></i>

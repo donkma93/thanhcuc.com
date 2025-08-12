@@ -189,4 +189,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::post('galleries/update-order', [\App\Http\Controllers\Admin\GalleryController::class, 'updateOrder'])->name('galleries.update-order');
     Route::patch('galleries/{gallery}/toggle-status', [\App\Http\Controllers\Admin\GalleryController::class, 'toggleStatus'])->name('galleries.toggle-status');
 
+    // Overview Management
+    Route::resource('overviews', \App\Http\Controllers\Admin\OverviewController::class);
+    Route::patch('overviews/{overview}/toggle-active', [\App\Http\Controllers\Admin\OverviewController::class, 'toggleActive'])->name('overviews.toggle-active');
+
 });

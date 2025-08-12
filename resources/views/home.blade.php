@@ -7,46 +7,55 @@
 <section class="hero-slider-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         @if(isset($sliders) && $sliders->count() > 0)
-            <div class="carousel-indicators">
+        <div class="carousel-indicators">
                 @foreach($sliders as $index => $slider)
                     <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
                 @endforeach
-            </div>
-            <div class="carousel-inner">
+        </div>
+        <div class="carousel-inner">
                 @foreach($sliders as $index => $slider)
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                         @if($slider->button_link)
                             <a href="{{ $slider->button_link }}" aria-label="{{ $slider->title }}" class="d-block">
                         @endif
-                        <div class="hero-slide" style="background: url('{{ $slider->image_url }}') center center/cover no-repeat; min-height: 600px; position: relative;">
-                            <div class="container position-relative">
-                                <div class="row align-items-center min-vh-100">
-                                    <div class="col-lg-7">
-                                        <div class="hero-content">
-                                            <h1 class="display-4 fw-bold mb-4 animate-fade-in-up hero-title">
-                                                {{ $slider->title }}
-                                            </h1>
-                                            @if($slider->description)
-                                                <p class="lead mb-4 animate-fade-in-up animate-delay-1 hero-desc">
-                                                    {{ $slider->description }}
-                                                </p>
-                                            @endif
-                                            <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                                @if($slider->button_text && $slider->button_link)
-                                                    <span class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862; pointer-events: none;">
-                                                        <i class="fas fa-graduation-cap me-2"></i>{{ $slider->button_text }}
-                                                    </span>
+                        <div class="hero-slide position-relative" style="min-height: revert-layer;">
+                            <!-- Hero Image -->
+                            <img src="{{ $slider->image_url }}" 
+                                 alt="{{ $slider->title }}" 
+                                 class="hero-slide-image w-100 h-100 position-absolute top-0 start-0 object-fit-cover">
+                            
+                            <!-- Content Overlay -->
+                            <div class="hero-content-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+                                <div class="container position-relative">
+                        <div class="row align-items-center min-vh-100">
+                                        <div class="col-lg-7">
+                                <div class="hero-content">
+                                                <h1 class="display-4 fw-bold mb-4 animate-fade-in-up hero-title text-white">
+                                                    {{ $slider->title }}
+                                    </h1>
+                                                @if($slider->description)
+                                                    <p class="lead mb-4 animate-fade-in-up animate-delay-1 hero-desc text-white">
+                                                        {{ $slider->description }}
+                                                    </p>
                                                 @endif
-                                            </div>
-                                        </div>
+                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                                    @if($slider->button_text && $slider->button_link)
+                                                        <span class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862; pointer-events: none;">
+                                                            <i class="fas fa-graduation-cap me-2"></i>{{ $slider->button_text }}
+                                                        </span>
+                                                    @endif
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
                         @if($slider->button_link)
                             </a>
                         @endif
-                    </div>
+                </div>
                 @endforeach
             </div>
             @if($sliders->count() > 4)
@@ -64,69 +73,104 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="hero-slide" style="background: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);">
-                        <div class="container">
-                            <div class="row align-items-center min-vh-100">
-                                <div class="col-lg-6">
-                                    <div class="hero-content">
-                                        <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-100">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
                                             DU HỌC NGHỀ ĐỨC - TƯƠNG LAI RỘNG MỞ
-                                        </h1>
-                                        <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
+                                    </h1>
+                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
                                             Thanh Cúc - Đơn vị tư vấn du học nghề Đức uy tín từ năm 2020. Chương trình Ausbildung với mức lương hấp dẫn, cơ hội định cư và phát triển sự nghiệp tại châu Âu.
-                                        </p>
-                                        <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                            <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
+                                    </p>
+                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+                                        <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
                                                 <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí
-                                            </a>
+                                        </a>
                                             <a href="tel:0975186230" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
                                                 <i class="fas fa-phone me-2"></i>0975.186.230
-                                            </a>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 text-center">
+                            </div>
+                            <div class="col-lg-6 text-center">
                                     <img src="{{ asset('images/hero/study-abroad-1.svg') }}" alt="Du học Đức - Cơ hội vàng" class="img-fluid animate-float">
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+                                    </div>
         @endif
-    </div>
+                                </div>
 </section>
 
-<!-- Stats Section -->
-<section class="stats-section py-5">
+<!-- Video & About Section -->
+@if($overview)
+<section class="py-5">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="animate-on-scroll">
-                    <h3 class="display-4 fw-bold text-primary counter" data-target="2000">0</h3>
-                    <p class="text-muted">Học Viên Đã Tốt Nghiệp</p>
+        <div class="row align-items-center">
+            <!-- Video Column -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="video-container">
+                    <div class="video-wrapper" style="padding-top: 56.25%; position: relative;">
+                        <iframe loading="lazy" 
+                                title="{{ $overview->video_title }}" 
+                                width="100%" 
+                                height="100%" 
+                                src="{{ $overview->video_embed_url }}" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen=""
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        </iframe>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="animate-on-scroll animate-delay-1">
-                    <h3 class="display-4 fw-bold text-secondary counter" data-target="25">0</h3>
-                    <p class="text-muted">Giảng Viên Bản Ngữ</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="animate-on-scroll animate-delay-2">
-                    <h3 class="display-4 fw-bold text-accent-color counter" data-target="95">0</h3>
-                    <p class="text-muted">% Học Viên Đạt Chứng Chỉ</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="animate-on-scroll animate-delay-3">
-                    <h3 class="display-4 fw-bold text-success counter" data-target="4">0</h3>
-                    <p class="text-muted">Năm Kinh Nghiệm</p>
+
+            <!-- Information Column -->
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <h2 class="section-title mb-4">
+                        {{ $overview->title }}
+                    </h2>
+                    
+                    <div class="about-text">
+                        <p class="mb-3">
+                            <i class="fas fa-bolt text-warning me-2"></i>
+                            {!! $overview->paragraph_1 !!}
+                        </p>
+                        <p class="mb-4">
+                            <i class="fas fa-bolt text-warning me-2"></i>
+                            {!! $overview->paragraph_2 !!}
+                        </p>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        @if($overview->button_1_text && $overview->button_1_url)
+                            <a href="{{ $overview->button_1_url }}" class="btn btn-secondary me-2 mb-2">
+                                <i class="fas fa-arrow-right me-1"></i>{{ $overview->button_1_text }}
+                            </a>
+                        @endif
+                        @if($overview->button_2_text && $overview->button_2_url)
+                            <a href="{{ $overview->button_2_url }}" class="btn btn-success me-2 mb-2">
+                                <i class="fas fa-phone me-1"></i>{{ $overview->button_2_text }}
+                            </a>
+                        @endif
+                        @if($overview->button_3_text && $overview->button_3_url)
+                            <a href="{{ $overview->button_3_url }}" class="btn btn-primary mb-2">
+                                <i class="fas fa-arrow-right me-1"></i>{{ $overview->button_3_text }}
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <!-- Features Section -->
 <section class="py-5">
@@ -242,22 +286,22 @@
                                                     <div class="sec-bg-gradient position-absolute top-0 start-0 w-100 h-100" 
                                                          style="background: linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF4500 100%);">
                                                     </div>
-                                                @endif
+                                                    @endif
                                                 <!-- Roadmap Text -->
                                                 <div class="sec-roadmap position-absolute bottom-0 start-0 w-100 text-center pb-2">
                                                     <small class="text-white fw-bold" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
                                                       {{ $course->name }}
                                                     </small>
-                                                </div>
-                                            </div>
+                                                                </div>
+                                                            </div>
                                             <!-- View More Button -->
                                             <div class="text-center mt-2">
                                                 <button class="btn btn-outline-warning btn-sm sec-view-more" 
                                                         onclick="openCourseModal({{ $course->id }})">
                                                     XEM THÊM <i class="fas fa-chevron-right ms-1"></i>
                                                 </button>
-                                            </div>
-                                        </div>
+                                                                </div>
+                                                            </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -799,38 +843,38 @@ function openCourseModal(courseId) {
                                 : asset('images/teachers/teacher-1.svg');
                             $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
                         @endphp
-                        <div class="col-lg-4 mb-4">
-                            <div class="achievement-card card border-0 shadow-lg h-100">
-                                <div class="card-body text-center p-4">
+                    <div class="col-lg-4 mb-4">
+                        <div class="achievement-card card border-0 shadow-lg h-100">
+                            <div class="card-body text-center p-4">
                                     <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
                                         <i class="fas {{ $rankIcon }}"></i>
                                         <span class="rank-number">{{ $achievement->rank }}</span>
-                                    </div>
+                                </div>
                                     <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
                                     <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
                                     @if($achievement->class_name)
                                         <p class="text-muted mb-2">Lớp {{ $achievement->class_name }}</p>
                                     @endif
-                                    <div class="achievement-details mb-3">
+                                <div class="achievement-details mb-3">
                                         @if(!is_null($achievement->score))
-                                            <div class="detail-item">
-                                                <i class="fas fa-star text-warning me-2"></i>
+                                    <div class="detail-item">
+                                        <i class="fas fa-star text-warning me-2"></i>
                                                 <span>Điểm trung bình: {{ number_format($achievement->score, 1) }}/10</span>
-                                            </div>
-                                        @endif
-                                        <div class="detail-item">
-                                            <i class="fas fa-clock text-success me-2"></i>
-                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
-                                        </div>
                                     </div>
-                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
+                                        @endif
+                                    <div class="detail-item">
+                                        <i class="fas fa-clock text-success me-2"></i>
+                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                    </div>
                                 </div>
+                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                             </div>
                         </div>
+                    </div>
                     @empty
                         <div class="col-12">
                             <div class="alert alert-light text-center mb-0">Chưa có thành tích tháng nào được cập nhật.</div>
-                        </div>
+                                </div>
                     @endforelse
                 </div>
             </div>
@@ -845,38 +889,38 @@ function openCourseModal(courseId) {
                                 : asset('images/teachers/teacher-2.svg');
                             $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
                         @endphp
-                        <div class="col-lg-4 mb-4">
-                            <div class="achievement-card card border-0 shadow-lg h-100">
-                                <div class="card-body text-center p-4">
+                    <div class="col-lg-4 mb-4">
+                        <div class="achievement-card card border-0 shadow-lg h-100">
+                            <div class="card-body text-center p-4">
                                     <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
                                         <i class="fas {{ $rankIcon }}"></i>
                                         <span class="rank-number">{{ $achievement->rank }}</span>
-                                    </div>
+                                </div>
                                     <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
                                     <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
                                     @if($achievement->certificate)
                                         <p class="text-muted mb-2">{{ $achievement->certificate }}</p>
                                     @endif
-                                    <div class="achievement-details mb-3">
+                                <div class="achievement-details mb-3">
                                         @if(!is_null($achievement->score))
-                                            <div class="detail-item">
-                                                <i class="fas fa-certificate text-warning me-2"></i>
+                                    <div class="detail-item">
+                                        <i class="fas fa-certificate text-warning me-2"></i>
                                                 <span>Điểm: {{ rtrim(rtrim(number_format($achievement->score, 2), '0'), '.') }}</span>
-                                            </div>
-                                        @endif
-                                        <div class="detail-item">
-                                            <i class="fas fa-calendar text-success me-2"></i>
-                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
-                                        </div>
                                     </div>
-                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
+                                        @endif
+                                    <div class="detail-item">
+                                        <i class="fas fa-calendar text-success me-2"></i>
+                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                    </div>
                                 </div>
+                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                             </div>
                         </div>
+                    </div>
                     @empty
                         <div class="col-12">
                             <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
-                        </div>
+                                </div>
                     @endforelse
                 </div>
             </div>
@@ -891,23 +935,23 @@ function openCourseModal(courseId) {
                                 : asset('images/teachers/teacher-1.svg');
                             $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
                         @endphp
-                        <div class="col-lg-4 mb-4">
-                            <div class="achievement-card card border-0 shadow-lg h-100">
-                                <div class="card-body text-center p-4">
+                    <div class="col-lg-4 mb-4">
+                        <div class="achievement-card card border-0 shadow-lg h-100">
+                            <div class="card-body text-center p-4">
                                     <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
                                         <i class="fas {{ $rankIcon }}"></i>
                                         <span class="rank-number">{{ $achievement->rank }}</span>
-                                    </div>
+                                </div>
                                     <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
                                     <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
                                     @if($achievement->university)
                                         <p class="text-muted mb-2">{{ $achievement->university }}</p>
                                     @endif
-                                    <div class="achievement-details mb-3">
-                                        <div class="detail-item">
+                                <div class="achievement-details mb-3">
+                                    <div class="detail-item">
                                             <i class="fas fa-calendar text-success me-2"></i>
                                             <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
-                                        </div>
+                                    </div>
                                     </div>
                                     <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                                 </div>
@@ -916,9 +960,9 @@ function openCourseModal(courseId) {
                     @empty
                         <div class="col-12">
                             <div class="alert alert-light text-center mb-0">Chưa có thành tích du học nào được cập nhật.</div>
-                        </div>
+                    </div>
                     @endforelse
-                </div>
+                                </div>
             </div>
         </div>
 
@@ -953,43 +997,43 @@ function openCourseModal(courseId) {
                 @php $slides = $testimonials->chunk(3); @endphp
                 @forelse($slides as $slideIndex => $chunk)
                     <div class="carousel-item {{ $slideIndex === 0 ? 'active' : '' }}">
-                        <div class="row">
+                    <div class="row">
                             @foreach($chunk as $testimonial)
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card border-0 shadow testimonial-card h-100">
-                                        <div class="card-body p-4 text-center">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow testimonial-card h-100">
+                                <div class="card-body p-4 text-center">
                                             <img src="{{ $testimonial->avatar_url }}" alt="{{ $testimonial->name }}" class="rounded-circle testimonial-avatar mb-3" width="80" height="80">
-                                            <div class="mb-3">
-                                                <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
-                                            </div>
+                                    <div class="mb-3">
+                                        <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
+                                    </div>
                                             <p class="text-muted mb-3 fst-italic">"{{ $testimonial->content }}"</p>
                                             <h6 class="fw-bold text-primary mb-1">{{ $testimonial->name }}</h6>
                                             <small class="text-muted">{{ $testimonial->current_job }}{{ $testimonial->location ? ' - ' . $testimonial->location : '' }}</small>
-                                            <div class="mt-2">
+                                    <div class="mt-2">
                                                 @if($testimonial->program)
                                                     <span class="badge bg-info">{{ $testimonial->program }}</span>
                                                 @endif
                                                 @if($testimonial->company)
                                                     <span class="badge bg-success ms-1">{{ $testimonial->company }}</span>
                                                 @endif
-                                            </div>
-                                            <div class="text-warning mt-2">
+                                    </div>
+                                    <div class="text-warning mt-2">
                                                 {!! $testimonial->stars !!}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @empty
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-light text-center mb-0">Chưa có nhận xét học viên nào được hiển thị.</div>
                             </div>
                         </div>
-                    </div>
+                            @endforeach
+                                    </div>
+                                    </div>
+                @empty
+                    <div class="carousel-item active">
+                    <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-light text-center mb-0">Chưa có nhận xét học viên nào được hiển thị.</div>
+                                    </div>
+                                    </div>
+                                    </div>
                 @endforelse
             </div>
             
@@ -2876,6 +2920,179 @@ function openCourseModal(courseId) {
 .modal-header .btn-close {
     filter: invert(1);
 }
+
+/* Video & About Section Styles */
+.video-container {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.video-wrapper {
+    background: #000;
+    border-radius: 10px;
+}
+
+.video-wrapper iframe {
+    border-radius: 10px;
+}
+
+.about-content {
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    height: 100%;
+}
+
+.section-title {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+
+.about-text p {
+    color: #495057;
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.about-text strong {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.about-text .fas.fa-bolt {
+    color: #ffc107;
+    font-size: 1.1rem;
+}
+
+.action-buttons {
+    margin-top: 2rem;
+}
+
+.action-buttons .btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-buttons .btn-secondary {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.action-buttons .btn-secondary:hover {
+    background: #5a6268;
+    border-color: #5a6268;
+    color: white;
+}
+
+.action-buttons .btn-success {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.action-buttons .btn-success:hover {
+    background: #218838;
+    border-color: #218838;
+    color: white;
+}
+
+.action-buttons .btn-primary {
+    background: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.action-buttons .btn-primary:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .about-content {
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .about-text p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        padding: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    .about-text p {
+        font-size: 0.9rem;
+    }
+    
+    .action-buttons {
+        text-align: center;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .video-container {
+        border-radius: 8px;
+    }
+    
+    .video-wrapper {
+        border-radius: 8px;
+    }
+    
+    .video-wrapper iframe {
+        border-radius: 8px;
+    }
+    
+    .about-content {
+        border-radius: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .about-text p {
+        font-size: 0.85rem;
+    }
+}
 </style>
 @endpush
 
@@ -3126,4 +3343,5 @@ window.addEventListener('resize', initMobileFeatures);
 </div>
 
 @endsection
+
 
