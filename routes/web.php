@@ -207,4 +207,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::resource('overviews', \App\Http\Controllers\Admin\OverviewController::class);
     Route::patch('overviews/{overview}/toggle-active', [\App\Http\Controllers\Admin\OverviewController::class, 'toggleActive'])->name('overviews.toggle-active');
 
+    // Course Offers Management
+    Route::resource('course-offers', \App\Http\Controllers\Admin\CourseOfferController::class);
+
 });

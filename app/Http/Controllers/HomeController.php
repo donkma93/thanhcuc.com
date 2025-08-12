@@ -11,6 +11,7 @@ use App\Models\Contact;
 use App\Models\Schedule;
 use App\Models\Achievement;
 use App\Models\Overview;
+use App\Models\CourseOffer;
 
 class HomeController extends Controller
 {
@@ -64,6 +65,9 @@ class HomeController extends Controller
         // Overview content
         $overview = Overview::active()->first();
         
+        // Course offers
+        $courseOffers = CourseOffer::active()->ordered()->take(4)->get();
+        
         return view('home', compact(
             'featuredCourses', 
             'featuredTeachers', 
@@ -71,7 +75,8 @@ class HomeController extends Controller
             'examAchievements', 
             'sliders',
             'testimonials',
-            'overview'
+            'overview',
+            'courseOffers'
         ));
     }
     

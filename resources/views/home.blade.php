@@ -944,7 +944,7 @@ function openCourseModal(courseId) {
         <div class="row mb-5">
             <div class="col-12 text-center">
                 <h2 class="display-5 fw-bold text-dark mb-3">
-                    Khóa học <span class="text-primary">Tiếng Đức</span> chuyên nghiệp
+                    KHÓA HỌC <span class="text-primary">TIẾNG ĐỨC</span> CHUYÊN NGHIỆP
                 </h2>
                 <p class="lead text-muted">Đăng ký ngay để nhận ưu đãi đặc biệt và tư vấn miễn phí</p>
             </div>
@@ -962,57 +962,77 @@ function openCourseModal(courseId) {
                 </div>
                 
                 <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="offer-card h-100">
-                            <div class="offer-icon">
-                                <i class="fas fa-percentage"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
-                            <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
-                            <div class="offer-badge">
-                                <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="offer-card h-100">
-                            <div class="offer-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
-                            <p class="text-muted mb-0">Bộ sách Tiếng Đức chuyên nghiệp + Audio CD trị giá 800.000đ</p>
-                            <div class="offer-badge">
-                                <span class="badge bg-success">Miễn phí</span>
+                    @forelse($courseOffers as $offer)
+                        <div class="col-md-6">
+                            <div class="offer-card h-100">
+                                @if($offer->icon)
+                                    <div class="offer-icon">
+                                        <i class="{{ $offer->icon }}"></i>
+                                    </div>
+                                @endif
+                                <h5 class="fw-bold mb-2 text-{{ $offer->badge_color ?? 'success' }}">{{ $offer->title }}</h5>
+                                <p class="text-muted mb-0">{{ $offer->description }}</p>
+                                @if($offer->badge_text)
+                                    <div class="offer-badge">
+                                        <span class="badge bg-{{ $offer->badge_color ?? 'success' }}">{{ $offer->badge_text }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="offer-card h-100">
-                            <div class="offer-icon">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
-                            <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
-                            <div class="offer-badge">
-                                <span class="badge bg-info">Không mất phí</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="offer-card h-100">
-                            <div class="offer-icon">
-                                <i class="fas fa-certificate"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
-                            <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
-                            <div class="offer-badge">
-                                <span class="badge bg-warning">Bảo đảm</span>
+                    @empty
+                        <!-- Fallback offers if no offers are configured -->
+                        <div class="col-md-6">
+                            <div class="offer-card h-100">
+                                <div class="offer-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
+                                <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
+                                <div class="offer-badge">
+                                    <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        
+                        <div class="col-md-6">
+                            <div class="offer-card h-100">
+                                <div class="offer-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
+                                <p class="text-muted mb-0">BỘ SÁCH TIẾNG ĐỨC CHUYÊN NGHIỆP + AUDIO CD TRỊ GIÁ 800.000Đ</p>
+                                <div class="offer-badge">
+                                    <span class="badge bg-success">Miễn phí</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="offer-card h-100">
+                                <div class="offer-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
+                                <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
+                                <div class="offer-badge">
+                                    <span class="badge bg-info">Không mất phí</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="offer-card h-100">
+                                <div class="offer-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
+                                <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
+                                <div class="offer-badge">
+                                    <span class="badge bg-warning">Bảo đảm</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforelse
                 </div>
                 
                 <div class="urgency-notice mt-4 p-3 bg-warning bg-opacity-10 border border-warning rounded-3">

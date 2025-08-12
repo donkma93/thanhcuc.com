@@ -258,6 +258,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.course-offers*') ? 'active' : '' }}" 
+                               href="{{ route('admin.course-offers.index') }}">
+                                <i class="fas fa-gift"></i>
+                                Ưu đãi khóa học
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.teachers*') ? 'active' : '' }}" 
                                href="{{ route('admin.teachers.index') }}">
                                 <i class="fas fa-chalkboard-teacher"></i>
