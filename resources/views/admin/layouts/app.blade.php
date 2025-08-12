@@ -231,6 +231,16 @@
                                 @endif
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.exam-registrations*') ? 'active' : '' }}" 
+                               href="{{ route('admin.exam-registrations.index') }}">
+                                <i class="fas fa-user-plus"></i>
+                                Quản lý đăng ký lịch thi
+                                @if(isset($stats['pending_exam_registrations']) && $stats['pending_exam_registrations'] > 0)
+                                    <span class="badge bg-warning ms-2">{{ $stats['pending_exam_registrations'] }}</span>
+                                @endif
+                            </a>
+                        </li>
                         
                         <li class="nav-item mt-2">
                             <small class="text-white-50 px-3">QUẢN LÝ NỘI DUNG</small>
@@ -290,6 +300,13 @@
                                href="{{ route('admin.schedules.index') }}">
                                 <i class="fas fa-calendar-alt"></i>
                                 Lịch khai giảng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.exam-schedules*') ? 'active' : '' }}" 
+                               href="{{ route('admin.exam-schedules.index') }}">
+                                <i class="fas fa-calendar-check"></i>
+                                Quản lý lịch thi
                             </a>
                         </li>
                         <li class="nav-item">

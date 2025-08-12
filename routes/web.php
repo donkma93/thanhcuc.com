@@ -63,6 +63,10 @@ Route::get('/lien-he', [HomeController::class, 'contactPage'])->name('contact');
 // Form liên hệ
 Route::post('/lien-he', [HomeController::class, 'contactSubmit'])->name('contact.submit');
 
+// Đăng ký lịch thi
+Route::post('/dang-ky-lich-thi', [App\Http\Controllers\ExamRegistrationController::class, 'store'])->name('exam-registration.store');
+Route::get('/api/lich-thi/{id}', [App\Http\Controllers\ExamRegistrationController::class, 'getExamSchedule'])->name('exam-registration.get-exam-schedule');
+
 // Trang học thử miễn phí
 Route::get('/hoc-thu-mien-phi', [HomeController::class, 'trial'])->name('trial');
 Route::post('/hoc-thu-mien-phi', [HomeController::class, 'trialSubmit'])->name('trial.submit');
@@ -209,5 +213,19 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
 
     // Course Offers Management
     Route::resource('course-offers', \App\Http\Controllers\Admin\CourseOfferController::class);
+
+    // Exam Schedule Management
+    Route::resource('exam-schedules', \App\Http\Controllers\Admin\ExamScheduleController::class);
+    Route::patch('exam-schedules/{examSchedule}/toggle-featured', [\App\Http\Controllers\Admin\ExamScheduleController::class, 'toggleFeatured'])->name('exam-schedules.toggle-featured');
+    Route::post('exam-schedules/update-sort-order', [\App\Http\Controllers\Admin\ExamScheduleController::class, 'updateSortOrder'])->name('exam-schedules.update-sort-order');
+
+    // Exam Registration Management
+    Route::prefix('exam-registrations')->name('exam-registrations.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\ExamRegistrationController::class, 'index'])->name('index');
+        Route::get('/{registration}', [\App\Http\Controllers\Admin\ExamRegistrationController::class, 'show'])->name('show');
+        Route::put('/{registration}/status', [\App\Http\Controllers\Admin\ExamRegistrationController::class, 'updateStatus'])->name('update-status');
+        Route::get('/by-exam-schedule/{examScheduleId}', [\App\Http\Controllers\Admin\ExamRegistrationController::class, 'byExamSchedule'])->name('by-exam-schedule');
+        Route::get('/export/csv', [\App\Http\Controllers\Admin\ExamRegistrationController::class, 'export'])->name('export');
+    });
 
 });

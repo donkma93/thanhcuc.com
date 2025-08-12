@@ -128,6 +128,9 @@ class DatabaseSeeder extends Seeder
         // Tạo dữ liệu mẫu cho Overview
         $this->call(OverviewSeeder::class);
 
+        // Tạo dữ liệu mẫu cho Exam Schedules
+        $this->call(ExamScheduleSeeder::class);
+
         // Tạo dữ liệu mẫu cho Job Postings
         \App\Models\JobPosting::create([
             'title' => 'Giảng viên tiếng Đức',

@@ -12,6 +12,7 @@ use App\Models\Schedule;
 use App\Models\Achievement;
 use App\Models\Overview;
 use App\Models\CourseOffer;
+use App\Models\ExamRegistration;
 
 class HomeController extends Controller
 {
@@ -68,6 +69,15 @@ class HomeController extends Controller
         // Course offers
         $courseOffers = CourseOffer::active()->ordered()->take(4)->get();
         
+        // Exam Registration Statistics
+        $examRegistrationStats = [
+            'total' => ExamRegistration::count(),
+            'pending' => ExamRegistration::pending()->count(),
+            'confirmed' => ExamRegistration::confirmed()->count(),
+            'cancelled' => ExamRegistration::cancelled()->count(),
+            'completed' => ExamRegistration::completed()->count(),
+        ];
+        
         return view('home', compact(
             'featuredCourses', 
             'featuredTeachers', 
@@ -76,7 +86,8 @@ class HomeController extends Controller
             'sliders',
             'testimonials',
             'overview',
-            'courseOffers'
+            'courseOffers',
+            'examRegistrationStats'
         ));
     }
     
@@ -156,7 +167,31 @@ class HomeController extends Controller
     
     public function examSchedule()
     {
-        return view('exam-schedule');
+        // Lấy lịch thi từ database, nhóm theo loại thi
+        $goetheExams = \App\Models\ExamSchedule::where('exam_type', 'Goethe')
+            ->where('status', 'active')
+            ->orderBy('level')
+            ->orderBy('exam_date')
+            ->get();
+            
+        $testdafExams = \App\Models\ExamSchedule::where('exam_type', 'TestDaF')
+            ->where('status', 'active')
+            ->orderBy('exam_date')
+            ->get();
+            
+        $telcExams = \App\Models\ExamSchedule::where('exam_type', 'Telc')
+            ->where('status', 'active')
+            ->orderBy('level')
+            ->orderBy('exam_date')
+            ->get();
+            
+        $otherExams = \App\Models\ExamSchedule::whereNotIn('exam_type', ['Goethe', 'TestDaF', 'Telc'])
+            ->where('status', 'active')
+            ->orderBy('exam_type')
+            ->orderBy('exam_date')
+            ->get();
+            
+        return view('exam-schedule', compact('goetheExams', 'testdafExams', 'telcExams', 'otherExams'));
     }
     
     public function contactPage()

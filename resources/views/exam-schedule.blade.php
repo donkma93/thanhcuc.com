@@ -26,6 +26,7 @@
         </div>
         
         <!-- Goethe Certificate -->
+        @if($goetheExams->count() > 0)
         <div class="row mb-5">
             <div class="col-12">
                 <div class="card border-0 shadow-lg">
@@ -41,6 +42,7 @@
                                 <thead class="bg-light">
                                     <tr>
                                         <th class="py-3">Trình Độ</th>
+                                        <th class="py-3">Kỳ Thi</th>
                                         <th class="py-3">Ngày Thi</th>
                                         <th class="py-3">Hạn Đăng Ký</th>
                                         <th class="py-3">Lệ Phí</th>
@@ -49,111 +51,55 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($goetheExams as $exam)
                                     <tr>
                                         <td class="py-3">
-                                            <span class="badge bg-success fs-6">Goethe A1</span>
+                                            <span class="badge bg-success fs-6">Goethe {{ $exam->level }}</span>
+                                            @if($exam->is_featured)
+                                                <i class="fas fa-star text-warning ms-1" title="Nổi bật"></i>
+                                            @endif
                                         </td>
                                         <td class="py-3">
-                                            <strong>15/03/2024</strong><br>
-                                            <small class="text-muted">Thứ 6, 9:00 AM</small>
+                                            @if($exam->exam_period)
+                                                <span class="badge bg-info">{{ $exam->exam_period }}</span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
                                         </td>
                                         <td class="py-3">
-                                            <span class="text-danger">15/02/2024</span>
+                                            <strong>{{ $exam->formatted_exam_date }}</strong><br>
+                                            <small class="text-muted">
+                                                {{ $exam->day_of_week }}
+                                                @if($exam->exam_time)
+                                                    , {{ $exam->time }}
+                                                @endif
+                                            </small>
                                         </td>
                                         <td class="py-3">
-                                            <strong>2.500.000₫</strong>
+                                            @if($exam->isRegistrationOpen())
+                                                <span class="text-success">{{ $exam->formatted_registration_deadline }}</span>
+                                            @else
+                                                <span class="text-danger">{{ $exam->formatted_registration_deadline }}</span>
+                                            @endif
                                         </td>
                                         <td class="py-3">
-                                            Viện Goethe Hà Nội
+                                            <strong>{{ $exam->formatted_fee }}</strong>
                                         </td>
                                         <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-sm">Đăng Ký</a>
+                                            {{ Str::limit($exam->location, 30) }}
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->isRegistrationOpen())
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="openExamRegistrationModal({{ $exam->id }})">
+                                                    <i class="fas fa-calendar-plus me-1"></i>
+                                                    Đăng Ký
+                                                </button>
+                                            @else
+                                                <span class="text-muted">Đã đóng</span>
+                                            @endif
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <span class="badge bg-primary fs-6">Goethe A2</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>22/03/2024</strong><br>
-                                            <small class="text-muted">Thứ 6, 9:00 AM</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="text-danger">22/02/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>2.800.000₫</strong>
-                                        </td>
-                                        <td class="py-3">
-                                            Viện Goethe Hà Nội
-                                        </td>
-                                        <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-sm">Đăng Ký</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <span class="badge bg-secondary fs-6">Goethe B1</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>14/06/2024</strong><br>
-                                            <small class="text-muted">Thứ 6, 9:00 AM</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="text-warning">14/05/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>3.200.000₫</strong>
-                                        </td>
-                                        <td class="py-3">
-                                            Viện Goethe Hà Nội
-                                        </td>
-                                        <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">Đăng Ký</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <span class="badge bg-accent-color fs-6">Goethe B2</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>21/06/2024</strong><br>
-                                            <small class="text-muted">Thứ 6, 9:00 AM</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="text-warning">21/05/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>3.800.000₫</strong>
-                                        </td>
-                                        <td class="py-3">
-                                            Viện Goethe Hà Nội
-                                        </td>
-                                        <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">Đăng Ký</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <span class="badge bg-dark fs-6">Goethe C1</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>27/09/2024</strong><br>
-                                            <small class="text-muted">Thứ 6, 9:00 AM</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="text-success">15/08/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>4.500.000₫</strong>
-                                        </td>
-                                        <td class="py-3">
-                                            Viện Goethe Hà Nội
-                                        </td>
-                                        <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">Đăng Ký</a>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -161,8 +107,10 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <!-- TestDaF -->
+        @if($testdafExams->count() > 0)
         <div class="row mb-5">
             <div class="col-12">
                 <div class="card border-0 shadow-lg">
@@ -177,6 +125,7 @@
                             <table class="table table-hover mb-0">
                                 <thead class="bg-light">
                                     <tr>
+                                        <th class="py-3">Trình Độ</th>
                                         <th class="py-3">Kỳ Thi</th>
                                         <th class="py-3">Ngày Thi</th>
                                         <th class="py-3">Hạn Đăng Ký</th>
@@ -186,69 +135,61 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($testdafExams as $exam)
                                     <tr>
                                         <td class="py-3">
-                                            <span class="badge bg-secondary fs-6">TestDaF 1/2024</span>
+                                            <span class="badge bg-secondary fs-6">
+                                                @if($exam->level)
+                                                    TestDaF {{ $exam->level }}
+                                                @else
+                                                    TestDaF
+                                                @endif
+                                            </span>
+                                            @if($exam->is_featured)
+                                                <i class="fas fa-star text-warning ms-1" title="Nổi bật"></i>
+                                            @endif
                                         </td>
                                         <td class="py-3">
-                                            <strong>09/05/2024</strong><br>
-                                            <small class="text-muted">Thứ 5, 8:30 AM</small>
+                                            @if($exam->exam_period)
+                                                <span class="badge bg-info">{{ $exam->exam_period }}</span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
                                         </td>
                                         <td class="py-3">
-                                            <span class="text-warning">28/03/2024</span>
+                                            <strong>{{ $exam->formatted_exam_date }}</strong><br>
+                                            <small class="text-muted">
+                                                {{ $exam->day_of_week }}
+                                                @if($exam->exam_time)
+                                                    , {{ $exam->time }}
+                                                @endif
+                                            </small>
                                         </td>
                                         <td class="py-3">
-                                            <strong>4.200.000₫</strong>
+                                            @if($exam->isRegistrationOpen())
+                                                <span class="text-success">{{ $exam->formatted_registration_deadline }}</span>
+                                            @else
+                                                <span class="text-danger">{{ $exam->formatted_registration_deadline }}</span>
+                                            @endif
                                         </td>
                                         <td class="py-3">
-                                            Đại học Ngoại ngữ HN
+                                            <strong>{{ $exam->formatted_fee }}</strong>
                                         </td>
                                         <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">Đăng Ký</a>
+                                            {{ Str::limit($exam->location, 30) }}
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->isRegistrationOpen())
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="openExamRegistrationModal({{ $exam->id }})">
+                                                    <i class="fas fa-calendar-plus me-1"></i>
+                                                    Đăng Ký
+                                                </button>
+                                            @else
+                                                <span class="text-muted">Đã đóng</span>
+                                            @endif
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <span class="badge bg-secondary fs-6">TestDaF 2/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>11/07/2024</strong><br>
-                                            <small class="text-muted">Thứ 5, 8:30 AM</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="text-success">30/05/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>4.200.000₫</strong>
-                                        </td>
-                                        <td class="py-3">
-                                            Đại học Ngoại ngữ HN
-                                        </td>
-                                        <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">Đăng Ký</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <span class="badge bg-secondary fs-6">TestDaF 3/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>10/10/2024</strong><br>
-                                            <small class="text-muted">Thứ 5, 8:30 AM</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="text-success">29/08/2024</span>
-                                        </td>
-                                        <td class="py-3">
-                                            <strong>4.200.000₫</strong>
-                                        </td>
-                                        <td class="py-3">
-                                            Đại học Ngoại ngữ HN
-                                        </td>
-                                        <td class="py-3">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">Đăng Ký</a>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -256,6 +197,183 @@
                 </div>
             </div>
         </div>
+        @endif
+
+        <!-- Telc -->
+        @if($telcExams->count() > 0)
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-info text-white py-3">
+                        <h4 class="mb-0 d-flex align-items-center">
+                            <i class="fas fa-graduation-cap me-3"></i>
+                            Telc (The European Language Certificates)
+                        </h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="py-3">Trình Độ</th>
+                                        <th class="py-3">Kỳ Thi</th>
+                                        <th class="py-3">Ngày Thi</th>
+                                        <th class="py-3">Hạn Đăng Ký</th>
+                                        <th class="py-3">Lệ Phí</th>
+                                        <th class="py-3">Địa Điểm</th>
+                                        <th class="py-3">Thao Tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($telcExams as $exam)
+                                    <tr>
+                                        <td class="py-3">
+                                            <span class="badge bg-info fs-6">Telc {{ $exam->level }}</span>
+                                            @if($exam->is_featured)
+                                                <i class="fas fa-star text-warning ms-1" title="Nổi bật"></i>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->exam_period)
+                                                <span class="badge bg-info">{{ $exam->exam_period }}</span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            <strong>{{ $exam->formatted_exam_date }}</strong><br>
+                                            <small class="text-muted">
+                                                {{ $exam->day_of_week }}
+                                                @if($exam->exam_time)
+                                                    , {{ $exam->time }}
+                                                @endif
+                                            </small>
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->isRegistrationOpen())
+                                                <span class="text-success">{{ $exam->formatted_registration_deadline }}</span>
+                                            @else
+                                                <span class="text-danger">{{ $exam->formatted_registration_deadline }}</span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            <strong>{{ $exam->formatted_fee }}</strong>
+                                        </td>
+                                        <td class="py-3">
+                                            {{ Str::limit($exam->location, 30) }}
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->isRegistrationOpen())
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="openExamRegistrationModal({{ $exam->id }})">
+                                                    <i class="fas fa-calendar-plus me-1"></i>
+                                                    Đăng Ký
+                                                </button>
+                                            @else
+                                                <span class="text-muted">Đã đóng</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <!-- Other Exams -->
+        @if($otherExams->count() > 0)
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-warning text-dark py-3">
+                        <h4 class="mb-0 d-flex align-items-center">
+                            <i class="fas fa-certificate me-3"></i>
+                            Các Chứng Chỉ Khác
+                        </h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="py-3">Loại Thi</th>
+                                        <th class="py-3">Trình Độ</th>
+                                        <th class="py-3">Kỳ Thi</th>
+                                        <th class="py-3">Ngày Thi</th>
+                                        <th class="py-3">Hạn Đăng Ký</th>
+                                        <th class="py-3">Lệ Phí</th>
+                                        <th class="py-3">Địa Điểm</th>
+                                        <th class="py-3">Thao Tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($otherExams as $exam)
+                                    <tr>
+                                        <td class="py-3">
+                                            <span class="badge bg-warning text-dark fs-6">{{ $exam->exam_type }}</span>
+                                            @if($exam->is_featured)
+                                                <i class="fas fa-star text-warning ms-1" title="Nổi bật"></i>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->level)
+                                                <span class="badge bg-secondary">{{ $exam->level }}</span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->exam_period)
+                                                <span class="badge bg-info">{{ $exam->exam_period }}</span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            <strong>{{ $exam->formatted_exam_date }}</strong><br>
+                                            <small class="text-muted">
+                                                {{ $exam->day_of_week }}
+                                                @if($exam->exam_time)
+                                                    , {{ $exam->time }}
+                                                @endif
+                                            </small>
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->isRegistrationOpen())
+                                                <span class="text-success">{{ $exam->formatted_registration_deadline }}</span>
+                                            @else
+                                                <span class="text-danger">{{ $exam->formatted_registration_deadline }}</span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            <strong>{{ $exam->formatted_fee }}</strong>
+                                        </td>
+                                        <td class="py-3">
+                                            {{ Str::limit($exam->location, 30) }}
+                                        </td>
+                                        <td class="py-3">
+                                            @if($exam->isRegistrationOpen())
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="openExamRegistrationModal({{ $exam->id }})">
+                                                    <i class="fas fa-calendar-plus me-1"></i>
+                                                    Đăng Ký
+                                                </button>
+                                            @else
+                                                <span class="text-muted">Đã đóng</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <!-- Important Notes -->
         <div class="row">
@@ -311,4 +429,7 @@
         </div>
     </div>
 </section>
+<!-- Include Exam Registration Modal -->
+@include('partials.exam-registration-modal')
+
 @endsection

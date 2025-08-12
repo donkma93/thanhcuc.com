@@ -256,6 +256,79 @@
     </div>
 </section>
 
+<!-- Exam Registration Statistics Section -->
+<section class="py-5 bg-gradient-primary">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-white mb-3 animate-on-scroll">
+                <i class="fas fa-chart-line text-warning me-3"></i>
+                THỐNG KÊ ĐĂNG KÝ LỊCH THI
+            </h2>
+            <p class="lead text-white-50 animate-on-scroll animate-delay-1">
+                Theo dõi số lượng học viên đăng ký các kỳ thi chứng chỉ tiếng Đức tại Thanh Cúc
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Total Registrations -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-card text-center h-100">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-users fa-3x text-warning"></i>
+                    </div>
+                    <h3 class="stat-number text-white mb-2">{{ number_format($examRegistrationStats['total']) }}</h3>
+                    <p class="stat-label text-white-50 mb-0">Tổng số đăng ký</p>
+                </div>
+            </div>
+            
+            <!-- Pending Registrations -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-card text-center h-100">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-clock fa-3x text-info"></i>
+                    </div>
+                    <h3 class="stat-number text-white mb-2">{{ number_format($examRegistrationStats['pending']) }}</h3>
+                    <p class="stat-label text-white-50 mb-0">Chờ xác nhận</p>
+                </div>
+            </div>
+            
+            <!-- Confirmed Registrations -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-card text-center h-100">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-check-circle fa-3x text-success"></i>
+                    </div>
+                    <h3 class="stat-number text-white mb-2">{{ number_format($examRegistrationStats['confirmed']) }}</h3>
+                    <p class="stat-label text-white-50 mb-0">Đã xác nhận</p>
+                </div>
+            </div>
+            
+            <!-- Completed Registrations -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-card text-center h-100">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-trophy fa-3x text-warning"></i>
+                    </div>
+                    <h3 class="stat-number text-white mb-2">{{ number_format($examRegistrationStats['completed']) }}</h3>
+                    <p class="stat-label text-white-50 mb-0">Hoàn thành</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="text-center mt-5">
+            <a href="{{ route('exam-schedule') }}" class="btn btn-warning btn-lg me-3 mb-2">
+                <i class="fas fa-calendar-alt me-2"></i>
+                Xem lịch thi
+            </a>
+            <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg mb-2">
+                <i class="fas fa-phone me-2"></i>
+                Tư vấn miễn phí
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- Featured Courses Section -->
 <section class="py-5 bg-light">
     <div class="container">
@@ -2113,6 +2186,111 @@ function openCourseModal(courseId) {
 /* Achievement Board Styles */
 .bg-gradient-primary {
     background: var(--bg-primary) !important;
+}
+
+/* Exam Registration Statistics Styles */
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s;
+    z-index: 1;
+}
+
+.stat-card:hover::before {
+    left: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+    transform: scale(1.1);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-number {
+    transform: scale(1.05);
+}
+
+.stat-label {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Responsive adjustments for statistics */
+@media (max-width: 768px) {
+    .stat-card {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .stat-icon i {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .stat-card {
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .stat-number {
+        font-size: 1.75rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .stat-icon i {
+        font-size: 2rem !important;
+    }
 }
 
 .achievement-tabs .nav-link {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\AdminUser;
+use App\Models\ExamSchedule;
 use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,12 @@ class AdminController extends Controller
             'contacted' => Contact::contacted()->count(),
             'completed' => Contact::completed()->count(),
             'total_admins' => AdminUser::count(),
+            'total_exam_schedules' => ExamSchedule::count(),
+            'active_exam_schedules' => ExamSchedule::where('status', 'active')->count(),
+            'featured_exam_schedules' => ExamSchedule::where('is_featured', true)->count(),
+            'total_exam_registrations' => \App\Models\ExamRegistration::count(),
+            'pending_exam_registrations' => \App\Models\ExamRegistration::where('status', 'pending')->count(),
+            'confirmed_exam_registrations' => \App\Models\ExamRegistration::where('status', 'confirmed')->count(),
         ];
 
         // Liên hệ mới nhất

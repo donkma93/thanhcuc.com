@@ -59,6 +59,64 @@
         </div>
     </div>
 
+    <!-- Exam Schedule Stats -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%); color: white;">
+                <div class="stats-number">{{ $stats['total_exam_schedules'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-calendar-check me-2"></i>
+                    Tổng lịch thi
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); color: white;">
+                <div class="stats-number">{{ $stats['active_exam_schedules'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-play-circle me-2"></i>
+                    Lịch thi hoạt động
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: #212529;">
+                <div class="stats-number">{{ $stats['featured_exam_schedules'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-star me-2"></i>
+                    Lịch thi nổi bật
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white;">
+                <div class="stats-number">{{ $stats['total_admins'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-users-cog me-2"></i>
+                    Quản trị viên
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
+                <div class="stats-number">{{ $stats['total_exam_registrations'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Tổng đăng ký lịch thi
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%); color: #212529;">
+                <div class="stats-number">{{ $stats['pending_exam_registrations'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-clock me-2"></i>
+                    Chờ xác nhận
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <!-- Chart -->
         <div class="col-lg-8 mb-4">
@@ -101,6 +159,22 @@
                         <a href="{{ route('admin.profile') }}" class="btn btn-secondary">
                             <i class="fas fa-user-cog me-2"></i>
                             Cài đặt tài khoản
+                        </a>
+                        <a href="{{ route('admin.exam-schedules.index') }}" class="btn btn-warning">
+                            <i class="fas fa-calendar-check me-2"></i>
+                            Quản lý lịch thi
+                        </a>
+                        <a href="{{ route('admin.exam-schedules.create') }}" class="btn btn-info">
+                            <i class="fas fa-plus me-2"></i>
+                            Thêm lịch thi mới
+                        </a>
+                        <a href="{{ route('admin.exam-registrations.index') }}" class="btn btn-success">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Quản lý đăng ký lịch thi
+                        </a>
+                        <a href="{{ route('admin.exam-registrations.index', ['status' => 'pending']) }}" class="btn btn-warning">
+                            <i class="fas fa-clock me-2"></i>
+                            Đăng ký chờ xác nhận ({{ $stats['pending_exam_registrations'] }})
                         </a>
                     </div>
                 </div>
