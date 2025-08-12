@@ -110,7 +110,7 @@
                     <div class="mt-4">
                         <h6 class="text-muted mb-2">Mô tả chi tiết</h6>
                         <div class="bg-light p-3 rounded border-start border-primary border-4">
-                            {!! nl2br(e($course->description)) !!}
+                            {!! $course->description !!}
                         </div>
                     </div>
                 @endif

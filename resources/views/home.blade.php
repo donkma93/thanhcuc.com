@@ -411,7 +411,7 @@ function openCourseModal(courseId) {
                             ${course.description ? `
                                 <div class="mb-3">
                                     <h6 class="fw-bold">Mô tả chi tiết:</h6>
-                                    <p class="text-muted">${course.description}</p>
+                                    <div class="text-muted">${course.description}</div>
                                 </div>
                             ` : ''}
                             
