@@ -30,11 +30,11 @@
                         <div class="row align-items-center min-vh-100">
                                         <div class="col-lg-7">
                                 <div class="hero-content">
-                                                <h1 class="display-4 fw-bold mb-4 animate-fade-in-up hero-title text-white">
+                                                <h1 class="display-4 fw-bold mb-4 animate-fade-in-up hero-title">
                                                     {{ $slider->title }}
                                     </h1>
                                                 @if($slider->description)
-                                                    <p class="lead mb-4 animate-fade-in-up animate-delay-1 hero-desc text-white">
+                                                    <p class="lead mb-4 animate-fade-in-up animate-delay-1 hero-desc">
                                                         {{ $slider->description }}
                                                     </p>
                                                 @endif
