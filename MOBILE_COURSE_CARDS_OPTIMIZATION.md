@@ -2,11 +2,18 @@
 
 ## 🎯 **Mục Tiêu Đã Hoàn Thành**
 
-Đã tối ưu hóa hiển thị khóa học trên các thiết bị di động với responsive design chia đôi màn hình và kích thước nhỏ gọn. **Mới nhất**: Đã loại bỏ nội dung phức tạp, chỉ hiển thị tiêu đề với font size nhỏ hơn trên mobile.
+Đã tối ưu hóa hiển thị khóa học trên các thiết bị di động với responsive design chia đôi màn hình và kích thước nhỏ gọn. **Mới nhất**: Đã áp dụng thiết kế SEC-style với gradient cam-vàng, branding, và layout chuyên nghiệp.
 
 ---
 
-## 📱 **Cải Tiến Responsive Design**
+## 🎨 **Thiết Kế SEC-Style Mới**
+
+### **Đặc Điểm Thiết Kế:**
+- ✅ **Original Database Image**: Ảnh từ database hiển thị làm background chính, không bị overlay
+- ✅ **Fallback Gradient**: Gradient cam-vàng chỉ hiển thị khi không có ảnh
+- ✅ **Text Overlay**: Gradient overlay cho text để đảm bảo khả năng đọc
+- ✅ **Course Name**: Tên khóa học với text shadow để dễ đọc
+- ✅ **View More Button**: Nút "XEM THÊM >" bên dưới card
 
 ### **Grid System Mới:**
 ```html
@@ -14,56 +21,61 @@
 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
 
 <!-- Sau -->
-<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
+<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4">
 ```
 
-### **Kích Thước Card Tối Ưu (Đã Cập Nhật):**
-- **Desktop**: 250px height (Chỉ tiêu đề)
-- **Tablet**: 220px height  
-- **Mobile**: 200px height
-- **Mobile nhỏ**: 180px height
-- **Mobile rất nhỏ**: 160px height
-- **Mobile cực nhỏ**: 140px height
+### **Kích Thước Card Tối Ưu (SEC-Style):**
+- **Desktop**: 320px height
+- **Tablet**: 280px height  
+- **Mobile**: 240px height
+- **Mobile nhỏ**: 200px height
+- **Mobile rất nhỏ**: 180px height
+- **Mobile cực nhỏ**: 160px height
 
-### **Font Size Tối Ưu Cho Mobile (Đã Giảm):**
-- **Desktop**: 0.9rem
-- **Tablet**: 0.8rem
-- **Mobile**: 0.7rem
-- **Mobile nhỏ**: 0.65rem
-- **Mobile rất nhỏ**: 0.6rem
-- **Mobile cực nhỏ**: 0.55rem
+### **Font Size Tối Ưu Cho Mobile:**
+- **Desktop**: 1.1rem (course name), 0.8rem (slogan)
+- **Tablet**: 1.0rem (course name), 0.7rem (slogan)
+- **Mobile**: 0.9rem (course name), 0.65rem (slogan)
+- **Mobile nhỏ**: 0.8rem (course name), 0.6rem (slogan)
+- **Mobile rất nhỏ**: 0.7rem (course name), 0.55rem (slogan)
+- **Mobile cực nhỏ**: 0.65rem (course name), 0.5rem (slogan)
 
-### **Responsive Breakpoints (Đã Cập Nhật):**
+### **Responsive Breakpoints (SEC-Style):**
 ```css
 /* Tablet và Mobile nhỏ */
 @media (max-width: 991.98px) {
-    height: 220px;
-    font-size: 0.8rem;
+    height: 280px;
+    course-name: 1rem;
+    slogan: 0.7rem;
 }
 
 /* Mobile trung bình */
 @media (max-width: 767.98px) {
     width: 50% !important;
-    height: 200px;
-    font-size: 0.7rem;
+    height: 240px;
+    course-name: 0.9rem;
+    slogan: 0.65rem;
 }
 
 /* Mobile nhỏ */
 @media (max-width: 576px) {
-    height: 180px;
-    font-size: 0.65rem;
+    height: 200px;
+    course-name: 0.8rem;
+    slogan: 0.6rem;
 }
 
 /* Mobile rất nhỏ */
 @media (max-width: 480px) {
-    height: 160px;
-    font-size: 0.6rem;
+    height: 180px;
+    course-name: 0.7rem;
+    slogan: 0.55rem;
 }
 
 /* Mobile cực nhỏ */
 @media (max-width: 360px) {
-    height: 140px;
-    font-size: 0.55rem;
+    height: 160px;
+    course-name: 0.65rem;
+    slogan: 0.5rem;
 }
 ```
 
@@ -71,24 +83,32 @@
 
 ## 🎨 **Tính Năng Mới**
 
-### **1. Chia Đôi Màn Hình Mobile**
+### **1. Thiết Kế Original Image Background**
+- ✅ **Original Database Image** hiển thị làm background chính
+- ✅ **No Overlay** - ảnh hiển thị nguyên gốc không bị phủ
+- ✅ **Fallback Gradient** chỉ hiển thị khi không có ảnh
+- ✅ **Text Overlay** với gradient để đảm bảo khả năng đọc
+- ✅ **Course Name** với text shadow mạnh
+- ✅ **View More Button** với hover effects
+
+### **2. Chia Đôi Màn Hình Mobile**
 - ✅ **2 khóa học/row** trên mobile thay vì 1
 - ✅ **Padding tối ưu** để tận dụng không gian
 - ✅ **Kích thước phù hợp** cho mobile
-- ✅ **Chỉ hiển thị tiêu đề** - đơn giản và rõ ràng
+- ✅ **Layout chuyên nghiệp** theo thiết kế SEC
 
-### **2. Touch Optimization**
+### **3. Touch Optimization**
 - ✅ **Touch feedback** với scale animation
 - ✅ **Swipe gestures** cho carousel
 - ✅ **Active states** cho mobile interaction
 
-### **3. Performance Improvements**
+### **4. Performance Improvements**
 - ✅ **Lazy loading** cho course images
 - ✅ **Debounced resize** handlers
 - ✅ **Hardware acceleration** với transform3d
 - ✅ **Reduced motion** support
 
-### **4. Accessibility**
+### **5. Accessibility**
 - ✅ **Keyboard navigation** support
 - ✅ **ARIA labels** cho screen readers
 - ✅ **Focus management** improvements
@@ -98,11 +118,11 @@
 ## 📁 **Files Đã Tạo/Cập Nhật**
 
 ### **CSS Files:**
-- `public/css/mobile-courses.css` - Responsive styles mới
-- `resources/views/home.blade.php` - Updated grid system
+- `public/css/mobile-courses.css` - SEC-style responsive styles
+- `resources/views/home.blade.php` - Updated SEC-style HTML structure
 
 ### **JavaScript Files:**
-- `public/js/mobile-courses.js` - Mobile optimizations
+- `public/js/mobile-courses.js` - Mobile optimizations for SEC cards
 - Touch gestures, lazy loading, performance
 
 ### **Layout Updates:**
@@ -234,7 +254,58 @@ const imageObserver = new IntersectionObserver((entries) => {
 
 ---
 
+## 🔄 **Cập Nhật Mới Nhất - Original Image Display**
+
+### **Thay Đổi Chính:**
+- ✅ **Loại bỏ gradient overlay** - ảnh hiển thị nguyên gốc
+- ✅ **Database image làm background chính** thay vì bị phủ
+- ✅ **Text overlay gradient** để đảm bảo khả năng đọc
+- ✅ **Fallback gradient** chỉ khi không có ảnh
+- ✅ **Hover effect** scale 1.05 cho ảnh
+
+### **CSS Changes:**
+```css
+/* Original Image Background Styling */
+.sec-course-card img {
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.4s ease;
+}
+
+.sec-course-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Text overlay for readability */
+.sec-roadmap {
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+}
+
+.sec-roadmap small {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-weight: 600;
+}
+```
+
+### **HTML Structure:**
+```html
+<!-- Original Database Image as Background -->
+@if($course->image)
+    <img src="/storage/{{ $course->image }}" 
+         alt="{{ $course->name }}" 
+         class="w-100 h-100 object-fit-cover position-absolute top-0 start-0">
+@else
+    <!-- Fallback gradient if no image -->
+    <div class="sec-bg-gradient position-absolute top-0 start-0 w-100 h-100" 
+         style="background: linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF4500 100%);">
+    </div>
+@endif
+```
+
+---
+
 <p align="center">
   <strong>🎯 Mobile Course Cards đã được tối ưu hóa hoàn toàn! 🎯</strong><br>
-  <em>Trải nghiệm mobile tốt hơn với hiển thị chia đôi màn hình và kích thước nhỏ gọn</em>
+  <em>Trải nghiệm mobile tốt hơn với hiển thị chia đôi màn hình và ảnh nguyên gốc</em>
 </p>

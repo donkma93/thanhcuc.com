@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     // Course cards optimization
-    const courseCards = document.querySelectorAll('.course-card-image');
+    const courseCards = document.querySelectorAll('.sec-course-card');
     
     if (courseCards.length > 0) {
         

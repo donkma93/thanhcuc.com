@@ -1,15 +1,109 @@
 /* Mobile Course Cards Optimization */
 /* Responsive design cho khóa học trên điện thoại */
 
+/* SEC Style Course Cards */
+.sec-course-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 1rem;
+    overflow: hidden;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Original Image Background Styling */
+.sec-course-card img {
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.4s ease;
+}
+
+.sec-course-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Text overlay for readability */
+.sec-roadmap {
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+}
+
+.sec-roadmap small {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-weight: 600;
+}
+
+.sec-course-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.sec-branding {
+    z-index: 3;
+}
+
+.sec-logo .badge {
+    font-size: 0.7rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sec-text small {
+    font-size: 0.6rem;
+    line-height: 1.1;
+}
+
+.sec-gift-icons {
+    z-index: 3;
+}
+
+.sec-gift-icons i {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.sec-slogan {
+    z-index: 2;
+}
+
+.sec-slogan .bg-warning {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.sec-course-name {
+    z-index: 2;
+}
+
+.sec-roadmap {
+    z-index: 2;
+}
+
+.sec-view-more {
+    border-width: 2px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sec-view-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
 /* Tablet và Mobile nhỏ */
 @media (max-width: 991.98px) {
-    .courses-slider-container .course-card-image {
-        height: 220px !important;
+    .courses-slider-container .sec-course-card {
+        height: 280px !important;
     }
     
-    .courses-slider-container .course-title {
-        font-size: 0.8rem !important;
-        line-height: 1.1 !important;
+    .courses-slider-container .sec-course-name h5 {
+        font-size: 1rem !important;
+    }
+    
+    .courses-slider-container .sec-slogan h6 {
+        font-size: 0.7rem !important;
     }
 }
 
@@ -21,18 +115,21 @@
         padding: 0 0.25rem !important;
     }
     
-    .courses-slider-container .course-card-image {
-        height: 200px !important;
+    .courses-slider-container .sec-course-card {
+        height: 240px !important;
         margin-bottom: 0.5rem !important;
     }
     
-    .courses-slider-container .course-title {
-        font-size: 0.7rem !important;
-        line-height: 1.0 !important;
+    .courses-slider-container .sec-course-name h5 {
+        font-size: 0.9rem !important;
     }
     
-    .courses-slider-container .position-absolute {
-        padding: 0.5rem !important;
+    .courses-slider-container .sec-slogan h6 {
+        font-size: 0.65rem !important;
+    }
+    
+    .courses-slider-container .sec-text small {
+        font-size: 0.5rem !important;
     }
     
     /* Ẩn navigation controls trên mobile */
@@ -49,18 +146,21 @@
         padding: 0 0.2rem !important;
     }
     
-    .courses-slider-container .course-card-image {
-        height: 180px !important;
+    .courses-slider-container .sec-course-card {
+        height: 200px !important;
         margin-bottom: 0.4rem !important;
     }
     
-    .courses-slider-container .course-title {
-        font-size: 0.65rem !important;
-        line-height: 1.0 !important;
+    .courses-slider-container .sec-course-name h5 {
+        font-size: 0.8rem !important;
     }
     
-    .courses-slider-container .position-absolute {
-        padding: 0.4rem !important;
+    .courses-slider-container .sec-slogan h6 {
+        font-size: 0.6rem !important;
+    }
+    
+    .courses-slider-container .sec-text small {
+        font-size: 0.45rem !important;
     }
 }
 
@@ -71,18 +171,21 @@
         padding: 0 0.15rem !important;
     }
     
-    .courses-slider-container .course-card-image {
-        height: 160px !important;
+    .courses-slider-container .sec-course-card {
+        height: 180px !important;
         margin-bottom: 0.3rem !important;
     }
     
-    .courses-slider-container .course-title {
-        font-size: 0.6rem !important;
-        line-height: 1.0 !important;
+    .courses-slider-container .sec-course-name h5 {
+        font-size: 0.7rem !important;
     }
     
-    .courses-slider-container .position-absolute {
-        padding: 0.3rem !important;
+    .courses-slider-container .sec-slogan h6 {
+        font-size: 0.55rem !important;
+    }
+    
+    .courses-slider-container .sec-text small {
+        font-size: 0.4rem !important;
     }
 }
 
@@ -93,45 +196,48 @@
         padding: 0 0.1rem !important;
     }
     
-    .courses-slider-container .course-card-image {
-        height: 140px !important;
+    .courses-slider-container .sec-course-card {
+        height: 160px !important;
         margin-bottom: 0.25rem !important;
     }
     
-    .courses-slider-container .course-title {
-        font-size: 0.55rem !important;
-        line-height: 1.0 !important;
+    .courses-slider-container .sec-course-name h5 {
+        font-size: 0.65rem !important;
     }
     
-    .courses-slider-container .position-absolute {
-        padding: 0.25rem !important;
+    .courses-slider-container .sec-slogan h6 {
+        font-size: 0.5rem !important;
+    }
+    
+    .courses-slider-container .sec-text small {
+        font-size: 0.35rem !important;
     }
 }
 
 /* Landscape mode trên mobile */
 @media (max-width: 767.98px) and (orientation: landscape) {
-    .courses-slider-container .course-card-image {
-        height: 120px !important;
+    .courses-slider-container .sec-course-card {
+        height: 140px !important;
     }
     
-    .courses-slider-container .course-title {
+    .courses-slider-container .sec-course-name h5 {
         font-size: 0.6rem !important;
     }
 }
 
 /* Touch optimization */
 @media (hover: none) and (pointer: coarse) {
-    .course-card-image:hover {
+    .sec-course-card:hover {
         transform: none !important;
     }
     
-    .course-card-image:active {
+    .sec-course-card:active {
         transform: scale(0.98) !important;
     }
 }
 
 /* Performance optimization */
-.course-card-image {
+.sec-course-card {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -149,12 +255,12 @@
     }
 }
 
-.course-card-image {
+.sec-course-card {
     animation: courseCardFadeIn 0.5s ease-out;
 }
 
 /* Stagger animation cho multiple cards */
-.courses-slider-container .col-sm-6:nth-child(1) .course-card-image { animation-delay: 0.1s; }
-.courses-slider-container .col-sm-6:nth-child(2) .course-card-image { animation-delay: 0.2s; }
-.courses-slider-container .col-sm-6:nth-child(3) .course-card-image { animation-delay: 0.3s; }
-.courses-slider-container .col-sm-6:nth-child(4) .course-card-image { animation-delay: 0.4s; }
+.courses-slider-container .col-sm-6:nth-child(1) .sec-course-card { animation-delay: 0.1s; }
+.courses-slider-container .col-sm-6:nth-child(2) .sec-course-card { animation-delay: 0.2s; }
+.courses-slider-container .col-sm-6:nth-child(3) .sec-course-card { animation-delay: 0.3s; }
+.courses-slider-container .col-sm-6:nth-child(4) .sec-course-card { animation-delay: 0.4s; }

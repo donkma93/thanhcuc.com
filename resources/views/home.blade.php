@@ -229,35 +229,33 @@
                             <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                                 <div class="row">
                                     @foreach($coursesChunk as $course)
-                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                                            <div class="course-card-image position-relative overflow-hidden rounded shadow-lg" style="height: 450px; cursor: pointer;" 
+                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4">
+                                            <div class="sec-course-card position-relative overflow-hidden rounded shadow-lg" style="height: 320px; cursor: pointer;" 
                                                  onclick="openCourseModal({{ $course->id }})">
-                                                <!-- Course Background Image -->
-                                                <div class="course-bg-image position-absolute top-0 start-0 w-100 h-100" 
-                                                     style="background: linear-gradient(135deg, #015862 0%, #3EB850 100%);">
-                                                    @if($course->image && file_exists(public_path('storage/' . $course->image)))
-                                                        <img src="{{ asset('storage/' . $course->image) }}" 
-                                                             alt="{{ $course->name }}" 
-                                                             class="w-100 h-100" 
-                                                             style="object-fit: cover; opacity: 0.8;">
-                                                    @else
-                                                        <!-- Fallback background with gradient -->
-                                                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" 
-                                                             style="background: linear-gradient(135deg, #015862 0%, #3EB850 100%);">
-                                                            <i class="fas fa-graduation-cap fa-3x text-white opacity-75"></i>
-                                                        </div>
-                                                    @endif
+                                                <!-- Original Database Image as Background -->
+                                                @if($course->image)
+                                                    <img src="/storage/{{ $course->image }}" 
+                                                         alt="{{ $course->name }}" 
+                                                         class="w-100 h-100 object-fit-cover position-absolute top-0 start-0">
+                                                @else
+                                                    <!-- Fallback gradient if no image -->
+                                                    <div class="sec-bg-gradient position-absolute top-0 start-0 w-100 h-100" 
+                                                         style="background: linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF4500 100%);">
+                                                    </div>
+                                                @endif
+                                                <!-- Roadmap Text -->
+                                                <div class="sec-roadmap position-absolute bottom-0 start-0 w-100 text-center pb-2">
+                                                    <small class="text-white fw-bold" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                                                      {{ $course->name }}
+                                                    </small>
                                                 </div>
-                                                
-                                                <!-- Overlay -->
-                                                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"></div>
-                                                
-                                                <!-- Course Content -->
-                                                <div class="position-absolute bottom-0 start-0 w-100 p-2 text-white">
-                                                    <h6 class="fw-bold text-white mb-0 course-title" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 0.9rem; line-height: 1.2;">
-                                                        {{ $course->name }}
-                                                    </h6>
-                                                </div>
+                                            </div>
+                                            <!-- View More Button -->
+                                            <div class="text-center mt-2">
+                                                <button class="btn btn-outline-warning btn-sm sec-view-more" 
+                                                        onclick="openCourseModal({{ $course->id }})">
+                                                    XEM THÊM <i class="fas fa-chevron-right ms-1"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     @endforeach
