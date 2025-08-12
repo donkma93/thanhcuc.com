@@ -230,92 +230,33 @@
                                 <div class="row">
                                     @foreach($coursesChunk as $course)
                                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
-                                            <div class="card border-0 shadow course-card h-100">
-                                                <div class="card-body p-4 text-center">
-                                                    <!-- Course Icon -->
-                                                    <div class="course-icon-wrapper mb-3">
-                                                        @php
-                                                            $courseIcons = [
-                                                                'A1-A2' => ['icon' => 'fas fa-seedling', 'color' => '#20c997'],
-                                                                'B1-B2' => ['icon' => 'fas fa-chart-line', 'color' => '#fd7e14'],
-                                                                'C1-C2' => ['icon' => 'fas fa-crown', 'color' => '#dc3545'],
-                                                                'Giao tiếp' => ['icon' => 'fas fa-comments', 'color' => '#ffc107'],
-                                                                'Chuyên ngành' => ['icon' => 'fas fa-briefcase', 'color' => '#6c757d'],
-                                                                'Luyện thi' => ['icon' => 'fas fa-graduation-cap', 'color' => '#e83e8c']
-                                                            ];
-                                                            $iconData = $courseIcons[$course->category] ?? ['icon' => 'fas fa-book', 'color' => '#007bff'];
-                                                        @endphp
-                                                        <i class="{{ $iconData['icon'] }} fa-3x" style="color: {{ $iconData['color'] }};"></i>
-                                                    </div>
-                                                    
-                                                    <!-- Course Title -->
-                                                    <h5 class="fw-bold text-primary mb-3">{{ $course->name }}</h5>
-                                                    
-                                                    <!-- Course Description -->
-                                                    @if($course->short_description)
-                                                        <p class="text-muted mb-3 fst-italic">
-                                                            "{{ Str::limit($course->short_description, 100) }}"
-                                                        </p>
-                                                    @endif
-                                                    
-                                                    <!-- Course Info -->
-                                                    <div class="course-info mb-3">
-                                                        <div class="row text-center">
-                                                            <div class="col-6">
-                                                                <div class="info-item">
-                                                                    <i class="fas fa-layer-group text-primary mb-1"></i>
-                                                                    <small class="text-muted d-block">Trình độ</small>
-                                                                    <strong class="text-dark">{{ $course->level ?? $course->category }}</strong>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <div class="info-item">
-                                                                    <i class="fas fa-clock text-info mb-1"></i>
-                                                                    <small class="text-muted d-block">Thời lượng</small>
-                                                                    <strong class="text-info">{{ $course->duration_hours }}h</strong>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <!-- Course Features -->
-                                                    @if($course->features && is_array($course->features))
-                                                        <div class="mb-3">
-                                                            @foreach(array_slice($course->features, 0, 2) as $feature)
-                                                                <span class="badge bg-light text-dark me-1 mb-1">
-                                                                    <i class="fas fa-check text-success me-1"></i>
-                                                                    {{ $feature }}
-                                                                </span>
-                                                            @endforeach
+                                            <div class="course-card-image position-relative overflow-hidden rounded shadow-lg" style="height: 280px; cursor: pointer;" 
+                                                 onclick="openCourseModal({{ $course->id }})">
+                                                <!-- Course Background Image -->
+                                                <div class="course-bg-image position-absolute top-0 start-0 w-100 h-100" 
+                                                     style="background: linear-gradient(135deg, #015862 0%, #3EB850 100%);">
+                                                    @if($course->image && file_exists(public_path('storage/' . $course->image)))
+                                                        <img src="{{ asset('storage/' . $course->image) }}" 
+                                                             alt="{{ $course->name }}" 
+                                                             class="w-100 h-100" 
+                                                             style="object-fit: cover; opacity: 0.8;">
+                                                    @else
+                                                        <!-- Fallback background with gradient -->
+                                                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" 
+                                                             style="background: linear-gradient(135deg, #015862 0%, #3EB850 100%);">
+                                                            <i class="fas fa-graduation-cap fa-3x text-white opacity-75"></i>
                                                         </div>
                                                     @endif
-                                                    
-                                                    <!-- Target Score Badge -->
-                                                    @if($course->target_score)
-                                                        <div class="mb-3">
-                                                            <span class="badge bg-success">
-                                                                <i class="fas fa-target me-1"></i>
-                                                                Mục tiêu: {{ $course->target_score }}
-                                                            </span>
-                                                        </div>
-                                                    @endif
-                                                    
-                                                    <!-- Action Button -->
-                                                    <div class="mt-3">
-                                                        <a href="{{ route('schedule') }}" class="btn btn-primary">
-                                                            <i class="fas fa-calendar-alt me-1"></i>
-                                                            Đăng ký học thử
-                                                        </a>
-                                                    </div>
-                                                    
-                                                    <!-- Rating Stars -->
-                                                    <div class="text-warning mt-2">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Overlay -->
+                                                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"></div>
+                                                
+                                                <!-- Course Content -->
+                                                <div class="position-absolute bottom-0 start-0 w-100 p-3 text-white">
+                                                    <h6 class="fw-bold text-white mb-0" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 0.9rem; line-height: 1.2;">
+                                                        {{ $course->name }}
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -352,6 +293,121 @@
         @endif
     </div>
 </section>
+
+<!-- Course Modal -->
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="courseModalLabel">Chi tiết khóa học</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="courseModalBody">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <a href="{{ route('schedule') }}" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt me-1"></i>Đăng ký học thử
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openCourseModal(courseId) {
+    // Show loading
+    document.getElementById('courseModalBody').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tải...</p></div>';
+    
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('courseModal'));
+    modal.show();
+    
+    // Load course data via AJAX
+    fetch(`/api/courses/${courseId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const course = data.course;
+                document.getElementById('courseModalLabel').textContent = course.name;
+                document.getElementById('courseModalBody').innerHTML = `
+                    <div class="row">
+                        <div class="col-md-4">
+                            ${course.image ? 
+                                `<img src="/storage/${course.image}" alt="${course.name}" class="img-fluid rounded">` :
+                                `<div class="bg-gradient rounded d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #015862 0%, #3EB850 100%);">
+                                    <i class="fas fa-graduation-cap fa-3x text-white opacity-75"></i>
+                                </div>`
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="text-primary mb-3">${course.name}</h4>
+                            ${course.short_description ? `<p class="text-muted mb-3">${course.short_description}</p>` : ''}
+                            
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-layer-group text-primary me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Trình độ</small>
+                                            <strong>${course.level || course.category}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-clock text-info me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Thời lượng</small>
+                                            <strong>${course.duration_hours}h</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${course.description ? `
+                                <div class="mb-3">
+                                    <h6 class="fw-bold">Mô tả chi tiết:</h6>
+                                    <p class="text-muted">${course.description}</p>
+                                </div>
+                            ` : ''}
+                            
+                            ${course.features && course.features.length > 0 ? `
+                                <div class="mb-3">
+                                    <h6 class="fw-bold">Đặc điểm nổi bật:</h6>
+                                    <div class="row">
+                                        ${course.features.map(feature => `
+                                            <div class="col-6 mb-1">
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="fas fa-check text-success me-1"></i>${feature}
+                                                </span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${course.target_score ? `
+                                <div class="mb-3">
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-target me-1"></i>Mục tiêu: ${course.target_score}
+                                    </span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Không thể tải thông tin khóa học</p></div>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Đã xảy ra lỗi khi tải dữ liệu</p></div>';
+        });
+}
+</script>
 
 <!-- Teachers Section -->
 <section class="py-5 teachers-section position-relative overflow-hidden">
@@ -2706,6 +2762,92 @@
     .feature-card {
         box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
     }
+}
+
+/* Course Cards Styling */
+.course-card-image {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.course-card-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+}
+
+.course-bg-image img {
+    transition: transform 0.3s ease;
+}
+
+.course-card-image:hover .course-bg-image img {
+    transform: scale(1.05);
+}
+
+/* Responsive Course Title Styling */
+@media (max-width: 768px) {
+    .course-card-image .position-absolute h6 {
+        font-size: 0.8rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .course-card-image .position-absolute {
+        padding: 0.75rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .course-card-image .position-absolute h6 {
+        font-size: 0.75rem !important;
+        line-height: 1.0 !important;
+    }
+    
+    .course-card-image .position-absolute {
+        padding: 0.5rem !important;
+    }
+}
+
+/* Slider Navigation */
+.slider-nav-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #015862;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.slider-nav-btn:hover {
+    background: #015862;
+    color: white;
+    transform: scale(1.1);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto;
+    opacity: 1;
+}
+
+/* Modal Styling */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
 }
 </style>
 @endpush

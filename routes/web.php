@@ -71,6 +71,21 @@ Route::post('/hoc-thu-mien-phi', [HomeController::class, 'trialSubmit'])->name('
 Route::get('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTest'])->name('online-test');
 Route::post('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTestSubmit'])->name('online-test.submit');
 
+// API Routes
+Route::get('/api/courses/{id}', function($id) {
+    $course = \App\Models\Course::find($id);
+    if ($course) {
+        return response()->json([
+            'success' => true,
+            'course' => $course
+        ]);
+    }
+    return response()->json([
+        'success' => false,
+        'message' => 'Khóa học không tồn tại'
+    ], 404);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
