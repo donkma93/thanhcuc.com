@@ -2,7 +2,7 @@
 
 ## 🎯 **Mục Tiêu Đã Hoàn Thành**
 
-Đã tối ưu hóa hiển thị khóa học trên các thiết bị di động với responsive design chia đôi màn hình và kích thước nhỏ gọn.
+Đã tối ưu hóa hiển thị khóa học trên các thiết bị di động với responsive design chia đôi màn hình và kích thước nhỏ gọn. **Mới nhất**: Đã loại bỏ nội dung phức tạp, chỉ hiển thị tiêu đề với font size nhỏ hơn trên mobile.
 
 ---
 
@@ -17,45 +17,53 @@
 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
 ```
 
-### **Kích Thước Card Tối Ưu:**
-- **Desktop**: 280px height
-- **Tablet**: 200px height  
-- **Mobile**: 160px height
-- **Mobile nhỏ**: 140px height
-- **Mobile rất nhỏ**: 120px height
-- **Mobile cực nhỏ**: 100px height
+### **Kích Thước Card Tối Ưu (Đã Cập Nhật):**
+- **Desktop**: 250px height (Chỉ tiêu đề)
+- **Tablet**: 220px height  
+- **Mobile**: 200px height
+- **Mobile nhỏ**: 180px height
+- **Mobile rất nhỏ**: 160px height
+- **Mobile cực nhỏ**: 140px height
 
-### **Responsive Breakpoints:**
+### **Font Size Tối Ưu Cho Mobile (Đã Giảm):**
+- **Desktop**: 0.9rem
+- **Tablet**: 0.8rem
+- **Mobile**: 0.7rem
+- **Mobile nhỏ**: 0.65rem
+- **Mobile rất nhỏ**: 0.6rem
+- **Mobile cực nhỏ**: 0.55rem
+
+### **Responsive Breakpoints (Đã Cập Nhật):**
 ```css
 /* Tablet và Mobile nhỏ */
 @media (max-width: 991.98px) {
-    height: 180px;
-    font-size: 0.85rem;
+    height: 220px;
+    font-size: 0.8rem;
 }
 
 /* Mobile trung bình */
 @media (max-width: 767.98px) {
     width: 50% !important;
-    height: 160px;
-    font-size: 0.75rem;
+    height: 200px;
+    font-size: 0.7rem;
 }
 
 /* Mobile nhỏ */
 @media (max-width: 576px) {
-    height: 140px;
-    font-size: 0.7rem;
+    height: 180px;
+    font-size: 0.65rem;
 }
 
 /* Mobile rất nhỏ */
 @media (max-width: 480px) {
-    height: 120px;
-    font-size: 0.65rem;
+    height: 160px;
+    font-size: 0.6rem;
 }
 
 /* Mobile cực nhỏ */
 @media (max-width: 360px) {
-    height: 100px;
-    font-size: 0.6rem;
+    height: 140px;
+    font-size: 0.55rem;
 }
 ```
 
@@ -66,7 +74,8 @@
 ### **1. Chia Đôi Màn Hình Mobile**
 - ✅ **2 khóa học/row** trên mobile thay vì 1
 - ✅ **Padding tối ưu** để tận dụng không gian
-- ✅ **Kích thước nhỏ gọn** phù hợp với màn hình
+- ✅ **Kích thước phù hợp** cho mobile
+- ✅ **Chỉ hiển thị tiêu đề** - đơn giản và rõ ràng
 
 ### **2. Touch Optimization**
 - ✅ **Touch feedback** với scale animation
@@ -156,12 +165,12 @@ const imageObserver = new IntersectionObserver((entries) => {
 
 | Device | Width | Cards/Row | Height | Font Size |
 |--------|-------|-----------|--------|-----------|
-| Desktop | >992px | 4 | 280px | 0.9rem |
-| Tablet | 768-991px | 4 | 200px | 0.85rem |
-| Mobile | 576-767px | 2 | 160px | 0.75rem |
-| Small Mobile | 480-575px | 2 | 140px | 0.7rem |
-| Tiny Mobile | 360-479px | 2 | 120px | 0.65rem |
-| Mini Mobile | <360px | 2 | 100px | 0.6rem |
+| Desktop | >992px | 4 | 320px | 1.0rem |
+| Tablet | 768-991px | 4 | 280px | 0.9rem |
+| Mobile | 576-767px | 2 | 240px | 0.8rem |
+| Small Mobile | 480-575px | 2 | 200px | 0.75rem |
+| Tiny Mobile | 360-479px | 2 | 180px | 0.7rem |
+| Mini Mobile | <360px | 2 | 160px | 0.65rem |
 
 ---
 

@@ -4,12 +4,12 @@
 /* Tablet và Mobile nhỏ */
 @media (max-width: 991.98px) {
     .courses-slider-container .course-card-image {
-        height: 180px !important;
+        height: 220px !important;
     }
     
     .courses-slider-container .course-title {
-        font-size: 0.85rem !important;
-        line-height: 1.2 !important;
+        font-size: 0.8rem !important;
+        line-height: 1.1 !important;
     }
 }
 
@@ -22,13 +22,13 @@
     }
     
     .courses-slider-container .course-card-image {
-        height: 160px !important;
+        height: 200px !important;
         margin-bottom: 0.5rem !important;
     }
     
     .courses-slider-container .course-title {
-        font-size: 0.75rem !important;
-        line-height: 1.1 !important;
+        font-size: 0.7rem !important;
+        line-height: 1.0 !important;
     }
     
     .courses-slider-container .position-absolute {
@@ -50,12 +50,12 @@
     }
     
     .courses-slider-container .course-card-image {
-        height: 140px !important;
+        height: 180px !important;
         margin-bottom: 0.4rem !important;
     }
     
     .courses-slider-container .course-title {
-        font-size: 0.7rem !important;
+        font-size: 0.65rem !important;
         line-height: 1.0 !important;
     }
     
@@ -72,12 +72,12 @@
     }
     
     .courses-slider-container .course-card-image {
-        height: 120px !important;
+        height: 160px !important;
         margin-bottom: 0.3rem !important;
     }
     
     .courses-slider-container .course-title {
-        font-size: 0.65rem !important;
+        font-size: 0.6rem !important;
         line-height: 1.0 !important;
     }
     
@@ -94,12 +94,12 @@
     }
     
     .courses-slider-container .course-card-image {
-        height: 100px !important;
+        height: 140px !important;
         margin-bottom: 0.25rem !important;
     }
     
     .courses-slider-container .course-title {
-        font-size: 0.6rem !important;
+        font-size: 0.55rem !important;
         line-height: 1.0 !important;
     }
     
@@ -111,11 +111,11 @@
 /* Landscape mode trên mobile */
 @media (max-width: 767.98px) and (orientation: landscape) {
     .courses-slider-container .course-card-image {
-        height: 100px !important;
+        height: 120px !important;
     }
     
     .courses-slider-container .course-title {
-        font-size: 0.65rem !important;
+        font-size: 0.6rem !important;
     }
 }
 

@@ -230,7 +230,7 @@
                                 <div class="row">
                                     @foreach($coursesChunk as $course)
                                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                                            <div class="course-card-image position-relative overflow-hidden rounded shadow-lg" style="height: 200px; cursor: pointer;" 
+                                            <div class="course-card-image position-relative overflow-hidden rounded shadow-lg" style="height: 450px; cursor: pointer;" 
                                                  onclick="openCourseModal({{ $course->id }})">
                                                 <!-- Course Background Image -->
                                                 <div class="course-bg-image position-absolute top-0 start-0 w-100 h-100" 
