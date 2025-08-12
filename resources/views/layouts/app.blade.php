@@ -31,12 +31,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom Animations -->
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
-    <!-- Mobile Course Cards Optimization -->
-    <link href="{{ asset('css/mobile-courses.css') }}" rel="stylesheet">
-    <!-- Mobile Bottom Navigation -->
-    <link href="{{ asset('css/mobile-bottom-nav.css') }}" rel="stylesheet">
-    <!-- Mobile Navigation -->
-    <link href="{{ asset('css/mobile-nav.css') }}" rel="stylesheet">
+    <!-- Global Site Styles -->
+    <link href="{{ asset('css/site.css') }}" rel="stylesheet">
+    <!-- Consolidated Responsive Styles -->
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
     
     <style>
         :root {

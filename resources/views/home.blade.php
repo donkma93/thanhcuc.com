@@ -1231,12 +1231,8 @@ function openCourseModal(courseId) {
 </div>
 
 @push('styles')
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
 <style>
-/* Clean Registration Section */
-.registration-section {
-    background: #f8f9fa;
-    position: relative;
-}
 
 /* Offer Cards */
 .offers-header h3 {
