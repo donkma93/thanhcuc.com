@@ -47,26 +47,12 @@ class HomeController extends Controller
             ->take(3)
             ->get();
             
-        // Get achievements for golden board
-        $monthlyAchievements = Achievement::where('category', 'monthly')
-            ->where('is_active', true)
-            ->orderBy('rank')
-            ->orderBy('sort_order')
-            ->take(3)
-            ->get();
-            
+        // Get achievements for golden board - only exam achievements
         $examAchievements = Achievement::where('category', 'exam')
             ->where('is_active', true)
             ->orderBy('rank')
             ->orderBy('sort_order')
-            ->take(3)
-            ->get();
-            
-        $scholarshipAchievements = Achievement::where('category', 'scholarship')
-            ->where('is_active', true)
-            ->orderBy('rank')
-            ->orderBy('sort_order')
-            ->take(3)
+            ->take(6)
             ->get();
             
         // Lấy slider từ database
@@ -82,9 +68,7 @@ class HomeController extends Controller
             'featuredCourses', 
             'featuredTeachers', 
             'latestNews',
-            'monthlyAchievements',
             'examAchievements', 
-            'scholarshipAchievements',
             'sliders',
             'testimonials',
             'overview'

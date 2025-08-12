@@ -28,10 +28,7 @@ class AchievementController extends Controller
             });
         }
 
-        // Filter by category
-        if ($request->filled('category')) {
-            $query->where('category', $request->category);
-        }
+
 
         // Filter by rank
         if ($request->filled('rank')) {
@@ -59,9 +56,7 @@ class AchievementController extends Controller
     public function create()
     {
         $categories = [
-            'monthly' => 'Thành tích tháng',
-            'exam' => 'Thành tích thi cử',
-            'scholarship' => 'Du học thành công'
+            'exam' => 'Thành tích thi cử'
         ];
 
         return view('admin.achievements.create', compact('categories'));
@@ -72,12 +67,11 @@ class AchievementController extends Controller
         $request->validate([
             'student_name' => 'required|string|max:255',
             'class_name' => 'nullable|string|max:255',
-            'category' => 'required|in:monthly,exam,scholarship',
+            'category' => 'required|in:exam',
             'score' => 'nullable|numeric|min:0|max:10',
             'achievement_title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'certificate' => 'nullable|string|max:255',
-            'university' => 'nullable|string|max:255',
             'achievement_date' => 'required|date',
             'rank' => 'required|integer|min:1|max:10',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -120,9 +114,7 @@ class AchievementController extends Controller
     public function edit(Achievement $achievement)
     {
         $categories = [
-            'monthly' => 'Thành tích tháng',
-            'exam' => 'Thành tích thi cử',
-            'scholarship' => 'Du học thành công'
+            'exam' => 'Thành tích thi cử'
         ];
 
         return view('admin.achievements.edit', compact('achievement', 'categories'));
@@ -133,12 +125,11 @@ class AchievementController extends Controller
         $request->validate([
             'student_name' => 'required|string|max:255',
             'class_name' => 'nullable|string|max:255',
-            'category' => 'required|in:monthly,exam,scholarship',
+            'category' => 'required|in:exam',
             'score' => 'nullable|numeric|min:0|max:10',
             'achievement_title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'certificate' => 'nullable|string|max:255',
-            'university' => 'nullable|string|max:255',
             'achievement_date' => 'required|date',
             'rank' => 'required|integer|min:1|max:10',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',

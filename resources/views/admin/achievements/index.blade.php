@@ -22,15 +22,7 @@
                 <input type="text" class="form-control" id="search" name="search" 
                        value="{{ request('search') }}" placeholder="Tên học viên, lớp, thành tích...">
             </div>
-            <div class="col-md-2">
-                <label for="category" class="form-label">Loại thành tích</label>
-                <select class="form-select" id="category" name="category">
-                    <option value="">Tất cả</option>
-                    <option value="monthly" {{ request('category') == 'monthly' ? 'selected' : '' }}>Thành tích tháng</option>
-                    <option value="exam" {{ request('category') == 'exam' ? 'selected' : '' }}>Thành tích thi cử</option>
-                    <option value="scholarship" {{ request('category') == 'scholarship' ? 'selected' : '' }}>Du học thành công</option>
-                </select>
-            </div>
+
             <div class="col-md-2">
                 <label for="rank" class="form-label">Hạng</label>
                 <select class="form-select" id="rank" name="rank">

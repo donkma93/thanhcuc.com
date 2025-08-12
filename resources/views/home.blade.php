@@ -780,11 +780,11 @@ function openCourseModal(courseId) {
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold text-white mb-3 animate-on-scroll">
-                <i class="fas fa-trophy text-warning me-3"></i>
-                BẢNG VÀNG THÀNH TÍCH
+                <i class="fas fa-medal text-warning me-3"></i>
+                BẢNG VÀNG THÀNH TÍCH THI CỬ
             </h2>
             <p class="lead text-white-50 animate-on-scroll animate-delay-1">
-                Vinh danh những học viên xuất sắc đạt thành tích cao trong học tập và thi cử
+                Vinh danh những học viên xuất sắc đạt thành tích cao trong các kỳ thi và chứng chỉ
             </p>
         </div>
 
@@ -793,18 +793,8 @@ function openCourseModal(courseId) {
             <div class="col-lg-8">
                 <ul class="nav nav-pills justify-content-center achievement-tabs" id="achievementTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="monthly-tab" data-bs-toggle="pill" data-bs-target="#monthly" type="button" role="tab">
-                            <i class="fas fa-calendar-alt me-2"></i>Thành tích tháng
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="exam-tab" data-bs-toggle="pill" data-bs-target="#exam" type="button" role="tab">
+                        <button class="nav-link active" id="exam-tab" data-bs-toggle="pill" data-bs-target="#exam" type="button" role="tab">
                             <i class="fas fa-medal me-2"></i>Thành tích thi cử
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="scholarship-tab" data-bs-toggle="pill" data-bs-target="#scholarship" type="button" role="tab">
-                            <i class="fas fa-graduation-cap me-2"></i>Du học thành công
                         </button>
                     </li>
                 </ul>
@@ -813,10 +803,10 @@ function openCourseModal(courseId) {
 
         <!-- Achievement Content -->
         <div class="tab-content" id="achievementTabsContent">
-            <!-- Monthly Achievements -->
-            <div class="tab-pane fade show active" id="monthly" role="tabpanel">
+            <!-- Exam Achievements -->
+            <div class="tab-pane fade show active" id="exam" role="tabpanel">
                 <div class="row">
-                    @forelse($monthlyAchievements as $achievement)
+                    @forelse($examAchievements as $achievement)
                         @php
                             $avatarUrl = $achievement->avatar
                                 ? asset('storage/' . $achievement->avatar)
@@ -839,7 +829,7 @@ function openCourseModal(courseId) {
                                         @if(!is_null($achievement->score))
                                     <div class="detail-item">
                                         <i class="fas fa-star text-warning me-2"></i>
-                                                <span>Điểm trung bình: {{ number_format($achievement->score, 1) }}/10</span>
+                                                <span>Điểm thi: {{ number_format($achievement->score, 1) }}/10</span>
                                     </div>
                                         @endif
                                     <div class="detail-item">
@@ -853,97 +843,10 @@ function openCourseModal(courseId) {
                     </div>
                     @empty
                         <div class="col-12">
-                            <div class="alert alert-light text-center mb-0">Chưa có thành tích tháng nào được cập nhật.</div>
-                                </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- Exam Achievements -->
-            <div class="tab-pane fade" id="exam" role="tabpanel">
-                <div class="row">
-                    @forelse($examAchievements as $achievement)
-                        @php
-                            $avatarUrl = $achievement->avatar
-                                ? asset('storage/' . $achievement->avatar)
-                                : asset('images/teachers/teacher-2.svg');
-                            $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
-                        @endphp
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                    <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
-                                        <i class="fas {{ $rankIcon }}"></i>
-                                        <span class="rank-number">{{ $achievement->rank }}</span>
-                                </div>
-                                    <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                    <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
-                                    @if($achievement->certificate)
-                                        <p class="text-muted mb-2">{{ $achievement->certificate }}</p>
-                                    @endif
-                                <div class="achievement-details mb-3">
-                                        @if(!is_null($achievement->score))
-                                    <div class="detail-item">
-                                        <i class="fas fa-certificate text-warning me-2"></i>
-                                                <span>Điểm: {{ rtrim(rtrim(number_format($achievement->score, 2), '0'), '.') }}</span>
-                                    </div>
-                                        @endif
-                                    <div class="detail-item">
-                                        <i class="fas fa-calendar text-success me-2"></i>
-                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
-                                    </div>
-                                </div>
-                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    @empty
-                        <div class="col-12">
                             <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
                                 </div>
                     @endforelse
                 </div>
-            </div>
-
-            <!-- Scholarship Achievements -->
-            <div class="tab-pane fade" id="scholarship" role="tabpanel">
-                <div class="row">
-                    @forelse($scholarshipAchievements as $achievement)
-                        @php
-                            $avatarUrl = $achievement->avatar
-                                ? asset('storage/' . $achievement->avatar)
-                                : asset('images/teachers/teacher-1.svg');
-                            $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
-                        @endphp
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                    <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
-                                        <i class="fas {{ $rankIcon }}"></i>
-                                        <span class="rank-number">{{ $achievement->rank }}</span>
-                                </div>
-                                    <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                    <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
-                                    @if($achievement->university)
-                                        <p class="text-muted mb-2">{{ $achievement->university }}</p>
-                                    @endif
-                                <div class="achievement-details mb-3">
-                                    <div class="detail-item">
-                                            <i class="fas fa-calendar text-success me-2"></i>
-                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
-                                    </div>
-                                    </div>
-                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="col-12">
-                            <div class="alert alert-light text-center mb-0">Chưa có thành tích du học nào được cập nhật.</div>
-                    </div>
-                    @endforelse
-                                </div>
-            </div>
         </div>
 
         <!-- View More Button -->

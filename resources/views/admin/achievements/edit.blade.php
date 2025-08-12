@@ -57,18 +57,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="category" class="form-label">Loại thành tích <span class="text-danger">*</span></label>
-                                <select class="form-select @error('category') is-invalid @enderror" 
-                                        id="category" name="category" required>
-                                    <option value="">Chọn loại thành tích</option>
-                                    @foreach($categories as $key => $value)
-                                        <option value="{{ $key }}" {{ old('category', $achievement->category) == $key ? 'selected' : '' }}>
-                                            {{ $value }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('category')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="text" class="form-control" value="Thành tích thi cử" readonly>
+                                <input type="hidden" name="category" value="exam">
+                                <small class="form-text text-muted">Chỉ hiển thị thành tích thi cử</small>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -135,18 +126,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="university" class="form-label">Trường đại học</label>
-                                <input type="text" class="form-control @error('university') is-invalid @enderror" 
-                                       id="university" name="university" value="{{ old('university', $achievement->university) }}" 
-                                       placeholder="VD: TU München, RWTH Aachen...">
-                                @error('university')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <div class="form-text">Dành cho thành tích du học</div>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="mb-3">

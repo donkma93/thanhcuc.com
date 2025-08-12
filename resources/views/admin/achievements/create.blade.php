@@ -51,18 +51,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="category" class="form-label">Loại thành tích <span class="text-danger">*</span></label>
-                                <select class="form-select @error('category') is-invalid @enderror" 
-                                        id="category" name="category" required>
-                                    <option value="">Chọn loại thành tích</option>
-                                    @foreach($categories as $key => $value)
-                                        <option value="{{ $key }}" {{ old('category') == $key ? 'selected' : '' }}>
-                                            {{ $value }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('category')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="text" class="form-control" value="Thành tích thi cử" readonly>
+                                <input type="hidden" name="category" value="exam">
+                                <small class="form-text text-muted">Chỉ hiển thị thành tích thi cử</small>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -244,16 +235,12 @@
                         <strong>Hạng 3:</strong> Hiển thị với huy chương đồng
                     </li>
                     <li class="mb-2">
-                        <i class="fas fa-calendar text-info me-2"></i>
-                        <strong>Thành tích tháng:</strong> Học viên xuất sắc hàng tháng
-                    </li>
-                    <li class="mb-2">
                         <i class="fas fa-graduation-cap text-info me-2"></i>
-                        <strong>Thành tích thi cử:</strong> Đạt chứng chỉ, điểm cao
+                        <strong>Thành tích thi cử:</strong> Đạt chứng chỉ, điểm cao trong các kỳ thi
                     </li>
                     <li>
-                        <i class="fas fa-plane text-info me-2"></i>
-                        <strong>Du học thành công:</strong> Được nhận vào trường ĐH
+                        <i class="fas fa-info-circle text-info me-2"></i>
+                        <strong>Lưu ý:</strong> Chỉ hiển thị thành tích thi cử trên website
                     </li>
                 </ul>
             </div>
