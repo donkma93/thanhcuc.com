@@ -479,86 +479,56 @@ function openCourseModal(courseId) {
         </div>
         
         @if(isset($featuredTeachers) && $featuredTeachers->count() > 0)
-            <!-- Teachers Carousel -->
-            <div id="teachersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+            <!-- Teachers Slider -->
+            <div id="teachersSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <!-- Carousel Indicators -->
                 <div class="carousel-indicators">
                     @for($i = 0; $i < ceil($featuredTeachers->count() / 4); $i++)
-                        <button type="button" data-bs-target="#teachersCarousel" data-bs-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"></button>
+                        <button type="button" data-bs-target="#teachersSlider" data-bs-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"></button>
                     @endfor
                 </div>
                 
+                <!-- Carousel Items -->
                 <div class="carousel-inner">
                     @foreach($featuredTeachers->chunk(4) as $index => $teacherChunk)
                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                             <div class="teachers-grid">
                                 <div class="row">
                                     @foreach($teacherChunk as $teacher)
-                                        <div class="col-lg-3 col-md-6 mb-4">
-                                            <div class="teacher-card-enhanced card h-100 border-0 position-relative overflow-hidden">
-                                                <!-- Card Background Gradient -->
-                                                <div class="card-bg-gradient"></div>
-                                                
-                                                <!-- Floating Icon -->
-                                                <div class="teacher-floating-icon">
-                                                    <i class="fas fa-graduation-cap"></i>
+                                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                                            <div class="teacher-card-new" onclick="openTeacherModal({{ $teacher->id }})">
+                                                <!-- Teacher Avatar -->
+                                                <div class="teacher-avatar-new">
+                                                    @if($teacher->avatar)
+                                                        <img src="{{ asset('storage/' . $teacher->avatar) }}" 
+                                                             alt="{{ $teacher->name }}" class="teacher-img">
+                                                    @else
+                                                        <div class="teacher-img-placeholder">
+                                                            <i class="fas fa-user"></i>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 
-                                                <div class="card-body text-center p-4 position-relative">
-                                                    <!-- Avatar Section -->
-                                                    <div class="teacher-avatar-container mb-4">
-                                                        <div class="avatar-ring"></div>
-                                                        @if($teacher->avatar)
-                                                            <img src="{{ asset('storage/' . $teacher->avatar) }}" 
-                                                                 alt="{{ $teacher->name }}" class="teacher-avatar-enhanced rounded-circle">
-                                                        @else
-                                                            <div class="teacher-avatar-placeholder-enhanced rounded-circle d-inline-flex align-items-center justify-content-center">
-                                                                <i class="fas fa-user fa-3x text-white"></i>
-                                                            </div>
-                                                        @endif
-                                                        <!-- Status Badge -->
-                                                        <div class="teacher-status-badge">
-                                                            <i class="fas fa-check"></i>
+                                                <!-- Teacher Info -->
+                                                <div class="teacher-info-new">
+                                                    <h5 class="teacher-name-new">{{ $teacher->name }}</h5>
+                                                    <p class="teacher-role-new">GIẢNG VIÊN</p>
+                                                    
+                                                    <!-- Social Icons -->
+                                                    <div class="teacher-social-new">
+                                                        <div class="social-icon">
+                                                            <i class="fab fa-facebook-f"></i>
+                                                        </div>
+                                                        <div class="social-icon">
+                                                            <i class="fab fa-tiktok"></i>
                                                         </div>
                                                     </div>
                                                     
-                                                    <!-- Teacher Info -->
-                                                    <div class="teacher-info-enhanced">
-                                                        <h5 class="fw-bold mb-2 teacher-name">{{ $teacher->name }}</h5>
-                                                        <p class="text-muted mb-3 teacher-specialization">
-                                                            <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
-                                                            {{ $teacher->specialization }}
-                                                        </p>
-                                                        
-                                                        <!-- Certification Badge -->
-                                                        <div class="certification-badge mb-3">
-                                                            <i class="fas fa-certificate me-2"></i>
-                                                            <span>{{ $teacher->certification }}</span>
-                                                        </div>
-                                                        
-                                                        <!-- Experience or Rating -->
-                                                        <div class="teacher-rating mb-3">
-                                                            <div class="stars">
-                                                                <i class="fas fa-star text-warning"></i>
-                                                                <i class="fas fa-star text-warning"></i>
-                                                                <i class="fas fa-star text-warning"></i>
-                                                                <i class="fas fa-star text-warning"></i>
-                                                                <i class="fas fa-star text-warning"></i>
-                                                            </div>
-                                                            <small class="text-muted">5.0 ({{ rand(15, 50) }} đánh giá)</small>
-                                                        </div>
-                                                        
-                                                        <!-- Action Button -->
-                                                        <div class="teacher-actions">
-                                                            <a href="{{ route('teachers.show', $teacher->slug) }}" class="btn btn-teacher-primary">
-                                                                <i class="fas fa-eye me-2"></i>Xem chi tiết
-                                                                <i class="fas fa-arrow-right ms-2"></i>
-                                                            </a>
-                                                        </div>
+                                                    <!-- Achievement -->
+                                                    <div class="teacher-achievement-new">
+                                                        {{ $teacher->certification }}
                                                     </div>
                                                 </div>
-                                                
-                                                <!-- Hover Effect Overlay -->
-                                                <div class="teacher-hover-overlay"></div>
                                             </div>
                                         </div>
                                     @endforeach
@@ -568,15 +538,15 @@ function openCourseModal(courseId) {
                     @endforeach
                 </div>
                 
+                <!-- Carousel Controls -->
                 @if($featuredTeachers->count() > 4)
-                    <!-- Carousel Controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#teachersCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#teachersSlider" data-bs-slide="prev">
                         <div class="carousel-control-icon">
                             <i class="fas fa-chevron-left"></i>
                         </div>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#teachersCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#teachersSlider" data-bs-slide="next">
                         <div class="carousel-control-icon">
                             <i class="fas fa-chevron-right"></i>
                         </div>
@@ -584,7 +554,17 @@ function openCourseModal(courseId) {
                     </button>
                 @endif
             </div>
-        @else
+            
+            <!-- View All Button -->
+            <div class="text-center mt-4">
+                <a href="{{ route('teachers') }}" class="btn-view-all">
+                    XEM TẤT CẢ
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        @endif
+        
+        @if(!isset($featuredTeachers) || $featuredTeachers->count() == 0)
             <!-- Fallback: Hiển thị giáo viên mẫu nếu không có dữ liệu -->
             <div class="teachers-grid">
                 <div class="row">
@@ -2478,6 +2458,249 @@ function openCourseModal(courseId) {
     z-index: 2;
 }
 
+/* ===== RESPONSIVE TYPOGRAPHY SYSTEM ===== */
+
+/* Base Typography Scale */
+:root {
+    /* Desktop (≥1200px) - Base scale */
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 0.8rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+    --font-size-4xl: 2.25rem;   /* 36px */
+    --font-size-5xl: 3rem;      /* 48px */
+    --font-size-6xl: 3.75rem;   /* 60px */
+    
+    /* Line heights */
+    --line-height-tight: 1.25;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+}
+
+/* Large Desktop (≥1400px) */
+@media (min-width: 1400px) {
+    :root {
+        --font-size-xs: 0.8125rem;   /* 13px */
+        --font-size-sm: 0.9375rem;   /* 15px */
+        --font-size-base: 1.0625rem; /* 17px */
+        --font-size-lg: 1.1875rem;   /* 19px */
+        --font-size-xl: 1.3125rem;   /* 21px */
+        --font-size-2xl: 1.5625rem;  /* 25px */
+        --font-size-3xl: 1.9375rem;  /* 31px */
+        --font-size-4xl: 2.3125rem;  /* 37px */
+        --font-size-5xl: 3.0625rem;  /* 49px */
+        --font-size-6xl: 3.8125rem;  /* 61px */
+    }
+}
+
+/* Medium Desktop (1200px-1399px) - Default scale */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    :root {
+        /* Keep default values */
+    }
+}
+
+/* Small Desktop (992px-1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    :root {
+        --font-size-xs: 0.6875rem;   /* 11px */
+        --font-size-sm: 0.8125rem;   /* 13px */
+        --font-size-base: 0.9375rem; /* 15px */
+        --font-size-lg: 1.0625rem;   /* 17px */
+        --font-size-xl: 1.1875rem;   /* 19px */
+        --font-size-2xl: 1.4375rem;  /* 23px */
+        --font-size-3xl: 1.8125rem;  /* 29px */
+        --font-size-4xl: 2.1875rem;  /* 35px */
+        --font-size-5xl: 2.9375rem;  /* 47px */
+        --font-size-6xl: 3.6875rem;  /* 59px */
+    }
+}
+
+/* Tablet (768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    :root {
+        --font-size-xs: 0.625rem;    /* 10px */
+        --font-size-sm: 0.75rem;     /* 12px */
+        --font-size-base: 0.875rem;  /* 14px */
+        --font-size-lg: 1rem;        /* 16px */
+        --font-size-xl: 1.125rem;    /* 18px */
+        --font-size-2xl: 1.375rem;   /* 22px */
+        --font-size-3xl: 1.75rem;    /* 28px */
+        --font-size-4xl: 2.125rem;   /* 34px */
+        --font-size-5xl: 2.875rem;   /* 46px */
+        --font-size-6xl: 3.625rem;   /* 58px */
+    }
+}
+
+/* Large Mobile (576px-767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    :root {
+        --font-size-xs: 0.5625rem;   /* 9px */
+        --font-size-sm: 0.6875rem;   /* 11px */
+        --font-size-base: 0.8125rem; /* 13px */
+        --font-size-lg: 0.9375rem;   /* 15px */
+        --font-size-xl: 1.0625rem;   /* 17px */
+        --font-size-2xl: 1.3125rem;  /* 21px */
+        --font-size-3xl: 1.6875rem;  /* 27px */
+        --font-size-4xl: 2.0625rem;  /* 33px */
+        --font-size-5xl: 2.8125rem;  /* 45px */
+        --font-size-6xl: 3.5625rem;  /* 57px */
+    }
+}
+
+/* Small Mobile (≤575px) */
+@media (max-width: 575px) {
+    :root {
+        --font-size-xs: 0.5rem;      /* 8px */
+        --font-size-sm: 0.625rem;    /* 10px */
+        --font-size-base: 0.75rem;   /* 12px */
+        --font-size-lg: 0.875rem;    /* 14px */
+        --font-size-xl: 1rem;        /* 16px */
+        --font-size-2xl: 1.25rem;    /* 20px */
+        --font-size-3xl: 1.625rem;   /* 26px */
+        --font-size-4xl: 2rem;       /* 32px */
+        --font-size-5xl: 2.75rem;    /* 44px */
+        --font-size-6xl: 3.5rem;     /* 56px */
+    }
+}
+
+/* Apply Typography Scale to All Elements */
+h1, .h1 {
+    font-size: var(--font-size-5xl) !important;
+    line-height: var(--line-height-tight) !important;
+}
+
+h2, .h2 {
+    font-size: var(--font-size-4xl) !important;
+    line-height: var(--line-height-tight) !important;
+}
+
+h3, .h3 {
+    font-size: var(--font-size-3xl) !important;
+    line-height: var(--line-height-snug) !important;
+}
+
+h4, .h4 {
+    font-size: var(--font-size-2xl) !important;
+    line-height: var(--line-height-snug) !important;
+}
+
+h5, .h5 {
+    font-size: var(--font-size-xl) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+h6, .h6 {
+    font-size: var(--font-size-lg) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+p, .lead {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--line-height-relaxed) !important;
+}
+
+small, .small {
+    font-size: var(--font-size-sm) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+.display-1 {
+    font-size: var(--font-size-6xl) !important;
+    line-height: var(--line-height-tight) !important;
+}
+
+.display-2 {
+    font-size: var(--font-size-5xl) !important;
+    line-height: var(--line-height-tight) !important;
+}
+
+.display-3 {
+    font-size: var(--font-size-4xl) !important;
+    line-height: var(--line-height-tight) !important;
+}
+
+.display-4 {
+    font-size: var(--font-size-3xl) !important;
+    line-height: var(--line-height-snug) !important;
+}
+
+.display-5 {
+    font-size: var(--font-size-2xl) !important;
+    line-height: var(--line-height-snug) !important;
+}
+
+.display-6 {
+    font-size: var(--font-size-xl) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+/* Button Typography */
+.btn {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+.btn-lg {
+    font-size: var(--font-size-lg) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+.btn-sm {
+    font-size: var(--font-size-sm) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+/* Form Elements */
+.form-control, .form-select {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+.form-label {
+    font-size: var(--font-size-sm) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: var(--font-size-xl) !important;
+    line-height: var(--line-height-tight) !important;
+}
+
+.nav-link {
+    font-size: 0.8rem !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+/* Cards */
+.card-title {
+    font-size: var(--font-size-xl) !important;
+    line-height: var(--line-height-snug) !important;
+}
+
+.card-text {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--line-height-relaxed) !important;
+}
+
+/* Badges */
+.badge {
+    font-size: var(--font-size-xs) !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+/* Alerts */
+.alert {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--line-height-relaxed) !important;
+}
+
 /* ===== MOBILE-FIRST RESPONSIVE IMPROVEMENTS ===== */
 
 /* Enhanced Mobile Hero Section */
@@ -2505,15 +2728,15 @@ function openCourseModal(courseId) {
     }
     
     .hero-content h1 {
-        font-size: 2.2rem !important;
-        line-height: 1.2 !important;
+        font-size: var(--font-size-4xl) !important;
+        line-height: var(--line-height-tight) !important;
         margin-bottom: 1.5rem !important;
         word-wrap: break-word;
     }
     
     .hero-content p.lead {
-        font-size: 1.1rem !important;
-        line-height: 1.5 !important;
+        font-size: var(--font-size-lg) !important;
+        line-height: var(--line-height-relaxed) !important;
         margin-bottom: 2rem !important;
         padding: 0 0.5rem;
     }
@@ -2529,7 +2752,7 @@ function openCourseModal(courseId) {
         width: 100% !important;
         max-width: 280px !important;
         padding: 1rem 1.5rem !important;
-        font-size: 1.1rem !important;
+        font-size: var(--font-size-base) !important;
         font-weight: 600 !important;
         border-radius: 50px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
@@ -2563,7 +2786,7 @@ function openCourseModal(courseId) {
     .navbar-toggler {
         border: none !important;
         padding: 0.5rem !important;
-        font-size: 1.5rem !important;
+        font-size: var(--font-size-2xl) !important;
         border-radius: 8px !important;
         background: rgba(1, 88, 98, 0.1) !important;
     }
@@ -2584,7 +2807,7 @@ function openCourseModal(courseId) {
         padding: 1rem 1.5rem !important;
         margin: 0.25rem 0 !important;
         border-radius: 10px !important;
-        font-size: 1.1rem !important;
+        font-size: var(--font-size-lg) !important;
         font-weight: 500 !important;
         color: #333 !important;
         transition: all 0.3s ease !important;
@@ -2616,28 +2839,28 @@ function openCourseModal(courseId) {
         padding: 0 1rem !important;
     }
     
-    /* Typography Mobile */
+    /* Typography Mobile - Now using CSS variables */
     h1, .h1 {
-        font-size: 2.2rem !important;
-        line-height: 1.2 !important;
+        font-size: var(--font-size-4xl) !important;
+        line-height: var(--line-height-tight) !important;
         margin-bottom: 1.5rem !important;
     }
     
     h2, .h2 {
-        font-size: 1.8rem !important;
-        line-height: 1.3 !important;
+        font-size: var(--font-size-3xl) !important;
+        line-height: var(--line-height-tight) !important;
         margin-bottom: 1.25rem !important;
     }
     
     h3, .h3 {
-        font-size: 1.4rem !important;
-        line-height: 1.3 !important;
+        font-size: var(--font-size-2xl) !important;
+        line-height: var(--line-height-snug) !important;
         margin-bottom: 1rem !important;
     }
     
     p, .lead {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
+        font-size: var(--font-size-base) !important;
+        line-height: var(--line-height-relaxed) !important;
         margin-bottom: 1.5rem !important;
     }
     
@@ -2664,7 +2887,7 @@ function openCourseModal(courseId) {
     }
     
     .feature-card i {
-        font-size: 2.5rem !important;
+        font-size: var(--font-size-4xl) !important;
         margin-bottom: 1rem !important;
     }
 }
@@ -2675,7 +2898,7 @@ function openCourseModal(courseId) {
     .btn {
         min-height: 48px !important;
         padding: 0.75rem 1.5rem !important;
-        font-size: 1rem !important;
+        font-size: var(--font-size-base) !important;
         border-radius: 25px !important;
         font-weight: 500 !important;
     }
@@ -2683,7 +2906,7 @@ function openCourseModal(courseId) {
     .btn-lg {
         min-height: 56px !important;
         padding: 1rem 2rem !important;
-        font-size: 1.1rem !important;
+        font-size: var(--font-size-lg) !important;
     }
     
     /* Links */
@@ -2699,7 +2922,7 @@ function openCourseModal(courseId) {
     .form-control {
         min-height: 48px !important;
         padding: 0.75rem 1rem !important;
-        font-size: 1rem !important;
+        font-size: var(--font-size-base) !important;
         border-radius: 10px !important;
     }
     
@@ -2740,7 +2963,7 @@ function openCourseModal(courseId) {
         border: none !important;
         border-radius: 50px !important;
         padding: 1rem 2rem !important;
-        font-size: 1.1rem !important;
+        font-size: var(--font-size-lg) !important;
         font-weight: 600 !important;
         box-shadow: 0 8px 25px rgba(1, 88, 98, 0.3) !important;
         animation: pulse-cta 2s infinite !important;
@@ -2759,7 +2982,7 @@ function openCourseModal(courseId) {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        font-size: 1.5rem !important;
+        font-size: var(--font-size-2xl) !important;
         z-index: 1040 !important;
         box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4) !important;
         animation: bounce-phone 2s infinite !important;
@@ -2772,7 +2995,7 @@ function openCourseModal(courseId) {
         left: 50% !important;
         transform: translateX(-50%) !important;
         color: rgba(255,255,255,0.8) !important;
-        font-size: 0.9rem !important;
+        font-size: var(--font-size-sm) !important;
         animation: fade-in-out 3s infinite !important;
     }
 }
@@ -2921,6 +3144,484 @@ function openCourseModal(courseId) {
     filter: invert(1);
 }
 
+/* New Teacher Design Styles */
+.teacher-card-new {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.teacher-card-new::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(249, 210, 0, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.teacher-card-new:hover::before {
+    left: 100%;
+}
+
+.teacher-card-new:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: #F9D200;
+}
+
+.teacher-avatar-new {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.teacher-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #F9D200;
+    box-shadow: 0 8px 20px rgba(249, 210, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.teacher-img-placeholder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #015862, #F9D200);
+    border: 4px solid #F9D200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(249, 210, 0, 0.3);
+}
+
+.teacher-card-new:hover .teacher-img,
+.teacher-card-new:hover .teacher-img-placeholder {
+    transform: scale(1.1);
+    box-shadow: 0 12px 25px rgba(249, 210, 0, 0.4);
+}
+
+.teacher-name-new {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: #015862;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    line-height: var(--line-height-tight);
+}
+
+.teacher-role-new {
+    font-size: var(--font-size-sm);
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: var(--line-height-normal);
+}
+
+.teacher-social-new {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.social-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: #F9D200;
+    border-color: #F9D200;
+    color: white;
+    transform: scale(1.1);
+}
+
+.teacher-achievement-new {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: #015862;
+    background: rgba(249, 210, 0, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(249, 210, 0, 0.3);
+    line-height: var(--line-height-normal);
+}
+
+.btn-view-all {
+    background: linear-gradient(135deg, #F9D200, #F57F25);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(249, 210, 0, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: var(--line-height-normal);
+}
+
+.btn-view-all:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(249, 210, 0, 0.4);
+    color: white;
+}
+
+.btn-view-all i {
+    transition: transform 0.3s ease;
+}
+
+.btn-view-all:hover i {
+    transform: translateX(5px);
+}
+
+/* Teacher Modal Styles */
+.teacher-modal-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.teacher-modal-avatar {
+    flex-shrink: 0;
+}
+
+.teacher-modal-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #F9D200;
+    box-shadow: 0 10px 25px rgba(249, 210, 0, 0.3);
+}
+
+.teacher-modal-info {
+    flex: 1;
+}
+
+.teacher-modal-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #015862;
+    margin-bottom: 0.5rem;
+}
+
+.teacher-modal-specialization {
+    font-size: 1.1rem;
+    color: #F9D200;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.teacher-modal-certification {
+    background: linear-gradient(135deg, #F9D200, #F57F25);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.teacher-modal-bio {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.teacher-modal-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(249, 210, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(249, 210, 0, 0.2);
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #015862;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.teacher-modal-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.teacher-modal-social a {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #F9D200;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.teacher-modal-social a:hover {
+    transform: scale(1.1);
+    background: #F57F25;
+    color: white;
+}
+
+/* Teachers Slider Styles */
+#teachersSlider {
+    position: relative;
+    overflow: hidden;
+}
+
+#teachersSlider .carousel-indicators {
+    bottom: -50px;
+}
+
+#teachersSlider .carousel-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(249, 210, 0, 0.5);
+    border: 2px solid #F9D200;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+#teachersSlider .carousel-indicators [data-bs-target].active {
+    background-color: #F9D200;
+    transform: scale(1.2);
+}
+
+#teachersSlider .carousel-control-prev,
+#teachersSlider .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(249, 210, 0, 0.9);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #F9D200;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+#teachersSlider .carousel-control-prev:hover,
+#teachersSlider .carousel-control-next:hover {
+    background: #F9D200;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+#teachersSlider .carousel-control-icon {
+    color: #015862;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#teachersSlider .carousel-control-prev:hover .carousel-control-icon,
+#teachersSlider .carousel-control-next:hover .carousel-control-icon {
+    color: white;
+}
+
+#teachersSlider .carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+#teachersSlider .carousel-item.active {
+    animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design for New Teacher Cards */
+@media (max-width: 768px) {
+    .teacher-card-new {
+        padding: 1.2rem;
+    }
+    
+    .teacher-img,
+    .teacher-img-placeholder {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .teacher-img-placeholder {
+        font-size: 2.5rem;
+    }
+    
+    .teacher-name-new {
+        font-size: var(--font-size-lg);
+    }
+    
+    .teacher-role-new {
+        font-size: var(--font-size-xs);
+    }
+    
+    .teacher-achievement-new {
+        font-size: var(--font-size-xs);
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .btn-view-all {
+        padding: 0.8rem 1.5rem;
+        font-size: var(--font-size-base);
+    }
+    
+    .teacher-modal-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .teacher-modal-avatar img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .teacher-modal-name {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .teacher-modal-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Mobile Slider Adjustments */
+    #teachersSlider .carousel-control-prev,
+    #teachersSlider .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    #teachersSlider .carousel-indicators {
+        bottom: -40px;
+    }
+    
+    #teachersSlider .carousel-indicators [data-bs-target] {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Small Mobile - 2 columns layout */
+@media (max-width: 576px) {
+    .teacher-card-new {
+        padding: 1rem;
+    }
+    
+    .teacher-img,
+    .teacher-img-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .teacher-img-placeholder {
+        font-size: 2rem;
+    }
+    
+    .teacher-name-new {
+        font-size: var(--font-size-base);
+        margin-bottom: 0.3rem;
+    }
+    
+    .teacher-role-new {
+        font-size: var(--font-size-xs);
+        margin-bottom: 0.8rem;
+    }
+    
+    .teacher-social-new {
+        gap: 0.3rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .social-icon {
+        width: 28px;
+        height: 28px;
+        font-size: var(--font-size-xs);
+    }
+    
+    .teacher-achievement-new {
+        font-size: var(--font-size-xs);
+        padding: 0.25rem 0.5rem;
+    }
+    
+    /* Adjust grid for 2 columns on small mobile */
+    #teachersSlider .col-lg-3.col-md-6.mb-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    #teachersSlider .carousel-control-prev,
+    #teachersSlider .carousel-control-next {
+        width: 35px;
+        height: 35px;
+    }
+    
+    #teachersSlider .carousel-control-icon {
+        font-size: var(--font-size-base);
+    }
+    
+    #teachersSlider .carousel-indicators {
+        bottom: -35px;
+    }
+    
+    #teachersSlider .carousel-indicators [data-bs-target] {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+    }
+}
+
 /* Video & About Section Styles */
 .video-container {
     position: relative;
@@ -2978,7 +3679,6 @@ function openCourseModal(courseId) {
 .action-buttons .btn {
     border-radius: 8px;
     font-weight: 600;
-    padding: 0.75rem 1.5rem;
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-flex;
@@ -3190,21 +3890,21 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(coursesSection);
     }
     
-    // Initialize Teachers Carousel with Grid Layout
-    const teachersCarousel = document.getElementById('teachersCarousel');
+    // Initialize Teachers Slider
+    const teachersSlider = document.getElementById('teachersSlider');
     
-    if (teachersCarousel) {
+    if (teachersSlider) {
         // Initialize carousel
-        const carousel = new bootstrap.Carousel(teachersCarousel, {
-            interval: 7000,
+        const carousel = new bootstrap.Carousel(teachersSlider, {
+            interval: 5000,
             wrap: true,
             touch: true
         });
         
         // Add animation to cards when carousel slides
-        teachersCarousel.addEventListener('slide.bs.carousel', function (e) {
+        teachersSlider.addEventListener('slide.bs.carousel', function (e) {
             // Reset animations
-            const allCards = this.querySelectorAll('.teacher-card, .teacher-card-enhanced');
+            const allCards = this.querySelectorAll('.teacher-card-new');
             allCards.forEach(card => {
                 card.style.animation = 'none';
                 card.style.opacity = '0';
@@ -3212,10 +3912,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        teachersCarousel.addEventListener('slid.bs.carousel', function (e) {
+        teachersSlider.addEventListener('slid.bs.carousel', function (e) {
             // Animate new active slide cards
             const activeSlide = this.querySelector('.carousel-item.active');
-            const cards = activeSlide.querySelectorAll('.teacher-card, .teacher-card-enhanced');
+            const cards = activeSlide.querySelectorAll('.teacher-card-new');
             
             cards.forEach((card, index) => {
                 setTimeout(() => {
@@ -3226,16 +3926,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Pause carousel on hover
-        teachersCarousel.addEventListener('mouseenter', function() {
+        teachersSlider.addEventListener('mouseenter', function() {
             carousel.pause();
         });
         
-        teachersCarousel.addEventListener('mouseleave', function() {
+        teachersSlider.addEventListener('mouseleave', function() {
             carousel.cycle();
         });
         
         // Initialize first slide animations
-        const firstSlideCards = teachersCarousel.querySelectorAll('.carousel-item.active .teacher-card, .carousel-item.active .teacher-card-enhanced');
+        const firstSlideCards = teachersSlider.querySelectorAll('.carousel-item.active .teacher-card-new');
         firstSlideCards.forEach((card, index) => {
             setTimeout(() => {
                 card.style.animation = 'fadeInUp 0.8s ease forwards';
@@ -3247,7 +3947,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const teacherObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const firstSlideCards = entry.target.querySelectorAll('.carousel-item.active .teacher-card, .carousel-item.active .teacher-card-enhanced');
+                    const firstSlideCards = entry.target.querySelectorAll('.carousel-item.active .teacher-card-new');
                     firstSlideCards.forEach((card, index) => {
                         setTimeout(() => {
                             card.style.animation = 'fadeInUp 0.8s ease forwards';
@@ -3261,7 +3961,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '0px 0px -50px 0px'
         });
         
-        teacherObserver.observe(teachersCarousel);
+        teacherObserver.observe(teachersSlider);
     }
     
     // Add hover effects to teacher cards
@@ -3333,8 +4033,108 @@ initMobileFeatures();
 
 // Re-initialize on resize
 window.addEventListener('resize', initMobileFeatures);
+
+// Teacher Modal Functions
+function openTeacherModal(teacherId) {
+    // Show loading state
+    const modalBody = document.getElementById('teacherModalBody');
+    modalBody.innerHTML = `
+        <div class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Đang tải thông tin giảng viên...</p>
+        </div>
+    `;
+    
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('teacherModal'));
+    modal.show();
+    
+    // Fetch teacher data
+    fetch(`/api/teachers/${teacherId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const teacher = data.teacher;
+                modalBody.innerHTML = `
+                    <div class="teacher-modal-content">
+                        <div class="teacher-modal-avatar">
+                            ${teacher.avatar ? 
+                                `<img src="/storage/${teacher.avatar}" alt="${teacher.name}">` :
+                                `<div class="teacher-img-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>`
+                            }
+                        </div>
+                        <div class="teacher-modal-info">
+                            <h3 class="teacher-modal-name">${teacher.name}</h3>
+                            <p class="teacher-modal-specialization">${teacher.specialization}</p>
+                            <div class="teacher-modal-certification">${teacher.certification}</div>
+                            <p class="teacher-modal-bio">${teacher.bio || 'Thông tin chi tiết về giảng viên sẽ được cập nhật sớm.'}</p>
+                            
+                            <div class="teacher-modal-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">${teacher.experience_years || 0}</span>
+                                    <span class="stat-label">Năm kinh nghiệm</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">${teacher.is_featured ? 'Có' : 'Không'}</span>
+                                    <span class="stat-label">Giảng viên nổi bật</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">${teacher.is_active ? 'Đang dạy' : 'Tạm nghỉ'}</span>
+                                    <span class="stat-label">Trạng thái</span>
+                                </div>
+                            </div>
+                            
+                            <div class="teacher-modal-social">
+                                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                                <a href="#" title="Phone"><i class="fas fa-phone"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                modalBody.innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-exclamation-triangle text-warning fa-3x mb-3"></i>
+                        <h5>Không tìm thấy thông tin</h5>
+                        <p class="text-muted">Không thể tải thông tin giảng viên. Vui lòng thử lại sau.</p>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching teacher data:', error);
+            modalBody.innerHTML = `
+                <div class="text-center py-4">
+                    <i class="fas fa-exclamation-triangle text-danger fa-3x mb-3"></i>
+                    <h5>Lỗi kết nối</h5>
+                    <p class="text-muted">Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối internet và thử lại.</p>
+                </div>
+            `;
+        });
+}
 </script>
 @endpush
+
+<!-- Teacher Modal -->
+<div class="modal fade" id="teacherModal" tabindex="-1" aria-labelledby="teacherModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="teacherModalLabel">Thông tin Giảng viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="teacherModalBody">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Mobile-only elements -->
 <div class="d-md-none">

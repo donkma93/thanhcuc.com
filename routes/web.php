@@ -86,6 +86,20 @@ Route::get('/api/courses/{id}', function($id) {
     ], 404);
 });
 
+Route::get('/api/teachers/{id}', function($id) {
+    $teacher = \App\Models\Teacher::find($id);
+    if ($teacher) {
+        return response()->json([
+            'success' => true,
+            'teacher' => $teacher
+        ]);
+    }
+    return response()->json([
+        'success' => false,
+        'message' => 'Giảng viên không tồn tại'
+    ], 404);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
