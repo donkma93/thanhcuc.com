@@ -331,6 +331,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.student-results*') ? 'active' : '' }}" 
+                               href="{{ route('admin.student-results.index') }}">
+                                <i class="fas fa-chart-line"></i>
+                                Kết quả học viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}" 
                                href="{{ route('admin.settings.index') }}">
                                 <i class="fas fa-cogs"></i>

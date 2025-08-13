@@ -146,7 +146,18 @@ class HomeController extends Controller
     
     public function results()
     {
-        return view('results');
+        // Lấy bảng điểm học viên
+        $scores = \App\Models\StudentResult::scores()->active()->ordered()->take(12)->get();
+        
+        // Lấy phản hồi học viên
+        $feedbacks = \App\Models\StudentResult::feedbacks()->active()->ordered()->take(8)->get();
+        
+        // Lấy thống kê tổng quan
+        $totalScores = \App\Models\StudentResult::scores()->active()->count();
+        $totalFeedbacks = \App\Models\StudentResult::feedbacks()->active()->count();
+        $featuredResults = \App\Models\StudentResult::active()->featured()->ordered()->take(6)->get();
+        
+        return view('results', compact('scores', 'feedbacks', 'totalScores', 'totalFeedbacks', 'featuredResults'));
     }
     
     public function trial()

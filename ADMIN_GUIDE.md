@@ -4,6 +4,7 @@
 - [Đăng Nhập Admin](#đăng-nhập-admin)
 - [Dashboard](#dashboard)
 - [Quản Lý Liên Hệ](#quản-lý-liên-hệ)
+- [Quản Lý Kết Quả Học Viên](#quản-lý-kết-quả-học-viên)
 - [Thông Tin Cá Nhân](#thông-tin-cá-nhân)
 - [Tạo Admin User Mới](#tạo-admin-user-mới)
 - [Backup & Bảo Mật](#backup--bảo-mật)
@@ -153,6 +154,103 @@ php artisan admin:create-user --name="Nguyễn Văn A" --email="admin@example.co
 ### Các Vai Trò
 - **admin**: Quyền đầy đủ
 - **manager**: Quyền quản lý hạn chế
+
+---
+
+## 🏆 Quản Lý Kết Quả Học Viên
+
+### 📊 Tổng Quan
+Quản lý hai loại nội dung chính:
+- **Bảng Điểm**: Kết quả thi của học viên (Goethe, TestDaF, DSH, Telc...)
+- **Phản Hồi**: Đánh giá và cảm nhận của học viên về khóa học
+
+### 🔍 Truy Cập
+```
+Admin Panel → Kết quả học viên
+URL: /admin/student-results
+```
+
+### 📋 Danh Sách Kết Quả
+Giao diện được chia thành 2 tabs:
+
+#### 📊 Tab Bảng Điểm
+- Hiển thị tất cả bảng điểm học viên
+- Thông tin: Ảnh, tiêu đề, học viên, chứng chỉ, điểm số
+- Trạng thái: Hiển thị/ẩn, nổi bật
+- Thứ tự sắp xếp
+
+#### 💬 Tab Phản Hồi
+- Hiển thị tất cả phản hồi từ học viên
+- Thông tin: Ảnh, tiêu đề, học viên, chứng chỉ, cấp độ
+- Trạng thái: Hiển thị/ẩn, nổi bật
+- Thứ tự sắp xếp
+
+### ➕ Thêm Kết Quả Mới
+1. Click "Thêm Mới"
+2. Chọn loại: **Bảng Điểm** hoặc **Phản Hồi**
+3. Điền thông tin:
+   - **Tiêu đề**: Tên kết quả (bắt buộc)
+   - **Mô tả**: Chi tiết về kết quả
+   - **Tên học viên**: Tên người đạt kết quả
+   - **Loại chứng chỉ**: Goethe, TestDaF, DSH, Telc, Khác
+   - **Cấp độ**: A1, A2, B1, B2, C1, C2
+   - **Điểm số**: Chỉ hiển thị khi chọn "Bảng Điểm"
+4. **Upload ảnh**: Bắt buộc, định dạng JPG/PNG/GIF, tối đa 2MB
+5. **Cài đặt**:
+   - Thứ tự sắp xếp (số càng nhỏ càng hiển thị trước)
+   - Hiển thị (bật/tắt)
+   - Nổi bật (đánh dấu quan trọng)
+6. Click "Lưu Kết Quả"
+
+### ✏️ Chỉnh Sửa Kết Quả
+1. Click nút "✏️" (bút chì) trên kết quả cần sửa
+2. Thay đổi thông tin cần thiết
+3. Upload ảnh mới (không bắt buộc)
+4. Click "Cập Nhật"
+
+### 👁️ Xem Chi Tiết
+1. Click nút "👁️" (mắt) để xem chi tiết
+2. Thông tin hiển thị đầy đủ:
+   - Ảnh kết quả
+   - Thông tin chi tiết
+   - Trạng thái hiện tại
+   - Thời gian tạo/cập nhật
+3. **Thao tác nhanh**:
+   - Bật/tắt hiển thị
+   - Bật/tắt nổi bật
+   - Chỉnh sửa
+
+### ⚡ Thao Tác Hàng Loạt
+1. **Chọn kết quả**: Tick checkbox các kết quả cần thao tác
+2. **Chọn thao tác**:
+   - **Kích hoạt**: Hiển thị các kết quả đã chọn
+   - **Ẩn**: Ẩn các kết quả đã chọn
+   - **Nổi bật**: Đánh dấu nổi bật
+   - **Xóa**: Xóa các kết quả đã chọn
+3. **Thực hiện**: Click nút thao tác tương ứng
+
+### 🎯 Quản Lý Trạng Thái
+- **Nút mắt**: Bật/tắt hiển thị trên frontend
+- **Nút sao**: Đánh dấu nổi bật (hiển thị ở đầu trang)
+- **Input số**: Thay đổi thứ tự sắp xếp
+
+### 📱 Frontend Integration
+Kết quả được hiển thị tự động tại:
+```
+/ket-qua-hoc-vien
+```
+
+**Hiển thị:**
+- Kết quả nổi bật (3 cái đầu)
+- Bảng điểm học viên (6 cái)
+- Phản hồi học viên (6 cái)
+- Thống kê tổng quan
+
+### 🔧 Lưu Ý Quan Trọng
+- **Ảnh**: Bắt buộc khi tạo mới, không bắt buộc khi sửa
+- **Validation**: Tất cả trường bắt buộc phải được điền
+- **Phân loại**: Tự động theo loại đã chọn
+- **Trạng thái**: Chỉ kết quả "Hiển thị" mới xuất hiện trên frontend
 
 ---
 

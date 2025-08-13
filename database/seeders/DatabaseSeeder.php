@@ -159,5 +159,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
             'is_featured' => false,
         ]);
+        
+        // Tạo dữ liệu mẫu cho Student Results
+        $this->call(StudentResultSeeder::class);
     }
 }

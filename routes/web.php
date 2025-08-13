@@ -208,6 +208,13 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::post('galleries/update-order', [\App\Http\Controllers\Admin\GalleryController::class, 'updateOrder'])->name('galleries.update-order');
     Route::patch('galleries/{gallery}/toggle-status', [\App\Http\Controllers\Admin\GalleryController::class, 'toggleStatus'])->name('galleries.toggle-status');
 
+    // Student Results Management
+    Route::resource('student-results', \App\Http\Controllers\Admin\StudentResultController::class);
+    Route::patch('student-results/{studentResult}/toggle-status', [\App\Http\Controllers\Admin\StudentResultController::class, 'toggleStatus'])->name('student-results.toggle-status');
+    Route::patch('student-results/{studentResult}/toggle-featured', [\App\Http\Controllers\Admin\StudentResultController::class, 'toggleFeatured'])->name('student-results.toggle-featured');
+    Route::post('student-results/update-order', [\App\Http\Controllers\Admin\StudentResultController::class, 'updateOrder'])->name('student-results.update-order');
+    Route::post('student-results/bulk-action', [\App\Http\Controllers\Admin\StudentResultController::class, 'bulkAction'])->name('student-results.bulk-action');
+
     // Overview Management
     Route::resource('overviews', \App\Http\Controllers\Admin\OverviewController::class);
     Route::patch('overviews/{overview}/toggle-active', [\App\Http\Controllers\Admin\OverviewController::class, 'toggleActive'])->name('overviews.toggle-active');

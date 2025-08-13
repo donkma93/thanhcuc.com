@@ -3,436 +3,167 @@
 @section('title', 'Kết Quả Học Viên - Trung Tâm Tiếng Đức Thanh Cúc')
 
 @section('content')
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center min-vh-75">
-            <div class="col-lg-8 mx-auto text-center">
-                <div class="hero-content">
-                    <div class="hero-badge mb-4 animate-fade-in-up">
-                        <i class="fas fa-trophy me-2"></i>
-                        <span>Thành Tích Xuất Sắc</span>
-                    </div>
-                    <h1 class="hero-title mb-4 animate-fade-in-up animate-delay-1">
-                    KẾT QUẢ HỌC VIÊN
-                        <span class="text-gradient">THANH CÚC</span>
-                </h1>
-                    <p class="hero-subtitle mb-5 animate-fade-in-up animate-delay-2">
-                        Những thành tích đáng tự hào và câu chuyện truyền cảm hứng từ hành trình 
-                        chinh phục tiếng Đức của các học viên Thanh Cúc
-                    </p>
-                    <div class="hero-stats d-flex justify-content-center gap-4 mb-5 animate-fade-in-up animate-delay-3">
-                        <div class="stat-item">
-                            <div class="stat-number">95%</div>
-                            <div class="stat-label">Tỷ lệ đậu</div>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <div class="stat-number">2000+</div>
-                            <div class="stat-label">Học viên</div>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <div class="stat-number">150+</div>
-                            <div class="stat-label">Du học</div>
-                        </div>
-                    </div>
-                    <div class="hero-actions animate-fade-in-up animate-delay-4">
-                        <a href="#success-stories" class="btn btn-hero-primary btn-lg me-3">
-                            <i class="fas fa-star me-2"></i>
-                            Xem Thành Tích
-                        </a>
-                        <a href="#cta-section" class="btn btn-hero-outline btn-lg">
-                            <i class="fas fa-rocket me-2"></i>
-                            Bắt Đầu Ngay
-                    </a>
-                                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Statistics Section -->
-<section class="py-5 stats-section">
+
+
+
+<!-- Student Results Section -->
+<section class="py-5 student-results-section" id="student-results">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title animate-on-scroll">
-                <span class="title-highlight">THỐNG KÊ</span> THÀNH TÍCH
+                KẾT QUẢ <span class="title-highlight">HỌC VIÊN</span>
             </h2>
             <p class="section-subtitle animate-on-scroll animate-delay-1">
-                Những con số ấn tượng chứng minh chất lượng giảng dạy
+                Những thành tích đáng tự hào và phản hồi chân thực từ học viên Thanh Cúc
             </p>
         </div>
-        
-        <div class="row">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stats-card animate-on-scroll">
-                    <div class="stats-icon">
-                        <i class="fas fa-trophy"></i>
+
+        <!-- Featured Results -->
+        @if($featuredResults->count() > 0)
+        <div class="mb-5">
+            <h4 class="text-center mb-4">
+                <i class="fas fa-star text-warning me-2"></i>
+                Kết Quả Nổi Bật
+            </h4>
+            <div class="row">
+                @foreach($featuredResults->take(3) as $result)
+                <div class="col-lg-4 mb-4">
+                    <div class="featured-result-card result-card animate-on-scroll">
+                        <div class="result-image">
+                            <img src="{{ $result->image_url }}" alt="{{ $result->title }}" class="img-fluid">
+                            <div class="result-badge">
+                                <i class="fas {{ $result->type == 'score' ? 'fa-chart-line' : 'fa-comments' }}"></i>
+                                {{ $result->type_label }}
+                            </div>
                         </div>
-                    <div class="stats-content">
-                        <div class="stats-number counter" data-target="95">0</div>
-                        <div class="stats-unit">%</div>
-                        <div class="stats-label">Tỷ lệ đậu chứng chỉ</div>
-                    </div>
-                    <div class="stats-decoration"></div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stats-card animate-on-scroll animate-delay-1">
-                    <div class="stats-icon">
-                        <i class="fas fa-users"></i>
+                        <div class="result-content">
+                            <h5 class="result-title">{{ $result->title }}</h5>
+                            @if($result->student_name)
+                                <p class="result-student">
+                                    <i class="fas fa-user me-2"></i>{{ $result->student_name }}
+                                </p>
+                            @endif
+                            @if($result->description)
+                                <p class="result-description">{{ Str::limit($result->description, 120) }}</p>
+                            @endif
+                            <div class="result-tags">
+                                @if($result->certificate_type)
+                                    <span class="tag">{{ $result->certificate_type }}</span>
+                                @endif
+                                @if($result->level)
+                                    <span class="tag">{{ $result->level }}</span>
+                                @endif
+                                @if($result->score)
+                                    <span class="tag score-tag">{{ $result->score }}</span>
+                                @endif
+                            </div>
                         </div>
-                    <div class="stats-content">
-                        <div class="stats-number counter" data-target="2000">0</div>
-                        <div class="stats-unit">+</div>
-                        <div class="stats-label">Học viên đã tốt nghiệp</div>
                     </div>
-                    <div class="stats-decoration"></div>
                 </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stats-card animate-on-scroll animate-delay-2">
-                    <div class="stats-icon">
-                        <i class="fas fa-plane"></i>
-                        </div>
-                    <div class="stats-content">
-                        <div class="stats-number counter" data-target="150">0</div>
-                        <div class="stats-unit">+</div>
-                        <div class="stats-label">Học viên du học thành công</div>
-                    </div>
-                    <div class="stats-decoration"></div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stats-card animate-on-scroll animate-delay-3">
-                    <div class="stats-icon">
-                        <i class="fas fa-briefcase"></i>
-                        </div>
-                    <div class="stats-content">
-                        <div class="stats-number counter" data-target="80">0</div>
-                        <div class="stats-unit">%</div>
-                        <div class="stats-label">Có việc làm sau tốt nghiệp</div>
-                    </div>
-                    <div class="stats-decoration"></div>
-                </div>
+                @endforeach
             </div>
         </div>
+        @endif
+
+        <!-- Scores Section -->
+        @if($scores->count() > 0)
+        <div class="mb-5">
+            <h4 class="text-center mb-4">
+                <i class="fas fa-chart-line text-success me-2"></i>
+                Bảng Điểm Học Viên
+            </h4>
+            <div class="row">
+                @foreach($scores->take(6) as $score)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="score-card result-card animate-on-scroll">
+                        <div class="score-image">
+                            <img src="{{ $score->image_url }}" alt="{{ $score->title }}" class="img-fluid">
+                            <div class="score-badge">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                        <div class="score-content">
+                            <h6 class="score-title">{{ $score->title }}</h6>
+                            @if($score->student_name)
+                                <p class="score-student">
+                                    <i class="fas fa-user me-2"></i>{{ $score->student_name }}
+                                </p>
+                            @endif
+                            <div class="score-info">
+                                @if($score->certificate_type)
+                                    <span class="info-tag">{{ $score->certificate_type }}</span>
+                                @endif
+                                @if($score->level)
+                                    <span class="info-tag">{{ $score->level }}</span>
+                                @endif
+                                @if($score->score)
+                                    <span class="score-value">{{ $score->score }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        <!-- Feedbacks Section -->
+        @if($feedbacks->count() > 0)
+        <div class="mb-5">
+            <h4 class="text-center mb-4">
+                <i class="fas fa-comments text-info me-2"></i>
+                Phản Hồi Học Viên
+            </h4>
+            <div class="row">
+                @foreach($feedbacks->take(6) as $feedback)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feedback-card animate-on-scroll">
+                        <div class="feedback-image">
+                            <img src="{{ $feedback->image_url }}" alt="{{ $feedback->title }}" class="img-fluid">
+                            <div class="feedback-badge">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="feedback-content">
+                            <h6 class="feedback-title">{{ $feedback->title }}</h6>
+                            @if($feedback->student_name)
+                                <p class="feedback-student">
+                                    <i class="fas fa-user me-2"></i>{{ $feedback->student_name }}
+                                </p>
+                            @endif
+                            @if($feedback->description)
+                                <p class="feedback-text">{{ Str::limit($feedback->description, 100) }}</p>
+                            @endif
+                            <div class="feedback-tags">
+                                @if($feedback->certificate_type)
+                                    <span class="tag">{{ $feedback->certificate_type }}</span>
+                                @endif
+                                @if($feedback->level)
+                                    <span class="tag">{{ $feedback->level }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        <!-- Empty State -->
+        @if($scores->count() == 0 && $feedbacks->count() == 0)
+        <div class="text-center py-5">
+            <i class="fas fa-trophy fa-4x text-muted mb-4"></i>
+            <h4 class="text-muted">Chưa có kết quả nào</h4>
+            <p class="text-muted">Hãy quay lại sau để xem những thành tích của học viên Thanh Cúc!</p>
+        </div>
+        @endif
     </div>
 </section>
 
-<!-- Success Stories Section -->
-<section class="py-5 success-stories-section" id="success-stories">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title animate-on-scroll">
-                CÂU CHUYỆN <span class="title-highlight">THÀNH CÔNG</span>
-            </h2>
-            <p class="section-subtitle animate-on-scroll animate-delay-1">
-                Những hành trình truyền cảm hứng từ học viên Thanh Cúc
-            </p>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="success-card animate-on-scroll">
-                    <div class="success-header">
-                        <div class="success-avatar">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                 alt="Nguyễn Minh Anh" class="avatar-img">
-                            <div class="success-badge">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            </div>
-                        <div class="success-info">
-                            <h5 class="success-name">Nguyễn Minh Anh</h5>
-                            <p class="success-title">Goethe C1 - Du học Đức</p>
-                            <div class="success-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="success-content">
-                        <p class="success-quote">
-                            "Sau 18 tháng học tại Thanh Cúc, tôi đã đạt chứng chỉ Goethe C1 và hiện đang học thạc sĩ 
-                            tại Đại học Technical University of Munich. Cảm ơn các thầy cô đã hỗ trợ tôi rất nhiều!"
-                        </p>
-                        <div class="success-achievements">
-                            <span class="achievement-tag">Goethe C1</span>
-                            <span class="achievement-tag">Munich University</span>
-                            <span class="achievement-year">2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="success-card animate-on-scroll animate-delay-1">
-                    <div class="success-header">
-                        <div class="success-avatar">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                 alt="Trần Văn Hùng" class="avatar-img">
-                            <div class="success-badge">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            </div>
-                        <div class="success-info">
-                            <h5 class="success-name">Trần Văn Hùng</h5>
-                            <p class="success-title">TestDaF - Làm việc tại Đức</p>
-                            <div class="success-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="success-content">
-                        <p class="success-quote">
-                            "Tôi đã đạt TestDaF 4x4 và hiện đang làm kỹ sư tại một công ty lớn ở Berlin. 
-                            Phương pháp giảng dạy của Thanh Cúc rất thực tế và hiệu quả."
-                        </p>
-                        <div class="success-achievements">
-                            <span class="achievement-tag">TestDaF 4x4</span>
-                            <span class="achievement-tag">Berlin Engineer</span>
-                            <span class="achievement-year">2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="success-card animate-on-scroll animate-delay-2">
-                    <div class="success-header">
-                        <div class="success-avatar">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face&auto=format" 
-                                 alt="Lê Thị Mai" class="avatar-img">
-                            <div class="success-badge">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            </div>
-                        <div class="success-info">
-                            <h5 class="success-name">Lê Thị Mai</h5>
-                            <p class="success-title">DSH - Học bác sĩ tại Đức</p>
-                            <div class="success-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="success-content">
-                        <p class="success-quote">
-                            "Từ A1 đến DSH chỉ trong 2 năm! Giờ tôi đang học y khoa tại Đại học Heidelberg. 
-                            Cảm ơn Thanh Cúc đã giúp tôi thực hiện ước mơ."
-                        </p>
-                        <div class="success-achievements">
-                            <span class="achievement-tag">DSH-2</span>
-                            <span class="achievement-tag">Heidelberg Medical</span>
-                            <span class="achievement-year">2024</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Additional Success Stories -->
-        <div class="row mt-4">
-            <div class="col-lg-6 mb-4">
-                <div class="success-card-horizontal animate-on-scroll">
-                    <div class="success-avatar-small">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face&auto=format" 
-                             alt="Phạm Thị Lan" class="avatar-img">
-                    </div>
-                    <div class="success-content-horizontal">
-                        <h6 class="success-name-small">Phạm Thị Lan</h6>
-                        <p class="success-quote-small">
-                            "Đạt Goethe B2 sau 12 tháng học. Hiện đang làm việc tại công ty Đức ở Việt Nam."
-                        </p>
-                        <div class="success-tags-small">
-                            <span class="tag-small">Goethe B2</span>
-                            <span class="tag-small">2024</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6 mb-4">
-                <div class="success-card-horizontal animate-on-scroll animate-delay-1">
-                    <div class="success-avatar-small">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face&auto=format" 
-                             alt="Hoàng Văn Nam" class="avatar-img">
-                    </div>
-                    <div class="success-content-horizontal">
-                        <h6 class="success-name-small">Hoàng Văn Nam</h6>
-                        <p class="success-quote-small">
-                            "Từ zero đến TestDaF trong 20 tháng. Giờ đang học thạc sĩ tại TU Dresden."
-                        </p>
-                        <div class="success-tags-small">
-                            <span class="tag-small">TestDaF</span>
-                            <span class="tag-small">2024</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Certificates Gallery Section -->
-<section class="py-5 certificates-section">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title animate-on-scroll">
-                BẰNG CẤP & <span class="title-highlight">CHỨNG CHỈ</span>
-            </h2>
-            <p class="section-subtitle animate-on-scroll animate-delay-1">
-                Những thành tích đáng tự hào của học viên
-            </p>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="certificate-card animate-on-scroll">
-                    <div class="certificate-header">
-                        <div class="certificate-icon">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <div class="certificate-glow"></div>
-                    </div>
-                    <div class="certificate-content">
-                        <h5 class="certificate-title">Goethe Institut</h5>
-                        <p class="certificate-desc">Chứng chỉ tiếng Đức quốc tế được công nhận toàn cầu</p>
-                        <div class="certificate-stats">
-                            <div class="stat-row">
-                                <span class="stat-level">A1</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="98"></div>
-                        </div>
-                                <span class="stat-percent">98%</span>
-                    </div>
-                            <div class="stat-row">
-                                <span class="stat-level">A2</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="96"></div>
-                                </div>
-                                <span class="stat-percent">96%</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-level">B1</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="94"></div>
-                                </div>
-                                <span class="stat-percent">94%</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-level">B2</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="92"></div>
-                                </div>
-                                <span class="stat-percent">92%</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-level">C1</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="89"></div>
-                                </div>
-                                <span class="stat-percent">89%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="certificate-card animate-on-scroll animate-delay-1">
-                    <div class="certificate-header">
-                        <div class="certificate-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="certificate-glow"></div>
-                    </div>
-                    <div class="certificate-content">
-                        <h5 class="certificate-title">TestDaF</h5>
-                        <p class="certificate-desc">Kỳ thi tiếng Đức cho người nước ngoài muốn du học</p>
-                        <div class="certificate-stats">
-                            <div class="stat-row">
-                                <span class="stat-level">TDN 3</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="85"></div>
-                        </div>
-                                <span class="stat-percent">85%</span>
-                    </div>
-                            <div class="stat-row">
-                                <span class="stat-level">TDN 4</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="78"></div>
-                                </div>
-                                <span class="stat-percent">78%</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-level">TDN 5</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="65"></div>
-                                </div>
-                                <span class="stat-percent">65%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="certificate-card animate-on-scroll animate-delay-2">
-                    <div class="certificate-header">
-                        <div class="certificate-icon">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <div class="certificate-glow"></div>
-                    </div>
-                    <div class="certificate-content">
-                        <h5 class="certificate-title">DSH</h5>
-                        <p class="certificate-desc">Kỳ thi năng lực tiếng Đức cho giáo dục đại học</p>
-                        <div class="certificate-stats">
-                            <div class="stat-row">
-                                <span class="stat-level">DSH-1</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="82"></div>
-                        </div>
-                                <span class="stat-percent">82%</span>
-                    </div>
-                            <div class="stat-row">
-                                <span class="stat-level">DSH-2</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="75"></div>
-                </div>
-                                <span class="stat-percent">75%</span>
-            </div>
-                            <div class="stat-row">
-                                <span class="stat-level">DSH-3</span>
-                                <div class="stat-bar">
-                                    <div class="stat-fill" data-percent="68"></div>
-                                </div>
-                                <span class="stat-percent">68%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Call to Action Section -->
 <section class="cta-section" id="cta-section">
@@ -543,9 +274,139 @@
         </div>
     </div>
 </section>
+<!-- Image Gallery Modal -->
+<div class="modal fade" id="imageGalleryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white" id="galleryModalTitle">Kết Quả Học Viên</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="position-relative">
+                    <img id="galleryModalImage" src="" alt="" class="img-fluid w-100" style="max-height: 70vh; object-fit: contain;">
+                    
+                    <!-- Navigation arrows -->
+                    <button class="gallery-nav gallery-prev" onclick="changeGalleryImage(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-nav gallery-next" onclick="changeGalleryImage(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Image counter -->
+                    <div class="gallery-counter">
+                        <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
+                    </div>
+                </div>
+                
+                <!-- Image info -->
+                <div class="p-4">
+                    <h6 class="text-white mb-2" id="galleryImageTitle">Title</h6>
+                    <p class="text-light mb-0" id="galleryImageDescription">Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('styles')
+<style>
+/* Gallery Modal Styles */
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.gallery-nav:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: #007bff;
+}
+
+.gallery-nav.gallery-prev {
+    left: 1rem;
+}
+
+.gallery-nav.gallery-next {
+    right: 1rem;
+}
+
+.gallery-counter {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Clickable overlay for result cards */
+.result-card, .feedback-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result-card:hover, .feedback-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.result-image, .feedback-image, .score-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.result-image::after, .feedback-image::after, .score-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.result-card:hover .result-image::after, 
+.feedback-card:hover .feedback-image::after,
+.result-card:hover .score-image::after {
+    opacity: 1;
+}
+
+.result-image::before, .feedback-image::before, .score-image::before {
+    content: '🔍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.result-card:hover .result-image::before, 
+.feedback-card:hover .feedback-image::before,
+.result-card:hover .score-image::before {
+    opacity: 1;
+}
+</style>
 <style>
 /* Hero Section Styles */
 .hero-section {
@@ -783,114 +644,93 @@
     opacity: 0.2;
 }
 
-/* Success Stories Section */
-.success-stories-section {
+/* Student Results Section */
+.student-results-section {
     background: white;
     position: relative;
     z-index: 2;
 }
 
-.success-card {
+/* Featured Result Cards */
+.featured-result-card {
     background: white;
     border-radius: 20px;
     overflow: hidden;
     transition: all 0.4s ease;
-    border: 1px solid rgba(1, 88, 98, 0.1);
+    border: 2px solid var(--secondary-color);
     height: 100%;
     position: relative;
+    box-shadow: 0 10px 30px rgba(249, 210, 0, 0.2);
 }
 
-.success-card:hover {
+.featured-result-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(1, 88, 98, 0.15);
-    border-color: var(--secondary-color);
+    box-shadow: 0 25px 50px rgba(249, 210, 0.3);
 }
 
-.success-header {
-    padding: 2rem 2rem 1rem;
-    text-align: center;
+.result-image {
     position: relative;
+    height: 200px;
+    overflow: hidden;
 }
 
-.success-avatar {
-    position: relative;
-    display: inline-block;
+.result-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.featured-result-card:hover .result-image img {
+    transform: scale(1.1);
+}
+
+.result-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.result-content {
+    padding: 1.5rem;
+}
+
+.result-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.result-student {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.result-description {
+    color: #495057;
+    font-size: 0.9rem;
+    line-height: 1.5;
     margin-bottom: 1rem;
 }
 
-.avatar-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 4px solid var(--secondary-color);
-    object-fit: cover;
-}
-
-.success-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.success-name {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 0.25rem;
-}
-
-.success-title {
-    color: #6c757d;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.success-rating {
-    color: var(--secondary-color);
-    font-size: 0.8rem;
-}
-
-.success-content {
-    padding: 0 2rem 2rem;
-}
-
-.success-quote {
-    font-style: italic;
-    color: #495057;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    position: relative;
-}
-
-.success-quote::before {
-    content: '"';
-    font-size: 3rem;
-    color: var(--secondary-color);
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    opacity: 0.3;
-}
-
-.success-achievements {
+.result-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    align-items: center;
 }
 
-.achievement-tag {
-    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+.tag {
+    background: var(--primary-color);
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
@@ -898,63 +738,184 @@
     font-weight: 600;
 }
 
-.achievement-year {
-    color: #6c757d;
-    font-size: 0.8rem;
+.score-tag {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    font-weight: 700;
+}
+
+/* Score Cards */
+.score-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+    height: 100%;
+}
+
+.score-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(1, 88, 98, 0.15);
+    border-color: var(--success-color);
+}
+
+.score-image {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+}
+
+.score-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.score-card:hover .score-image img {
+    transform: scale(1.05);
+}
+
+.score-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: var(--success-color);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.score-content {
+    padding: 1.25rem;
+}
+
+.score-title {
+    font-size: 1rem;
     font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.score-student {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.score-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.info-tag {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.score-value {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
     margin-left: auto;
 }
 
-/* Horizontal Success Cards */
-.success-card-horizontal {
+/* Feedback Cards */
+.feedback-card {
     background: white;
     border-radius: 15px;
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    overflow: hidden;
     transition: all 0.3s ease;
     border: 1px solid rgba(1, 88, 98, 0.1);
+    height: 100%;
 }
 
-.success-card-horizontal:hover {
-        transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(1, 88, 98, 0.1);
-    border-color: var(--secondary-color);
+.feedback-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(1, 88, 98, 0.15);
+    border-color: var(--info-color);
 }
 
-.success-avatar-small .avatar-img {
-    width: 60px;
-    height: 60px;
-    border: 3px solid var(--secondary-color);
+.feedback-image {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
 }
 
-.success-name-small {
+.feedback-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.feedback-card:hover .feedback-image img {
+    transform: scale(1.05);
+}
+
+.feedback-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: var(--info-color);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-content {
+    padding: 1.25rem;
+}
+
+.feedback-title {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+    line-height: 1.3;
 }
 
-.success-quote-small {
-    font-size: 0.9rem;
-    color: #495057;
+.feedback-student {
+    color: #6c757d;
+    font-size: 0.85rem;
     margin-bottom: 0.75rem;
+}
+
+.feedback-text {
+    color: #495057;
+    font-size: 0.85rem;
     line-height: 1.5;
+    margin-bottom: 0.75rem;
+    font-style: italic;
 }
 
-.success-tags-small {
+.feedback-tags {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
-}
-
-.tag-small {
-    background: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 0.2rem 0.6rem;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    font-weight: 600;
 }
 
 /* Certificates Section */
@@ -1459,6 +1420,167 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
         });
     }
+
+    // Gallery functionality for student results and feedbacks
+    let currentGalleryData = [];
+    let currentImageIndex = 0;
+    let currentGalleryType = '';
+    
+    // Debug: Check if data is available
+    console.log('Available data on page load:');
+    console.log('Scores count:', {{ $scores->count() }});
+    console.log('Feedbacks count:', {{ $feedbacks->count() }});
+    console.log('Sample score:', {!! json_encode($scores->first()) !!});
+    console.log('Sample feedback:', {!! json_encode($feedbacks->first()) !!});
+
+    // Open gallery modal
+    function openGallery(galleryType, imageIndex) {
+        console.log('openGallery called with:', galleryType, imageIndex);
+        
+        currentGalleryType = galleryType;
+        currentImageIndex = imageIndex;
+        
+        // Set gallery data based on type
+        if (galleryType === 'scores') {
+            currentGalleryData = {!! json_encode($scores) !!};
+            console.log('Scores data:', currentGalleryData);
+        } else if (galleryType === 'feedbacks') {
+            currentGalleryData = {!! json_encode($feedbacks) !!};
+            console.log('Feedbacks data:', currentGalleryData);
+        }
+        
+        console.log('Current gallery data:', currentGalleryData);
+        console.log('Current image index:', currentImageIndex);
+        
+        const modalElement = document.getElementById('imageGalleryModal');
+        if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement);
+            updateGalleryModal();
+            modal.show();
+        } else {
+            console.error('Modal element not found!');
+        }
+    }
+
+    // Update gallery modal content
+    function updateGalleryModal() {
+        console.log('updateGalleryModal called');
+        console.log('currentGalleryData:', currentGalleryData);
+        console.log('currentImageIndex:', currentImageIndex);
+        
+        if (currentGalleryData.length === 0) {
+            console.log('No gallery data available');
+            return;
+        }
+        
+        const currentImage = currentGalleryData[currentImageIndex];
+        console.log('Current image data:', currentImage);
+        
+        const modalImage = document.getElementById('galleryModalImage');
+        const modalTitle = document.getElementById('galleryModalTitle');
+        const imageTitle = document.getElementById('galleryImageTitle');
+        const imageDescription = document.getElementById('galleryImageDescription');
+        const currentIndex = document.getElementById('currentImageIndex');
+        const totalImages = document.getElementById('totalImages');
+        
+        console.log('Modal elements found:', {
+            modalImage: !!modalImage,
+            modalTitle: !!modalTitle,
+            imageTitle: !!imageTitle,
+            imageDescription: !!imageDescription,
+            currentIndex: !!currentIndex,
+            totalImages: !!totalImages
+        });
+        
+        if (modalImage && currentImage) {
+            modalImage.src = currentImage.image_url;
+            modalImage.alt = currentImage.title;
+            console.log('Set image src to:', currentImage.image_url);
+        }
+        
+        // Update modal title based on gallery type
+        if (modalTitle) {
+            if (currentGalleryType === 'scores') {
+                modalTitle.textContent = 'Bảng Điểm Học Viên';
+            } else if (currentGalleryType === 'feedbacks') {
+                modalTitle.textContent = 'Phản Hồi Học Viên';
+            }
+        }
+        
+        if (imageTitle) imageTitle.textContent = currentImage.title;
+        if (imageDescription) imageDescription.textContent = currentImage.description || '';
+        if (currentIndex) currentIndex.textContent = currentImageIndex + 1;
+        if (totalImages) totalImages.textContent = currentGalleryData.length;
+        
+        // Show/hide navigation arrows
+        const prevBtn = document.querySelector('.gallery-prev');
+        const nextBtn = document.querySelector('.gallery-next');
+        
+        if (prevBtn) prevBtn.style.display = currentImageIndex === 0 ? 'none' : 'block';
+        if (nextBtn) nextBtn.style.display = currentImageIndex === currentGalleryData.length - 1 ? 'none' : 'block';
+    }
+
+    // Change gallery image
+    function changeGalleryImage(direction) {
+        if (currentGalleryData.length === 0) return;
+        
+        currentImageIndex += direction;
+        
+        // Boundary checks with loop
+        if (currentImageIndex >= currentGalleryData.length) {
+            currentImageIndex = 0;
+        } else if (currentImageIndex < 0) {
+            currentImageIndex = currentGalleryData.length - 1;
+        }
+        
+        updateGalleryModal();
+    }
+
+    // Add click event listeners to result and feedback cards
+    console.log('Setting up click listeners...');
+    
+    // Check if modal exists
+    const modalElement = document.getElementById('imageGalleryModal');
+    console.log('Modal element found:', !!modalElement);
+    
+    // For score cards (result-card class)
+    const scoreCards = document.querySelectorAll('.result-card');
+    console.log('Score cards found:', scoreCards.length);
+    scoreCards.forEach((card, index) => {
+        console.log('Adding click listener to score card:', index);
+        card.addEventListener('click', function() {
+            console.log('Score card clicked:', index);
+            openGallery('scores', index);
+        });
+    });
+    
+    // For feedback cards (feedback-card class)
+    const feedbackCards = document.querySelectorAll('.feedback-card');
+    console.log('Feedback cards found:', feedbackCards.length);
+    feedbackCards.forEach((card, index) => {
+        console.log('Adding click listener to feedback card:', index);
+        card.addEventListener('click', function() {
+            console.log('Feedback card clicked:', index);
+            openGallery('feedbacks', index);
+        });
+    });
+
+    // Keyboard navigation for gallery
+    document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('imageGalleryModal');
+        if (modal.classList.contains('show')) {
+            if (e.key === 'ArrowLeft') {
+                changeGalleryImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeGalleryImage(1);
+            } else if (e.key === 'Escape') {
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            }
+        }
+    });
 });
 </script>
 @endpush

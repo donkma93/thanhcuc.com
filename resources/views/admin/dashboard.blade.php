@@ -117,6 +117,55 @@
         </div>
     </div>
 
+    <!-- Student Results Stats -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #F9D200 0%, #f0c800 100%); color: #015862;">
+                <div class="stats-number">{{ $stats['total_student_results'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Tổng kết quả
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
+                <div class="stats-number">{{ $stats['active_student_results'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-eye me-2"></i>
+                    Đang hiển thị
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: #212529;">
+                <div class="stats-number">{{ $stats['featured_student_results'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-star me-2"></i>
+                    Nổi bật
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white;">
+                <div class="stats-number">{{ $stats['total_scores'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-trophy me-2"></i>
+                    Bảng điểm
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stats-card" style="background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%); color: white;">
+                <div class="stats-number">{{ $stats['total_feedbacks'] }}</div>
+                <div class="stats-label">
+                    <i class="fas fa-comments me-2"></i>
+                    Phản hồi
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <!-- Chart -->
         <div class="col-lg-8 mb-4">
@@ -175,6 +224,14 @@
                         <a href="{{ route('admin.exam-registrations.index', ['status' => 'pending']) }}" class="btn btn-warning">
                             <i class="fas fa-clock me-2"></i>
                             Đăng ký chờ xác nhận ({{ $stats['pending_exam_registrations'] }})
+                        </a>
+                        <a href="{{ route('admin.student-results.index') }}" class="btn btn-primary">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Quản lý kết quả học viên
+                        </a>
+                        <a href="{{ route('admin.student-results.create') }}" class="btn btn-success">
+                            <i class="fas fa-plus me-2"></i>
+                            Thêm kết quả mới
                         </a>
                     </div>
                 </div>

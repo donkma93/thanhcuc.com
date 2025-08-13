@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\AdminUser;
 use App\Models\ExamSchedule;
+use App\Models\StudentResult;
 use App\Traits\HasMessagebox;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,11 @@ class AdminController extends Controller
             'total_exam_registrations' => \App\Models\ExamRegistration::count(),
             'pending_exam_registrations' => \App\Models\ExamRegistration::where('status', 'pending')->count(),
             'confirmed_exam_registrations' => \App\Models\ExamRegistration::where('status', 'confirmed')->count(),
+            'total_student_results' => \App\Models\StudentResult::count(),
+            'active_student_results' => \App\Models\StudentResult::active()->count(),
+            'featured_student_results' => \App\Models\StudentResult::featured()->count(),
+            'total_scores' => \App\Models\StudentResult::scores()->active()->count(),
+            'total_feedbacks' => \App\Models\StudentResult::feedbacks()->active()->count(),
         ];
 
         // Liên hệ mới nhất

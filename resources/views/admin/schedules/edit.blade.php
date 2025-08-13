@@ -382,14 +382,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="discount_percentage" class="form-label">Phần trăm giảm giá (%)</label>
-                        <input type="number" class="form-control @error('discount_percentage') is-invalid @enderror" 
-                               id="discount_percentage" name="discount_percentage" value="{{ old('discount_percentage', $schedule->discount_percentage) }}" 
-                               min="0" max="100">
+                                                <label for="discount_percentage" class="form-label">Phần trăm giảm giá (%)</label>
+                        <input type="number" class="form-control @error('discount_percentage') is-invalid @enderror"
+                               id="discount_percentage" name="discount_percentage" value="{{ old('discount_percentage', $schedule->discount_percentage ?? 0) }}"
+                               min="0" max="100" required>
                         @error('discount_percentage')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <div class="form-text">Để trống để tự động tính toán</div>
+                        <div class="form-text">Nhập 0 nếu không có giảm giá</div>
                     </div>
                 </div>
             </div>

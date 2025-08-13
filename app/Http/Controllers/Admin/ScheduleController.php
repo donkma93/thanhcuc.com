@@ -116,6 +116,11 @@ class ScheduleController extends Controller
         if (empty($validated['discount_percentage']) && !empty($validated['original_price']) && $validated['original_price'] > $validated['price']) {
             $validated['discount_percentage'] = round((($validated['original_price'] - $validated['price']) / $validated['original_price']) * 100);
         }
+        
+        // Ensure discount_percentage is never null
+        if (empty($validated['discount_percentage'])) {
+            $validated['discount_percentage'] = 0;
+        }
 
         // Set current students to 0 if not provided
         $validated['current_students'] = $validated['current_students'] ?? 0;
@@ -205,6 +210,11 @@ class ScheduleController extends Controller
         // Calculate discount percentage if not provided
         if (empty($validated['discount_percentage']) && !empty($validated['original_price']) && $validated['original_price'] > $validated['price']) {
             $validated['discount_percentage'] = round((($validated['original_price'] - $validated['price']) / $validated['original_price']) * 100);
+        }
+        
+        // Ensure discount_percentage is never null
+        if (empty($validated['discount_percentage'])) {
+            $validated['discount_percentage'] = 0;
         }
 
         // Convert boolean fields
