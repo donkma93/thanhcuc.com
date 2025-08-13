@@ -63,12 +63,6 @@
                                                             {{ $slider->button_text }}
                                                         </a>
                                                     @endif
-                                                    
-                                                    <!-- Contact Button -->
-                                                    <a href="tel:0975186230" class="btn btn-outline-light btn-hero">
-                                                        <i class="fas fa-phone me-2"></i>
-                                                        0975.186.230
-                                                    </a>
                                     </div>
 
 
@@ -122,9 +116,7 @@
                                                     <i class="fas fa-graduation-cap me-2"></i>
                                                     Tư Vấn Miễn Phí
                                                 </a>
-                                                <a href="tel:0975186230" class="btn btn-outline-light btn-hero">
-                                                    <i class="fas fa-phone me-2"></i>
-                                                    0975.186.230
+                                                
                                         </a>
                                     </div>
 

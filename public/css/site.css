@@ -115,20 +115,15 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
     object-position: center;
 }
 
-/* Gradient Overlay */
+/* Gradient Overlay - Hidden by default */
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        135deg,
-        rgba(1, 88, 98, 0.8) 0%,
-        rgba(1, 88, 98, 0.6) 50%,
-        rgba(245, 127, 37, 0.7) 100%
-    );
     z-index: 2;
+    display: none; /* Hide overlay by default */
 }
 
 /* Fallback Background */
@@ -150,7 +145,7 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
 /* Hero Content */
 .hero-content {
-    color: white;
+    color: #015862;
     max-width: 600px;
 }
 
@@ -159,8 +154,8 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #ffffff, #f8f9fa);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(45deg, #015862, #0d7a8a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -170,7 +165,8 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
     font-size: 1.25rem;
     line-height: 1.6;
     margin-bottom: 2rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    color: #2c5530;
     opacity: 0.95;
 }
 
@@ -223,16 +219,18 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
 }
 
 .btn-outline-light.btn-hero {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(1, 88, 98, 0.1);
+    border-color: rgba(1, 88, 98, 0.3);
+    color: #015862;
     backdrop-filter: blur(10px);
 }
 
 .btn-outline-light.btn-hero:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(1, 88, 98, 0.2);
+    border-color: rgba(1, 88, 98, 0.5);
+    color: #015862;
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(1, 88, 98, 0.2);
 }
 
 
@@ -243,6 +241,13 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
 .hero-illustration {
     text-align: center;
     animation: float 6s ease-in-out infinite;
+}
+
+/* Show overlay on larger screens */
+@media (min-width: 992px) {
+    .hero-overlay {
+        display: block !important;
+    }
 }
 
 @keyframes float {
