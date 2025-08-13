@@ -284,7 +284,7 @@
                                     @foreach($coursesChunk as $course)
                                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4">
                                             <div class="sec-course-card position-relative overflow-hidden rounded shadow-lg" style="cursor: pointer;" 
-                                                 onclick="openCourseModal({{ $course->id }})">
+                                                 onclick="openCourseModal({{ $course->id }}, '{{ $course->name }}', false)">
                                                 <!-- Original Database Image as Background -->
                                                 @if($course->image)
                                                     <img src="/storage/{{ $course->image }}" 
@@ -306,7 +306,7 @@
                                             <!-- View More Button -->
                                             <div class="text-center mt-2">
                                                 <button class="btn btn-outline-warning btn-sm sec-view-more" 
-                                                        onclick="openCourseModal({{ $course->id }})">
+                                                        onclick="openCourseModal({{ $course->id }}, '{{ $course->name }}', false)">
                                                     XEM THÊM <i class="fas fa-chevron-right ms-1"></i>
                                                 </button>
                                                                 </div>
@@ -346,6 +346,46 @@
 </section>
 
 <!-- Course Modal -->
+<style>
+.modal-header {
+    background: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.course-info-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f8f9fa;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.course-info-label {
+    font-weight: 600;
+    color: #495057;
+    min-width: 120px;
+    flex-shrink: 0;
+}
+
+.course-info-value {
+    color: #212529;
+    flex: 1;
+}
+
+.features-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.features-list li:last-child {
+    border-bottom: none;
+}
+</style>
+
 <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -358,8 +398,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="{{ route('schedule') }}" class="btn btn-primary">
+                <a href="{{ route('schedule') }}" class="btn btn-primary" id="scheduleBtn">
                     <i class="fas fa-calendar-alt me-1"></i>Đăng ký học thử
+                </a>
+                <a href="{{ route('contact') }}" class="btn btn-primary d-none" id="contactBtn" onclick="goToContactWithCourse()">
+                    <i class="fas fa-phone me-1"></i>Liên Hệ Ngay
                 </a>
             </div>
         </div>
@@ -367,13 +410,32 @@
 </div>
 
 <script>
-function openCourseModal(courseId) {
+function openCourseModal(courseId, courseName = null, fromFooter = false) {
     // Show loading
     document.getElementById('courseModalBody').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tải...</p></div>';
     
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('courseModal'));
     modal.show();
+    
+    // Hiển thị/ẩn nút tương ứng
+    const scheduleBtn = document.getElementById('scheduleBtn');
+    const contactBtn = document.getElementById('contactBtn');
+    
+    if (fromFooter) {
+        scheduleBtn.classList.add('d-none');
+        contactBtn.classList.remove('d-none');
+        
+        // Lưu thông tin khóa học để sử dụng khi chuyển đến trang liên hệ
+        window.currentCourseInfo = {
+            id: courseId,
+            name: courseName
+        };
+    } else {
+        scheduleBtn.classList.remove('d-none');
+        contactBtn.classList.add('d-none');
+        window.currentCourseInfo = null;
+    }
     
     // Load course data via AJAX
     fetch(`/api/courses/${courseId}`)
@@ -457,6 +519,15 @@ function openCourseModal(courseId) {
             console.error('Error:', error);
             document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Đã xảy ra lỗi khi tải dữ liệu</p></div>';
         });
+}
+
+// Hàm chuyển đến trang liên hệ với thông tin khóa học
+function goToContactWithCourse() {
+    if (window.currentCourseInfo) {
+        localStorage.setItem('selectedCourseId', window.currentCourseInfo.id);
+        localStorage.setItem('selectedCourseName', window.currentCourseInfo.name);
+    }
+    window.location.href = '{{ route("contact") }}';
 }
 </script>
 

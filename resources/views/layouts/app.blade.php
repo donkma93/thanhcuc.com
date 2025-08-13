@@ -38,6 +38,7 @@
     <!-- Consolidated Responsive Styles -->
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
     
+    
     <style>
         :root {
             /* New Color Palette - #015862 as Primary */

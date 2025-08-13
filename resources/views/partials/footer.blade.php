@@ -107,8 +107,9 @@
                     <div class="programs-list">
                         @foreach($footerCourses as $course)
                             <div class="program-item mb-2">
-                                <a href="#" class="text-decoration-none d-flex align-items-center p-2 rounded program-link" 
-                                   style="background: rgba(255,255,255,0.05); transition: all 0.3s ease;">
+                                <a href="javascript:void(0)" 
+                                   class="text-decoration-none d-flex align-items-center p-2 rounded program-link course-modal-trigger" 
+                                   data-course-id="{{ $course->id }}">
                                     <span class="me-2"><i class="fas fa-book"></i></span>
                                     <span>{{ $course->name }}</span>
                                 </a>
@@ -140,4 +141,44 @@
         </div>
     </div>
 </footer>
+
+
+
+<style>
+.course-modal-trigger {
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.05);
+    cursor: pointer;
+}
+
+.course-modal-trigger:hover {
+    background: rgba(255,255,255,0.15) !important;
+    transform: translateX(5px);
+}
+
+.program-link {
+    color: #f8f9fa !important;
+}
+
+.program-link:hover {
+    color: #ffc107 !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý click vào khóa học trong footer
+    const courseModalTriggers = document.querySelectorAll('.course-modal-trigger');
+    
+    courseModalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+            const courseId = this.getAttribute('data-course-id');
+            const courseName = this.querySelector('span').textContent;
+            
+            // Sử dụng modal từ home.blade.php
+            openCourseModal(courseId, courseName, true); // true = từ footer
+        });
+    });
+});
+</script>
 

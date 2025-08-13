@@ -201,6 +201,8 @@ class HomeController extends Controller
             'email' => 'nullable|email|max:255',
             'course' => 'required|string|max:100',
             'message' => 'nullable|string|max:1000',
+            'selected_course_id' => 'nullable|integer',
+            'selected_course_name' => 'nullable|string|max:255',
         ], [
             'name.required' => 'Vui lòng nhập họ tên.',
             'phone.required' => 'Vui lòng nhập số điện thoại.',
@@ -208,17 +210,29 @@ class HomeController extends Controller
             'course.required' => 'Vui lòng chọn chương trình quan tâm.',
         ]);
         
+        // Tạo message với thông tin khóa học cụ thể nếu có
+        $message = $request->message;
+        if ($request->selected_course_name) {
+            $message = "Khóa học quan tâm: " . $request->selected_course_name . "\n\n" . ($message ?: '');
+        }
+        
         // Lưu thông tin liên hệ vào database
         Contact::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'program' => $request->course,
-            'message' => $request->message,
+            'message' => $message,
             'status' => 'new',
         ]);
         
-        return back()->with('success', 'Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất để tư vấn về chương trình ' . $request->course . '.');
+        $successMessage = 'Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất để tư vấn về chương trình ' . $request->course . '.';
+        
+        if ($request->selected_course_name) {
+            $successMessage .= ' Chúng tôi đã ghi nhận bạn quan tâm đến khóa học "' . $request->selected_course_name . '".';
+        }
+        
+        return back()->with('success', $successMessage);
     }
     
     public function trialSubmit(Request $request)
