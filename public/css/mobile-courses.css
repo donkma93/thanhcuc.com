@@ -95,7 +95,7 @@
 /* Tablet và Mobile nhỏ */
 @media (max-width: 991.98px) {
     .courses-slider-container .sec-course-card {
-        height: 280px !important;
+        height: 280px;
     }
     
     .courses-slider-container .sec-course-name h5 {
@@ -116,7 +116,7 @@
     }
     
     .courses-slider-container .sec-course-card {
-        height: 240px !important;
+        height: 240px ;
         margin-bottom: 0.5rem !important;
     }
     
@@ -147,7 +147,7 @@
     }
     
     .courses-slider-container .sec-course-card {
-        height: 200px !important;
+        height: 200px ;
         margin-bottom: 0.4rem !important;
     }
     
@@ -172,7 +172,7 @@
     }
     
     .courses-slider-container .sec-course-card {
-        height: 180px !important;
+        height: 180px;
         margin-bottom: 0.3rem !important;
     }
     
@@ -197,7 +197,7 @@
     }
     
     .courses-slider-container .sec-course-card {
-        height: 160px !important;
+        height: 160px;
         margin-bottom: 0.25rem !important;
     }
     
@@ -217,7 +217,7 @@
 /* Landscape mode trên mobile */
 @media (max-width: 767.98px) and (orientation: landscape) {
     .courses-slider-container .sec-course-card {
-        height: 140px !important;
+        height: 140px ;
     }
     
     .courses-slider-container .sec-course-name h5 {

@@ -7,6 +7,7 @@
    Plus orientation-specific and desktop fallback (min-width: 992px)
 ====================================================
 */
+.courses-slider-container .sec-course-card { height: 320px;}
 
 /* ======================== */
 /* Mobile Navigation Styles */
@@ -14,7 +15,6 @@
 @media (max-width: 991.98px) {
     /* Ensure navbar has proper stacking context */
     .navbar { position: relative !important; z-index: 1000000 !important; }
-
     /* Mobile Navigation Container */
     .navbar .navbar-collapse {
         position: fixed !important;
@@ -228,94 +228,405 @@
 .hero-desc { transition: all 0.3s ease; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
 @keyframes heroSlideFadeIn { from { opacity: 0; transform: scale(1.05);} to { opacity: 1; transform: scale(1);} }
 
-/* Tablet and down */
-@media (max-width: 991.98px) {
-    .courses-slider-container .sec-course-card { height: 280px !important; }
+/* =============================== */
+/* Hero Slider Responsive - Sắp xếp từ nhỏ đến lớn */
+/* =============================== */
+
+/* Mobile <= 360px - Tiny Mobile (Ưu tiên cao nhất) */
+@media (max-width: 360px) {
+    .courses-slider-container .col-sm-6 { width: 50% !important; padding: 0 0.1rem !important; }
+    .courses-slider-container .sec-course-card { height: 160px; margin-bottom: 0.25rem !important; }
+    .courses-slider-container .sec-course-name h5 { font-size: 0.65rem !important; }
+    .courses-slider-container .sec-course-name h6 { font-size: 0.5rem !important; }
+    .courses-slider-container .sec-text small { font-size: 0.35rem !important; }
+
+    /* Hero Slider - Tiny Mobile */
+    .hero-slide { min-height: 30vh !important; }
+    .hero-slider-section { min-height: 30vh !important; }
+    
+    /* Hide text and buttons on mobile - show only images */
+    .hero-content {
+        display: none !important;
+    }
+    
+    /* Show only the background image */
+    .hero-background {
+        display: block !important;
+    }
+    
+    /* Remove background overlay on mobile */
+    .hero-overlay {
+        display: none !important;
+    }
+    
+    /* Carousel indicators for tiny mobile */
+    .carousel-indicators {
+        bottom: 0.75rem;
+    }
+    .carousel-indicators button {
+        width: 6px;
+        height: 6px;
+        margin: 0 2px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(1.2);
+        background-color: #fff;
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+    }
+    
+    /* Hide carousel controls on tiny mobile */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+    
+    /* Carousel controls scale for tiny mobile (if shown) */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        transform: translateY(-50%) scale(1.02);
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        transform: scale(1.02);
+    }
+}
+
+/* Mobile <= 480px - Extra Small Mobile */
+@media (max-width: 480px) {
+    .courses-slider-container .col-sm-6 { width: 50% !important; padding: 0 0.15rem !important; }
+    .courses-slider-container .sec-course-card { height: 180px ; margin-bottom: 0.3rem !important; }
+    .courses-slider-container .sec-course-name h5 { font-size: 0.7rem !important; }
+    .courses-slider-container .sec-course-name h6 { font-size: 0.55rem !important; }
+    .courses-slider-container .sec-text small { font-size: 0.4rem !important; }
+
+    /* Hero Slider - Extra Small Mobile */
+    .hero-slide { height: 210px;}
+    .hero-slider-section { height: 210px; }
+    
+    /* Hide text and buttons on mobile - show only images */
+    .hero-content {
+        display: none !important;
+    }
+    
+    /* Show only the background image */
+    .hero-background {
+        display: block !important;
+    }
+    
+    /* Remove background overlay on mobile */
+    .hero-overlay {
+        display: none !important;
+    }
+    
+    /* Carousel indicators for extra small mobile */
+    .carousel-indicators {
+        bottom: 0.875rem;
+    }
+    .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(1.18);
+        background-color: #fff;
+        box-shadow: 0 0 7px rgba(255, 255, 255, 0.65);
+    }
+    
+    /* Hide carousel controls on extra small mobile */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+    
+    /* Carousel controls scale for extra small mobile (if shown) */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        transform: translateY(-50%) scale(1.03);
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        transform: scale(1.03);
+    }
+}
+
+/* Mobile <= 576px - Small Mobile */
+@media (max-width: 576px) {
+    .courses-slider-container .col-sm-6 { width: 50% !important; padding: 0 0.2rem !important; }
+    .courses-slider-container .sec-course-card { height: 200px ; margin-bottom: 0.4rem !important; }
+    .courses-slider-container .sec-course-name h5 { font-size: 0.8rem !important; }
+    .courses-slider-container .sec-slogan h6 { font-size: 0.6rem !important; }
+    .courses-slider-container .sec-text small { font-size: 0.45rem !important; }
+
+    /* Hero Slider - Small Mobile */
+    .hero-slide { height: 100%; }
+    .hero-slider-section {height: 210px; }
+    
+    /* Hide text and buttons on mobile - show only images */
+    .hero-content {
+        display: none !important;
+    }
+    
+    /* Show only the background image */
+    .hero-background {
+        display: block !important;
+    }
+    
+    /* Remove background overlay on mobile */
+    .hero-overlay {
+        display: none !important;
+    }
+    
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    /* Carousel indicators for small mobile */
+    .carousel-indicators {
+        bottom: 1rem;
+    }
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(1.15);
+        background-color: #fff;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Hide carousel controls on small mobile */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+    
+    /* Carousel controls scale for small mobile (if shown) */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        transform: translateY(-50%) scale(1.04);
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        transform: scale(1.04);
+    }
+}
+
+/* Mobile <= 768px - Mobile */
+@media (max-width: 767.98px) {
+    .courses-slider-container .col-sm-6 { flex: 0 0 auto; width: 50% !important; padding: 0 0.25rem !important; }
+    .courses-slider-container .sec-course-card { margin-bottom: 0.5rem !important; }
+
+    /* Hero Slider - Mobile */
+    .hero-slide { min-height: 45vh !important; }
+    .hero-slider-section { height: 210px; }
+    
+    /* Hide text and buttons on mobile - show only images */
+    .hero-content {
+        display: none !important;
+    }
+    
+    /* Show only the background image */
+    .hero-background {
+        display: block !important;
+    }
+    
+    /* Remove background overlay on mobile */
+    .hero-overlay {
+        display: none !important;
+    }
+    
+    /* Hide carousel controls on mobile */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+    
+    /* Carousel controls scale for mobile (if shown) */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        transform: scale(1.05);
+    }
+    
+    /* Adjust indicators for mobile */
+    .carousel-indicators {
+        bottom: 1rem;
+    }
+    
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(1.12);
+        background-color: #fff;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    }
+}
+
+/* Tablet <= 992px - Tablet */
+@media (max-width: 991.98px) and (min-width: 768px) {
+    .courses-slider-container .sec-course-card { height: 280px ; }
     .courses-slider-container .sec-course-name h5 { font-size: 1rem !important; }
     .courses-slider-container .sec-slogan h6 { font-size: 0.7rem !important; }
 
-    .hero-slide { min-height: 500px !important; }
-    .hero-slide-image { object-position: center center; }
-    .hero-title { font-size: 2.5rem !important; line-height: 1.2 !important; }
-    .hero-desc { font-size: 1.1rem !important; line-height: 1.4 !important; }
-    .hero-content .btn { font-size: 0.9rem !important; padding: 0.5rem 1rem !important; }
+    /* Hero Slider - Tablet */
+    .hero-slide { min-height: 50vh !important; }
+    .hero-slider-section { height: 210px; }
+    
+    /* Hide text and buttons on mobile - show only images */
+    .hero-content {
+        display: none !important;
+    }
+    
+    /* Show only the background image */
+    .hero-background {
+        display: block !important;
+    }
+    
+    /* Remove background overlay on mobile */
+    .hero-overlay {
+        display: none !important;
+    }
+    
+    /* Carousel Controls - Tablet */
+    .carousel-control-prev,
+    .carousel-control-next {
+        margin: 0 1rem;
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 28px;
+        height: 28px;
+        padding: 6px;
+    }
+    
+    /* Carousel controls scale for tablet */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        transform: scale(1.05);
+    }
+    
+    /* Carousel indicators for tablet */
+    .carousel-indicators {
+        bottom: 1.5rem;
+    }
+    
+    .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        margin: 0 5px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(1.1);
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
 }
 
-/* Mobile <= 768px */
+/* Mobile <= 768px - Mobile (Ưu tiên cao hơn tablet) */
 @media (max-width: 767.98px) {
-    .courses-slider-container .col-sm-6 { flex: 0 0 auto; width: 50% !important; padding: 0 0.25rem !important; }
-    .courses-slider-container .sec-course-card { height: 240px !important; margin-bottom: 0.5rem !important; }
+    .courses-slider-container .sec-course-card { height: 190px }
     .courses-slider-container .sec-course-name h5 { font-size: 0.9rem !important; }
     .courses-slider-container .sec-slogan h6 { font-size: 0.65rem !important; }
     .courses-slider-container .sec-text small { font-size: 0.5rem !important; }
     .courses-slider-container .carousel-control-prev,
     .courses-slider-container .carousel-control-next { display: none !important; }
-
-    .hero-slide { min-height: 400px !important; }
-    .hero-slide-image { object-position: center center; }
-    .hero-title { font-size: 2rem !important; line-height: 1.1 !important; margin-bottom: 1rem !important; }
-    .hero-desc { font-size: 1rem !important; line-height: 1.3 !important; margin-bottom: 1.5rem !important; }
-    .hero-content .btn { font-size: 0.85rem !important; padding: 0.4rem 0.8rem !important; }
-    .hero-content .d-flex { gap: 0.5rem !important; }
-    .hero-slider-section .carousel-control-prev,
-    .hero-slider-section .carousel-control-next { display: none !important; }
-    .hero-slider-section .carousel-indicators { display: none !important; }
 }
 
-/* Mobile <= 576px */
-@media (max-width: 576px) {
-    .courses-slider-container .col-sm-6 { width: 50% !important; padding: 0 0.2rem !important; }
-    .courses-slider-container .sec-course-card { height: 200px !important; margin-bottom: 0.4rem !important; }
-    .courses-slider-container .sec-course-name h5 { font-size: 0.8rem !important; }
-    .courses-slider-container .sec-slogan h6 { font-size: 0.6rem !important; }
-    .courses-slider-container .sec-text small { font-size: 0.45rem !important; }
+/* =============================== */
+/* Landscape Orientation - Ưu tiên cao hơn mobile thường */
+/* =============================== */
 
-    .hero-slide { min-height: 350px !important; }
-    .hero-title { font-size: 1.75rem !important; line-height: 1.1 !important; margin-bottom: 0.75rem !important; }
-    .hero-desc { font-size: 0.9rem !important; line-height: 1.3 !important; margin-bottom: 1.25rem !important; }
-    .hero-content .btn { font-size: 0.8rem !important; padding: 0.35rem 0.7rem !important; }
-    .hero-content .d-flex { gap: 0.4rem !important; flex-direction: column !important; }
-    .hero-content .d-flex .btn { width: 100% !important; margin-bottom: 0.5rem !important; }
-}
-
-/* Mobile <= 480px */
-@media (max-width: 480px) {
-    .courses-slider-container .col-sm-6 { width: 50% !important; padding: 0 0.15rem !important; }
-    .courses-slider-container .sec-course-card { height: 180px !important; margin-bottom: 0.3rem !important; }
-    .courses-slider-container .sec-course-name h5 { font-size: 0.7rem !important; }
-    .courses-slider-container .sec-slogan h6 { font-size: 0.55rem !important; }
-    .courses-slider-container .sec-text small { font-size: 0.4rem !important; }
-
-    .hero-slide { min-height: 200px !important; }
-    .hero-title { font-size: 1.5rem !important; line-height: 1.1 !important; margin-bottom: 0.5rem !important; }
-    .hero-desc { font-size: 0.85rem !important; line-height: 1.2 !important; margin-bottom: 1rem !important; }
-    .hero-content .btn { font-size: 0.75rem !important; padding: 0.3rem 0.6rem !important; }
-}
-
-/* Mobile <= 360px */
-@media (max-width: 360px) {
-    .courses-slider-container .col-sm-6 { width: 50% !important; padding: 0 0.1rem !important; }
-    .courses-slider-container .sec-course-card { height: 160px !important; margin-bottom: 0.25rem !important; }
-    .courses-slider-container .sec-course-name h5 { font-size: 0.65rem !important; }
-    .courses-slider-container .sec-slogan h6 { font-size: 0.5rem !important; }
-    .courses-slider-container .sec-text small { font-size: 0.35rem !important; }
-
-    .hero-slide { min-height: 250px !important; }
-    .hero-title { font-size: 1.25rem !important; line-height: 1.1 !important; margin-bottom: 0.5rem !important; }
-    .hero-desc { font-size: 0.8rem !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
-    .hero-content .btn { font-size: 0.7rem !important; padding: 0.25rem 0.5rem !important; }
-}
-
-/* Orientation: landscape */
+/* Landscape <= 767.98px - Mobile Landscape */
 @media (max-width: 767.98px) and (orientation: landscape) {
-    .courses-slider-container .sec-course-card { height: 140px !important; }
+    .courses-slider-container .sec-course-card { height: 140px; }
     .courses-slider-container .sec-course-name h5 { font-size: 0.6rem !important; }
 
-    .hero-slide { min-height: 200px !important; }
-    .hero-slide-image { object-position: center center; }
-    .hero-title { font-size: 1.5rem !important; margin-bottom: 0.5rem !important; }
-    .hero-desc { font-size: 0.9rem !important; margin-bottom: 0.75rem !important; }
-    .hero-content .btn { font-size: 0.8rem !important; padding: 0.3rem 0.6rem !important; }
+    /* Hero Slider - Mobile Landscape */
+    .hero-slide { min-height: 25vh !important; }
+    .hero-slider-section { min-height: 25vh !important; }
+    
+    /* Hide text and buttons on mobile - show only images */
+    .hero-content {
+        display: none !important;
+    }
+    
+    /* Show only the background image */
+    .hero-background {
+        display: block !important;
+    }
+    
+    /* Remove background overlay on mobile */
+    .hero-overlay {
+        display: none !important;
+    }
+    
+    /* Carousel indicators for landscape */
+    .carousel-indicators {
+        bottom: 0.75rem;
+    }
+    .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(1.15);
+        background-color: #fff;
+        box-shadow: 0 0 7px rgba(255, 255, 255, 0.65);
+    }
+    
+    /* Hide carousel controls on landscape */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+    
+    /* Carousel controls scale for landscape (if shown) */
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        transform: translateY(-50%) scale(1.03);
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        transform: scale(1.03);
+    }
+}
+
+/* Desktop - Show text and buttons */
+@media (min-width: 992px) {
+    /* Show text and buttons on desktop */
+    .hero-content {
+        display: block !important;
+    }
+    
+    /* Ensure proper layout on desktop */
+    .hero-content-wrapper {
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Full height for desktop */
+    .hero-slide { min-height: 100vh !important; }
+    .hero-slider-section { min-height: 100vh !important; }
+    
+    /* Show background overlay on desktop */
+    .hero-overlay {
+        display: block !important;
+    }
 }
 
 /* Touch optimization */
@@ -323,7 +634,42 @@
     .sec-course-card:hover { transform: none !important; }
     .sec-course-card:active { transform: scale(0.98) !important; }
     .hero-slide-image { will-change: transform; }
-    .hero-content .btn:active { transform: scale(0.98) !important; }
+    .btn-hero:hover { transform: none !important; }
+    .btn-hero:active { transform: scale(0.98) !important; }
+    
+    /* Improve touch targets */
+    .carousel-indicators button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-slide-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide-image,
+    .btn-hero,
+    .scroll-arrow,
+    .carousel-control-prev,
+    .carousel-control-next {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .animate-fade-in-up {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }
 
 

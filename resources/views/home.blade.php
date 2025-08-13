@@ -5,96 +5,138 @@
 @section('content')
 <!-- Hero Slider Section -->
 <section class="hero-slider-section">
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
         @if(isset($sliders) && $sliders->count() > 0)
+            <!-- Carousel Indicators -->
         <div class="carousel-indicators">
                 @foreach($sliders as $index => $slider)
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
+                    <button type="button" 
+                            data-bs-target="#heroCarousel" 
+                            data-bs-slide-to="{{ $index }}" 
+                            class="{{ $index === 0 ? 'active' : '' }}"
+                            aria-label="Slide {{ $index + 1 }}">
+                    </button>
                 @endforeach
         </div>
+
+            <!-- Carousel Items -->
         <div class="carousel-inner">
                 @foreach($sliders as $index => $slider)
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                        @if($slider->button_link)
-                            <a href="{{ $slider->button_link }}" aria-label="{{ $slider->title }}" class="d-block">
-                        @endif
-                        <div class="hero-slide overflow-hidden" style="min-height: revert-layer;">
-                            <!-- Hero Image -->
+                        <div class="hero-slide">
+                            <!-- Background Image with Lazy Loading -->
+                            <div class="hero-background">
                             <img src="{{ $slider->image_url }}" 
                                  alt="{{ $slider->title }}" 
-                                 class="hero-slide-image w-100 h-100 position-absolute top-0 start-0 object-fit-cover">
-                            
-                            <!-- Content Overlay -->
-                            <div class="hero-content-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
-                                <div class="container position-relative">
+                                     class="hero-slide-image"
+                                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}"
+                                     @if($index > 0) data-src="{{ $slider->image_url }}" @endif>
+                                
+                                <!-- Gradient Overlay -->
+                                <div class="hero-overlay"></div>
+                            </div>
+
+                            <!-- Content Container -->
+                            <div class="hero-content-wrapper">
+                                <div class="container">
                         <div class="row align-items-center min-vh-100">
-                                        <div class="col-lg-7">
+                                        <div class="col-lg-7 col-md-8">
                                 <div class="hero-content">
-                                                <h1 class="display-4 fw-bold mb-4 animate-fade-in-up hero-title">
+                                                <!-- Title -->
+                                                <h1 class="hero-title animate-fade-in-up">
                                                     {{ $slider->title }}
                                     </h1>
+
+                                                <!-- Description -->
                                                 @if($slider->description)
-                                                    <p class="lead mb-4 animate-fade-in-up animate-delay-1 hero-desc">
+                                                    <p class="hero-description animate-fade-in-up animate-delay-1">
                                                         {{ $slider->description }}
                                                     </p>
                                                 @endif
-                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
+
+                                                <!-- Action Buttons -->
+                                                <div class="hero-actions animate-fade-in-up animate-delay-2">
                                                     @if($slider->button_text && $slider->button_link)
-                                                        <span class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862; pointer-events: none;">
-                                                            <i class="fas fa-graduation-cap me-2"></i>{{ $slider->button_text }}
-                                                        </span>
+                                                        <a href="{{ $slider->button_link }}" 
+                                                           class="btn btn-primary btn-hero">
+                                                            <i class="fas fa-graduation-cap me-2"></i>
+                                                            {{ $slider->button_text }}
+                                                        </a>
                                                     @endif
+                                                    
+                                                    <!-- Contact Button -->
+                                                    <a href="tel:0975186230" class="btn btn-outline-light btn-hero">
+                                                        <i class="fas fa-phone me-2"></i>
+                                                        0975.186.230
+                                                    </a>
                                     </div>
+
+
                                 </div>
                             </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                        @if($slider->button_link)
-                            </a>
-                        @endif
                 </div>
                 @endforeach
             </div>
-            @if($sliders->count() > 4)
+
+            <!-- Navigation Controls -->
+            @if($sliders->count() > 1)
                 <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             @endif
+
         @else
-            <!-- Fallback: slider cũ nếu không có dữ liệu -->
+            <!-- Fallback Slider -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="hero-slide" style="background: linear-gradient(135deg, #F9D200 0%, #F57F25 100%);">
+                    <div class="hero-slide">
+                        <div class="hero-background">
+                            <div class="hero-fallback-bg"></div>
+                            <div class="hero-overlay"></div>
+                        </div>
+                        
+                        <div class="hero-content-wrapper">
                     <div class="container">
                         <div class="row align-items-center min-vh-100">
-                            <div class="col-lg-6">
+                                    <div class="col-lg-7 col-md-8">
                                 <div class="hero-content">
-                                    <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up" style="text-shadow: 2px 2px 4px rgba(1, 88, 98, 0.3);">
+                                            <h1 class="hero-title animate-fade-in-up">
                                             DU HỌC NGHỀ ĐỨC - TƯƠNG LAI RỘNG MỞ
                                     </h1>
-                                    <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1" style="text-shadow: 1px 1px 2px rgba(1, 88, 98, 0.3);">
-                                            Thanh Cúc - Đơn vị tư vấn du học nghề Đức uy tín từ năm 2020. Chương trình Ausbildung với mức lương hấp dẫn, cơ hội định cư và phát triển sự nghiệp tại châu Âu.
-                                    </p>
-                                    <div class="d-flex flex-wrap gap-3 animate-fade-in-up animate-delay-2">
-                                        <a href="{{ route('contact') }}" class="btn btn-dark btn-lg btn-liquid" style="background: #015862; border-color: #015862;">
-                                                <i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí
-                                        </a>
-                                            <a href="tel:0975186230" class="btn btn-outline-light btn-lg" style="border-color: #015862; color: #015862; background: rgba(255,255,255,0.9);">
-                                                <i class="fas fa-phone me-2"></i>0975.186.230
+                                            <p class="hero-description animate-fade-in-up animate-delay-1">
+                                                Thanh Cúc - Đơn vị tư vấn du học nghề Đức uy tín từ năm 2020. 
+                                                Chương trình Ausbildung với mức lương hấp dẫn, cơ hội định cư và 
+                                                phát triển sự nghiệp tại châu Âu.
+                                            </p>
+                                            <div class="hero-actions animate-fade-in-up animate-delay-2">
+                                                <a href="{{ route('contact') }}" class="btn btn-primary btn-hero">
+                                                    <i class="fas fa-graduation-cap me-2"></i>
+                                                    Tư Vấn Miễn Phí
+                                                </a>
+                                                <a href="tel:0975186230" class="btn btn-outline-light btn-hero">
+                                                    <i class="fas fa-phone me-2"></i>
+                                                    0975.186.230
                                         </a>
                                     </div>
+
                                 </div>
                             </div>
-                            <div class="col-lg-6 text-center">
-                                    <img src="{{ asset('images/hero/study-abroad-1.svg') }}" alt="Du học Đức - Cơ hội vàng" class="img-fluid animate-float">
+                                    <div class="col-lg-5 col-md-4 d-none d-lg-block">
+                                        <div class="hero-illustration animate-float">
+                                            <img src="{{ asset('images/hero/study-abroad-1.svg') }}" 
+                                                 alt="Du học Đức - Cơ hội vàng" 
+                                                 class="img-fluid">
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -347,7 +389,7 @@
                                 <div class="row">
                                     @foreach($coursesChunk as $course)
                                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4">
-                                            <div class="sec-course-card position-relative overflow-hidden rounded shadow-lg" style="height: 320px; cursor: pointer;" 
+                                            <div class="sec-course-card position-relative overflow-hidden rounded shadow-lg" style="cursor: pointer;" 
                                                  onclick="openCourseModal({{ $course->id }})">
                                                 <!-- Original Database Image as Background -->
                                                 @if($course->image)
@@ -3871,161 +3913,130 @@ small, .small {
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Bootstrap carousel with custom settings
-    const coursesCarousel = document.getElementById('coursesCarousel');
+    // Lazy Loading for Images
+    const lazyImages = document.querySelectorAll('img[data-src]');
     
-    if (coursesCarousel) {
-        // Initialize carousel
-        const carousel = new bootstrap.Carousel(coursesCarousel, {
-            interval: 5000,
-            wrap: true,
-            touch: true
-        });
-        
-        // Add animation to cards when carousel slides
-        coursesCarousel.addEventListener('slide.bs.carousel', function (e) {
-            // Reset animations
-            const allCards = this.querySelectorAll('.course-card');
-            allCards.forEach(card => {
-                card.style.animation = 'none';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-            });
-        });
-        
-        coursesCarousel.addEventListener('slid.bs.carousel', function (e) {
-            // Animate new active slide cards
-            const activeSlide = this.querySelector('.carousel-item.active');
-            const cards = activeSlide.querySelectorAll('.course-card');
-            
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animation = 'fadeInUp 0.6s ease forwards';
-                    card.style.animationDelay = `${index * 0.1}s`;
-                }, 50);
-            });
-        });
-        
-        // Pause carousel on hover
-        coursesCarousel.addEventListener('mouseenter', function() {
-            carousel.pause();
-        });
-        
-        coursesCarousel.addEventListener('mouseleave', function() {
-            carousel.cycle();
-        });
-        
-        // Initialize first slide animations
-        const firstSlideCards = coursesCarousel.querySelectorAll('.carousel-item.active .course-card');
-        firstSlideCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.animation = 'fadeInUp 0.6s ease forwards';
-                card.style.animationDelay = `${index * 0.1}s`;
-            }, 100);
-        });
-    }
-    
-    // Add hover effects to course cards
-    const courseCards = document.querySelectorAll('.course-card');
-    courseCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const cards = entry.target.querySelectorAll('.course-card');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.animationPlayState = 'running';
-                    }, index * 100);
-                });
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+            });
+        });
+        
+    lazyImages.forEach(img => imageObserver.observe(img));
+    
+
+    
+    // Carousel performance optimization
+    const carousel = document.getElementById('heroCarousel');
+    if (carousel) {
+        // Pause carousel on hover for better UX
+        carousel.addEventListener('mouseenter', function() {
+            const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+            if (bsCarousel) {
+                bsCarousel.pause();
             }
         });
-    }, observerOptions);
-    
-    // Observe the courses section
-    const coursesSection = document.querySelector('.py-5.bg-light');
-    if (coursesSection && coursesSection.querySelector('#coursesCarousel')) {
-        observer.observe(coursesSection);
+        
+        carousel.addEventListener('mouseleave', function() {
+            const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+            if (bsCarousel) {
+                bsCarousel.cycle();
+            }
+        });
+        
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+        
+        carousel.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        carousel.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                if (bsCarousel) {
+                    if (diff > 0) {
+                        bsCarousel.next();
+                    } else {
+                        bsCarousel.prev();
+                    }
+                }
+            }
+        }
     }
     
-    // Initialize Teachers Slider
-    const teachersSlider = document.getElementById('teachersSlider');
+
     
-    if (teachersSlider) {
-        // Initialize carousel
-        const carousel = new bootstrap.Carousel(teachersSlider, {
-            interval: 5000,
-            wrap: true,
-            touch: true
-        });
+    // Keyboard navigation for accessibility
+    document.addEventListener('keydown', function(e) {
+        const carousel = document.getElementById('heroCarousel');
+        if (!carousel) return;
         
-        // Add animation to cards when carousel slides
-        teachersSlider.addEventListener('slide.bs.carousel', function (e) {
-            // Reset animations
-            const allCards = this.querySelectorAll('.teacher-card-new');
-            allCards.forEach(card => {
-                card.style.animation = 'none';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-            });
-        });
+        const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+        if (!bsCarousel) return;
         
-        teachersSlider.addEventListener('slid.bs.carousel', function (e) {
-            // Animate new active slide cards
-            const activeSlide = this.querySelector('.carousel-item.active');
-            const cards = activeSlide.querySelectorAll('.teacher-card-new');
-            
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animation = 'fadeInUp 0.8s ease forwards';
-                    card.style.animationDelay = `${index * 0.15}s`;
-                }, 100);
-            });
-        });
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                bsCarousel.prev();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                bsCarousel.next();
+                break;
+            case ' ':
+                e.preventDefault();
+                bsCarousel.cycle();
+                break;
+        }
+    });
+    
+    // Performance: Preload next image
+    function preloadNextImage() {
+        const activeSlide = document.querySelector('.carousel-item.active');
+        if (!activeSlide) return;
         
-        // Pause carousel on hover
-        teachersSlider.addEventListener('mouseenter', function() {
-            carousel.pause();
-        });
+        const nextSlide = activeSlide.nextElementSibling || 
+                         document.querySelector('.carousel-item');
         
-        teachersSlider.addEventListener('mouseleave', function() {
-            carousel.cycle();
-        });
-        
-        // Initialize first slide animations
-        const firstSlideCards = teachersSlider.querySelectorAll('.carousel-item.active .teacher-card-new');
-        firstSlideCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.animation = 'fadeInUp 0.8s ease forwards';
-                card.style.animationDelay = `${index * 0.15}s`;
-            }, 300);
-        });
-        
-        // Intersection Observer for initial load
-        const teacherObserver = new IntersectionObserver(function(entries) {
+        if (nextSlide) {
+            const nextImage = nextSlide.querySelector('img[data-src]');
+            if (nextImage && nextImage.dataset.src) {
+                const img = new Image();
+                img.src = nextImage.dataset.src;
+            }
+        }
+    }
+    
+    // Preload on carousel slide change
+    if (carousel) {
+        carousel.addEventListener('slid.bs.carousel', preloadNextImage);
+    }
+    
+    // Intersection Observer for animations
+    const animatedElements = document.querySelectorAll('.animate-fade-in-up');
+    
+    const animationObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const firstSlideCards = entry.target.querySelectorAll('.carousel-item.active .teacher-card-new');
-                    firstSlideCards.forEach((card, index) => {
-                        setTimeout(() => {
-                            card.style.animation = 'fadeInUp 0.8s ease forwards';
-                            card.style.animationDelay = `${index * 0.15}s`;
-                        }, index * 100);
-                    });
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                animationObserver.unobserve(entry.target);
                 }
             });
         }, {
@@ -4033,163 +4044,45 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '0px 0px -50px 0px'
         });
         
-        teacherObserver.observe(teachersSlider);
-    }
-    
-    // Add hover effects to teacher cards
-    const teacherCards = document.querySelectorAll('.teacher-card');
-    teacherCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
+    animatedElements.forEach(element => {
+        animationObserver.observe(element);
     });
-});
-
-// Mobile-specific features
-function initMobileFeatures() {
-    if (window.innerWidth <= 768) {
-        // Add mobile CTA button
-        if (!document.querySelector('.mobile-cta-sticky')) {
-            const mobileCTA = document.createElement('a');
-            mobileCTA.href = '{{ route("contact") }}';
-            mobileCTA.className = 'mobile-cta-sticky d-md-none';
-            mobileCTA.innerHTML = '<i class="fas fa-graduation-cap me-2"></i>Tư Vấn Miễn Phí';
-            document.body.appendChild(mobileCTA);
-        }
-        
-        // Add floating phone button
-        if (!document.querySelector('.mobile-phone-float')) {
-            const phoneFloat = document.createElement('a');
-            phoneFloat.href = 'tel:0975186230';
-            phoneFloat.className = 'mobile-phone-float d-md-none';
-            phoneFloat.innerHTML = '<i class="fas fa-phone"></i>';
-            phoneFloat.title = 'Gọi ngay: 0975.186.230';
-            document.body.appendChild(phoneFloat);
-        }
-        
-        // Add swipe indicators to hero carousel
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        carouselItems.forEach(item => {
-            if (!item.querySelector('.swipe-indicator')) {
-                const swipeIndicator = document.createElement('div');
-                swipeIndicator.className = 'swipe-indicator d-md-none';
-                swipeIndicator.innerHTML = '<i class="fas fa-chevron-left me-2"></i>Vuốt để xem thêm<i class="fas fa-chevron-right ms-2"></i>';
-                item.appendChild(swipeIndicator);
-            }
-        });
-        
-        // Optimize touch scrolling
-        document.body.style.webkitOverflowScrolling = 'touch';
-        
-        // Add touch feedback to buttons
-        const buttons = document.querySelectorAll('.btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            btn.addEventListener('touchend', function() {
+    
+    // Add loading state for buttons
+    const heroButtons = document.querySelectorAll('.btn-hero');
+    heroButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Add loading state
+            const originalText = this.innerHTML;
+            this.innerHTML = '<span class="loading-spinner"></span> Đang tải...';
+            this.disabled = true;
+            
+            // Reset after navigation
                 setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
+                this.innerHTML = originalText;
+                this.disabled = false;
+            }, 2000);
             });
         });
-    }
-}
-
-// Initialize mobile features
-initMobileFeatures();
-
-// Re-initialize on resize
-window.addEventListener('resize', initMobileFeatures);
-
-// Teacher Modal Functions
-function openTeacherModal(teacherId) {
-    // Show loading state
-    const modalBody = document.getElementById('teacherModalBody');
-    modalBody.innerHTML = `
-        <div class="text-center py-4">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="mt-3">Đang tải thông tin giảng viên...</p>
-        </div>
-    `;
     
-    // Show modal
-    const modal = new bootstrap.Modal(document.getElementById('teacherModal'));
-    modal.show();
-    
-    // Fetch teacher data
-    fetch(`/api/teachers/${teacherId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const teacher = data.teacher;
-                modalBody.innerHTML = `
-                    <div class="teacher-modal-content">
-                        <div class="teacher-modal-avatar">
-                            ${teacher.avatar ? 
-                                `<img src="/storage/${teacher.avatar}" alt="${teacher.name}">` :
-                                `<div class="teacher-img-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>`
-                            }
-                        </div>
-                        <div class="teacher-modal-info">
-                            <h3 class="teacher-modal-name">${teacher.name}</h3>
-                            <p class="teacher-modal-specialization">${teacher.specialization}</p>
-                            <div class="teacher-modal-certification">${teacher.certification}</div>
-                            <div class="teacher-modal-bio">${teacher.bio || 'Thông tin chi tiết về giảng viên sẽ được cập nhật sớm.'}</div>
-                            
-                            <div class="teacher-modal-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number">${teacher.experience_years || 0}</span>
-                                    <span class="stat-label">Năm kinh nghiệm</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">${teacher.is_featured ? 'Có' : 'Không'}</span>
-                                    <span class="stat-label">Giảng viên nổi bật</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">${teacher.is_active ? 'Đang dạy' : 'Tạm nghỉ'}</span>
-                                    <span class="stat-label">Trạng thái</span>
-                                </div>
-                            </div>
-                            
-                            <div class="teacher-modal-social">
-                                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
-                                <a href="#" title="Phone"><i class="fas fa-phone"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                modalBody.innerHTML = `
-                    <div class="text-center py-4">
-                        <i class="fas fa-exclamation-triangle text-warning fa-3x mb-3"></i>
-                        <h5>Không tìm thấy thông tin</h5>
-                        <p class="text-muted">Không thể tải thông tin giảng viên. Vui lòng thử lại sau.</p>
-                    </div>
-                `;
+    // Optimize for mobile performance
+    if ('ontouchstart' in window) {
+        // Disable hover effects on touch devices
+        document.body.classList.add('touch-device');
+        
+        // Reduce animation complexity on mobile
+        const style = document.createElement('style');
+        style.textContent = `
+            .touch-device .btn-hero::before {
+                display: none;
             }
-        })
-        .catch(error => {
-            console.error('Error fetching teacher data:', error);
-            modalBody.innerHTML = `
-                <div class="text-center py-4">
-                    <i class="fas fa-exclamation-triangle text-danger fa-3x mb-3"></i>
-                    <h5>Lỗi kết nối</h5>
-                    <p class="text-muted">Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối internet và thử lại.</p>
-                </div>
-            `;
-        });
-}
+            .touch-device .hero-slide-image {
+                transform: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+});
 </script>
 @endpush
 

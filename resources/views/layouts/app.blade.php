@@ -33,6 +33,8 @@
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
     <!-- Global Site Styles -->
     <link href="{{ asset('css/site.css') }}" rel="stylesheet">
+    <!-- Carousel Styles -->
+    <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
     <!-- Consolidated Responsive Styles -->
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
     
@@ -478,24 +480,7 @@
             text-shadow: none !important;
         }
         
-        .carousel-indicators {
-            bottom: 30px;
-            z-index: 3;
-        }
-        
-        .carousel-indicators button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin: 0 5px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-        }
-        
-        .carousel-indicators button.active {
-            background-color: white;
-            transform: scale(1.2);
-        }
+        /* Carousel indicators moved to carousel.css */
         
         .carousel-control-prev,
         .carousel-control-next {
@@ -1295,26 +1280,7 @@
             border-color: var(--secondary-color);
         }
         
-        .carousel-indicators {
-            bottom: 10px;
-        }
-        
-        .carousel-indicators button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin: 0 8px;
-            background-color: var(--primary-color);
-            opacity: 0.5;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        
-        .carousel-indicators button.active {
-            opacity: 1;
-            transform: scale(1.2);
-            background-color: var(--secondary-color);
-        }
+        /* Carousel indicators moved to carousel.css */
         
         .carousel-control-prev,
         .carousel-control-next {
@@ -1378,9 +1344,7 @@
                 font-size: 3rem !important;
             }
             
-            .carousel-indicators {
-                bottom: -40px;
-            }
+            /* Carousel indicators moved to carousel.css */
             
             .carousel-control-icon {
                 width: 40px;
