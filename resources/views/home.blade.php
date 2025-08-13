@@ -155,79 +155,111 @@
             <p class="lead text-muted animate-on-scroll animate-delay-1">Những ưu điểm vượt trội giúp bạn học tiếng Đức hiệu quả</p>
         </div>
         
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card feature-card h-100 text-center magnetic animate-on-scroll">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-users fa-3x text-primary"></i>
+        @if(isset($reasons) && $reasons->count() > 0)
+            <div class="row">
+                @foreach($reasons as $idx => $reason)
+                    @php
+                        $delayClass = match($idx % 6) {
+                            1 => 'animate-delay-1',
+                            2 => 'animate-delay-2',
+                            3 => 'animate-delay-3',
+                            4 => 'animate-delay-4',
+                            5 => 'animate-delay-5',
+                            default => ''
+                        };
+                    @endphp
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card feature-card h-100 text-center magnetic animate-on-scroll {{ $delayClass }}">
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    @if(!empty($reason->icon))
+                                        <i class="{{ $reason->icon }} fa-3x" style="color: {{ $reason->color ?: '#0d6efd' }}"></i>
+                                    @else
+                                        <i class="fas fa-check-circle fa-3x text-primary"></i>
+                                    @endif
+                                </div>
+                                <h5 class="fw-bold mb-3">{{ $reason->title }}</h5>
+                                <p class="text-muted">{{ $reason->description }}</p>
+                            </div>
                         </div>
-                        <h5 class="fw-bold mb-3">Giảng Viên Bản Ngữ</h5>
-                        <p class="text-muted">Đội ngũ giảng viên người Đức với kinh nghiệm giảng dạy chuyên nghiệp</p>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card feature-card h-100 text-center magnetic animate-on-scroll">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-users fa-3x text-primary"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Giảng Viên Bản Ngữ</h5>
+                            <p class="text-muted">Đội ngũ giảng viên người Đức với kinh nghiệm giảng dạy chuyên nghiệp</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-1">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-certificate fa-3x text-secondary"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Chứng Chỉ Quốc Tế</h5>
+                            <p class="text-muted">Luyện thi các chứng chỉ Goethe, TestDaF, DSH với tỷ lệ đậu cao</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-2">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-laptop fa-3x text-accent-color"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Học Online & Offline</h5>
+                            <p class="text-muted">Linh hoạt hình thức học tập phù hợp với lịch trình của bạn</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-3">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-clock fa-3x text-success"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Lịch Học Linh Hoạt</h5>
+                            <p class="text-muted">Nhiều khung giờ học từ sáng đến tối, phù hợp với mọi đối tượng</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-4">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-handshake fa-3x text-primary"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Hỗ Trợ Du Học</h5>
+                            <p class="text-muted">Tư vấn và hỗ trợ thủ tục du học Đức miễn phí cho học viên</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-5">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-star fa-3x text-secondary"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Chất Lượng Đảm Bảo</h5>
+                            <p class="text-muted">Cam kết chất lượng với chính sách hoàn tiền nếu không hài lòng</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-1">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-certificate fa-3x text-secondary"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3">Chứng Chỉ Quốc Tế</h5>
-                        <p class="text-muted">Luyện thi các chứng chỉ Goethe, TestDaF, DSH với tỷ lệ đậu cao</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-2">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-laptop fa-3x text-accent-color"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3">Học Online & Offline</h5>
-                        <p class="text-muted">Linh hoạt hình thức học tập phù hợp với lịch trình của bạn</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-3">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-clock fa-3x text-success"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3">Lịch Học Linh Hoạt</h5>
-                        <p class="text-muted">Nhiều khung giờ học từ sáng đến tối, phù hợp với mọi đối tượng</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-4">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-handshake fa-3x text-primary"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3">Hỗ Trợ Du Học</h5>
-                        <p class="text-muted">Tư vấn và hỗ trợ thủ tục du học Đức miễn phí cho học viên</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card feature-card h-100 text-center magnetic animate-on-scroll animate-delay-5">
-                    <div class="card-body p-4">
-                        <div class="mb-3">
-                            <i class="fas fa-star fa-3x text-secondary"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3">Chất Lượng Đảm Bảo</h5>
-                        <p class="text-muted">Cam kết chất lượng với chính sách hoàn tiền nếu không hài lòng</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
 </section>
 
