@@ -96,65 +96,94 @@
     </div>
 </section>
 
-<!-- Mission & Vision -->
+<!-- Mission, Vision & Core Values Tabs -->
 <section class="py-5 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body p-5 text-center">
-                        <div class="mb-4">
-                            <i class="fas fa-bullseye fa-4x text-primary"></i>
-                        </div>
-                        <h3 class="fw-bold mb-4">Sứ Mệnh</h3>
-                        <p class="text-muted">
-                            {{ \App\Models\Setting::get('about_mission', 'Giúp hàng triệu người Việt Nam vượt qua tiếng Anh dễ dàng, một lần và mãi mãi thông qua phương pháp học đơn giản, hiệu quả và khoa học.') }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body p-5 text-center">
-                        <div class="mb-4">
-                            <i class="fas fa-eye fa-4x text-primary"></i>
-                        </div>
-                        <h3 class="fw-bold mb-4">Tầm Nhìn</h3>
-                        <p class="text-muted">
-                            {{ \App\Models\Setting::get('about_vision', 'Trở thành trung tâm anh ngữ hàng đầu Việt Nam, được công nhận về chất lượng giảng dạy và phương pháp học tiếng Anh độc quyền.') }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Core Values -->
-<section class="py-5">
-    <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Giá Trị Cốt Lõi</h2>
-            <p class="text-muted">Những giá trị định hướng mọi hoạt động của SEC</p>
+            <h2 class="fw-bold text-primary mb-3">Sứ Mệnh - Tầm Nhìn - Giá Trị Cốt Lõi</h2>
+            <p class="text-muted">Những định hướng và giá trị cốt lõi của Thanh Cúc</p>
         </div>
         
-        <div class="row">
-            @php
-                $coreValues = json_decode(\App\Models\Setting::get('about_core_values', '[]'), true);
-            @endphp
-            
-            @foreach($coreValues as $value)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="text-center">
-                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                             style="width: 80px; height: 80px;">
-                            <i class="{{ $value['icon'] ?? 'fas fa-star' }} fa-2x text-white"></i>
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs justify-content-center mb-4" id="aboutTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="mission-tab" data-bs-toggle="tab" data-bs-target="#mission" type="button" role="tab" aria-controls="mission" aria-selected="true">
+                    <i class="fas fa-bullseye me-2"></i>Sứ Mệnh
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab" aria-controls="vision" aria-selected="false">
+                    <i class="fas fa-eye me-2"></i>Tầm Nhìn
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="values-tab" data-bs-toggle="tab" data-bs-target="#values" type="button" role="tab" aria-controls="values" aria-selected="false">
+                    <i class="fas fa-star me-2"></i>Giá Trị Cốt Lõi
+                </button>
+            </li>
+        </ul>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="aboutTabsContent">
+            <!-- Mission Tab -->
+            <div class="tab-pane fade show active" id="mission" role="tabpanel" aria-labelledby="mission-tab">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-5 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-bullseye fa-4x text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-4">Sứ Mệnh</h3>
+                                <p class="text-muted lead">
+                                    {{ \App\Models\Setting::get('about_mission', 'Giúp hàng triệu người Việt Nam vượt qua tiếng Anh dễ dàng, một lần và mãi mãi thông qua phương pháp học đơn giản, hiệu quả và khoa học.') }}
+                                </p>
+                            </div>
                         </div>
-                        <h5 class="fw-bold mb-3">{{ $value['title'] ?? '' }}</h5>
-                        <p class="text-muted">{{ $value['description'] ?? '' }}</p>
                     </div>
                 </div>
-            @endforeach
+            </div>
+            
+            <!-- Vision Tab -->
+            <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-5 text-center">
+                                <div class="mb-4">
+                                    <i class="fas fa-eye fa-4x text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-4">Tầm Nhìn</h3>
+                                <p class="text-muted lead">
+                                    {{ \App\Models\Setting::get('about_vision', 'Trở thành trung tâm anh ngữ hàng đầu Việt Nam, được công nhận về chất lượng giảng dạy và phương pháp học tiếng Anh độc quyền.') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Core Values Tab -->
+            <div class="tab-pane fade" id="values" role="tabpanel" aria-labelledby="values-tab">
+                <div class="row">
+                    @php
+                        $coreValues = json_decode(\App\Models\Setting::get('about_core_values', '[]'), true);
+                    @endphp
+                    
+                    @foreach($coreValues as $value)
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                     style="width: 80px; height: 80px;">
+                                    <i class="{{ $value['icon'] ?? 'fas fa-star' }} fa-2x text-white"></i>
+                                </div>
+                                <h5 class="fw-bold mb-3">{{ $value['title'] ?? '' }}</h5>
+                                <p class="text-muted">{{ $value['description'] ?? '' }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -255,7 +284,7 @@
                                          <h6 class="fw-bold mb-2">
                                              <i class="fas fa-info-circle text-primary me-2"></i>Giới thiệu
                                          </h6>
-                                         <p class="small mb-0">{!! Str::limit(strip_tags($teacher->bio), 100) !!}</p>
+                                         <div class="small mb-0">{!! $teacher->bio !!}</div>
                                      </div>
                                      @endif
                                      
@@ -406,46 +435,7 @@
             @endif
         </div>
         
-        <!-- Facility Features -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-5">
-                        <h4 class="fw-bold text-center mb-4">Tiện Ích Đặc Biệt</h4>
-                        <div class="row text-center">
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="facility-feature">
-                                    <i class="fas fa-wifi fa-2x text-primary mb-3"></i>
-                                    <h6 class="fw-bold">WiFi Miễn Phí</h6>
-                                    <p class="text-muted small">Kết nối internet tốc độ cao</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="facility-feature">
-                                    <i class="fas fa-coffee fa-2x text-primary mb-3"></i>
-                                    <h6 class="fw-bold">Khu Vực Nghỉ</h6>
-                                    <p class="text-muted small">Không gian thư giãn với đồ uống miễn phí</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="facility-feature">
-                                    <i class="fas fa-parking fa-2x text-primary mb-3"></i>
-                                    <h6 class="fw-bold">Bãi Đỗ Xe</h6>
-                                    <p class="text-muted small">Chỗ đỗ xe máy và ô tô an toàn</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="facility-feature">
-                                    <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
-                                    <h6 class="fw-bold">An Ninh 24/7</h6>
-                                    <p class="text-muted small">Hệ thống bảo vệ và camera giám sát</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 @endif
@@ -513,10 +503,114 @@
 
 @push('styles')
 <style>
+/* Tab System Styles */
+.nav-tabs {
+    border-bottom: 2px solid #e9ecef;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    margin: 0 0.5rem;
+    border-radius: 10px 10px 0 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--primary-color);
+    background-color: rgba(1, 88, 98, 0.05);
+    border: none;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    background-color: white;
+    border: none;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.nav-tabs .nav-link i {
+    transition: transform 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover i,
+.nav-tabs .nav-link.active i {
+    transform: scale(1.1);
+}
+
+.tab-content {
+    background: white;
+    border-radius: 0 0 15px 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tab-pane {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Tab Design */
+@media (max-width: 768px) {
+    .nav-tabs {
+        flex-direction: column;
+        border-bottom: none;
+    }
+    
+    .nav-tabs .nav-link {
+        margin: 0.25rem 0;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .nav-tabs .nav-link.active::after {
+        display: none;
+    }
+    
+    .tab-content {
+        border-radius: 15px;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-tabs .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .tab-content {
+        padding: 1.5rem;
+    }
+}
 /* Teaching Staff Styles */
 .teacher-card {
     transition: all 0.3s ease;
     overflow: hidden;
+    height: auto;
 }
 
 .teacher-card:hover {
@@ -528,6 +622,7 @@
     position: relative;
     overflow: hidden;
     height: 200px;
+    flex-shrink: 0;
 }
 
 .teacher-placeholder {
@@ -585,6 +680,30 @@
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
     border: 1px solid #dee2e6;
+}
+
+/* Teacher Bio Content */
+.teacher-card .small {
+    line-height: 1.6;
+    color: #6c757d;
+}
+
+.teacher-card .small p {
+    margin-bottom: 0.5rem;
+}
+
+.teacher-card .small p:last-child {
+    margin-bottom: 0;
+}
+
+.teacher-card .small ul, 
+.teacher-card .small ol {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+}
+
+.teacher-card .small li {
+    margin-bottom: 0.25rem;
 }
 
 /* Gallery Slider Styles */
@@ -775,24 +894,7 @@
     z-index: 10;
 }
 
-/* Facility Features */
-.facility-feature {
-    padding: 1rem;
-    transition: all 0.3s ease;
-}
 
-.facility-feature:hover {
-    transform: translateY(-5px);
-}
-
-.facility-feature i {
-    transition: all 0.3s ease;
-}
-
-.facility-feature:hover i {
-    transform: scale(1.1);
-    color: var(--secondary-color) !important;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
