@@ -138,7 +138,8 @@ class AboutController extends Controller
                     if (json_last_error() !== JSON_ERROR_NONE) {
                         return $this->errorAndRedirect('Dữ liệu JSON không hợp lệ cho trường: ' . $setting->label, 'admin.about.index');
                     }
-                    $value = $value; // Keep as JSON string
+                    // Ensure value is a valid JSON string
+                    $value = json_encode($decoded);
                 }
                 
                 // Handle file uploads

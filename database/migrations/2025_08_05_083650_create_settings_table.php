@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('value')->nullable();
             $table->string('type')->default('text'); // text, textarea, number, boolean, image, json
             $table->string('group')->default('general'); // general, contact, social, seo
-            $table->string('label');
+            $table->string('label')->nullable();
             $table->text('description')->nullable();
             $table->integer('sort_order')->default(0);
             $table->timestamps();

@@ -595,6 +595,12 @@
             updateAchievementsJson();
             updateHeaderStatsJson();
             
+            // Validate form before submission
+            if (!validateForm()) {
+                e.preventDefault();
+                return false;
+            }
+            
             // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
@@ -681,18 +687,20 @@
             <div class="header-stat-item border rounded p-3 mb-3">
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="form-label">Số liệu</label>
+                        <label class="form-label">Số liệu <span class="text-danger">*</span></label>
                         <input type="text" 
                                class="form-control" 
                                name="header_stats[${index}][number]" 
-                               placeholder="25+">
+                               placeholder="25+"
+                               required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Nhãn</label>
+                        <label class="form-label">Nhãn <span class="text-danger">*</span></label>
                         <input type="text" 
                                class="form-control" 
                                name="header_stats[${index}][label]" 
-                               placeholder="Giảng viên">
+                               placeholder="Giảng viên"
+                               required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">&nbsp;</label>
@@ -737,15 +745,76 @@
     function updateHeaderStatsJson() {
         const headerStats = [];
         document.querySelectorAll('.header-stat-item').forEach((item, index) => {
-            const number = item.querySelector(`input[name="header_stats[${index}][number]"]`).value;
-            const label = item.querySelector(`input[name="header_stats[${index}][label]"]`).value;
+            const numberInput = item.querySelector(`input[name="header_stats[${index}][number]"]`);
+            const labelInput = item.querySelector(`input[name="header_stats[${index}][label]"]`);
             
-            if (number.trim() && label.trim()) {
-                headerStats.push({ number, label });
+            if (numberInput && labelInput) {
+                const number = numberInput.value.trim();
+                const label = labelInput.value.trim();
+                
+                // Chỉ thêm vào mảng nếu cả number và label đều có giá trị
+                if (number && label) {
+                    headerStats.push({ 
+                        number: number, 
+                        label: label 
+                    });
+                }
             }
         });
         
+        // Đảm bảo luôn có ít nhất 3 thống kê mặc định
+        if (headerStats.length === 0) {
+            headerStats.push(
+                { number: '25+', label: 'Giảng viên' },
+                { number: '4+', label: 'Năm kinh nghiệm' },
+                { number: '1000+', label: 'Học viên thành công' }
+            );
+        }
+        
         document.getElementById('header_stats_json').value = JSON.stringify(headerStats);
+    }
+    
+    // Form validation function
+    function validateForm() {
+        let isValid = true;
+        const errors = [];
+        
+        // Validate header stats
+        const headerStatsContainer = document.getElementById('header-stats-container');
+        const headerStatItems = headerStatsContainer.querySelectorAll('.header-stat-item');
+        
+        headerStatItems.forEach((item, index) => {
+            const numberInput = item.querySelector(`input[name="header_stats[${index}][number]"]`);
+            const labelInput = item.querySelector(`input[name="header_stats[${index}][label]"]`);
+            
+            if (numberInput && labelInput) {
+                if (!numberInput.value.trim()) {
+                    errors.push(`Số liệu thống kê ${index + 1} không được để trống`);
+                    isValid = false;
+                }
+                if (!labelInput.value.trim()) {
+                    errors.push(`Nhãn thống kê ${index + 1} không được để trống`);
+                    isValid = false;
+                }
+            }
+        });
+        
+        // Validate other required fields
+        const requiredFields = document.querySelectorAll('[required]');
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                field.classList.remove('is-invalid');
+            }
+        });
+        
+        if (!isValid) {
+            alert('Vui lòng kiểm tra các lỗi sau:\n' + errors.join('\n'));
+        }
+        
+        return isValid;
     }
     
     function resetToDefault() {
