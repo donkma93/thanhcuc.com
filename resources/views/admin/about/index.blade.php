@@ -21,9 +21,194 @@
 @endsection
 
 @section('content')
+    @if(session('image_updated'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            <strong>Thành công!</strong> 
+            @if(session('image_updated') === 'header')
+                Ảnh header đã được cập nhật thành công! 
+            @elseif(session('image_updated') === 'building')
+                Ảnh tòa nhà đã được cập nhật thành công!
+            @endif
+            Để thấy thay đổi ngay lập tức, hãy sử dụng nút "Xóa cache ảnh" bên dưới hoặc làm mới trang.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data" id="aboutForm">
         @csrf
         @method('PUT')
+        
+        <!-- Quản lý ảnh header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-images me-2"></i>Quản lý ảnh header
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Ảnh header chính -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="border rounded p-3">
+                                    <h6 class="fw-bold mb-3">
+                                        <i class="fas fa-image me-2 text-primary"></i>Ảnh Header Chính
+                                    </h6>
+                                    <p class="text-muted small mb-3">Ảnh hiển thị toàn màn hình ở đầu trang about</p>
+                                    
+                                    @if(file_exists(public_path('images/about/team-photo.jpg')))
+                                        <div class="mb-3">
+                                            <label class="form-label">Ảnh hiện tại:</label>
+                                            <div class="position-relative">
+                                                <img src="{{ asset('images/about/team-photo.jpg') }}?v={{ time() }}" 
+                                                     alt="Ảnh header hiện tại" 
+                                                     class="img-fluid rounded border" 
+                                                     style="max-height: 200px; width: 100%; object-fit: cover;">
+                                                <div class="position-absolute top-0 end-0 m-2">
+                                                    <span class="badge bg-success">Đang sử dụng</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="alert alert-warning mb-3">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            Chưa có ảnh header. Vui lòng upload ảnh để hiển thị.
+                                        </div>
+                                    @endif
+                                    
+                                    <div class="mb-3">
+                                        <label for="header_image" class="form-label">Upload ảnh mới:</label>
+                                        <input type="file" 
+                                               class="form-control @error('header_image') is-invalid @enderror" 
+                                               id="header_image" 
+                                               name="header_image" 
+                                               accept="image/*">
+                                        <div class="form-text">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Định dạng: JPG, PNG, GIF, SVG. Kích thước tối đa: 2MB
+                                        </div>
+                                        @error('header_image')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="previewImage('header_image', 'header_preview')">
+                                            <i class="fas fa-eye me-1"></i>Xem trước
+                                        </button>
+                                        @if(file_exists(public_path('images/about/team-photo.jpg')))
+                                            <a href="{{ asset('images/about/team-photo.jpg') }}" target="_blank" class="btn btn-outline-info btn-sm">
+                                                <i class="fas fa-external-link-alt me-1"></i>Xem ảnh gốc
+                                            </a>
+                                        @endif
+                                    </div>
+                                    
+                                    <!-- Preview -->
+                                    <div id="header_preview" class="mt-3" style="display: none;">
+                                        <label class="form-label">Xem trước:</label>
+                                        <img id="header_preview_img" src="" alt="Preview" class="img-fluid rounded border" style="max-height: 200px; width: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Ảnh tòa nhà -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="border rounded p-3">
+                                    <h6 class="fw-bold mb-3">
+                                        <i class="fas fa-building me-2 text-primary"></i>Ảnh Tòa Nhà
+                                    </h6>
+                                    <p class="text-muted small mb-3">Ảnh hiển thị trong phần tổng quan về trung tâm</p>
+                                    
+                                    @if(file_exists(public_path('images/about/sec-building.svg')))
+                                        <div class="mb-3">
+                                            <label class="form-label">Ảnh hiện tại:</label>
+                                            <div class="position-relative">
+                                                <img src="{{ asset('images/about/sec-building.svg') }}?v={{ time() }}" 
+                                                     alt="Ảnh tòa nhà hiện tại" 
+                                                     class="img-fluid rounded border" 
+                                                     style="max-height: 200px; width: 100%; object-fit: cover;">
+                                                <div class="position-absolute top-0 end-0 m-2">
+                                                    <span class="badge bg-success">Đang sử dụng</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="alert alert-warning mb-3">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            Chưa có ảnh tòa nhà. Vui lòng upload ảnh để hiển thị.
+                                        </div>
+                                    @endif
+                                    
+                                    <div class="mb-3">
+                                        <label for="building_image" class="form-label">Upload ảnh mới:</label>
+                                        <input type="file" 
+                                               class="form-control @error('building_image') is-invalid @enderror" 
+                                               id="building_image" 
+                                               name="building_image" 
+                                               accept="image/*">
+                                        <div class="form-text">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Định dạng: JPG, PNG, GIF, SVG. Kích thước tối đa: 2MB
+                                        </div>
+                                        @error('building_image')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="previewImage('building_image', 'building_preview')">
+                                            <i class="fas fa-eye me-1"></i>Xem trước
+                                        </button>
+                                        @if(file_exists(public_path('images/about/sec-building.svg')))
+                                            <a href="{{ asset('images/about/sec-building.svg') }}" target="_blank" class="btn btn-outline-info btn-sm">
+                                                <i class="fas fa-external-link-alt me-1"></i>Xem ảnh gốc
+                                            </a>
+                                        @endif
+                                    </div>
+                                    
+                                    <!-- Preview -->
+                                    <div id="building_preview" class="mt-3" style="display: none;">
+                                        <label class="form-label">Xem trước:</label>
+                                        <img id="building_preview_img" src="" alt="Preview" class="img-fluid rounded border" style="max-height: 200px; width: 100%; object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Lưu ý:</strong> Ảnh sẽ được tự động resize và tối ưu hóa. 
+                            Nên sử dụng ảnh có tỷ lệ khung hình phù hợp để hiển thị đẹp nhất.
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Lưu ý về cache:</strong> Sau khi upload ảnh mới, có thể cần làm mới trang hoặc xóa cache browser để thấy thay đổi ngay lập tức.
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-sm btn-outline-warning" onclick="refreshPage()">
+                                    <i class="fas fa-sync-alt me-1"></i>Làm mới trang
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-info" onclick="clearImageCache()">
+                                    <i class="fas fa-broom me-1"></i>Xóa cache ảnh
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Mẹo:</strong> Để thấy thay đổi ảnh ngay lập tức:
+                            <ul class="mb-0 mt-2">
+                                <li>Nhấn <kbd>Ctrl + F5</kbd> (Windows) hoặc <kbd>Cmd + Shift + R</kbd> (Mac) để làm mới hoàn toàn</li>
+                                <li>Hoặc sử dụng nút "Xóa cache ảnh" bên trên</li>
+                                <li>Hoặc mở trang about trong tab ẩn danh</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="row">
             <!-- Thông tin cơ bản -->
@@ -35,6 +220,103 @@
                         </h5>
                     </div>
                     <div class="card-body">
+                        <!-- Header Settings -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3">
+                                <i class="fas fa-heading me-2"></i>Cài đặt Header
+                            </h6>
+                            
+                            <div class="mb-3">
+                                <label for="setting_about_header_title" class="form-label">
+                                    Tiêu đề Header <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" 
+                                       class="form-control @error('settings.about_header_title') is-invalid @enderror" 
+                                       id="setting_about_header_title" 
+                                       name="settings[about_header_title]" 
+                                       value="{{ old('settings.about_header_title', \App\Models\Setting::get('about_header_title', 'Đội Ngũ Giảng Viên Chuyên Nghiệp')) }}"
+                                       placeholder="Tiêu đề hiển thị trên ảnh header"
+                                       required>
+                                <div class="form-text">Tiêu đề chính hiển thị trên ảnh header</div>
+                                @error('settings.about_header_title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="setting_about_header_subtitle" class="form-label">
+                                    Mô tả Header <span class="text-danger">*</span>
+                                </label>
+                                <textarea class="form-control @error('settings.about_header_subtitle') is-invalid @enderror" 
+                                          id="setting_about_header_subtitle" 
+                                          name="settings[about_header_subtitle]" 
+                                          rows="3"
+                                          placeholder="Mô tả ngắn gọn về đội ngũ giảng viên"
+                                          required>{{ old('settings.about_header_subtitle', \App\Models\Setting::get('about_header_subtitle', 'Hơn 25 giảng viên giàu kinh nghiệm, tận tâm với sứ mệnh giúp học viên chinh phục tiếng Đức thành công')) }}</textarea>
+                                <div class="form-text">Mô tả ngắn gọn hiển thị dưới tiêu đề</div>
+                                @error('settings.about_header_subtitle')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <!-- Header Statistics -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3">
+                                <i class="fas fa-chart-bar me-2"></i>Thống kê Header
+                            </h6>
+                            <p class="text-muted small mb-3">Các con số thống kê hiển thị trên ảnh header</p>
+                            
+                            @php
+                                $headerStats = json_decode(\App\Models\Setting::get('about_header_stats', '[]'), true);
+                                if (empty($headerStats)) {
+                                    $headerStats = [
+                                        ['number' => '25+', 'label' => 'Giảng viên'],
+                                        ['number' => '4+', 'label' => 'Năm kinh nghiệm'],
+                                        ['number' => '1000+', 'label' => 'Học viên thành công']
+                                    ];
+                                }
+                            @endphp
+                            
+                            <div id="header-stats-container">
+                                @foreach($headerStats as $index => $stat)
+                                    <div class="header-stat-item border rounded p-3 mb-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Số liệu</label>
+                                                <input type="text" 
+                                                       class="form-control" 
+                                                       name="header_stats[{{ $index }}][number]" 
+                                                       value="{{ $stat['number'] ?? '' }}"
+                                                       placeholder="25+">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Nhãn</label>
+                                                <input type="text" 
+                                                       class="form-control" 
+                                                       name="header_stats[{{ $index }}][label]" 
+                                                       value="{{ $stat['label'] ?? '' }}"
+                                                       placeholder="Giảng viên">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">&nbsp;</label>
+                                                <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="removeHeaderStat({{ $index }})">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addHeaderStat()">
+                                <i class="fas fa-plus me-1"></i>Thêm thống kê
+                            </button>
+                            
+                            <input type="hidden" name="settings[about_header_stats]" id="header_stats_json">
+                        </div>
+                        
+                        <!-- Other Settings -->
                         @foreach($aboutSettings->where('sort_order', '<=', 4) as $setting)
                             <div class="mb-3">
                                 <label for="setting_{{ $setting->key }}" class="form-label">
@@ -272,64 +554,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Hệ thống cơ sở -->
-            <div class="col-lg-12 mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">
-                            <i class="fas fa-map-marker-alt me-2"></i>Hệ thống cơ sở
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        @php
-                            $locationsSetting = $aboutSettings->where('key', 'about_locations')->first();
-                            $locations = $locationsSetting ? json_decode($locationsSetting->value, true) : [];
-                        @endphp
-                        
-                        <div id="locations-container">
-                            @foreach($locations as $index => $location)
-                                <div class="location-item border rounded p-3 mb-3">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label class="form-label">Tên cơ sở</label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   name="locations[{{ $index }}][name]" 
-                                                   value="{{ $location['name'] ?? '' }}"
-                                                   placeholder="Cơ Sở 1">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Địa chỉ</label>
-                                            <textarea class="form-control" 
-                                                      name="locations[{{ $index }}][address]" 
-                                                      rows="2"
-                                                      placeholder="Địa chỉ cơ sở">{{ $location['address'] ?? '' }}</textarea>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Điện thoại</label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   name="locations[{{ $index }}][phone]" 
-                                                   value="{{ $location['phone'] ?? '' }}"
-                                                   placeholder="0975.186.230">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Mô tả</label>
-                                            <textarea class="form-control" 
-                                                      name="locations[{{ $index }}][description]" 
-                                                      rows="2"
-                                                      placeholder="Mô tả cơ sở">{{ $location['description'] ?? '' }}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        
-                        <input type="hidden" name="settings[about_locations]" id="locations_json">
-                    </div>
-                </div>
-            </div>
         </div>
         
         <div class="row">
@@ -369,9 +593,54 @@
             // Update JSON fields before submission
             updateCoreValuesJson();
             updateAchievementsJson();
-            updateLocationsJson();
+            updateHeaderStatsJson();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang lưu...';
+            submitBtn.disabled = true;
+            
+            // Re-enable button after form submission
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 3000);
         });
+        
+        // Auto-refresh images after successful upload
+        @if(session('image_updated'))
+            // Force refresh images after successful upload
+            setTimeout(() => {
+                // Refresh all images on the page
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    if (img.src.includes('images/about/')) {
+                        const newSrc = img.src.split('?')[0] + '?v=' + Date.now();
+                        img.src = newSrc;
+                    }
+                });
+            }, 1000);
+        @endif
     });
+    
+    // Preview image function
+    function previewImage(inputId, previewId) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+        const previewImg = document.getElementById(previewId + '_img');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     
     function updateCoreValuesJson() {
         const coreValues = [];
@@ -403,25 +672,129 @@
         document.getElementById('achievements_json').value = JSON.stringify(achievements);
     }
     
-    function updateLocationsJson() {
-        const locations = [];
-        document.querySelectorAll('.location-item').forEach((item, index) => {
-            const name = item.querySelector(`input[name="locations[${index}][name]"]`).value;
-            const address = item.querySelector(`textarea[name="locations[${index}][address]"]`).value;
-            const phone = item.querySelector(`input[name="locations[${index}][phone]"]`).value;
-            const description = item.querySelector(`textarea[name="locations[${index}][description]"]`).value;
+    // Header statistics functions
+    function addHeaderStat() {
+        const container = document.getElementById('header-stats-container');
+        const index = container.children.length;
+        
+        const statHtml = `
+            <div class="header-stat-item border rounded p-3 mb-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">Số liệu</label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="header_stats[${index}][number]" 
+                               placeholder="25+">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nhãn</label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="header_stats[${index}][label]" 
+                               placeholder="Giảng viên">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="removeHeaderStat(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        container.insertAdjacentHTML('beforeend', statHtml);
+    }
+    
+    function removeHeaderStat(index) {
+        const container = document.getElementById('header-stats-container');
+        const items = container.querySelectorAll('.header-stat-item');
+        
+        if (items[index]) {
+            items[index].remove();
             
-            if (name.trim()) {
-                locations.push({ name, address, phone, description });
+            // Reindex remaining items
+            const remainingItems = container.querySelectorAll('.header-stat-item');
+            remainingItems.forEach((item, newIndex) => {
+                const numberInput = item.querySelector('input[name*="[number]"]');
+                const labelInput = item.querySelector('input[name*="[label]"]');
+                const removeBtn = item.querySelector('button');
+                
+                if (numberInput) {
+                    numberInput.name = `header_stats[${newIndex}][number]`;
+                }
+                if (labelInput) {
+                    labelInput.name = `header_stats[${newIndex}][label]`;
+                }
+                if (removeBtn) {
+                    removeBtn.onclick = () => removeHeaderStat(newIndex);
+                }
+            });
+        }
+    }
+    
+    function updateHeaderStatsJson() {
+        const headerStats = [];
+        document.querySelectorAll('.header-stat-item').forEach((item, index) => {
+            const number = item.querySelector(`input[name="header_stats[${index}][number]"]`).value;
+            const label = item.querySelector(`input[name="header_stats[${index}][label]"]`).value;
+            
+            if (number.trim() && label.trim()) {
+                headerStats.push({ number, label });
             }
         });
         
-        document.getElementById('locations_json').value = JSON.stringify(locations);
+        document.getElementById('header_stats_json').value = JSON.stringify(headerStats);
     }
     
     function resetToDefault() {
         if (confirm('Bạn có chắc chắn muốn khôi phục về cài đặt mặc định? Tất cả thay đổi hiện tại sẽ bị mất.')) {
             window.location.href = '{{ route("admin.about.reset") }}';
+        }
+    }
+
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    function clearImageCache() {
+        if (confirm('Bạn có chắc chắn muốn xóa cache ảnh? Tất cả ảnh sẽ được tải lại từ server.')) {
+            // Show loading state
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Đang xóa cache...';
+            btn.disabled = true;
+            
+            // Call API to clear cache
+            fetch('{{ route("admin.about.clear-cache") }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Cache ảnh đã được xóa thành công! Vui lòng tải lại trang để thấy thay đổi.');
+                    // Optionally reload the page
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    alert('Có lỗi xảy ra: ' + (data.message || 'Không thể xóa cache'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi xóa cache. Vui lòng thử lại.');
+            })
+            .finally(() => {
+                // Restore button state
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
         }
     }
 </script>

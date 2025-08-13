@@ -175,6 +175,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
     Route::put('about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
     Route::get('about/reset', [\App\Http\Controllers\Admin\AboutController::class, 'reset'])->name('about.reset');
+    Route::post('about/clear-cache', [\App\Http\Controllers\Admin\AboutController::class, 'clearCache'])->name('about.clear-cache');
     
     // Schedule Management
     Route::resource('schedules', \App\Http\Controllers\Admin\ScheduleController::class);

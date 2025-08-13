@@ -191,5 +191,70 @@ class AboutSettingsSeeder extends Seeder
                 $setting
             );
         }
+
+        // Header settings
+        Setting::updateOrCreate(
+            ['key' => 'about_header_image'],
+            [
+                'value' => 'images/about/team-photo.jpg',
+                'type' => 'text',
+                'group' => 'about',
+                'label' => 'Đường dẫn ảnh header',
+                'description' => 'Đường dẫn đến ảnh header chính của trang about',
+                'sort_order' => 1,
+            ]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'about_header_title'],
+            [
+                'value' => 'Đội Ngũ Giảng Viên Chuyên Nghiệp',
+                'type' => 'text',
+                'group' => 'about',
+                'label' => 'Tiêu đề header',
+                'description' => 'Tiêu đề chính hiển thị trên ảnh header',
+                'sort_order' => 2,
+            ]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'about_header_subtitle'],
+            [
+                'value' => 'Hơn 25 giảng viên giàu kinh nghiệm, tận tâm với sứ mệnh giúp học viên chinh phục tiếng Đức thành công',
+                'type' => 'textarea',
+                'group' => 'about',
+                'label' => 'Mô tả header',
+                'description' => 'Mô tả ngắn gọn hiển thị dưới tiêu đề header',
+                'sort_order' => 3,
+            ]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'about_header_stats'],
+            [
+                'value' => json_encode([
+                    ['number' => '25+', 'label' => 'Giảng viên'],
+                    ['number' => '4+', 'label' => 'Năm kinh nghiệm'],
+                    ['number' => '1000+', 'label' => 'Học viên thành công']
+                ]),
+                'type' => 'json',
+                'group' => 'about',
+                'label' => 'Thống kê header',
+                'description' => 'Các con số thống kê hiển thị trên ảnh header',
+                'sort_order' => 4,
+            ]
+        );
+
+        Setting::updateOrCreate(
+            ['key' => 'about_building_image'],
+            [
+                'value' => 'images/about/sec-building.svg',
+                'type' => 'text',
+                'group' => 'about',
+                'label' => 'Đường dẫn ảnh tòa nhà',
+                'description' => 'Đường dẫn đến ảnh tòa nhà trong phần tổng quan',
+                'sort_order' => 5,
+            ]
+        );
     }
 }

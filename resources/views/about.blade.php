@@ -2,16 +2,62 @@
 
 @section('title', 'Về Chúng Tôi - Trung Tâm Tiếng Đức Thanh Cúc')
 
+@push('styles')
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+@endpush
+
 @section('content')
-<!-- Page Header -->
-<section class="py-5 bg-primary text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">{{ \App\Models\Setting::get('about_page_title', 'Về Chúng Tôi') }}</h1>
-                <p class="lead">
-                    {{ \App\Models\Setting::get('about_page_subtitle', 'Tìm hiểu về hành trình 4 năm phát triển của Thanh Cúc và sứ mệnh giúp hàng ngàn người chinh phục tiếng Đức thành công') }}
-                </p>
+<!-- Full Screen Image Section -->
+<section class="fullscreen-image-section position-relative">
+    <div class="fullscreen-image-container">
+        @php
+            $headerImage = \App\Models\Setting::get('about_header_image', 'images/about/team-photo.jpg');
+            $headerTitle = \App\Models\Setting::get('about_header_title', 'Đội Ngũ Giảng Viên Chuyên Nghiệp');
+            $headerSubtitle = \App\Models\Setting::get('about_header_subtitle', 'Hơn 25 giảng viên giàu kinh nghiệm, tận tâm với sứ mệnh giúp học viên chinh phục tiếng Đức thành công');
+            $headerStats = json_decode(\App\Models\Setting::get('about_header_stats', '[]'), true);
+            
+            // Add timestamp to avoid cache
+            $headerImageUrl = asset($headerImage);
+            if (strpos($headerImage, '?v=') === false) {
+                $headerImageUrl .= '?v=' . time();
+            }
+        @endphp
+        
+        <img src="{{ $headerImageUrl }}" 
+             alt="{{ $headerTitle }}" 
+             class="fullscreen-image"
+             onerror="this.src='{{ asset('images/about/team-photo.jpg') }}?v={{ time() }}'">
+        <div class="fullscreen-image-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center text-white">
+                        <h2 class="display-5 fw-bold mb-4">{{ $headerTitle }}</h2>
+                        <p class="lead mb-4">{{ $headerSubtitle }}</p>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            @if(!empty($headerStats))
+                                @foreach($headerStats as $stat)
+                                    <div class="stat-item">
+                                        <div class="stat-number fw-bold">{{ $stat['number'] ?? '' }}</div>
+                                        <div class="stat-label">{{ $stat['label'] ?? '' }}</div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="stat-item">
+                                    <div class="stat-number fw-bold">25+</div>
+                                    <div class="stat-label">Giảng viên</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number fw-bold">4+</div>
+                                    <div class="stat-label">Năm kinh nghiệm</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number fw-bold">1000+</div>
+                                    <div class="stat-label">Học viên thành công</div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -32,8 +78,19 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('images/about/sec-building.svg') }}" 
-                     alt="Thanh Cúc Building" class="img-fluid rounded shadow-lg animate-on-scroll">
+                @php
+                    $buildingImage = \App\Models\Setting::get('about_building_image', 'images/about/sec-building.svg');
+                    
+                    // Add timestamp to avoid cache
+                    $buildingImageUrl = asset($buildingImage);
+                    if (strpos($buildingImage, '?v=') === false) {
+                        $buildingImageUrl .= '?v=' . time();
+                    }
+                @endphp
+                <img src="{{ $buildingImageUrl }}" 
+                     alt="Thanh Cúc Building" 
+                     class="img-fluid rounded shadow-lg animate-on-scroll"
+                     onerror="this.src='{{ asset('images/about/sec-building.svg') }}?v={{ time() }}'">
             </div>
         </div>
     </div>
