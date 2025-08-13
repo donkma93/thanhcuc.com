@@ -222,9 +222,7 @@
 /* Hero base */
 .hero-slide { transition: all 0.3s ease; position: inherit; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; animation: heroSlideFadeIn 0.6s ease-out; }
 .hero-slide-image { transition: all 0.3s ease; object-fit: cover; object-position: center; will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.hero-content-overlay { z-index: 2; }
-.hero-content { transition: all 0.3s ease; }
-.hero-title { transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+
 .hero-desc { transition: all 0.3s ease; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
 @keyframes heroSlideFadeIn { from { opacity: 0; transform: scale(1.05);} to { opacity: 1; transform: scale(1);} }
 
@@ -243,16 +241,6 @@
     /* Hero Slider - Tiny Mobile */
     .hero-slide { min-height: 30vh !important; }
     .hero-slider-section { min-height: 30vh !important; }
-    
-    /* Hide text and buttons on mobile - show only images */
-    .hero-content {
-        display: none !important;
-    }
-    
-    /* Show only the background image */
-    .hero-background {
-        display: block !important;
-    }
     
     /* Remove background overlay on mobile */
     .hero-overlay {
@@ -303,16 +291,6 @@
     .hero-slide { height: 210px;}
     .hero-slider-section { height: 210px; }
     
-    /* Hide text and buttons on mobile - show only images */
-    .hero-content {
-        display: none !important;
-    }
-    
-    /* Show only the background image */
-    .hero-background {
-        display: block !important;
-    }
-    
     /* Remove background overlay on mobile */
     .hero-overlay {
         display: none !important;
@@ -361,16 +339,6 @@
     /* Hero Slider - Small Mobile */
     .hero-slide { height: 100%; }
     .hero-slider-section {height: 210px; }
-    
-    /* Hide text and buttons on mobile - show only images */
-    .hero-content {
-        display: none !important;
-    }
-    
-    /* Show only the background image */
-    .hero-background {
-        display: block !important;
-    }
     
     /* Remove background overlay on mobile */
     .hero-overlay {
@@ -423,16 +391,6 @@
     .hero-slide { min-height: 45vh !important; }
     .hero-slider-section { height: 210px; }
     
-    /* Hide text and buttons on mobile - show only images */
-    .hero-content {
-        display: none !important;
-    }
-    
-    /* Show only the background image */
-    .hero-background {
-        display: block !important;
-    }
-    
     /* Remove background overlay on mobile */
     .hero-overlay {
         display: none !important;
@@ -480,16 +438,6 @@
     /* Hero Slider - Tablet */
     .hero-slide { min-height: 50vh !important; }
     .hero-slider-section { height: 210px; }
-    
-    /* Hide text and buttons on mobile - show only images */
-    .hero-content {
-        display: none !important;
-    }
-    
-    /* Show only the background image */
-    .hero-background {
-        display: block !important;
-    }
     
     /* Remove background overlay on mobile */
     .hero-overlay {
@@ -559,16 +507,6 @@
     .hero-slide { min-height: 25vh !important; }
     .hero-slider-section { min-height: 25vh !important; }
     
-    /* Hide text and buttons on mobile - show only images */
-    .hero-content {
-        display: none !important;
-    }
-    
-    /* Show only the background image */
-    .hero-background {
-        display: block !important;
-    }
-    
     /* Remove background overlay on mobile */
     .hero-overlay {
         display: none !important;
@@ -606,19 +544,8 @@
     }
 }
 
-/* Desktop - Show text and buttons */
+/* Desktop - Show overlay */
 @media (min-width: 992px) {
-    /* Show text and buttons on desktop */
-    .hero-content {
-        display: block !important;
-    }
-    
-    /* Ensure proper layout on desktop */
-    .hero-content-wrapper {
-        display: flex !important;
-        align-items: center !important;
-    }
-    
     /* Full height for desktop */
     .hero-slide { min-height: 100vh !important; }
     .hero-slider-section { min-height: 100vh !important; }
@@ -634,16 +561,12 @@
     .sec-course-card:hover { transform: none !important; }
     .sec-course-card:active { transform: scale(0.98) !important; }
     .hero-slide-image { will-change: transform; }
-    .btn-hero:hover { transform: none !important; }
-    .btn-hero:active { transform: scale(0.98) !important; }
     
     /* Improve touch targets */
     .carousel-indicators button {
         min-width: 44px;
         min-height: 44px;
     }
-    
-
 }
 
 /* High DPI displays */
@@ -657,8 +580,6 @@
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     .hero-slide-image,
-    .btn-hero,
-    .scroll-arrow,
     .carousel-control-prev,
     .carousel-control-next {
         transition: none !important;

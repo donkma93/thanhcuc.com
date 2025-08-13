@@ -12,8 +12,7 @@ class TeacherController extends Controller
         $teachers = Teacher::where('is_active', true)
             ->orderBy('sort_order')
             ->orderBy('name')
-            ->get()
-            ->groupBy('specialization');
+            ->paginate(12);
             
         return view('teachers.index', compact('teachers'));
     }

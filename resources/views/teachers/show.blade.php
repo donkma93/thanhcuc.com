@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $teacher->name . ' - Giảng viên')
+@section('title', $teacher->name . ' - Giảng viên tiếng Đức')
 
 @section('content')
 <div class="container-fluid p-0">
@@ -30,7 +30,7 @@
                     <div class="teacher-hero-info">
                         <div class="teacher-badge mb-3">
                             <i class="fas fa-chalkboard-teacher me-2"></i>
-                            Giảng viên chính thức
+                            Giảng viên tiếng Đức chính thức
                         </div>
                         <h1 class="display-4 fw-bold mb-3 text-gradient">{{ $teacher->name }}</h1>
                         <p class="lead text-muted mb-4">
@@ -39,12 +39,24 @@
                         </p>
                         
                         <!-- Certification -->
+                        @if($teacher->certification)
                         <div class="certification-info mb-4">
                             <div class="certification-badge-large">
                                 <i class="fas fa-certificate me-2"></i>
                                 <span>{{ $teacher->certification }}</span>
                             </div>
                         </div>
+                        @endif
+                        
+                        <!-- Experience -->
+                        @if($teacher->experience_years)
+                        <div class="experience-info mb-4">
+                            <div class="experience-badge-large">
+                                <i class="fas fa-clock me-2"></i>
+                                <span>{{ $teacher->experience_years }}+ năm kinh nghiệm giảng dạy tiếng Đức</span>
+                            </div>
+                        </div>
+                        @endif
                         
                         <!-- Rating -->
                         <div class="teacher-rating-large mb-4">
@@ -94,8 +106,11 @@
                             @else
                                 <p class="text-muted">
                                     {{ $teacher->name }} là một giảng viên giàu kinh nghiệm trong lĩnh vực {{ $teacher->specialization }}. 
-                                    Với chứng chỉ {{ $teacher->certification }}, {{ $teacher->name }} cam kết mang đến 
-                                    chất lượng giảng dạy tốt nhất cho học viên.
+                                    @if($teacher->certification)
+                                    Với chứng chỉ {{ $teacher->certification }}, 
+                                    @endif
+                                    {{ $teacher->name }} cam kết mang đến 
+                                    chất lượng giảng dạy tiếng Đức tốt nhất cho học viên.
                                 </p>
                             @endif
                         </div>
@@ -132,7 +147,7 @@
                         <div class="card-body p-4">
                             <h3 class="card-title mb-4">
                                 <i class="fas fa-lightbulb text-info me-2"></i>
-                                Phương pháp giảng dạy
+                                Phương pháp giảng dạy tiếng Đức
                             </h3>
                             <div class="teaching-methods">
                                 <div class="row">
@@ -182,6 +197,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if($teacher->certification)
                                 <div class="info-item mb-3">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-certificate text-success me-3"></i>
@@ -191,15 +207,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                @if($teacher->experience_years)
                                 <div class="info-item mb-3">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-clock text-info me-3"></i>
                                         <div>
                                             <strong>Kinh nghiệm:</strong><br>
-                                            <span class="text-muted">{{ rand(3, 10) }}+ năm giảng dạy</span>
+                                            <span class="text-muted">{{ $teacher->experience_years }}+ năm giảng dạy</span>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 <div class="info-item">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-users text-warning me-3"></i>
@@ -216,8 +235,8 @@
                     <!-- Contact Card -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4 text-center">
-                            <h4 class="card-title mb-3">Bạn muốn học với {{ $teacher->name }}?</h4>
-                            <p class="text-muted mb-4">Liên hệ ngay để được tư vấn lộ trình học phù hợp</p>
+                            <h4 class="card-title mb-3">Bạn muốn học tiếng Đức với {{ $teacher->name }}?</h4>
+                            <p class="text-muted mb-4">Liên hệ ngay để được tư vấn lộ trình học tiếng Đức phù hợp</p>
                             <div class="d-grid gap-2">
                                 <a href="{{ route('contact') }}" class="btn btn-primary">
                                     <i class="fas fa-phone me-2"></i>Liên hệ tư vấn
@@ -237,8 +256,8 @@
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold text-primary mb-3">Giảng viên khác</h2>
-                <p class="lead text-muted">Khám phá đội ngũ giảng viên chuyên nghiệp của chúng tôi</p>
+                <h2 class="display-5 fw-bold text-primary mb-3">Giảng viên tiếng Đức khác</h2>
+                <p class="lead text-muted">Khám phá đội ngũ giảng viên tiếng Đức chuyên nghiệp của chúng tôi</p>
             </div>
             
             <div class="row">
@@ -268,7 +287,9 @@
                             </div>
                             <h5 class="fw-bold text-primary mb-2">{{ $otherTeacher->name }}</h5>
                             <p class="text-muted mb-2">{{ $otherTeacher->specialization }}</p>
+                            @if($otherTeacher->certification)
                             <span class="badge bg-light text-primary border mb-3">{{ $otherTeacher->certification }}</span>
+                            @endif
                             <div class="mt-3">
                                 <a href="{{ route('teachers.show', $otherTeacher->slug) }}" class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-eye me-1"></i>Xem chi tiết
@@ -379,7 +400,8 @@
     background-clip: text;
 }
 
-.certification-badge-large {
+.certification-badge-large,
+.experience-badge-large {
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     border: 2px solid #dee2e6;
     border-radius: 30px;
