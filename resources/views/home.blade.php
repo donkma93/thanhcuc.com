@@ -2540,7 +2540,7 @@ small, .small {
 
 /* Button Typography */
 .btn {
-    font-size: var(--font-size-base) !important;
+    font-size: 0.8rem !important;
     line-height: var(--line-height-normal) !important;
 }
 
@@ -2796,7 +2796,7 @@ small, .small {
     .btn {
         min-height: 48px !important;
         padding: 0.75rem 1.5rem !important;
-        font-size: var(--font-size-base) !important;
+        font-size: 0.8rem !important;
         border-radius: 25px !important;
         font-weight: 500 !important;
     }
