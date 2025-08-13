@@ -1576,7 +1576,7 @@ function openCourseModal(courseId) {
 /* Button styling */
 .btn-primary {
     border-radius: 0.375rem;
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
     font-weight: 500;
     transition: all 0.3s ease;
 }
