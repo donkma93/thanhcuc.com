@@ -188,33 +188,7 @@
     </div>
 </section>
 
-<!-- Achievements -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Thành Tựu Đạt Được</h2>
-            <p class="text-muted">Những con số ấn tượng sau 7 năm hoạt động</p>
-        </div>
-        
-        <div class="row text-center">
-            @php
-                $achievements = json_decode(\App\Models\Setting::get('about_achievements', '[]'), true);
-            @endphp
-            
-            @foreach($achievements as $achievement)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card border-0 h-100">
-                        <div class="card-body p-4">
-                            <div class="h1 fw-bold text-primary mb-2">{{ $achievement['number'] ?? '' }}</div>
-                            <h5 class="fw-bold mb-2">{{ $achievement['title'] ?? '' }}</h5>
-                            <p class="text-muted mb-0">{{ $achievement['description'] ?? '' }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+
 
 <!-- Teaching Staff -->
 <section class="py-5">
