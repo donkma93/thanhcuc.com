@@ -138,6 +138,56 @@
 }
 
 /* =============================== */
+/* Small Laptop Screens (12-13 inch) */
+/* =============================== */
+@media (min-width: 992px) and (max-width: 1366px) {
+    /* Smaller navbar for 12-13 inch laptops */
+    .navbar .navbar-nav .nav-link { 
+        padding: 0.4rem 0.75rem !important; 
+        font-size: 0.8rem !important; 
+    }
+    .navbar .navbar-nav .nav-link i { 
+        font-size: 0.8rem !important; 
+        margin-right: 0.4rem !important; 
+    }
+    .navbar .btn { 
+        padding: 0.4rem 0.75rem !important; 
+        font-size: 0.8rem !important; 
+    }
+    .navbar .d-flex { 
+        gap: 0.5rem !important; 
+    }
+    .navbar-brand .logo-img {
+        max-height: 35px !important;
+    }
+}
+
+/* =============================== */
+/* Medium Laptop Screens (13-15 inch) */
+/* =============================== */
+@media (min-width: 1367px) and (max-width: 1600px) {
+    /* Slightly smaller navbar for medium laptops */
+    .navbar .navbar-nav .nav-link { 
+        padding: 0.45rem 0.85rem !important; 
+        font-size: 0.85rem !important; 
+    }
+    .navbar .navbar-nav .nav-link i { 
+        font-size: 0.85rem !important; 
+        margin-right: 0.45rem !important; 
+    }
+    .navbar .btn { 
+        padding: 0.45rem 0.85rem !important; 
+        font-size: 0.85rem !important; 
+    }
+    .navbar .d-flex { 
+        gap: 0.6rem !important; 
+    }
+    .navbar-brand .logo-img {
+        max-height: 40px !important;
+    }
+}
+
+/* =============================== */
 /* Mobile Bottom Navigation Styles */
 /* =============================== */
 @media (max-width: 768px) {
