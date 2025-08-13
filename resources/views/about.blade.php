@@ -27,39 +27,6 @@
              alt="{{ $headerTitle }}" 
              class="fullscreen-image"
              onerror="this.src='{{ asset('images/about/team-photo.jpg') }}?v={{ time() }}'">
-        <div class="fullscreen-image-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center text-white">
-                        <h2 class="display-5 fw-bold mb-4">{{ $headerTitle }}</h2>
-                        <p class="lead mb-4">{{ $headerSubtitle }}</p>
-                        <div class="d-flex justify-content-center gap-3 flex-wrap">
-                            @if(!empty($headerStats))
-                                @foreach($headerStats as $stat)
-                                    <div class="stat-item">
-                                        <div class="stat-number fw-bold">{{ $stat['number'] ?? '' }}</div>
-                                        <div class="stat-label">{{ $stat['label'] ?? '' }}</div>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="stat-item">
-                                    <div class="stat-number fw-bold">25+</div>
-                                    <div class="stat-label">Giảng viên</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-number fw-bold">4+</div>
-                                    <div class="stat-label">Năm kinh nghiệm</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-number fw-bold">1000+</div>
-                                    <div class="stat-label">Học viên thành công</div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
