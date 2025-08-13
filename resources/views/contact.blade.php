@@ -122,8 +122,7 @@
                                 <div>
                                     <h6 class="fw-bold mb-1">Địa Chỉ</h6>
                                     <p class="text-muted mb-0">
-                                        123 Đường ABC, Quận XYZ<br>
-                                        Thành phố Hà Nội
+                                        {{ $footerSettings['company_address'] ?? 'Đang cập nhật' }}
                                     </p>
                                 </div>
                             </div>
@@ -136,8 +135,9 @@
                                 <div>
                                     <h6 class="fw-bold mb-1">Điện Thoại</h6>
                                     <p class="text-muted mb-0">
-                                        <a href="tel:0975186230" class="text-decoration-none">0975.186.230</a><br>
-                                        <a href="tel:0243123456" class="text-decoration-none">024.3123.456</a>
+                                        <a href="tel:{{ $footerSettings['company_phone'] ?? '' }}" class="text-decoration-none">
+                                            {{ $footerSettings['company_phone_display'] ?? ($footerSettings['company_phone'] ?? 'Đang cập nhật') }}
+                                        </a>
                                     </p>
                                 </div>
                             </div>
@@ -150,8 +150,11 @@
                                 <div>
                                     <h6 class="fw-bold mb-1">Email</h6>
                                     <p class="text-muted mb-0">
-                                        <a href="mailto:info@thanhcuc.edu.vn" class="text-decoration-none">info@thanhcuc.edu.vn</a><br>
-                                        <a href="mailto:tuvantuyensinh@thanhcuc.edu.vn" class="text-decoration-none">tuvantuyensinh@thanhcuc.edu.vn</a>
+                                        @if(!empty($footerSettings['company_email']))
+                                            <a href="mailto:{{ $footerSettings['company_email'] }}" class="text-decoration-none">{{ $footerSettings['company_email'] }}</a>
+                                        @else
+                                            Đang cập nhật
+                                        @endif
                                     </p>
                                 </div>
                             </div>
@@ -164,8 +167,7 @@
                                 <div>
                                     <h6 class="fw-bold mb-1">Giờ Làm Việc</h6>
                                     <p class="text-muted mb-0">
-                                        Thứ 2 - Thứ 6: 8:00 - 20:00<br>
-                                        Thứ 7 - CN: 8:00 - 17:00
+                                        {{ $footerSettings['working_hours'] ?? 'Đang cập nhật' }}
                                     </p>
                                 </div>
                             </div>
@@ -182,18 +184,26 @@
                     </div>
                     <div class="card-body p-4 text-center">
                         <div class="d-flex justify-content-center gap-3">
-                            <a href="#" class="btn btn-outline-primary btn-lg">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-danger btn-lg">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-info btn-lg">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-dark btn-lg">
-                                <i class="fab fa-tiktok"></i>
-                            </a>
+                            @if(!empty($footerSettings['facebook_url']))
+                                <a href="{{ $footerSettings['facebook_url'] }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-lg">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            @endif
+                            @if(!empty($footerSettings['youtube_url']))
+                                <a href="{{ $footerSettings['youtube_url'] }}" target="_blank" rel="noopener" class="btn btn-outline-danger btn-lg">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            @endif
+                            @if(!empty($footerSettings['instagram_url']))
+                                <a href="{{ $footerSettings['instagram_url'] }}" target="_blank" rel="noopener" class="btn btn-outline-info btn-lg">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            @endif
+                            @if(!empty($footerSettings['tiktok_url']))
+                                <a href="{{ $footerSettings['tiktok_url'] }}" target="_blank" rel="noopener" class="btn btn-outline-dark btn-lg">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                            @endif
                         </div>
                         <p class="text-muted mt-3 mb-0">
                             Theo dõi chúng tôi để cập nhật thông tin mới nhất về các khóa học và sự kiện!
@@ -315,7 +325,7 @@
                 <p class="mb-0">Liên hệ ngay với chúng tôi để được tư vấn miễn phí và đăng ký học thử!</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="tel:0975186230" class="btn btn-light btn-lg me-3">
+                <a href="tel:{{ $footerSettings['company_phone'] ?? '' }}" class="btn btn-light btn-lg me-3">
                     <i class="fas fa-phone me-2"></i>Gọi Ngay
                 </a>
                 <a href="#" class="btn btn-outline-light btn-lg" onclick="document.getElementById('name').focus(); return false;">

@@ -4,7 +4,7 @@
         <div class="row">
             <!-- Cột 1: Liên hệ chúng tôi -->
             <div class="col-lg-4 mb-4">
-                <h5 class="text-white mb-4 fw-bold">
+                <h5 class="text-white mb-4 fw-bold text-uppercase">
                     <i class="fas fa-phone-alt me-2 text-warning"></i>
                     Liên hệ chúng tôi
                 </h5>
@@ -68,7 +68,7 @@
             
             <!-- Cột 2: Hệ thống chi nhánh -->
             <div class="col-lg-4 mb-4">
-                <h5 class="text-white mb-4 fw-bold">
+                <h5 class="text-white mb-4 fw-bold text-uppercase">
                     <i class="fas fa-building me-2 text-warning"></i>
                     Hệ thống chi nhánh
                 </h5>
@@ -98,7 +98,7 @@
             
             <!-- Cột 3: Khóa học -->
             <div class="col-lg-4 mb-4">
-                <h5 class="text-white mb-4 fw-bold">
+                <h5 class="text-white mb-4 fw-bold text-uppercase">
                     <i class="fas fa-graduation-cap me-2 text-warning"></i>
                     Khóa học
                 </h5>
