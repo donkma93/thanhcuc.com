@@ -26,18 +26,26 @@
                         <div class="hero-slide">
                             <!-- Background Image with Lazy Loading -->
                             <div class="hero-background">
-                            <img src="{{ $slider->image_url }}" 
-                                 alt="{{ $slider->title }}" 
-                                     class="hero-slide-image"
-                                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}"
-                                     @if($index > 0) data-src="{{ $slider->image_url }}" @endif>
+                                @if($slider->button_link)
+                                    <a href="{{ $slider->button_link }}" class="hero-slide-link">
+                                        <img src="{{ $slider->image_url }}" 
+                                             alt="{{ $slider->title }}" 
+                                             class="hero-slide-image"
+                                             loading="{{ $index === 0 ? 'eager' : 'lazy' }}"
+                                             @if($index > 0) data-src="{{ $slider->image_url }}" @endif>
+                                    </a>
+                                @else
+                                    <img src="{{ $slider->image_url }}" 
+                                         alt="{{ $slider->title }}" 
+                                         class="hero-slide-image"
+                                         loading="{{ $index === 0 ? 'eager' : 'lazy' }}"
+                                         @if($index > 0) data-src="{{ $slider->image_url }}" @endif>
+                                @endif
                                 
                                 <!-- Gradient Overlay -->
                                 <div class="hero-overlay"></div>
-                                    </div>
-
-
-                                </div>
+                            </div>
+                        </div>
                 </div>
                 @endforeach
             </div>
