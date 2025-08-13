@@ -4143,7 +4143,7 @@ function openTeacherModal(teacherId) {
                             <h3 class="teacher-modal-name">${teacher.name}</h3>
                             <p class="teacher-modal-specialization">${teacher.specialization}</p>
                             <div class="teacher-modal-certification">${teacher.certification}</div>
-                            <p class="teacher-modal-bio">${teacher.bio || 'Thông tin chi tiết về giảng viên sẽ được cập nhật sớm.'}</p>
+                            <div class="teacher-modal-bio">${teacher.bio || 'Thông tin chi tiết về giảng viên sẽ được cập nhật sớm.'}</div>
                             
                             <div class="teacher-modal-stats">
                                 <div class="stat-item">

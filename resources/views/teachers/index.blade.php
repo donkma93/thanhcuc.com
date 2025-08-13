@@ -50,7 +50,7 @@
                             <span class="course-badge mb-3 d-inline-block">{{ $teacher->certification }}</span>
                             
                             @if($teacher->bio)
-                                <p class="text-muted small mb-3">{{ Str::limit($teacher->bio, 100) }}</p>
+                                <p class="text-muted small mb-3">{!! Str::limit(strip_tags($teacher->bio), 100) !!}</p>
                             @endif
                             
                             @if($teacher->experience_years)

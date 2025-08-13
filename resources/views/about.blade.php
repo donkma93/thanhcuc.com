@@ -198,7 +198,7 @@
                                          <h6 class="fw-bold mb-2">
                                              <i class="fas fa-info-circle text-primary me-2"></i>Giới thiệu
                                          </h6>
-                                         <p class="small mb-0">{{ Str::limit($teacher->bio, 100) }}</p>
+                                         <p class="small mb-0">{!! Str::limit(strip_tags($teacher->bio), 100) !!}</p>
                                      </div>
                                      @endif
                                      

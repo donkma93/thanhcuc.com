@@ -87,8 +87,9 @@
                     <div class="mb-3">
                         <label for="bio" class="form-label">Tiểu sử</label>
                         <textarea class="form-control @error('bio') is-invalid @enderror" 
-                                  id="bio" name="bio" rows="4" 
+                                  id="bio" name="bio" 
                                   placeholder="Mô tả về kinh nghiệm, phong cách giảng dạy...">{{ old('bio', $teacher->bio) }}</textarea>
+                        <div class="form-text">Sử dụng thanh công cụ bên trên để định dạng văn bản</div>
                         @error('bio')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -268,6 +269,11 @@
 @endsection
 
 @push('scripts')
+<!-- CKEditor 5 CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+<!-- Custom CKEditor Configuration -->
+<script src="{{ asset('admin/js/ckeditor-config.js') }}"></script>
+
 <script>
     // Image preview
     document.getElementById('avatar').addEventListener('change', function(e) {

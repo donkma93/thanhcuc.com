@@ -89,7 +89,7 @@
                             </h3>
                             @if($teacher->bio)
                                 <div class="teacher-bio">
-                                    {!! nl2br(e($teacher->bio)) !!}
+                                    {!! $teacher->bio !!}
                                 </div>
                             @else
                                 <p class="text-muted">

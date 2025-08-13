@@ -112,7 +112,7 @@
                 </div>
                 <div class="card-body">
                     <div class="text-muted">
-                        {!! nl2br(e($teacher->bio)) !!}
+                        {!! $teacher->bio !!}
                     </div>
                 </div>
             </div>

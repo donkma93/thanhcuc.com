@@ -145,7 +145,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <small class="text-muted">{{ Str::limit($teacher->bio, 60) }}</small>
+                                                            <small class="text-muted">{!! Str::limit(strip_tags($teacher->bio), 60) !!}</small>
                         </td>
                         <td>
                             <span class="badge bg-info">{{ $teacher->specialization }}</span>
