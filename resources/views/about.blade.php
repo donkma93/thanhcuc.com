@@ -676,14 +676,12 @@
             </div>
             
             <!-- Navigation Buttons -->
-            @if($classrooms->count() >= 4)
             <button class="slider-nav slider-prev" onclick="moveSlider('classroomSlider', -1)">
                 <i class="fas fa-chevron-left"></i>
             </button>
             <button class="slider-nav slider-next" onclick="moveSlider('classroomSlider', 1)">
                 <i class="fas fa-chevron-right"></i>
             </button>
-            @endif
         </div>
     </div>
 </section>
@@ -731,14 +729,12 @@
             </div>
             
             <!-- Navigation Buttons -->
-            @if($facilities->count() >= 4)
             <button class="slider-nav slider-prev" onclick="moveSlider('facilitiesSlider', -1)">
                 <i class="fas fa-chevron-left"></i>
             </button>
             <button class="slider-nav slider-next" onclick="moveSlider('facilitiesSlider', 1)">
                 <i class="fas fa-chevron-right"></i>
             </button>
-            @endif
         </div>
         
 
