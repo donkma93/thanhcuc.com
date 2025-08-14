@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">Lịch Thi Chứng Chỉ</h1>
+                <h1 class="display-4 fw-bold mb-3">LỊCH THI CHỨNG CHỈ</h1>
                 <p class="lead">
-                    Lịch thi các chứng chỉ tiếng Đức quốc tế năm 2024
+                    Lịch thi các chứng chỉ tiếng Đức quốc tế
                 </p>
             </div>
         </div>
@@ -20,10 +20,6 @@
 <!-- Exam Schedule -->
 <section class="py-5">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3">LỊCH THI 2024</h2>
-            <p class="lead text-muted">Kế hoạch thi và đăng ký các chứng chỉ tiếng Đức</p>
-        </div>
         
         <!-- Goethe Certificate -->
         @if($goetheExams->count() > 0)

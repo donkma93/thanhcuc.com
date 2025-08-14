@@ -4,6 +4,18 @@
 @section('description', 'Cập nhật tin tức mới nhất về trung tâm tiếng Đức Thanh Cúc, lịch khai giảng, lịch thi và các hoạt động của trung tâm.')
 
 @section('content')
+<!-- Page Header -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">TIN TỨC</h1>
+                <p class="lead">Cập nhật những tin tức mới nhất về trung tâm và các hoạt động học tập</p>
+            </div>
+        </div>
+    </div>
+ </section>
+
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
@@ -14,10 +26,6 @@
                 </ol>
             </nav>
             
-            <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-primary mb-3">TIN TỨC</h1>
-                <p class="lead text-muted">Cập nhật những tin tức mới nhất về trung tâm và các hoạt động học tập</p>
-            </div>
         </div>
     </div>
 

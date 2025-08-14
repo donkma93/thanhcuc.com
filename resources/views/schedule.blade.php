@@ -4,6 +4,18 @@
 
 @section('content')
 
+<!-- Page Header -->
+<section class="py-5 bg-primary text-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto text-center">
+				<h1 class="display-4 fw-bold mb-3">LỊCH KHAI GIẢNG</h1>
+				<p class="lead">Lịch khai giảng các khóa học tiếng Đức tại Trung Tâm Thanh Cúc</p>
+			</div>
+		</div>
+	</div>
+</section>
+
 
 <!-- Schedule Table Section -->
 <section id="schedule-table" class="py-5 bg-light">

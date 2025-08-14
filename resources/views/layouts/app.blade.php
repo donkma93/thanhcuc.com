@@ -1552,14 +1552,14 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('lien-he') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            <i class="fas fa-phone-alt me-2"></i>LIÊN HỆ
+                        <a class="nav-link {{ Request::is('tin-tuc*') ? 'active' : '' }}" href="{{ route('news') }}">
+                            <i class="fas fa-newspaper me-2"></i>TIN TỨC
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('tin-tuc*') ? 'active' : '' }}" href="{{ route('news') }}">
-                            <i class="fas fa-newspaper me-2"></i>TIN TỨC
+                        <a class="nav-link {{ Request::is('lien-he') ? 'active' : '' }}" href="{{ route('contact') }}">
+                            <i class="fas fa-phone-alt me-2"></i>LIÊN HỆ
                         </a>
                     </li>
                 </ul>

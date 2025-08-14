@@ -4,18 +4,21 @@
 
 @section('content')
 
+<!-- Page Header -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">KẾT QUẢ HỌC VIÊN</h1>
+                <p class="lead">Thành tích và phản hồi từ học viên Thanh Cúc</p>
+            </div>
+        </div>
+    </div>
+ </section>
+
 <!-- Student Results Section -->
 <section class="py-5 student-results-section" id="student-results">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title animate-on-scroll">
-                KẾT QUẢ <span class="title-highlight">HỌC VIÊN</span>
-            </h2>
-            <p class="section-subtitle animate-on-scroll animate-delay-1">
-                Những thành tích đáng tự hào và phản hồi chân thực từ học viên Thanh Cúc
-            </p>
-        </div>
-
 
 
         <!-- Scores Section -->
