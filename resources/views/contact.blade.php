@@ -227,16 +227,38 @@
             <div class="col-12">
                 <div class="card border-0 shadow-lg">
                     <div class="card-body p-0">
-                        <!-- Google Maps Embed -->
-                        <div class="ratio ratio-21x9">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0967470394973!2d105.84117831533216!3d21.028511986010745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1635123456789!5m2!1svi!2s" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
+                        @php
+                            $mapEmbed = \App\Models\Setting::get('contact_map_embed')
+                                ?: \App\Models\Setting::get('company_map_embed')
+                                ?: \App\Models\Setting::get('map_embed_url')
+                                ?: \App\Models\Setting::get('google_map_embed');
+                        @endphp
+                        @if(!empty($mapEmbed))
+                            @if(\Illuminate\Support\Str::contains($mapEmbed, '<iframe'))
+                                {!! $mapEmbed !!}
+                            @else
+                                <div class="ratio ratio-21x9">
+                                    <iframe 
+                                        src="{{ $mapEmbed }}"
+                                        style="border:0;" 
+                                        allowfullscreen 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                            @endif
+                        @else
+                            <!-- Fallback static map if no admin setting is configured -->
+                            <div class="ratio ratio-21x9">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0967470394973!2d105.84117831533216!3d21.028511986010745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1635123456789!5m2!1svi!2s" 
+                                    style="border:0;" 
+                                    allowfullscreen 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

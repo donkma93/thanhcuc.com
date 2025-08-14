@@ -1014,6 +1014,18 @@
     position: relative;
 }
 
+/* Improve drag UX */
+.gallery-slider {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.gallery-slider .slider-container.dragging {
+    cursor: grabbing;
+    transition: none !important;
+}
+
 .slider-container {
     display: flex;
     transition: transform 0.5s ease;
@@ -1322,10 +1334,10 @@ const galleryData = {
     facility: @json($facilityData)
 };
 
-// Slider positions
-const sliderPositions = {
-    classroomSlider: 0,
-    facilitiesSlider: 0
+// Slider state
+const sliderState = {
+    classroomSlider: { position: 0, autoplayId: null },
+    facilitiesSlider: { position: 0, autoplayId: null }
 };
 
 // Current gallery state
@@ -1350,16 +1362,18 @@ function moveSlider(sliderId, direction) {
     const maxPosition = -(Math.max(0, items.length - visibleItems) * itemWidth);
 
     // Move by one item width per click
-    sliderPositions[sliderId] = (sliderPositions[sliderId] || 0) + (direction * itemWidth);
+    const current = sliderState[sliderId]?.position || 0;
+    sliderState[sliderId] = sliderState[sliderId] || { position: 0, autoplayId: null };
+    sliderState[sliderId].position = current + (direction * itemWidth);
 
     // Boundary checks
-    if (sliderPositions[sliderId] > 0) {
-        sliderPositions[sliderId] = 0;
-    } else if (sliderPositions[sliderId] < maxPosition) {
-        sliderPositions[sliderId] = maxPosition;
+    if (sliderState[sliderId].position > 0) {
+        sliderState[sliderId].position = 0;
+    } else if (sliderState[sliderId].position < maxPosition) {
+        sliderState[sliderId].position = maxPosition;
     }
 
-    container.style.transform = `translateX(${sliderPositions[sliderId]}px)`;
+    container.style.transform = `translateX(${sliderState[sliderId].position}px)`;
 
     // Update navigation button states
     updateNavigationButtons(sliderId);
@@ -1386,7 +1400,8 @@ function updateNavigationButtons(sliderId) {
 
     if (prevBtn && nextBtn) {
         // Disable/enable prev button
-        if ((sliderPositions[sliderId] || 0) >= 0) {
+        const pos = sliderState[sliderId]?.position || 0;
+        if (pos >= 0) {
             prevBtn.style.opacity = '0.5';
             prevBtn.style.pointerEvents = 'none';
         } else {
@@ -1395,13 +1410,46 @@ function updateNavigationButtons(sliderId) {
         }
 
         // Disable/enable next button
-        if ((sliderPositions[sliderId] || 0) <= maxPosition) {
+        if (pos <= maxPosition) {
             nextBtn.style.opacity = '0.5';
             nextBtn.style.pointerEvents = 'none';
         } else {
             nextBtn.style.opacity = '1';
             nextBtn.style.pointerEvents = 'auto';
         }
+    }
+}
+
+// Autoplay per slider
+function startAutoplay(sliderId, intervalMs = 4000) {
+    stopAutoplay(sliderId);
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+    const container = slider.querySelector('.slider-container');
+    if (!container) return;
+    const items = container.querySelectorAll('.slider-item');
+    if (!items || items.length <= 1) return;
+    sliderState[sliderId] = sliderState[sliderId] || { position: 0, autoplayId: null };
+    sliderState[sliderId].autoplayId = setInterval(() => {
+        // If next is disabled (at end), jump back to start for loop effect
+        const prevBtn = slider.parentElement.querySelector('.slider-prev');
+        const nextBtn = slider.parentElement.querySelector('.slider-next');
+        if (nextBtn && nextBtn.style.pointerEvents === 'none') {
+            // reset to start
+            sliderState[sliderId].position = 0;
+            container.style.transform = `translateX(0px)`;
+            updateNavigationButtons(sliderId);
+        } else {
+            moveSlider(sliderId, 1);
+        }
+    }, intervalMs);
+}
+
+function stopAutoplay(sliderId) {
+    const state = sliderState[sliderId];
+    if (state && state.autoplayId) {
+        clearInterval(state.autoplayId);
+        state.autoplayId = null;
     }
 }
 
@@ -1536,6 +1584,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Expose functions globally for inline onclick handlers
+    window.moveSlider = moveSlider;
+    window.changeGalleryImage = changeGalleryImage;
+    window.openGallery = openGallery;
+    window.startAutoplay = startAutoplay;
+    window.stopAutoplay = stopAutoplay;
+
     // Keyboard navigation for gallery
     document.addEventListener('keydown', function(e) {
         const modal = document.getElementById('imageGalleryModal');
@@ -1550,16 +1605,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Initialize navigation buttons after first layout
+    // Initialize navigation buttons and autoplay after first layout
     setTimeout(() => {
-        ['classroomSlider', 'facilitiesSlider'].forEach(sliderId => updateNavigationButtons(sliderId));
+        ['classroomSlider', 'facilitiesSlider'].forEach(sliderId => {
+            updateNavigationButtons(sliderId);
+            startAutoplay(sliderId, 4000);
+        });
     }, 0);
     
     // Auto-resize sliders on window resize
     window.addEventListener('resize', function() {
         // Reset slider positions on resize
-        Object.keys(sliderPositions).forEach(sliderId => {
-            sliderPositions[sliderId] = 0;
+        Object.keys(sliderState).forEach(sliderId => {
+            sliderState[sliderId].position = 0;
             const slider = document.getElementById(sliderId);
             if (slider) {
                 const container = slider.querySelector('.slider-container');
@@ -1574,11 +1632,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let startX = 0;
         let currentX = 0;
         let isDragging = false;
+        const container = slider.querySelector('.slider-container');
 
         // Touch
         slider.addEventListener('touchstart', function(e) {
             startX = e.touches[0].clientX;
             isDragging = true;
+            if (container) container.classList.add('dragging');
+            stopAutoplay(slider.id);
         });
         slider.addEventListener('touchmove', function(e) {
             if (!isDragging) return;
@@ -1587,12 +1648,14 @@ document.addEventListener('DOMContentLoaded', function() {
         slider.addEventListener('touchend', function() {
             if (!isDragging) return;
             isDragging = false;
+            if (container) container.classList.remove('dragging');
             const diffX = startX - currentX;
             const threshold = 50;
             if (Math.abs(diffX) > threshold) {
                 const direction = diffX > 0 ? 1 : -1;
                 moveSlider(slider.id, direction);
             }
+            startAutoplay(slider.id);
         });
 
         // Mouse
@@ -1600,6 +1663,8 @@ document.addEventListener('DOMContentLoaded', function() {
             startX = e.clientX;
             currentX = e.clientX;
             isDragging = true;
+            if (container) container.classList.add('dragging');
+            stopAutoplay(slider.id);
         });
         slider.addEventListener('mousemove', function(e) {
             if (!isDragging) return;
@@ -1608,16 +1673,25 @@ document.addEventListener('DOMContentLoaded', function() {
         slider.addEventListener('mouseup', function() {
             if (!isDragging) return;
             isDragging = false;
+            if (container) container.classList.remove('dragging');
             const diffX = startX - currentX;
             const threshold = 50;
             if (Math.abs(diffX) > threshold) {
                 const direction = diffX > 0 ? 1 : -1;
                 moveSlider(slider.id, direction);
             }
+            startAutoplay(slider.id);
         });
         slider.addEventListener('mouseleave', function() {
-            isDragging = false;
+            if (isDragging) {
+                isDragging = false;
+                if (container) container.classList.remove('dragging');
+            }
         });
+
+        // Pause autoplay on hover, resume on leave
+        slider.addEventListener('mouseenter', function() { stopAutoplay(slider.id); });
+        slider.addEventListener('mouseleave', function() { startAutoplay(slider.id); });
     });
 });
 </script>

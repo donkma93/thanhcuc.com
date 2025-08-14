@@ -78,6 +78,44 @@ class FooterSettingsSeeder extends Seeder
                 'sort_order' => 7,
             ],
 
+            // Contact Map Settings
+            [
+                'key' => 'contact_map_embed',
+                'value' => '',
+                'type' => 'textarea',
+                'group' => 'contact',
+                'label' => 'Bản đồ liên hệ (iframe hoặc URL)',
+                'description' => 'Dán mã nhúng Google Maps (thẻ iframe) hoặc URL embed của Google Maps.',
+                'sort_order' => 1,
+            ],
+            [
+                'key' => 'company_map_embed',
+                'value' => '',
+                'type' => 'textarea',
+                'group' => 'company',
+                'label' => 'Bản đồ công ty (iframe hoặc URL)',
+                'description' => 'Tùy chọn: Mã nhúng hoặc URL embed Google Maps cho công ty.',
+                'sort_order' => 8,
+            ],
+            [
+                'key' => 'map_embed_url',
+                'value' => '',
+                'type' => 'url',
+                'group' => 'contact',
+                'label' => 'Google Maps Embed URL',
+                'description' => 'Tùy chọn: URL embed nếu không dùng iframe.',
+                'sort_order' => 2,
+            ],
+            [
+                'key' => 'google_map_embed',
+                'value' => '',
+                'type' => 'textarea',
+                'group' => 'contact',
+                'label' => 'Google Map (iframe)',
+                'description' => 'Tùy chọn: Dán thẻ <iframe> Google Map.',
+                'sort_order' => 3,
+            ],
+
             // Social Media
             [
                 'key' => 'facebook_url',
