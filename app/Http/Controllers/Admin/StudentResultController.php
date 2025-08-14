@@ -3,22 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\StudentResult;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class StudentResultController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $scores = StudentResult::scores()->ordered()->get();
-        $feedbacks = StudentResult::feedbacks()->ordered()->get();
-        
-        return view('admin.student-results.index', compact('scores', 'feedbacks'));
+        $query = StudentResult::query();
+
+        // Filter by type
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('is_active', $request->status === 'active');
+        }
+
+        // Search
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%')
+                  ->orWhere('student_name', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $studentResults = $query->ordered()->paginate(12);
+
+        return view('admin.student-results.index', compact('studentResults'));
     }
 
     /**
@@ -34,58 +54,38 @@ class StudentResultController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'type' => 'required|in:score,feedback',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'type' => 'required|in:score,feedback',
             'student_name' => 'nullable|string|max:255',
-            'certificate_type' => 'nullable|string|max:100',
-            'level' => 'nullable|string|max:50',
-            'score' => 'nullable|string|max:100',
+            'certificate_type' => 'nullable|string|max:255',
+            'level' => 'nullable|string|max:10',
+            'score' => 'nullable|string|max:50',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'boolean',
-            'is_featured' => 'boolean',
-        ], [
-            'title.required' => 'Vui lòng nhập tiêu đề.',
-            'type.required' => 'Vui lòng chọn loại kết quả.',
-            'type.in' => 'Loại kết quả không hợp lệ.',
-            'image.required' => 'Vui lòng chọn ảnh.',
-            'image.image' => 'File phải là ảnh.',
-            'image.mimes' => 'Ảnh phải có định dạng: jpeg, png, jpg, gif.',
-            'image.max' => 'Ảnh không được lớn hơn 2MB.',
+            'is_active' => 'in:0,1',
+            'is_featured' => 'in:0,1'
         ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+        $data = $request->all();
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '_' . Str::slug($request->title) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('student-results', $filename, 'public');
+            $data['image_path'] = $path;
         }
 
-        try {
-            // Xử lý upload ảnh
-            $imagePath = $request->file('image')->store('student-results', 'public');
-            
-            // Tạo kết quả học viên
-            StudentResult::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'type' => $request->type,
-                'image_path' => $imagePath,
-                'student_name' => $request->student_name,
-                'certificate_type' => $request->certificate_type,
-                'level' => $request->level,
-                'score' => $request->score,
-                'sort_order' => $request->sort_order ?? 0,
-                'is_active' => $request->boolean('is_active'),
-                'is_featured' => $request->boolean('is_featured'),
-            ]);
+        $data['is_active'] = (bool) $request->input('is_active', 0);
+        $data['is_featured'] = (bool) $request->input('is_featured', 0);
+        $data['sort_order'] = $request->sort_order ?? 0;
 
-            $typeLabel = $request->type === 'score' ? 'Bảng điểm' : 'Phản hồi';
-            return redirect()->route('admin.student-results.index')
-                ->with('success', "Thêm {$typeLabel} thành công!");
+        StudentResult::create($data);
 
-        } catch (\Exception $e) {
-            return back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage())->withInput();
-        }
+        return redirect()->route('admin.student-results.index')
+            ->with('success', 'Kết quả học viên đã được tạo thành công!');
     }
 
     /**
@@ -109,65 +109,43 @@ class StudentResultController extends Controller
      */
     public function update(Request $request, StudentResult $studentResult)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'type' => 'required|in:score,feedback',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'type' => 'required|in:score,feedback',
             'student_name' => 'nullable|string|max:255',
-            'certificate_type' => 'nullable|string|max:100',
-            'level' => 'nullable|string|max:50',
-            'score' => 'nullable|string|max:100',
+            'certificate_type' => 'nullable|string|max:255',
+            'level' => 'nullable|string|max:10',
+            'score' => 'nullable|string|max:50',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'boolean',
-            'is_featured' => 'boolean',
-        ], [
-            'title.required' => 'Vui lòng nhập tiêu đề.',
-            'type.required' => 'Vui lòng chọn loại kết quả.',
-            'type.in' => 'Loại kết quả không hợp lệ.',
-            'image.image' => 'File phải là ảnh.',
-            'image.mimes' => 'Ảnh phải có định dạng: jpeg, png, jpg, gif.',
-            'image.max' => 'Ảnh không được lớn hơn 2MB.',
+            'is_active' => 'in:0,1',
+            'is_featured' => 'in:0,1'
         ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
+        $data = $request->all();
 
-        try {
-            $data = [
-                'title' => $request->title,
-                'description' => $request->description,
-                'type' => $request->type,
-                'student_name' => $request->student_name,
-                'certificate_type' => $request->certificate_type,
-                'level' => $request->level,
-                'score' => $request->score,
-                'sort_order' => $request->sort_order ?? 0,
-                'is_active' => $request->boolean('is_active'),
-                'is_featured' => $request->boolean('is_featured'),
-            ];
-
-            // Xử lý upload ảnh mới nếu có
-            if ($request->hasFile('image')) {
-                // Xóa ảnh cũ
-                if ($studentResult->image_path && !str_starts_with($studentResult->image_path, 'http')) {
-                    Storage::disk('public')->delete($studentResult->image_path);
-                }
-                
-                // Upload ảnh mới
-                $data['image_path'] = $request->file('image')->store('student-results', 'public');
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($studentResult->image_path && Storage::disk('public')->exists($studentResult->image_path)) {
+                Storage::disk('public')->delete($studentResult->image_path);
             }
 
-            $studentResult->update($data);
-
-            $typeLabel = $request->type === 'score' ? 'Bảng điểm' : 'Phản hồi';
-            return redirect()->route('admin.student-results.index')
-                ->with('success', "Cập nhật {$typeLabel} thành công!");
-
-        } catch (\Exception $e) {
-            return back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage())->withInput();
+            $image = $request->file('image');
+            $filename = time() . '_' . Str::slug($request->title) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('student-results', $filename, 'public');
+            $data['image_path'] = $path;
         }
+
+        $data['is_active'] = (bool) $request->input('is_active', 0);
+        $data['is_featured'] = (bool) $request->input('is_featured', 0);
+        $data['sort_order'] = $request->sort_order ?? 0;
+
+        $studentResult->update($data);
+
+        return redirect()->route('admin.student-results.index')
+            ->with('success', 'Kết quả học viên đã được cập nhật thành công!');
     }
 
     /**
@@ -175,114 +153,54 @@ class StudentResultController extends Controller
      */
     public function destroy(StudentResult $studentResult)
     {
-        try {
-            // Xóa ảnh
-            if ($studentResult->image_path && !str_starts_with($studentResult->image_path, 'http')) {
-                Storage::disk('public')->delete($studentResult->image_path);
-            }
-            
-            $studentResult->delete();
-            
-            $typeLabel = $studentResult->type === 'score' ? 'Bảng điểm' : 'Phản hồi';
-            return redirect()->route('admin.student-results.index')
-                ->with('success', "Xóa {$typeLabel} thành công!");
-
-        } catch (\Exception $e) {
-            return back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+        // Delete image file
+        if ($studentResult->image_path && Storage::disk('public')->exists($studentResult->image_path)) {
+            Storage::disk('public')->delete($studentResult->image_path);
         }
+
+        $studentResult->delete();
+
+        return redirect()->route('admin.student-results.index')
+            ->with('success', 'Kết quả học viên đã được xóa thành công!');
     }
 
     /**
-     * Toggle trạng thái active
-     */
-    public function toggleStatus(StudentResult $studentResult)
-    {
-        $studentResult->update(['is_active' => !$studentResult->is_active]);
-        
-        $status = $studentResult->is_active ? 'kích hoạt' : 'ẩn';
-        $typeLabel = $studentResult->type === 'score' ? 'Bảng điểm' : 'Phản hồi';
-        
-        return back()->with('success', "Đã {$status} {$typeLabel}!");
-    }
-
-    /**
-     * Toggle trạng thái featured
-     */
-    public function toggleFeatured(StudentResult $studentResult)
-    {
-        $studentResult->update(['is_featured' => !$studentResult->is_featured]);
-        
-        $status = $studentResult->is_featured ? 'nổi bật' : 'bỏ nổi bật';
-        $typeLabel = $studentResult->type === 'score' ? 'Bảng điểm' : 'Phản hồi';
-        
-        return back()->with('success', "Đã {$status} {$typeLabel}!");
-    }
-
-    /**
-     * Cập nhật thứ tự sắp xếp
+     * Update sort order via AJAX
      */
     public function updateOrder(Request $request)
     {
         $request->validate([
             'items' => 'required|array',
             'items.*.id' => 'required|exists:student_results,id',
-            'items.*.sort_order' => 'required|integer|min:0',
+            'items.*.sort_order' => 'required|integer|min:0'
         ]);
 
         foreach ($request->items as $item) {
             StudentResult::where('id', $item['id'])->update(['sort_order' => $item['sort_order']]);
         }
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'message' => 'Thứ tự đã được cập nhật!']);
     }
 
     /**
-     * Bulk actions
+     * Toggle active status
      */
-    public function bulkAction(Request $request)
+    public function toggleStatus(StudentResult $studentResult)
     {
-        $request->validate([
-            'action' => 'required|in:activate,deactivate,feature,unfeature,delete',
-            'items' => 'required|array|min:1',
-            'items.*' => 'exists:student_results,id',
-        ]);
+        $studentResult->update(['is_active' => !$studentResult->is_active]);
 
-        $action = $request->action;
-        $items = $request->items;
+        return redirect()->back()
+            ->with('success', 'Trạng thái đã được cập nhật!');
+    }
 
-        switch ($action) {
-            case 'activate':
-                StudentResult::whereIn('id', $items)->update(['is_active' => true]);
-                $message = 'Đã kích hoạt các mục đã chọn!';
-                break;
-                
-            case 'deactivate':
-                StudentResult::whereIn('id', $items)->update(['is_active' => false]);
-                $message = 'Đã ẩn các mục đã chọn!';
-                break;
-                
-            case 'feature':
-                StudentResult::whereIn('id', $items)->update(['is_featured' => true]);
-                $message = 'Đã đánh dấu nổi bật các mục đã chọn!';
-                break;
-                
-            case 'unfeature':
-                StudentResult::whereIn('id', $items)->update(['is_featured' => false]);
-                $message = 'Đã bỏ đánh dấu nổi bật các mục đã chọn!';
-                break;
-                
-            case 'delete':
-                $results = StudentResult::whereIn('id', $items)->get();
-                foreach ($results as $result) {
-                    if ($result->image_path && !str_starts_with($result->image_path, 'http')) {
-                        Storage::disk('public')->delete($result->image_path);
-                    }
-                }
-                StudentResult::whereIn('id', $items)->delete();
-                $message = 'Đã xóa các mục đã chọn!';
-                break;
-        }
+    /**
+     * Toggle featured status
+     */
+    public function toggleFeatured(StudentResult $studentResult)
+    {
+        $studentResult->update(['is_featured' => !$studentResult->is_featured]);
 
-        return back()->with('success', $message);
+        return redirect()->back()
+            ->with('success', 'Trạng thái nổi bật đã được cập nhật!');
     }
 }
