@@ -4,6 +4,346 @@
 
 @push('styles')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<style>
+/* Company Overview & Mission Vision Values Section */
+.company-overview {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mission-vision-tabs {
+    height: 100%;
+}
+
+/* Tab Navigation Styling */
+.nav-pills .nav-link {
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    margin: 0 0.25rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: rgba(1, 88, 98, 0.1);
+    color: var(--primary-color, #015862);
+    transform: translateY(-2px);
+    border-color: rgba(1, 88, 98, 0.2);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--primary-color, #015862);
+    color: white;
+    box-shadow: 0 4px 15px rgba(1, 88, 98, 0.3);
+    border-color: var(--primary-color, #015862);
+}
+
+/* Tab Content Styling */
+.tab-content {
+    min-height: 300px;
+}
+
+.tab-pane {
+    transition: all 0.3s ease;
+}
+
+.tab-pane.fade {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.tab-pane.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card Styling */
+.card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 20px rgba(1, 88, 98, 0.08);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(1, 88, 98, 0.15);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8f9 100%);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Icon Styling */
+.fa-3x {
+    font-size: 3rem;
+    color: var(--primary-color, #015862);
+}
+
+/* Core Values Icons */
+.core-values-grid .bg-primary {
+    background-color: var(--primary-color, #015862) !important;
+}
+
+.core-values-grid .bg-light {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+}
+
+/* Core Values Grid */
+.core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+/* Building Image Section */
+.building-image {
+    max-width: 100%;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+.building-image:hover {
+    transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .company-overview {
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+    
+    .mission-vision-tabs {
+        text-align: center;
+    }
+    
+    .nav-pills {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .nav-pills .nav-link {
+        margin: 0.25rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .fa-3x {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .nav-pills .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        margin: 0.125rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .fa-3x {
+        font-size: 2rem;
+    }
+    
+    .company-overview h2 {
+        font-size: 1.75rem;
+    }
+    
+    .mission-vision-tabs h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .nav-pills {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-pills .nav-link {
+        width: 100%;
+        max-width: 200px;
+        margin: 0.25rem 0;
+    }
+    
+    .card-body {
+        padding: 0.75rem;
+    }
+    
+    .fa-3x {
+        font-size: 1.75rem;
+    }
+    
+    .company-overview h2 {
+        font-size: 1.5rem;
+    }
+    
+    .mission-vision-tabs h3 {
+        font-size: 1.25rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover Effects */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(1, 88, 98, 0.25);
+    transition: all 0.3s ease;
+}
+
+/* Button Styling */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color, #015862) 0%, #027a8a 100%);
+    border: none;
+    box-shadow: 0 2px 8px rgba(1, 88, 98, 0.2);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #027a8a 0%, var(--primary-color, #015862) 100%);
+    box-shadow: 0 4px 15px rgba(1, 88, 98, 0.3);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color, #015862);
+    border-color: var(--primary-color, #015862);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color, #015862);
+    color: white;
+    box-shadow: 0 4px 15px rgba(1, 88, 98, 0.3);
+}
+
+/* Custom Scrollbar for Tab Content */
+.tab-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 3px;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: rgba(1, 88, 98, 0.3);
+    border-radius: 3px;
+}
+
+.tab-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(1, 88, 98, 0.5);
+}
+
+/* Section Background */
+.company-overview {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(1, 88, 98, 0.05);
+}
+
+/* Text Colors */
+.text-primary {
+    color: var(--primary-color, #015862) !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Card Body Enhancement */
+.card-body {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+}
+
+/* Core Value Items Enhancement */
+.core-value-item {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(1, 88, 98, 0.1);
+}
+
+.core-value-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(1, 88, 98, 0.15);
+    border-color: rgba(1, 88, 98, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8f9 100%) !important;
+}
+
+/* Tab Content Enhancement */
+.tab-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    border: 1px solid rgba(1, 88, 98, 0.05);
+}
+
+/* Section Header Enhancement */
+.company-overview h2 {
+    background: linear-gradient(135deg, var(--primary-color, #015862) 0%, #027a8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+/* Animation Enhancement */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-pane.fade.show {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Responsive Color Adjustments */
+@media (max-width: 768px) {
+    .company-overview {
+        background: linear-gradient(135deg, #ffffff 0%, #f5f7f8 100%);
+    }
+    
+    .nav-pills .nav-link {
+        background-color: #f8f9fa;
+        border: 1px solid rgba(1, 88, 98, 0.1);
+    }
+}
+</style>
 @endpush
 
 @section('content')
@@ -30,20 +370,135 @@
     </div>
 </section>
 
-<!-- Company Overview -->
+<!-- Company Overview & Mission Vision Values -->
 <section class="py-5">
     <div class="container">
         <div class="row align-items-center">
+            <!-- Left Side: Company Overview with Tabs -->
             <div class="col-lg-6">
-                <h2 class="fw-bold text-primary mb-4">{{ \App\Models\Setting::get('about_overview_title', 'TỔNG QUAN TRUNG TÂM ANH NGỮ SEC') }}</h2>
-                <div class="mb-4">
-                    {!! nl2br(\App\Models\Setting::get('about_overview_content', 'Nội dung tổng quan về trung tâm')) !!}
-                </div>
-                <div class="d-flex gap-3">
-                    <a href="{{ route('contact') }}" class="btn btn-primary btn-lg">Học Thử Miễn Phí</a>
-                    <a href="tel:0975186230" class="btn btn-outline-primary btn-lg">0975.186.230</a>
+                <div class="company-overview">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-primary mb-2">Tổng Quan</h2>
+                        <p class="text-muted">Những định hướng và giá trị cốt lõi của Thanh Cúc</p>
+                    </div>
+                    
+                    <!-- Tab Navigation -->
+                    <ul class="nav nav-pills nav-fill mb-4" id="aboutTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">
+                                <i class="fas fa-info-circle me-2"></i>Tổng Quan
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="mission-tab" data-bs-toggle="tab" data-bs-target="#mission" type="button" role="tab" aria-controls="mission" aria-selected="false">
+                                <i class="fas fa-bullseye me-2"></i>Sứ Mệnh
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab" aria-controls="vision" aria-selected="false">
+                                <i class="fas fa-eye me-2"></i>Tầm Nhìn
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="values-tab" data-bs-toggle="tab" data-bs-target="#values" type="button" role="tab" aria-controls="values" aria-selected="false">
+                                <i class="fas fa-star me-2"></i>Giá Trị
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="aboutTabsContent">
+                        <!-- Overview Tab -->
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-3">
+                                        <i class="fas fa-building fa-3x text-primary"></i>
+                                    </div>
+                                    <h4 class="fw-bold mb-3 text-primary">Tổng Quan</h4>
+                                    <p class="text-muted">
+                                        {{ \App\Models\Setting::get('about_overview_short', 'Trung tâm tiếng Đức Thanh Cúc - Nơi ươm mầm tài năng, kiến tạo tương lai cho học viên Việt Nam.') }}
+                                    </p>
+                                    <div class="mt-4">
+                                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-lg">Học Thử Miễn Phí</a>
+                                            <a href="tel:0975186230" class="btn btn-outline-primary btn-lg">0975.186.230</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mission Tab -->
+                        <div class="tab-pane fade" id="mission" role="tabpanel" aria-labelledby="mission-tab">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-3">
+                                        <i class="fas fa-bullseye fa-3x text-primary"></i>
+                                    </div>
+                                    <h4 class="fw-bold mb-3 text-primary">Sứ Mệnh</h4>
+                                    <p class="text-muted">
+                                        {{ \App\Models\Setting::get('about_mission', 'Giúp hàng triệu người Việt Nam vượt qua tiếng Đức dễ dàng, một lần và mãi mãi thông qua phương pháp học đơn giản, hiệu quả và khoa học.') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Vision Tab -->
+                        <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-3">
+                                        <i class="fas fa-eye fa-3x text-primary"></i>
+                                    </div>
+                                    <h4 class="fw-bold mb-3 text-primary">Tầm Nhìn</h4>
+                                    <p class="text-muted">
+                                        {{ \App\Models\Setting::get('about_vision', 'Trở thành trung tâm tiếng Đức hàng đầu Việt Nam, được công nhận về chất lượng giảng dạy và phương pháp học tiếng Đức độc quyền.') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Core Values Tab -->
+                        <div class="tab-pane fade" id="values" role="tabpanel" aria-labelledby="values-tab">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <div class="text-center mb-3">
+                                        <i class="fas fa-star fa-3x text-primary"></i>
+                                        <h4 class="fw-bold mb-3 text-primary">Giá Trị Cốt Lõi</h4>
+                                    </div>
+                                    @php
+                                        $coreValues = json_decode(\App\Models\Setting::get('about_core_values', '[]'), true);
+                                    @endphp
+                                    
+                                    @if(count($coreValues) > 0)
+                                        <div class="row g-3">
+                                            @foreach($coreValues as $value)
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="{{ $value['icon'] ?? 'fas fa-star' }} text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">{{ $value['title'] ?? '' }}</h6>
+                                                        <p class="text-muted small mb-0">{{ Str::limit($value['description'] ?? '', 60) }}</p>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="text-center">
+                                            <p class="text-muted">Chất lượng - Tận tâm - Sáng tạo - Hiệu quả</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Right Side: Building Image (Giữ nguyên vị trí cũ) -->
             <div class="col-lg-6">
                 @php
                     $buildingImage = \App\Models\Setting::get('about_building_image', 'images/about/sec-building.svg');
@@ -63,97 +518,7 @@
     </div>
 </section>
 
-<!-- Mission, Vision & Core Values Tabs -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Sứ Mệnh - Tầm Nhìn - Giá Trị Cốt Lõi</h2>
-            <p class="text-muted">Những định hướng và giá trị cốt lõi của Thanh Cúc</p>
-        </div>
-        
-        <!-- Tab Navigation -->
-        <ul class="nav nav-tabs justify-content-center mb-4" id="aboutTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="mission-tab" data-bs-toggle="tab" data-bs-target="#mission" type="button" role="tab" aria-controls="mission" aria-selected="true">
-                    <i class="fas fa-bullseye me-2"></i>Sứ Mệnh
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab" aria-controls="vision" aria-selected="false">
-                    <i class="fas fa-eye me-2"></i>Tầm Nhìn
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="values-tab" data-bs-toggle="tab" data-bs-target="#values" type="button" role="tab" aria-controls="values" aria-selected="false">
-                    <i class="fas fa-star me-2"></i>Giá Trị Cốt Lõi
-                </button>
-            </li>
-        </ul>
-        
-        <!-- Tab Content -->
-        <div class="tab-content" id="aboutTabsContent">
-            <!-- Mission Tab -->
-            <div class="tab-pane fade show active" id="mission" role="tabpanel" aria-labelledby="mission-tab">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body p-5 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-bullseye fa-4x text-primary"></i>
-                                </div>
-                                <h3 class="fw-bold mb-4">Sứ Mệnh</h3>
-                                <p class="text-muted lead">
-                                    {{ \App\Models\Setting::get('about_mission', 'Giúp hàng triệu người Việt Nam vượt qua tiếng Anh dễ dàng, một lần và mãi mãi thông qua phương pháp học đơn giản, hiệu quả và khoa học.') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Vision Tab -->
-            <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body p-5 text-center">
-                                <div class="mb-4">
-                                    <i class="fas fa-eye fa-4x text-primary"></i>
-                                </div>
-                                <h3 class="fw-bold mb-4">Tầm Nhìn</h3>
-                                <p class="text-muted lead">
-                                    {{ \App\Models\Setting::get('about_vision', 'Trở thành trung tâm anh ngữ hàng đầu Việt Nam, được công nhận về chất lượng giảng dạy và phương pháp học tiếng Anh độc quyền.') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Core Values Tab -->
-            <div class="tab-pane fade" id="values" role="tabpanel" aria-labelledby="values-tab">
-                <div class="row">
-                    @php
-                        $coreValues = json_decode(\App\Models\Setting::get('about_core_values', '[]'), true);
-                    @endphp
-                    
-                    @foreach($coreValues as $value)
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="text-center">
-                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                     style="width: 80px; height: 80px;">
-                                    <i class="{{ $value['icon'] ?? 'fas fa-star' }} fa-2x text-white"></i>
-                                </div>
-                                <h5 class="fw-bold mb-3">{{ $value['title'] ?? '' }}</h5>
-                                <p class="text-muted">{{ $value['description'] ?? '' }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 
 
@@ -1081,6 +1446,53 @@ function updateGalleryModal() {
     document.getElementById('galleryModalTitle').textContent = modalTitle;
 }
 
+// About Tabs Functionality
+function initializeAboutTabs() {
+    const tabLinks = document.querySelectorAll('#aboutTabs .nav-link');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all tabs
+            tabLinks.forEach(tab => tab.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('show', 'active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Show corresponding content
+            const targetId = this.getAttribute('data-bs-target');
+            const targetPane = document.querySelector(targetId);
+            if (targetPane) {
+                targetPane.classList.add('show', 'active');
+            }
+        });
+    });
+}
+
+// Scroll Animation Functionality
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+}
+
 // Change gallery image
 function changeGalleryImage(direction) {
     if (!currentGallery || !galleryData[currentGallery]) return;
@@ -1100,6 +1512,11 @@ function changeGalleryImage(direction) {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize about tabs functionality
+    initializeAboutTabs();
+    
+    // Initialize scroll animations
+    initializeScrollAnimations();
     // Add click event listeners to slider items
     document.querySelectorAll('.slider-item').forEach(item => {
         item.addEventListener('click', function() {
