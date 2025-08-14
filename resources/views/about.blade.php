@@ -828,7 +828,7 @@
 
 .modal-dialog {
     margin: 1.75rem auto;
-    max-width: 500px;
+    max-width: 800px;
 }
 
 .modal-content {
