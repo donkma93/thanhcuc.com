@@ -1241,9 +1241,9 @@ function goToContactWithCourse() {
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h4 class="modal-title fw-bold text-primary" id="registrationModalLabel">
-                        🎓 CƠHỘI VÀNG - HỌC THỬ MIỄN PHÍ!
+                        {{ \App\Models\Setting::get('registration_modal_title', '🎓 CƠ HỘI VÀNG - HỌC THỬ MIỄN PHÍ!') }}
                     </h4>
-                    <p class="text-muted mb-0">Đăng ký ngay để nhận ưu đãi đặc biệt</p>
+                    <p class="text-muted mb-0">{{ \App\Models\Setting::get('registration_modal_subtitle', 'Đăng ký ngay để nhận ưu đãi đặc biệt') }}</p>
                 </div>
                 <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 15px; right: 15px;"></button>
             </div>
@@ -1253,22 +1253,24 @@ function goToContactWithCourse() {
                     <div class="col-md-6">
                         <div class="benefits-section">
                             <h5 class="fw-bold text-primary mb-3">
-                                <i class="fas fa-star me-2"></i>Ưu đãi đặc biệt:
+                                <i class="fas fa-star me-2"></i>{{ \App\Models\Setting::get('registration_modal_benefits_title', 'Ưu đãi đặc biệt:') }}
                             </h5>
+                            @php
+                                $benefitsRaw = \App\Models\Setting::get('registration_modal_benefits', "Học thử 1 buổi hoàn toàn MIỄN PHÍ\nTặng tài liệu học tập trị giá 500K\nGiảm 20% học phí khóa đầu tiên\nTư vấn lộ trình học 1-1 miễn phí\nCam kết đầu ra hoặc học lại miễn phí");
+                                $benefits = array_filter(array_map('trim', preg_split("/(\r\n|\n|\r)/", (string) $benefitsRaw)));
+                            @endphp
                             <ul class="benefits-list">
-                                <li><i class="fas fa-check-circle text-success me-2"></i>Học thử 1 buổi hoàn toàn MIỄN PHÍ</li>
-                                <li><i class="fas fa-check-circle text-success me-2"></i>Tặng tài liệu học tập trị giá 500K</li>
-                                <li><i class="fas fa-check-circle text-success me-2"></i>Giảm 20% học phí khóa đầu tiên</li>
-                                <li><i class="fas fa-check-circle text-success me-2"></i>Tư vấn lộ trình học 1-1 miễn phí</li>
-                                <li><i class="fas fa-check-circle text-success me-2"></i>Cam kết đầu ra hoặc học lại miễn phí</li>
+                                @foreach($benefits as $line)
+                                    <li><i class="fas fa-check-circle text-success me-2"></i>{{ $line }}</li>
+                                @endforeach
                             </ul>
                             
                             <div class="urgency-banner mt-4">
                                 <div class="d-flex align-items-center">
                                     <i class="fas fa-clock text-warning me-2"></i>
-                                    <span class="fw-bold text-warning">Chỉ còn 3 ngày!</span>
+                                    <span class="fw-bold text-warning">{{ \App\Models\Setting::get('registration_modal_urgency_title', 'Chỉ còn 3 ngày!') }}</span>
                                 </div>
-                                <small class="text-muted">Ưu đãi có hạn, đăng ký ngay!</small>
+                                <small class="text-muted">{{ \App\Models\Setting::get('registration_modal_urgency_note', 'Ưu đãi có hạn, đăng ký ngay!') }}</small>
                             </div>
                         </div>
                     </div>
@@ -1332,17 +1334,23 @@ function goToContactWithCourse() {
                                 </div>
                                 
                                 <button type="submit" class="btn btn-primary w-100 btn-lg btn-pulse">
-                                    <i class="fas fa-rocket me-2"></i>ĐĂNG KÝ NGAY - NHẬN ưu ĐÃI
+                                    <i class="fas fa-rocket me-2"></i>{{ \App\Models\Setting::get('registration_modal_button_text', 'ĐĂNG KÝ NGAY - NHẬN ƯU ĐÃI') }}
                                 </button>
                                 
                                 <div class="text-center mt-3">
                                     <small class="text-muted">
-                                        <i class="fas fa-shield-alt me-1"></i>Thông tin được bảo mật 100%
+                                        <i class="fas fa-shield-alt me-1"></i>{{ \App\Models\Setting::get('registration_modal_privacy_text', 'Thông tin được bảo mật 100%') }}
                                     </small>
                                     <br>
-                                    <small class="text-success fw-bold">
-                                        <i class="fas fa-phone me-1"></i>Hotline: 0975.186.230
-                                    </small>
+                                    @php 
+                                        $hotlineRaw = $footerSettings['company_phone'] ?? '';
+                                        $hotlineLabel = $footerSettings['company_phone_display'] ?? $hotlineRaw;
+                                    @endphp
+                                    @if($hotlineRaw)
+                                        <small class="text-success fw-bold">
+                                            <i class="fas fa-phone me-1"></i>Hotline: {{ $hotlineLabel }}
+                                        </small>
+                                    @endif
                                 </div>
                             </form>
                         </div>
