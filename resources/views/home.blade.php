@@ -1260,7 +1260,7 @@ function goToContactWithCourse() {
                                     ? $courseOffers
                                     : \App\Models\CourseOffer::active()->ordered()->take(6)->get();
                             @endphp
-                            <div class="benefits-grid">
+gi                            <div class="benefits-grid">
                                 @forelse($modalOffers as $offer)
                                     <div class="benefit-item">
                                         <div class="benefit-icon">
@@ -1268,9 +1268,6 @@ function goToContactWithCourse() {
                                         </div>
                                         <div class="benefit-content">
                                             <h6 class="benefit-title">{{ $offer->title }}</h6>
-                                            @if(!empty($offer->description))
-                                                <p class="benefit-description">{{ $offer->description }}</p>
-                                            @endif
                                         </div>
                                     </div>
                                 @empty
