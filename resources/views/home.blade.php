@@ -44,9 +44,38 @@
                                 
                                 <!-- Gradient Overlay -->
                                 <div class="hero-overlay"></div>
+                                
+                                <!-- Slide Content -->
+                                <div class="hero-content">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-xl-6">
+                                                @if($slider->title)
+                                                    <h1 class="hero-title animate-fade-in-up">
+                                                        {{ $slider->title }}
+                                                    </h1>
+                                                @endif
+                                                
+                                                @if($slider->description)
+                                                    <p class="hero-description animate-fade-in-up animate-delay-1">
+                                                        {{ $slider->description }}
+                                                    </p>
+                                                @endif
+                                                
+                                                @if($slider->button_text && $slider->button_link)
+                                                    <div class="hero-buttons animate-fade-in-up animate-delay-2">
+                                                        <a href="{{ $slider->button_link }}" class="btn btn-primary btn-lg hero-btn">
+                                                            {{ $slider->button_text }}
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 @endforeach
             </div>
 
@@ -70,12 +99,34 @@
                         <div class="hero-background">
                             <div class="hero-fallback-bg"></div>
                             <div class="hero-overlay"></div>
+                            
+                            <!-- Fallback Content -->
+                            <div class="hero-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-xl-6">
+                                            <h1 class="hero-title animate-fade-in-up">
+                                                Trung Tâm Tiếng Đức Thanh Cúc
+                                            </h1>
+                                            <p class="hero-description animate-fade-in-up animate-delay-1">
+                                                Nơi ươm mầm tài năng, kiến tạo tương lai cho học viên Việt Nam
+                                            </p>
+                                            <div class="hero-buttons animate-fade-in-up animate-delay-2">
+                                                <a href="{{ route('contact') }}" class="btn btn-primary btn-lg hero-btn">
+                                                    Học Thử Miễn Phí
+                                                </a>
+                                                <a href="tel:0975186230" class="btn btn-outline-light btn-lg hero-btn ms-3">
+                                                    0975.186.230
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                        
-
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-                                    </div>
         @endif
                                 </div>
 </section>
