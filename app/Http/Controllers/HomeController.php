@@ -151,10 +151,10 @@ class HomeController extends Controller
     public function results()
     {
         // Lấy bảng điểm học viên
-        $scores = \App\Models\StudentResult::scores()->active()->ordered()->take(12)->get();
+        $scores = \App\Models\StudentResult::scores()->active()->ordered()->get();
         
         // Lấy phản hồi học viên
-        $feedbacks = \App\Models\StudentResult::feedbacks()->active()->ordered()->take(8)->get();
+        $feedbacks = \App\Models\StudentResult::feedbacks()->active()->ordered()->get();
         
         // Lấy thống kê tổng quan
         $totalScores = \App\Models\StudentResult::scores()->active()->count();
