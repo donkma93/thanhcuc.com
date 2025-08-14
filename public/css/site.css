@@ -486,4 +486,115 @@ main { margin: 0 !important; padding: 0 !important; }
   .program-icon i { font-size: 1rem !important; }
 }
 
+/* ====== Benefits Grid for Registration Modal ====== */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(1, 88, 98, 0.05) 0%, rgba(62, 184, 80, 0.05) 100%);
+    border: 1px solid rgba(1, 88, 98, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(1, 88, 98, 0.15);
+    border-color: rgba(1, 88, 98, 0.2);
+}
+
+.benefit-item:hover::before {
+    transform: scaleY(1);
+}
+
+.benefit-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+    border-radius: 50%;
+    margin-right: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-icon i {
+    font-size: 1.1rem;
+    color: white;
+}
+
+.benefit-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.benefit-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.benefit-description {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .benefits-grid {
+        gap: 0.75rem;
+    }
+    
+    .benefit-item {
+        padding: 0.75rem;
+    }
+    
+    .benefit-icon {
+        width: 35px;
+        height: 35px;
+        margin-right: 0.75rem;
+    }
+    
+    .benefit-icon i {
+        font-size: 1rem;
+    }
+    
+    .benefit-title {
+        font-size: 0.9rem;
+    }
+    
+    .benefit-description {
+        font-size: 0.8rem;
+    }
+}
+
 
