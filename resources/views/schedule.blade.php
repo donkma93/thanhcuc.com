@@ -10,7 +10,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold text-primary mb-3">
-                <i class="fas fa-table me-2"></i>Lịch Khai Giảng Chi Tiết
+                <i class="fas fa-table me-2"></i>LỊCH KHAI GIẢNG CHI TIẾT
             </h2>
             <p class="lead text-muted">
                 Thông tin đầy đủ về các khóa học tiếng Đức tại Trung Tâm Thanh Cúc

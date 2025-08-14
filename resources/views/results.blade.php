@@ -22,61 +22,44 @@
         @if($scores->count() > 0)
         <div class="mb-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bold text-primary mb-3">Bảng Điểm Học Viên</h2>
-                <p class="text-muted">Những thành tích xuất sắc và điểm số ấn tượng của học viên Thanh Cúc</p>
+                <h2 class="fw-bold text-primary mb-3">CHỨNG CHỈ B1 CỦA HỌC VIÊN THANH CÚC</h2>
+                <p class="text-muted">Những tấm bằng B1 có điểm số ấn tượng trong thời gian qua của Thanh Cúc</p>
                             </div>
             
-            <!-- Scores Slider -->
-            <div class="position-relative">
-                <div class="gallery-slider" id="scoresSlider">
-                    <div class="slider-container">
-                        @foreach($scores as $index => $score)
-                            <div class="slider-item" data-gallery="scores" data-index="{{ $index }}">
-                                <div class="slider-card">
-                                    <div class="slider-image-container">
-                                        <img src="{{ $score->image_url }}" 
-                                             alt="{{ $score->title }}" 
-                                             class="slider-image">
-                                        @if($score->level)
-                                            <div class="slider-level-badge">
-                                                <span class="badge bg-primary">{{ $score->level }}</span>
-                        </div>
+            <!-- Scores Grid -->
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+                @foreach($scores as $index => $score)
+                    <div class="col">
+                        <div class="slider-card" data-gallery="scores" data-index="{{ $index }}" onclick="openGallery('scores', {{ $index }})" role="button">
+                            <div class="slider-image-container">
+                                <img src="{{ $score->image_url }}" 
+                                     alt="{{ $score->title }}" 
+                                     class="slider-image">
+                                @if($score->level)
+                                    <div class="slider-level-badge">
+                                        <span class="badge bg-primary">{{ $score->level }}</span>
+                                    </div>
+                                @endif
+                                <div class="slider-overlay">
+                                    <div class="slider-content">
+                                        <h6 class="text-white fw-bold mb-1">{{ $score->title }}</h6>
+                                        <p class="text-white-50 small mb-1">{{ Str::limit($score->description, 80) }}</p>
+                                        @if($score->student_name)
+                                            <span class="badge bg-light text-dark small">
+                                                <i class="fas fa-user me-1"></i>{{ $score->student_name }}
+                                            </span>
                                         @endif
-                                        <div class="slider-overlay">
-                                            <div class="slider-content">
-                                                <h6 class="text-white fw-bold mb-1">{{ $score->title }}</h6>
-                                                <p class="text-white-50 small mb-1">{{ Str::limit($score->description, 80) }}</p>
-                            @if($score->student_name)
-                                                    <span class="badge bg-light text-dark small">
-                                                        <i class="fas fa-user me-1"></i>{{ $score->student_name }}
-                                                    </span>
-                                @endif
-                                @if($score->score)
-                                                    <span class="badge bg-success small ms-1">
-                                                        <i class="fas fa-chart-line me-1"></i>{{ $score->score }}
-                                                    </span>
-                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="slider-click-overlay">
-                                            <i class="fas fa-search-plus fa-2x text-white"></i>
+                                        @if($score->score)
+                                            <span class="badge bg-success small ms-1">
+                                                <i class="fas fa-chart-line me-1"></i>{{ $score->score }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
-                    </div>
-                </div>
-                
-                <!-- Navigation Buttons -->
-                @if($scores->count() >= 4)
-                <button class="slider-nav slider-prev" onclick="moveSlider('scoresSlider', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-nav slider-next" onclick="moveSlider('scoresSlider', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                @endif
             </div>
         </div>
         @endif
@@ -86,83 +69,210 @@
         <div class="mb-5 bg-light py-5">
             <div class="container">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bold text-primary mb-3">Phản Hồi Học Viên</h2>
+                    <h2 class="fw-bold text-primary mb-3">PHẢN HỒI HỌC VIÊN</h2>
                     <p class="text-muted">Những chia sẻ chân thực và đánh giá tích cực từ học viên</p>
                             </div>
                 
-                <!-- Feedbacks Slider -->
-                <div class="position-relative">
-                    <div class="gallery-slider" id="feedbacksSlider">
-                        <div class="slider-container">
-                            @foreach($feedbacks as $index => $feedback)
-                                <div class="slider-item" data-gallery="feedbacks" data-index="{{ $index }}">
-                                    <div class="slider-card">
-                                        <div class="slider-image-container">
-                                            <img src="{{ $feedback->image_url }}" 
-                                                 alt="{{ $feedback->title }}" 
-                                                 class="slider-image">
-                                            @if($feedback->level)
-                                                <div class="slider-level-badge">
-                                                    <span class="badge bg-info">{{ $feedback->level }}</span>
-                        </div>
+                <!-- Feedbacks Grid -->
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+                    @foreach($feedbacks as $index => $feedback)
+                        <div class="col">
+                            <div class="slider-card" data-gallery="feedbacks" data-index="{{ $index }}" onclick="openGallery('feedbacks', {{ $index }})" role="button">
+                                <div class="slider-image-container">
+                                    <img src="{{ $feedback->image_url }}" 
+                                         alt="{{ $feedback->title }}" 
+                                         class="slider-image">
+                                    @if($feedback->level)
+                                        <div class="slider-level-badge">
+                                            <span class="badge bg-info">{{ $feedback->level }}</span>
+                                        </div>
+                                    @endif
+                                    <div class="slider-overlay">
+                                        <div class="slider-content">
+                                            <h6 class="text-white fw-bold mb-1">{{ $feedback->title }}</h6>
+                                            <p class="text-white-50 small mb-1">{{ Str::limit($feedback->description, 80) }}</p>
+                                            @if($feedback->student_name)
+                                                <span class="badge bg-light text-dark small">
+                                                    <i class="fas fa-user me-1"></i>{{ $feedback->student_name }}
+                                                </span>
                                             @endif
-                                            <div class="slider-overlay">
-                                                <div class="slider-content">
-                                                    <h6 class="text-white fw-bold mb-1">{{ $feedback->title }}</h6>
-                                                    <p class="text-white-50 small mb-1">{{ Str::limit($feedback->description, 80) }}</p>
-                            @if($feedback->student_name)
-                                                        <span class="badge bg-light text-dark small">
-                                                            <i class="fas fa-user me-1"></i>{{ $feedback->student_name }}
-                                                        </span>
-                            @endif
-                                @if($feedback->certificate_type)
-                                                        <span class="badge bg-warning small ms-1">
-                                                            <i class="fas fa-certificate me-1"></i>{{ $feedback->certificate_type }}
-                                                        </span>
-                                @endif
-                                                </div>
-                                            </div>
-                                            <div class="slider-click-overlay">
-                                                <i class="fas fa-search-plus fa-2x text-white"></i>
+                                            @if($feedback->certificate_type)
+                                                <span class="badge bg-warning small ms-1">
+                                                    <i class="fas fa-certificate me-1"></i>{{ $feedback->certificate_type }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
-                    
-                    <!-- Navigation Buttons -->
-                    @if($feedbacks->count() >= 4)
-                    <button class="slider-nav slider-prev" onclick="moveSlider('feedbacksSlider', -1)">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="slider-nav slider-next" onclick="moveSlider('feedbacksSlider', 1)">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-        @endif
-    </div>
-                    </div>
             </div>
         @endif
 
-        <!-- Statistics Section -->
-        <div class="row text-center mt-5">
-            <div class="col-md-6 mb-4">
-                <div class="stat-card">
-                    <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
-                    <h3 class="fw-bold text-primary">{{ $totalScores }}</h3>
-                    <p class="text-muted mb-0">Bảng Điểm</p>
+        <!-- Course Registration Section (moved from homepage) -->
+        <section class="py-5 bg-light position-relative registration-section">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="row mb-5">
+                    <div class="col-12 text-center">
+                        <h2 class="display-5 fw-bold text-dark mb-3">
+                            KHÓA HỌC <span class="text-primary">TIẾNG ĐỨC</span> CHUYÊN NGHIỆP
+                        </h2>
+                        <p class="lead text-muted">Đăng ký ngay để nhận ưu đãi đặc biệt và tư vấn miễn phí</p>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <!-- Course Offers Column -->
+                    <div class="col-lg-7 mb-4 mb-lg-0">
+                        <div class="offers-header mb-4">
+                            <h3 class="fw-bold text-dark mb-2">
+                                <i class="fas fa-gift text-primary me-2"></i>
+                                ƯU ĐÃI ĐẶC BIỆT KHÓA HỌC TIẾNG ĐỨC
+                            </h3>
+                            <p class="text-muted">Chỉ áp dụng cho 50 học viên đăng ký đầu tiên trong tháng này!</p>
                         </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="offer-card h-100">
+                                    <div class="offer-icon">
+                                        <i class="fas fa-percentage"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
+                                    <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
+                                    <div class="offer-badge">
+                                        <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="offer-card h-100">
+                                    <div class="offer-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
+                                    <p class="text-muted mb-0">BỘ SÁCH TIẾNG ĐỨC CHUYÊN NGHIỆP + AUDIO CD TRỊ GIÁ 800.000Đ</p>
+                                    <div class="offer-badge">
+                                        <span class="badge bg-success">Miễn phí</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="offer-card h-100">
+                                    <div class="offer-icon">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
+                                    <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
+                                    <div class="offer-badge">
+                                        <span class="badge bg-info">Không mất phí</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="offer-card h-100">
+                                    <div class="offer-icon">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
+                                    <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
+                                    <div class="offer-badge">
+                                        <span class="badge bg-warning">Bảo đảm</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-            <div class="col-md-6 mb-4">
-                <div class="stat-card">
-                    <i class="fas fa-comments fa-3x text-success mb-3"></i>
-                    <h3 class="fw-bold text-success">{{ $totalFeedbacks }}</h3>
-                    <p class="text-muted mb-0">Phản Hồi</p>
+
+                        <div class="urgency-notice mt-4 p-3 bg-warning bg-opacity-10 border border-warning rounded-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-clock text-warning me-2"></i>
+                                <div>
+                                    <strong class="text-warning">Ưu đãi có hạn!</strong>
+                                    <span class="text-muted ms-2">Chỉ còn <strong>7 ngày</strong> để nhận ưu đãi này</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Registration Form Column -->
+                    <div class="col-lg-5">
+                        <div class="registration-form-card">
+                            <div class="form-header text-center mb-4">
+                                <div class="form-icon mb-3">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h3 class="fw-bold text-white mb-2">ĐĂNG KÝ KHÓA HỌC TIẾNG ĐỨC</h3>
+                                <p class="text-white-50 mb-0">Nhận tư vấn miễn phí và ưu đãi đặc biệt</p>
+                            </div>
+
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            @endif
+
+                            @if($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <ul class="mb-0">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('contact.submit') }}" method="POST" class="consultation-form">
+                                @csrf
+                                <div class="mb-3">
+                                    <input type="text" class="form-control form-control-lg" name="name" placeholder="Họ và tên của bạn" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control form-control-lg" name="phone" placeholder="Số điện thoại" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control form-control-lg" name="email" placeholder="Địa chỉ email">
+                                </div>
+                                <div class="mb-3">
+                                    <select class="form-select form-select-lg" name="course" required>
+                                        <option value="">Chọn khóa học Tiếng Đức</option>
+                                        <option value="Tiếng Đức A1 - Cơ bản">Tiếng Đức A1 - Cơ bản</option>
+                                        <option value="Tiếng Đức A2 - Sơ cấp">Tiếng Đức A2 - Sơ cấp</option>
+                                        <option value="Tiếng Đức B1 - Trung cấp">Tiếng Đức B1 - Trung cấp</option>
+                                        <option value="Tiếng Đức B2 - Trung cấp cao">Tiếng Đức B2 - Trung cấp cao</option>
+                                        <option value="Tiếng Đức giao tiếp">Tiếng Đức giao tiếp</option>
+                                        <option value="Tư vấn chọn khóa phù hợp">Tư vấn chọn khóa phù hợp</option>
+                                    </select>
+                                </div>
+                                
+                                
+                                
+                                <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold py-3">
+                                    <i class="fas fa-paper-plane me-2"></i>ĐĂNG KÝ NGAY
+                                </button>
+                                
+                                <div class="text-center mt-3">
+                                    <small class="text-white-50">
+                                        <i class="fas fa-shield-alt me-1"></i>
+                                        Thông tin của bạn được bảo mật tuyệt đối
+                                    </small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </section>
 
@@ -205,6 +315,7 @@
 @endsection
 
 @push('styles')
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
 <style>
 /* Student Results Section Styles */
 .student-results-section {
@@ -431,27 +542,31 @@
     z-index: 10;
 }
 
-/* Statistics Styles */
-.stat-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.stat-card i {
-    transition: transform 0.3s ease;
-}
-
-.stat-card:hover i {
-    transform: scale(1.1);
-}
+/* Offer Cards and Registration Styles (imported) */
+.offers-header h3 { color: #2c3e50; }
+.offer-card { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; border: 1px solid rgba(0, 0, 0, 0.05); position: relative; overflow: hidden; }
+.offer-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+.offer-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(135deg, #015862, #3EB850); }
+.offer-icon { width: 50px; height: 50px; background: linear-gradient(135deg, #015862, #3EB850); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.offer-icon i { font-size: 20px; color: white; }
+.offer-card h5 { margin-bottom: 0.8rem; font-size: 1.1rem; }
+.offer-card p { line-height: 1.5; margin-bottom: 1rem; font-size: 0.9rem; }
+.offer-badge { margin-top: 0.5rem; }
+.offer-badge .badge { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+.urgency-notice { animation: pulse-border 2s ease-in-out infinite; }
+@keyframes pulse-border { 0%, 100% { border-color: #ffc107; } 50% { border-color: #ff8c00; } }
+.registration-form-card { background: linear-gradient(135deg, #015862, #3EB850); padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(1, 88, 98, 0.3); position: relative; overflow: hidden; }
+.registration-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%); pointer-events: none; }
+.form-header { position: relative; z-index: 2; }
+.form-icon { width: 80px; height: 80px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3); }
+.form-icon i { font-size: 32px; color: white; }
+.consultation-form { position: relative; z-index: 2; }
+.consultation-form .form-control, .consultation-form .form-select { border: 2px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.95); border-radius: 10px; padding: 0.75rem 1rem; font-size: 16px; height: auto; transition: all 0.3s ease; backdrop-filter: blur(10px); }
+.consultation-form .form-control:focus, .consultation-form .form-select:focus { border-color: rgba(255, 255, 255, 0.5); background: white; box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+.consultation-form .form-control::placeholder { color: #6c757d; }
+.consultation-form .btn-warning { background: linear-gradient(135deg, #ffc107, #ff8c00); border: none; border-radius: 10px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4); }
+.consultation-form .btn-warning:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6); background: linear-gradient(135deg, #ff8c00, #ffc107); }
+@media (max-width: 991px) { .offer-card { padding: 1.25rem; margin-bottom: 1rem; } .registration-form-card { padding: 2rem; margin-top: 2rem; } .offer-icon { width: 45px; height: 45px; margin-bottom: 0.8rem; } .offer-icon i { font-size: 18px; } .form-icon { width: 60px; height: 60px; } .form-icon i { font-size: 24px; } .offers-header h3 { font-size: 1.3rem; } .urgency-notice { margin-top: 2rem !important; } }
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -710,7 +825,7 @@ function updateNavigationButtons(sliderId) {
     document.getElementById('totalImages').textContent = data.length;
     
     // Update modal title
-    const modalTitle = currentGallery === 'scores' ? 'Bảng Điểm Học Viên' : 'Phản Hồi Học Viên';
+    const modalTitle = currentGallery === 'scores' ? 'CHỨNG CHỈ B1 CỦA HỌC VIÊN THANH CÚC' : 'PHẢN HỒI HỌC VIÊN';
     document.getElementById('galleryModalTitle').textContent = modalTitle;
     }
 
@@ -758,10 +873,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Initialize navigation buttons
-    ['scoresSlider', 'feedbacksSlider'].forEach(sliderId => {
-        updateNavigationButtons(sliderId);
-    });
+    // Grids do not require slider navigation initialization
     
     // Auto-resize sliders on window resize
     window.addEventListener('resize', function() {

@@ -202,7 +202,7 @@
 <section class="py-5 d-none d-md-block">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">TẠI SAO CHỌN THANH CÚC?</h2>
+            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 1px;">TẠI SAO CHỌN THANH CÚC?</h2>
             <p class="lead text-muted animate-on-scroll animate-delay-1">Những ưu điểm vượt trội giúp bạn học tiếng Đức hiệu quả</p>
         </div>
         
@@ -1230,17 +1230,7 @@ function goToContactWithCourse() {
                             </select>
                         </div>
                         
-                        <div class="mb-4">
-                            <select class="form-select form-select-lg" name="location" required>
-                                <option value="">Chọn cơ sở học</option>
-                                <option value="Hà Nội - Cầu Giấy">Hà Nội - Cầu Giấy</option>
-                                <option value="Hà Nội - Đống Đa">Hà Nội - Đống Đa</option>
-                                <option value="TP.HCM - Quận 1">TP.HCM - Quận 1</option>
-                                <option value="TP.HCM - Quận 3">TP.HCM - Quận 3</option>
-                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                <option value="Online">Học Online</option>
-                            </select>
-                        </div>
+                        
                         
                         <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold py-3">
                             <i class="fas fa-paper-plane me-2"></i>ĐĂNG KÝ NGAY

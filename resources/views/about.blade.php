@@ -378,7 +378,7 @@
             <div class="col-lg-6">
                 <div class="company-overview">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold text-primary mb-2">Tổng Quan</h2>
+                        <h2 class="fw-bold text-primary mb-2">TỔNG QUAN</h2>
                         <p class="text-muted">Những định hướng và giá trị cốt lõi của Thanh Cúc</p>
                     </div>
                     
@@ -386,22 +386,22 @@
                     <ul class="nav nav-pills nav-fill mb-4" id="aboutTabs" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">
-                                <i class="fas fa-info-circle me-2"></i>Tổng Quan
+                                <i class="fas fa-info-circle me-2"></i>TỔNG QUAN
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="mission-tab" data-bs-toggle="tab" data-bs-target="#mission" type="button" role="tab" aria-controls="mission" aria-selected="false">
-                                <i class="fas fa-bullseye me-2"></i>Sứ Mệnh
+                                <i class="fas fa-bullseye me-2"></i>SỨ MỆNH
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab" aria-controls="vision" aria-selected="false">
-                                <i class="fas fa-eye me-2"></i>Tầm Nhìn
+                                <i class="fas fa-eye me-2"></i>TẦM NHÌN
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="values-tab" data-bs-toggle="tab" data-bs-target="#values" type="button" role="tab" aria-controls="values" aria-selected="false">
-                                <i class="fas fa-star me-2"></i>Giá Trị
+                                <i class="fas fa-star me-2"></i>GIÁ TRỊ
                             </button>
                         </li>
                     </ul>
@@ -415,7 +415,7 @@
                                     <div class="mb-3">
                                         <i class="fas fa-building fa-3x text-primary"></i>
                                     </div>
-                                    <h4 class="fw-bold mb-3 text-primary">Tổng Quan</h4>
+                                    <h4 class="fw-bold mb-3 text-primary">TỔNG QUAN</h4>
                                     <p class="text-muted">
                                         {{ \App\Models\Setting::get('about_overview_short', 'Trung tâm tiếng Đức Thanh Cúc - Nơi ươm mầm tài năng, kiến tạo tương lai cho học viên Việt Nam.') }}
                                     </p>
@@ -436,7 +436,7 @@
                                     <div class="mb-3">
                                         <i class="fas fa-bullseye fa-3x text-primary"></i>
                                     </div>
-                                    <h4 class="fw-bold mb-3 text-primary">Sứ Mệnh</h4>
+                                    <h4 class="fw-bold mb-3 text-primary">SỨ MỆNH</h4>
                                     <p class="text-muted">
                                         {{ \App\Models\Setting::get('about_mission', 'Giúp hàng triệu người Việt Nam vượt qua tiếng Đức dễ dàng, một lần và mãi mãi thông qua phương pháp học đơn giản, hiệu quả và khoa học.') }}
                                     </p>
@@ -451,7 +451,7 @@
                                     <div class="mb-3">
                                         <i class="fas fa-eye fa-3x text-primary"></i>
                                     </div>
-                                    <h4 class="fw-bold mb-3 text-primary">Tầm Nhìn</h4>
+                                    <h4 class="fw-bold mb-3 text-primary">TẦM NHÌN</h4>
                                     <p class="text-muted">
                                         {{ \App\Models\Setting::get('about_vision', 'Trở thành trung tâm tiếng Đức hàng đầu Việt Nam, được công nhận về chất lượng giảng dạy và phương pháp học tiếng Đức độc quyền.') }}
                                     </p>
@@ -465,7 +465,7 @@
                                 <div class="card-body p-4">
                                     <div class="text-center mb-3">
                                         <i class="fas fa-star fa-3x text-primary"></i>
-                                        <h4 class="fw-bold mb-3 text-primary">Giá Trị Cốt Lõi</h4>
+                                        <h4 class="fw-bold mb-3 text-primary">GIÁ TRỊ CỐT LÕI</h4>
                                     </div>
                                     @php
                                         $coreValues = json_decode(\App\Models\Setting::get('about_core_values', '[]'), true);
@@ -526,7 +526,7 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Đội Ngũ Giảng Viên</h2>
+            <h2 class="fw-bold text-primary mb-3">ĐỘI NGŨ GIẢNG VIÊN</h2>
             <p class="text-muted">Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Đức nhiều năm</p>
         </div>
         
@@ -633,7 +633,7 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Lớp Học Của Thanh Cúc</h2>
+            <h2 class="fw-bold text-primary mb-3">LỚP HỌC CỦA THANH CÚC</h2>
             <p class="text-muted">Không gian học tập sinh động và hiện đại, nơi học viên trải nghiệm phương pháp học tiếng Đức độc đáo</p>
         </div>
         
@@ -698,7 +698,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Cơ Sở Vật Chất</h2>
+            <h2 class="fw-bold text-primary mb-3">CƠ SỞ VẬT CHẤT</h2>
             <p class="text-muted">Không gian học tập hiện đại, trang thiết bị đầy đủ cho việc học tiếng Đức hiệu quả</p>
         </div>
         
