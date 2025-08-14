@@ -225,8 +225,8 @@
 
 @media (max-width: 576px) {
     .fullscreen-image-section {
-        height: 60vh;
-        min-height: 400px;
+        height: 205px;
+        min-height: 204px;
     }
     
     .fullscreen-image-overlay h2 {

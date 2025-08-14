@@ -1,326 +1,245 @@
 @extends('layouts.app')
 
-@section('title', 'Về Chúng Tôi - Trung Tâm Tiếng Đức Thanh Cúc')
+@section('title', 'Về Chúng Tôi - Trung Tâm Anh Ngữ SEC')
 
 @push('styles')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <style>
-/* Company Overview & Mission Vision Values Section */
+/* ===== TRADITIONAL TAB DESIGN ===== */
 .company-overview {
-    height: 100%;
+    background: white;
+    padding: 2rem;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    overflow: visible;
+}
+
+.company-overview::before {
+    display: none;
+}
+
+/* ===== TRADITIONAL TAB DESIGN ===== */
+.nav-pills {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-.mission-vision-tabs {
-    height: 100%;
-}
-
-/* Tab Navigation Styling */
 .nav-pills .nav-link {
-    border-radius: 25px;
+    border-radius: 6px 6px 0 0;
     padding: 0.75rem 1.5rem;
-    margin: 0 0.25rem;
-    font-weight: 500;
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
-    background-color: #f8f9fa;
-    color: #6c757d;
+    border: 1px solid #e0e0e0;
+    border-bottom: none;
+    background: #f0f0f0;
+    color: #333;
+    position: relative;
+    white-space: nowrap;
+    min-width: 120px;
+    text-align: center;
+    margin-right: -1px;
 }
 
 .nav-pills .nav-link:hover {
-    background-color: rgba(1, 88, 98, 0.1);
-    color: var(--primary-color, #015862);
-    transform: translateY(-2px);
-    border-color: rgba(1, 88, 98, 0.2);
+    background: #e8e8e8;
+    color: #333;
+    transform: none;
+    box-shadow: none;
+    border-color: #e0e0e0;
 }
 
 .nav-pills .nav-link.active {
-    background-color: var(--primary-color, #015862);
-    color: white;
-    box-shadow: 0 4px 15px rgba(1, 88, 98, 0.3);
-    border-color: var(--primary-color, #015862);
+    background: white;
+    color: #333;
+    box-shadow: none;
+    border-color: #e0e0e0;
+    transform: none;
+    border-bottom: 3px solid #dc3545;
+    z-index: 10;
 }
 
-/* Tab Content Styling */
+.nav-pills .nav-link.active::after {
+    display: none;
+}
+
+/* ===== TRADITIONAL TAB CONTENT ===== */
 .tab-content {
     min-height: 300px;
+    background: white;
+    border-radius: 0;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    box-shadow: none;
+    overflow: hidden;
+    position: relative;
+    margin-top: -1px;
+}
+
+.tab-content::before {
+    display: none;
 }
 
 .tab-pane {
     transition: all 0.3s ease;
+    padding: 2rem;
 }
 
 .tab-pane.fade {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px) scale(0.98);
 }
 
 .tab-pane.fade.show {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
-/* Card Styling */
+/* ===== CARD ENHANCEMENT ===== */
 .card {
-    transition: all 0.3s ease;
     border: none;
-    box-shadow: 0 5px 20px rgba(1, 88, 98, 0.08);
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(1, 88, 98, 0.15);
-    background: linear-gradient(135deg, #ffffff 0%, #f0f8f9 100%);
+    background: transparent;
+    box-shadow: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-body {
-    padding: 2rem;
-}
-
-/* Icon Styling */
-.fa-3x {
-    font-size: 3rem;
-    color: var(--primary-color, #015862);
-}
-
-/* Core Values Icons */
-.core-values-grid .bg-primary {
-    background-color: var(--primary-color, #015862) !important;
-}
-
-.core-values-grid .bg-light {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-    border: 1px solid rgba(1, 88, 98, 0.1);
-}
-
-/* Core Values Grid */
-.core-values-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-}
-
-/* Building Image Section */
-.building-image {
-    max-width: 100%;
-    height: auto;
-    transition: all 0.3s ease;
-}
-
-.building-image:hover {
-    transform: scale(1.02);
-}
-
-/* Responsive Design */
-@media (max-width: 991.98px) {
-    .company-overview {
-        margin-bottom: 3rem;
-        text-align: center;
-    }
-    
-    .mission-vision-tabs {
-        text-align: center;
-    }
-    
-    .nav-pills {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .nav-pills .nav-link {
-        margin: 0.25rem;
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-    
-    .card-body {
-        padding: 1.5rem;
-    }
-    
-    .fa-3x {
-        font-size: 2.5rem;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .nav-pills .nav-link {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.8rem;
-        margin: 0.125rem;
-    }
-    
-    .card-body {
-        padding: 1rem;
-    }
-    
-    .fa-3x {
-        font-size: 2rem;
-    }
-    
-    .company-overview h2 {
-        font-size: 1.75rem;
-    }
-    
-    .mission-vision-tabs h3 {
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .nav-pills {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .nav-pills .nav-link {
-        width: 100%;
-        max-width: 200px;
-        margin: 0.25rem 0;
-    }
-    
-    .card-body {
-        padding: 0.75rem;
-    }
-    
-    .fa-3x {
-        font-size: 1.75rem;
-    }
-    
-    .company-overview h2 {
-        font-size: 1.5rem;
-    }
-    
-    .mission-vision-tabs h3 {
-        font-size: 1.25rem;
-    }
-    
-    .btn-lg {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-/* Animation Classes */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
-
-.animate-on-scroll.animated {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Hover Effects */
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(1, 88, 98, 0.25);
-    transition: all 0.3s ease;
-}
-
-/* Button Styling */
-.btn-primary {
-    background: linear-gradient(135deg, var(--primary-color, #015862) 0%, #027a8a 100%);
-    border: none;
-    box-shadow: 0 2px 8px rgba(1, 88, 98, 0.2);
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, #027a8a 0%, var(--primary-color, #015862) 100%);
-    box-shadow: 0 4px 15px rgba(1, 88, 98, 0.3);
-}
-
-.btn-outline-primary {
-    color: var(--primary-color, #015862);
-    border-color: var(--primary-color, #015862);
+    padding: 0;
     background: transparent;
 }
 
-.btn-outline-primary:hover {
-    background: var(--primary-color, #015862);
-    color: white;
-    box-shadow: 0 4px 15px rgba(1, 88, 98, 0.3);
-}
-
-/* Custom Scrollbar for Tab Content */
-.tab-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.tab-content::-webkit-scrollbar-track {
-    background: #f8f9fa;
-    border-radius: 3px;
-}
-
-.tab-content::-webkit-scrollbar-thumb {
-    background: rgba(1, 88, 98, 0.3);
-    border-radius: 3px;
-}
-
-.tab-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(1, 88, 98, 0.5);
-}
-
-/* Section Background */
-.company-overview {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid rgba(1, 88, 98, 0.05);
-}
-
-/* Text Colors */
-.text-primary {
-    color: var(--primary-color, #015862) !important;
-}
-
-.text-muted {
-    color: #6c757d !important;
-}
-
-/* Card Body Enhancement */
-.card-body {
-    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-}
-
-/* Core Value Items Enhancement */
-.core-value-item {
-    transition: all 0.3s ease;
-    border: 1px solid rgba(1, 88, 98, 0.1);
-}
-
-.core-value-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(1, 88, 98, 0.15);
-    border-color: rgba(1, 88, 98, 0.2);
-    background: linear-gradient(135deg, #ffffff 0%, #f0f8f9 100%) !important;
-}
-
-/* Tab Content Enhancement */
-.tab-content {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 15px;
-    border: 1px solid rgba(1, 88, 98, 0.05);
-}
-
-/* Section Header Enhancement */
-.company-overview h2 {
-    background: linear-gradient(135deg, var(--primary-color, #015862) 0%, #027a8a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+/* ===== ICON STYLING ===== */
+.fa-3x {
+    font-size: 2.5rem;
+    color: #dc3545;
+    margin-bottom: 1rem;
     display: inline-block;
 }
 
-/* Animation Enhancement */
-@keyframes fadeInUp {
+/* ===== CORE VALUES GRID ===== */
+.core-value-item {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.core-value-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.core-value-item:hover::before {
+    transform: scaleX(1);
+}
+
+.core-value-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 107, 53, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f0 100%);
+}
+
+.core-value-item .bg-primary {
+    background: #dc3545 !important;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* ===== BUTTON STYLING ===== */
+.btn {
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
+}
+
+/* ===== TEXT STYLING ===== */
+.text-primary {
+    color: #dc3545 !important;
+    font-weight: 700;
+}
+
+.company-overview h2 {
+    color: #333;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -328,20 +247,670 @@
     }
 }
 
-.tab-pane.fade.show {
-    animation: fadeInUp 0.5s ease-out;
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* Responsive Color Adjustments */
-@media (max-width: 768px) {
+.tab-pane.fade.show {
+    animation: fadeInScale 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.core-value-item {
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 991.98px) {
     .company-overview {
-        background: linear-gradient(135deg, #ffffff 0%, #f5f7f8 100%);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
     }
     
     .nav-pills .nav-link {
-        background-color: #f8f9fa;
-        border: 1px solid rgba(1, 88, 98, 0.1);
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+        min-width: 100px;
     }
+    
+    .tab-pane {
+        padding: 1.5rem;
+    }
+    
+    .company-overview h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .company-overview {
+        padding: 1rem;
+    }
+    
+    .nav-pills {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        border-bottom: 1px solid #e0e0e0;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    
+    .nav-pills .nav-link {
+        width: auto;
+        min-width: 100px;
+        max-width: none;
+        margin: 0;
+        border-radius: 6px 6px 0 0;
+        border: 1px solid #e0e0e0;
+        border-bottom: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .nav-pills .nav-link.active {
+        border-bottom: 3px solid #dc3545;
+    }
+    
+    .tab-pane {
+        padding: 1.5rem;
+    }
+    
+    .company-overview h2 {
+        font-size: 1.5rem;
+    }
+    
+    .fa-3x {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .company-overview {
+        padding: 0.75rem;
+    }
+    
+    .nav-pills .nav-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+        min-width: 90px;
+        max-width: none;
+    }
+    
+    .tab-pane {
+        padding: 1rem;
+    }
+    
+    .company-overview h2 {
+        font-size: 1.25rem;
+    }
+    
+    .fa-3x {
+        font-size: 1.75rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+    
+    .teacher-card .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .teacher-avatar,
+    .teacher-avatar-placeholder {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+/* ===== BUILDING IMAGE ENHANCEMENT ===== */
+.building-image {
+    max-width: 100%;
+    height: auto;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.building-image:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== LIGHTNING BOLT ICONS ===== */
+/* Removed lightning bolt styling */
+
+/* ===== TEACHER CARDS STYLING ===== */
+.teacher-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.teacher-avatar {
+    object-fit: cover;
+    border: 4px solid #f8f9fa;
+    transition: transform 0.3s ease;
+}
+
+.teacher-card:hover .teacher-avatar {
+    transform: scale(1.05);
+}
+
+.teacher-avatar-placeholder {
+    border: 4px solid #f8f9fa;
+    transition: transform 0.3s ease;
+}
+
+.teacher-card:hover .teacher-avatar-placeholder {
+    transform: scale(1.05);
+}
+
+.teacher-card .badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.teacher-card .btn {
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.teacher-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* ===== TEACHER MODAL STYLING ===== */
+#teacherDetailModal {
+    z-index: 9999 !important;
+}
+
+#teacherDetailModal .modal-dialog {
+    z-index: 10000 !important;
+}
+
+#teacherDetailModal .modal-content {
+    z-index: 10001 !important;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.teacher-modal-avatar {
+    object-fit: cover;
+    border: 8px solid #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.teacher-modal-avatar-placeholder {
+    border: 8px solid #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.avatar-ring {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+.avatar-ring::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #dc3545, #fd7e14, #ffc107, #20c997);
+    border-radius: 50%;
+    z-index: -1;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #dc3545, #fd7e14) !important;
+}
+
+.modal-header {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 2rem 1.5rem 2rem;
+    background: linear-gradient(135deg, #dc3545, #fd7e14) !important;
+}
+
+.modal-header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #dc3545, #fd7e14);
+    z-index: 0;
+}
+
+.position-relative.z-1 {
+    position: relative;
+    z-index: 1;
+}
+
+.modal-header h4 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-header .btn-close {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.modal-header .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.teacher-quick-stats {
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #f8f9fa;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: #dc3545;
+}
+
+.stat-item i {
+    color: #dc3545;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item h6 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-item small {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.teacher-header h3 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #dc3545, #fd7e14);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.teacher-header p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.info-section {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    padding: 2rem;
+    border-radius: 20px;
+    border-left: 5px solid #dc3545;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.info-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.info-section h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.info-section h6 i {
+    color: #dc3545;
+    margin-right: 0.75rem;
+}
+
+.info-section .text-muted {
+    color: #495057 !important;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.achievements-grid .badge {
+    background: linear-gradient(135deg, #dc3545, #fd7e14);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+}
+
+.achievements-grid .badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+.modal-footer {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    padding: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.modal-footer .btn {
+    border-radius: 30px;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-footer .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-footer .btn-primary {
+    background: linear-gradient(135deg, #dc3545, #fd7e14);
+    border: none;
+    color: white;
+}
+
+.modal-footer .btn-outline-primary {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    background: transparent;
+}
+
+.modal-footer .btn-outline-primary:hover {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+/* Teacher Badges */
+.teacher-badges .badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.teacher-badges .badge.bg-success {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+}
+
+.teacher-badges .badge.bg-info {
+    background: linear-gradient(135deg, #17a2b8, #6f42c1) !important;
+}
+
+.teacher-badges .badge.bg-warning {
+    background: linear-gradient(135deg, #ffc107, #fd7e14) !important;
+    color: #333 !important;
+}
+
+/* Small Info Sections */
+.info-section-small {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 3px solid #dc3545;
+    margin-bottom: 1rem;
+}
+
+.info-section-small h6 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.info-section-small .text-muted {
+    color: #495057 !important;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Small Stats */
+.stat-item-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.75rem;
+    border: 2px solid #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.stat-item-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-color: #dc3545;
+}
+
+.stat-item-small i {
+    color: #dc3545;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item-small h6 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.stat-item-small small {
+    color: #6c757d;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+/* Small Achievements Grid */
+.achievements-grid-small {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.achievements-grid-small .badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .teacher-modal-avatar,
+    .teacher-modal-avatar-placeholder {
+        width: 150px !important;
+        height: 150px !important;
+    }
+    
+    .modal-header h4 {
+        font-size: 1.5rem;
+    }
+    
+    .teacher-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .info-section {
+        padding: 1.5rem;
+    }
+    
+    .modal-footer .btn {
+        padding: 0.875rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== MODAL FALLBACK STYLING ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-dialog {
+    margin: 1.75rem auto;
+    max-width: 500px;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-body {
+    padding: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.btn-close {
+    background: transparent;
+    border: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: inherit;
+}
+
+.btn-close:hover {
+    opacity: 0.75;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.tab-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    border-radius: 4px;
+}
+
+.tab-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #f7931e, #ff6b35);
+}
+
+/* ===== TAB NAVIGATION SCROLLBAR ===== */
+.nav-pills::-webkit-scrollbar {
+    height: 6px;
+}
+
+.nav-pills::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+.nav-pills::-webkit-scrollbar-thumb {
+    background: #dc3545;
+    border-radius: 3px;
+}
+
+.nav-pills::-webkit-scrollbar-thumb:hover {
+    background: #c82333;
 }
 </style>
 @endpush
@@ -379,7 +948,7 @@
                 <div class="company-overview">
                     <div class="text-center mb-4">
                         <h2 class="fw-bold text-primary mb-2">TỔNG QUAN</h2>
-                        <p class="text-muted">Những định hướng và giá trị cốt lõi của Thanh Cúc</p>
+                        <p class="text-muted">Những định hướng và giá trị cốt lõi của SEC</p>
                     </div>
                     
                     <!-- Tab Navigation -->
@@ -411,18 +980,21 @@
                         <!-- Overview Tab -->
                         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                             <div class="card border-0 shadow-sm h-100">
-                                <div class="card-body p-4 text-center">
-                                    <div class="mb-3">
-                                        <i class="fas fa-building fa-3x text-primary"></i>
+                                <div class="card-body p-4">
+                                    <div class="text-start">
+                                        <p class="text-muted mb-3">
+                                            SEC Tiếng Anh Đơn Giản ra đời vào ngày 23/03/2017, với những phương pháp học tiếng Anh cực kỳ đơn giản và hiệu quả. Ngay từ khi thành lập, SEC đã trở thành nơi uy tín của hàng ngàn học sinh, sinh viên. Mỗi tháng, SEC tuyển sinh từ 600 đến 700 học viên mới, minh chứng cho chất lượng giảng dạy của trung tâm.
+                                        </p>
+                                        <p class="text-muted mb-3">
+                                            Tên thương hiệu SEC (Simple English Center) phản ánh kim chỉ nam của chúng tôi: biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Với phương pháp đơn giản và hiệu quả, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo.
+                                        </p>
+                                        <p class="text-muted mb-4">
+                                            SEC có khát vọng mãnh liệt lan tỏa phương pháp này mạnh mẽ hơn nữa, giúp hàng triệu người vượt qua môn học Tiếng Anh dễ dàng, một lần và mãi mãi. Hãy đến với SEC để trải nghiệm và chinh phục tiếng Anh ngay hôm nay!
+                                        </p>
                                     </div>
-                                    <h4 class="fw-bold mb-3 text-primary">TỔNG QUAN</h4>
-                                    <p class="text-muted">
-                                        {{ \App\Models\Setting::get('about_overview_short', 'Trung tâm tiếng Đức Thanh Cúc - Nơi ươm mầm tài năng, kiến tạo tương lai cho học viên Việt Nam.') }}
-                                    </p>
                                     <div class="mt-4">
                                         <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                            <a href="{{ route('contact') }}" class="btn btn-primary btn-lg">Học Thử Miễn Phí</a>
-                                            <a href="tel:0975186230" class="btn btn-outline-primary btn-lg">0975.186.230</a>
+                                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">Đăng kí học ngay ></a>
                                         </div>
                                     </div>
                                 </div>
@@ -432,14 +1004,18 @@
                         <!-- Mission Tab -->
                         <div class="tab-pane fade" id="mission" role="tabpanel" aria-labelledby="mission-tab">
                             <div class="card border-0 shadow-sm h-100">
-                                <div class="card-body p-4 text-center">
-                                    <div class="mb-3">
-                                        <i class="fas fa-bullseye fa-3x text-primary"></i>
+                                <div class="card-body p-4">
+                                    <div class="text-start">
+                                        <p class="text-muted mb-3">
+                                            SEC có sứ mệnh biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Chúng tôi cam kết mang đến phương pháp học đơn giản, hiệu quả và khoa học.
+                                        </p>
+                                        <p class="text-muted mb-3">
+                                            Với kim chỉ nam rõ ràng, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo, đảm bảo kiến thức được ghi nhớ lâu dài.
+                                        </p>
+                                        <p class="text-muted">
+                                            Chúng tôi tin rằng mọi người đều có thể chinh phục tiếng Anh một cách tự nhiên và bền vững thông qua phương pháp đúng đắn.
+                                        </p>
                                     </div>
-                                    <h4 class="fw-bold mb-3 text-primary">SỨ MỆNH</h4>
-                                    <p class="text-muted">
-                                        {{ \App\Models\Setting::get('about_mission', 'Giúp hàng triệu người Việt Nam vượt qua tiếng Đức dễ dàng, một lần và mãi mãi thông qua phương pháp học đơn giản, hiệu quả và khoa học.') }}
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -447,14 +1023,18 @@
                         <!-- Vision Tab -->
                         <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
                             <div class="card border-0 shadow-sm h-100">
-                                <div class="card-body p-4 text-center">
-                                    <div class="mb-3">
-                                        <i class="fas fa-eye fa-3x text-primary"></i>
+                                <div class="card-body p-4">
+                                    <div class="text-start">
+                                        <p class="text-muted mb-3">
+                                            SEC định hướng phát triển thành Trung tâm Anh ngữ số 1 Việt Nam về phổ cập phương pháp Tiếng Anh đơn giản đến mọi lứa tuổi.
+                                        </p>
+                                        <p class="text-muted mb-3">
+                                            Chúng tôi mong muốn trở thành đối tác tin cậy của các tổ chức giáo dục, doanh nghiệp và cá nhân trong việc nâng cao trình độ tiếng Anh.
+                                        </p>
+                                        <p class="text-muted">
+                                            SEC sẽ mở rộng mạng lưới trung tâm trên toàn quốc, mang phương pháp học tiếng Anh đơn giản đến mọi miền đất nước.
+                                        </p>
                                     </div>
-                                    <h4 class="fw-bold mb-3 text-primary">TẦM NHÌN</h4>
-                                    <p class="text-muted">
-                                        {{ \App\Models\Setting::get('about_vision', 'Trở thành trung tâm tiếng Đức hàng đầu Việt Nam, được công nhận về chất lượng giảng dạy và phương pháp học tiếng Đức độc quyền.') }}
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -463,34 +1043,50 @@
                         <div class="tab-pane fade" id="values" role="tabpanel" aria-labelledby="values-tab">
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
-                                    <div class="text-center mb-3">
-                                        <i class="fas fa-star fa-3x text-primary"></i>
-                                        <h4 class="fw-bold mb-3 text-primary">GIÁ TRỊ CỐT LÕI</h4>
-                                    </div>
-                                    @php
-                                        $coreValues = json_decode(\App\Models\Setting::get('about_core_values', '[]'), true);
-                                    @endphp
-                                    
-                                    @if(count($coreValues) > 0)
+                                    <div class="text-start">
                                         <div class="row g-3">
-                                            @foreach($coreValues as $value)
-                                                <div class="col-6">
-                                                    <div class="text-center p-3 bg-light rounded core-value-item">
-                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                             style="width: 50px; height: 50px;">
-                                                            <i class="{{ $value['icon'] ?? 'fas fa-star' }} text-white"></i>
-                                                        </div>
-                                                        <h6 class="fw-bold mb-2 small text-primary">{{ $value['title'] ?? '' }}</h6>
-                                                        <p class="text-muted small mb-0">{{ Str::limit($value['description'] ?? '', 60) }}</p>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-light rounded core-value-item">
+                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                         style="width: 50px; height: 50px;">
+                                                        <i class="fas fa-graduation-cap text-white"></i>
                                                     </div>
+                                                    <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
+                                                    <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
                                                 </div>
-                                            @endforeach
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-light rounded core-value-item">
+                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                         style="width: 50px; height: 50px;">
+                                                        <i class="fas fa-heart text-white"></i>
+                                                    </div>
+                                                    <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
+                                                    <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-light rounded core-value-item">
+                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                         style="width: 50px; height: 50px;">
+                                                        <i class="fas fa-lightbulb text-white"></i>
+                                                    </div>
+                                                    <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
+                                                    <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-light rounded core-value-item">
+                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                         style="width: 50px; height: 50px;">
+                                                        <i class="fas fa-chart-line text-white"></i>
+                                                    </div>
+                                                    <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
+                                                    <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    @else
-                                        <div class="text-center">
-                                            <p class="text-muted">Chất lượng - Tận tâm - Sáng tạo - Hiệu quả</p>
-                                        </div>
-                                    @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -510,7 +1106,7 @@
                     }
                 @endphp
                 <img src="{{ $buildingImageUrl }}" 
-                     alt="Thanh Cúc Building" 
+                     alt="SEC Building" 
                      class="img-fluid rounded shadow-lg animate-on-scroll"
                      onerror="this.src='{{ asset('images/about/sec-building.svg') }}?v={{ time() }}'">
             </div>
@@ -527,98 +1123,76 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="fw-bold text-primary mb-3">ĐỘI NGŨ GIẢNG VIÊN</h2>
-            <p class="text-muted">Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Đức nhiều năm</p>
+            <p class="text-muted">Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Anh nhiều năm</p>
         </div>
         
-                 <div class="row">
-             @php
-                 $teachers = \App\Models\Teacher::where('is_active', true)
-                     ->orderBy('sort_order')
-                     ->orderBy('name')
-                     ->get();
-             @endphp
-             
-             @forelse($teachers as $teacher)
-                <div class="col-lg-6 mb-5">
-                    <div class="card h-100 border-0 shadow-sm teacher-card">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                                                <div class="teacher-image-container">
-                                     @if($teacher->avatar)
-                                         <img src="{{ asset('storage/' . $teacher->avatar) }}" 
-                                              alt="{{ $teacher->name }}" 
-                                              class="img-fluid teacher-image">
-                                     @else
-                                         <div class="teacher-placeholder d-flex align-items-center justify-content-center">
-                                             <i class="fas fa-user fa-3x text-muted"></i>
-                                         </div>
-                                     @endif
-                                     <div class="teacher-overlay">
-                                         <div class="teacher-social">
-                                             <a href="#" class="btn btn-light btn-sm rounded-circle">
-                                                 <i class="fas fa-envelope"></i>
-                                             </a>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="col-md-8">
-                                 <div class="card-body p-4">
-                                     <h5 class="fw-bold text-primary mb-1">{{ $teacher->name }}</h5>
-                                     <p class="text-muted mb-3">{{ $teacher->specialization }}</p>
-                                     
-                                     @if($teacher->certification)
-                                     <div class="mb-3">
-                                         <h6 class="fw-bold mb-2">
-                                             <i class="fas fa-graduation-cap text-primary me-2"></i>Trình độ
-                                         </h6>
-                                         <p class="small mb-0">{{ $teacher->certification }}</p>
-                                     </div>
-                                     @endif
-                                     
-                                     @if($teacher->experience_years)
-                                     <div class="mb-3">
-                                         <h6 class="fw-bold mb-2">
-                                             <i class="fas fa-clock text-primary me-2"></i>Kinh nghiệm
-                                         </h6>
-                                         <p class="small mb-0">{{ $teacher->experience_years }}+ năm kinh nghiệm</p>
-                                     </div>
-                                     @endif
-                                     
-                                     @if($teacher->bio)
-                                     <div class="mb-3">
-                                         <h6 class="fw-bold mb-2">
-                                             <i class="fas fa-info-circle text-primary me-2"></i>Giới thiệu
-                                         </h6>
-                                         <div class="small mb-0">{!! $teacher->bio !!}</div>
-                                     </div>
-                                     @endif
-                                     
-                                     @if($teacher->achievements && count($teacher->achievements) > 0)
-                                     <div>
-                                         <h6 class="fw-bold mb-2">
-                                             <i class="fas fa-trophy text-primary me-2"></i>Thành tích
-                                         </h6>
-                                         <div class="d-flex flex-wrap gap-1">
-                                             @foreach($teacher->achievements as $achievement)
-                                                 <span class="badge bg-light text-dark">{{ $achievement }}</span>
-                                             @endforeach
-                                         </div>
-                                     </div>
-                                     @endif
-                                 </div>
-                             </div>
+        <div class="row">
+            @php
+                $teachers = \App\Models\Teacher::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('name')
+                    ->get();
+            @endphp
+            
+            @forelse($teachers as $teacher)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="teacher-card card h-100 border-0 shadow-sm" 
+                     data-teacher-id="{{ $teacher->id }}"
+                     data-teacher-name="{{ $teacher->name }}"
+                     data-teacher-specialization="{{ $teacher->specialization }}"
+                     data-teacher-certification="{{ $teacher->certification }}"
+                     data-teacher-experience="{{ $teacher->experience_years }}"
+                     data-teacher-bio="{{ strip_tags($teacher->bio) }}"
+                     data-teacher-achievements="{{ json_encode($teacher->achievements) }}"
+                     data-teacher-avatar="{{ $teacher->avatar ? asset('storage/' . $teacher->avatar) : '' }}"
+                     style="cursor: pointer;">
+                    <div class="card-body p-4 text-center">
+                        <div class="mb-3">
+                            @if($teacher->avatar)
+                                <img src="{{ asset('storage/' . $teacher->avatar) }}" 
+                                     alt="{{ $teacher->name }}" 
+                                     class="rounded-circle teacher-avatar"
+                                     width="120" height="120">
+                            @else
+                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center teacher-avatar-placeholder" 
+                                     style="width: 120px; height: 120px;">
+                                    <i class="fas fa-user fa-3x text-white"></i>
+                                </div>
+                            @endif
                         </div>
+                        
+                        <h5 class="fw-bold text-primary mb-2">{{ $teacher->name }}</h5>
+                        <p class="text-muted mb-2">{{ $teacher->specialization }}</p>
+                        
+                        @if($teacher->certification)
+                        <span class="badge bg-light text-primary border mb-3">{{ $teacher->certification }}</span>
+                        @endif
+                        
+                        @if($teacher->experience_years)
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <i class="fas fa-clock text-primary me-2"></i>
+                            <small class="text-muted">{{ $teacher->experience_years }}+ năm kinh nghiệm</small>
+                        </div>
+                        @endif
+                        
+                        @if($teacher->bio)
+                            <p class="text-muted small mb-3">{!! Str::limit(strip_tags($teacher->bio), 120) !!}</p>
+                        @endif
+                        
+                        <button class="btn btn-outline-primary btn-sm teacher-detail-btn">
+                            <i class="fas fa-eye me-1"></i>Xem Chi Tiết
+                        </button>
                     </div>
                 </div>
+            </div>
             @empty
-                <div class="col-12">
-                    <div class="text-center py-5">
-                        <i class="fas fa-users fa-4x text-muted mb-3"></i>
-                        <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
-                        <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
-                    </div>
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-users fa-4x text-muted mb-3"></i>
+                    <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
+                    <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
                 </div>
+            </div>
             @endforelse
         </div>
     </div>
@@ -745,6 +1319,22 @@
 
 
 
+
+<!-- Teacher Detail Modal -->
+<div class="modal fade" id="teacherDetailModal" tabindex="-1" aria-labelledby="teacherModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="teacherModalLabel">Chi tiết giảng viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="teacherModalBody">
+                <!-- Content will be loaded here -->
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!-- Image Gallery Modal -->
 <div class="modal fade" id="imageGalleryModal" tabindex="-1" aria-hidden="true">
@@ -1693,6 +2283,149 @@ document.addEventListener('DOMContentLoaded', function() {
         slider.addEventListener('mouseenter', function() { stopAutoplay(slider.id); });
         slider.addEventListener('mouseleave', function() { startAutoplay(slider.id); });
     });
+    
+    // Teacher Detail Modal Functionality
+    function setupTeacherModal() {
+        console.log('DOM Content Loaded - Setting up teacher modal functionality');
+        
+        // Handle teacher card clicks
+        const teacherCards = document.querySelectorAll('.teacher-card');
+        console.log('Found teacher cards:', teacherCards.length);
+        
+        teacherCards.forEach(function(card, index) {
+            console.log('Setting up card', index, 'with data:', card.dataset);
+            
+            card.addEventListener('click', function(e) {
+                console.log('Card clicked:', index);
+                const teacherData = this.dataset;
+                console.log('Teacher data from card:', teacherData);
+                showTeacherModal(teacherData);
+            });
+        });
+        
+        // Handle teacher detail button clicks (prevent event bubbling)
+        const teacherButtons = document.querySelectorAll('.teacher-detail-btn');
+        console.log('Found teacher buttons:', teacherButtons.length);
+        
+        teacherButtons.forEach(function(btn, index) {
+            btn.addEventListener('click', function(e) {
+                console.log('Button clicked:', index);
+                e.stopPropagation();
+                const card = this.closest('.teacher-card');
+                const teacherData = card.dataset;
+                console.log('Teacher data from button:', teacherData);
+                showTeacherModal(teacherData);
+            });
+        });
+    }
+    
+    // Try to setup immediately if DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupTeacherModal);
+    } else {
+        setupTeacherModal();
+    }
+    
+    // Also try after a short delay to ensure everything is loaded
+    setTimeout(setupTeacherModal, 1000);
+    
+    function showTeacherModal(teacherData) {
+        console.log('Teacher data:', teacherData); // Debug log
+        
+        // Show loading
+        document.getElementById('teacherModalBody').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tải...</p></div>';
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('teacherDetailModal'));
+        modal.show();
+        
+        // Update modal title
+        document.getElementById('teacherModalLabel').textContent = teacherData.teacherName || 'Chi tiết giảng viên';
+        
+        // Build modal content HTML
+        const modalContent = `
+            <div class="row">
+                <div class="col-md-4">
+                    ${teacherData.teacherAvatar && teacherData.teacherAvatar.trim() !== '' ? 
+                        `<img src="${teacherData.teacherAvatar}" alt="${teacherData.teacherName}" class="img-fluid rounded" style="width: 200px; height: 200px; object-fit: cover;">` :
+                        `<div class="bg-gradient rounded d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);">
+                            <i class="fas fa-user fa-3x text-white opacity-75"></i>
+                        </div>`
+                    }
+                </div>
+                <div class="col-md-8">
+                    <h4 class="text-primary mb-3">${teacherData.teacherName || ''}</h4>
+                    ${teacherData.teacherSpecialization ? `<p class="text-muted mb-3">${teacherData.teacherSpecialization}</p>` : ''}
+                    
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-clock text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Kinh nghiệm</small>
+                                    <strong>${teacherData.teacherExperience || '0'}+ năm</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-graduation-cap text-info me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Trình độ</small>
+                                    <strong>${teacherData.teacherCertification || 'Chưa cập nhật'}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${teacherData.teacherBio ? `
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Giới thiệu:</h6>
+                            <div class="text-muted">${teacherData.teacherBio}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${teacherData.teacherAchievements ? `
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Thành tích & Chứng chỉ:</h6>
+                            <div class="row">
+                                ${(() => {
+                                    try {
+                                        const achievements = JSON.parse(teacherData.teacherAchievements);
+                                        if (achievements && achievements.length > 0) {
+                                            return achievements.map(achievement => `
+                                                <div class="col-6 mb-1">
+                                                    <span class="badge bg-light text-dark">
+                                                        <i class="fas fa-check text-success me-1"></i>${achievement}
+                                                    </span>
+                                                </div>
+                                            `).join('');
+                                        }
+                                    } catch (e) {
+                                        console.error('Error parsing achievements:', e);
+                                    }
+                                    return '';
+                                })()}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${teacherData.teacherSpecialization ? `
+                        <div class="mb-3">
+                            <span class="badge bg-success">
+                                <i class="fas fa-star me-1"></i>Chuyên môn: ${teacherData.teacherSpecialization}
+                            </span>
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+        
+        // Update modal body
+        document.getElementById('teacherModalBody').innerHTML = modalContent;
+        
+        console.log('Modal content updated successfully');
+    }
 });
 </script>
 @endpush
