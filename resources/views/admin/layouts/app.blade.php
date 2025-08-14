@@ -331,6 +331,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.news*') ? 'active' : '' }}" 
+                               href="{{ route('admin.news.index') }}">
+                                <i class="fas fa-newspaper"></i>
+                                Quản lý Tin tức
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.student-results*') ? 'active' : '' }}" 
                                href="{{ route('admin.student-results.index') }}">
                                 <i class="fas fa-chart-line"></i>

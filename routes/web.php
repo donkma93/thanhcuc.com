@@ -236,4 +236,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
         Route::get('/export/csv', [\App\Http\Controllers\Admin\ExamRegistrationController::class, 'export'])->name('export');
     });
 
+    // News Management
+    Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
+    Route::patch('news/{news}/toggle-published', [\App\Http\Controllers\Admin\NewsController::class, 'togglePublished'])->name('news.toggle-published');
+    Route::patch('news/{news}/toggle-featured', [\App\Http\Controllers\Admin\NewsController::class, 'toggleFeatured'])->name('news.toggle-featured');
+
 });

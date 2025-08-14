@@ -1556,6 +1556,12 @@
                             <i class="fas fa-phone-alt me-2"></i>LIÊN HỆ
                         </a>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('tin-tuc*') ? 'active' : '' }}" href="{{ route('news') }}">
+                            <i class="fas fa-newspaper me-2"></i>TIN TỨC
+                        </a>
+                    </li>
                 </ul>
                 
                 <div class="d-flex align-items-center">

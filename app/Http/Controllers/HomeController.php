@@ -92,11 +92,19 @@ class HomeController extends Controller
     
     public function news()
     {
-        $news = News::where('is_published', true)
+        $germanKnowledge = News::where('is_published', true)
+            ->where('category', 'KIẾN THỨC TIẾNG ĐỨC')
             ->orderBy('published_at', 'desc')
-            ->paginate(12);
+            ->take(6)
+            ->get();
             
-        return view('news.index', compact('news'));
+        $companyActivities = News::where('is_published', true)
+            ->where('category', 'HOẠT ĐỘNG CÔNG TY')
+            ->orderBy('published_at', 'desc')
+            ->take(6)
+            ->get();
+            
+        return view('news.index', compact('germanKnowledge', 'companyActivities'));
     }
     
     public function newsDetail($slug)

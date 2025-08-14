@@ -162,5 +162,8 @@ class DatabaseSeeder extends Seeder
         
         // Tạo dữ liệu mẫu cho Student Results
         $this->call(StudentResultSeeder::class);
+        
+        // Tạo dữ liệu mẫu cho News
+        $this->call(NewsSeeder::class);
     }
 }
