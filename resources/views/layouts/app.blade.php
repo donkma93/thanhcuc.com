@@ -485,15 +485,31 @@
         
         .carousel-control-prev,
         .carousel-control-next {
-            width: 5%;
+            width: 7%;
             z-index: 3;
         }
         
         .carousel-control-prev-icon,
         .carousel-control-next-icon {
-            width: 30px;
-            height: 30px;
-            background-size: 100%;
+            width: 56px;
+            height: 56px;
+            background-size: 45%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: none; /* keep default arrow, just style the container */
+            background-color: transparent;
+            background: linear-gradient(135deg, #ff8c00, #ffc107);
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        
+        .carousel-control-prev:hover .carousel-control-prev-icon,
+        .carousel-control-next:hover .carousel-control-next-icon {
+            transform: scale(1.08);
+            box-shadow: 0 10px 28px rgba(255, 140, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #ffc107, #ff8c00);
         }
         
         /* Registration Modal Styles */

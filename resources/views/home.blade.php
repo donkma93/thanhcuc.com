@@ -320,7 +320,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">KHÓA HỌC NỔI BẬT</h2>
+            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll">KHÓA HỌC NỔI BẬT</h2>
             <p class="lead text-muted animate-on-scroll animate-delay-1">Khám phá các khóa học tiếng Đức chất lượng cao tại Thanh Cúc với phương pháp giảng dạy hiện đại</p>
         </div>
         
@@ -598,7 +598,7 @@ function goToContactWithCourse() {
                 <i class="fas fa-chalkboard-teacher me-2"></i>
                 <span>Đội Ngũ Chuyên Nghiệp</span>
             </div>
-            <h2 class="display-4 fw-bold mb-3 animate-on-scroll animate-delay-1">
+            <h2 class="display-2 fw-bold mb-4 animate-on-scroll animate-delay-1">
                 <span class="text-gradient">ĐỘI NGŨ GIẢNG VIÊN</span>
                 <br>
                 <span class="text-primary">ĐÀO TẠO</span>
@@ -910,7 +910,7 @@ function goToContactWithCourse() {
 <section class="py-5 bg-gradient-primary">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-white mb-3 animate-on-scroll">
+            <h2 class="display-2 fw-bold text-white mb-4 animate-on-scroll">
                 <i class="fas fa-medal text-warning me-3"></i>
                 BẢNG VÀNG THÀNH TÍCH THI CỬ
             </h2>
@@ -994,7 +994,7 @@ function goToContactWithCourse() {
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">HỌC VIÊN NÓI GÌ VỀ CHÚNG TÔI</h2>
+            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll">HỌC VIÊN NÓI GÌ VỀ CHÚNG TÔI</h2>
             <p class="lead text-muted animate-on-scroll animate-delay-1">Những chia sẻ chân thực từ các bạn đã thành công du học nghề Đức</p>
         </div>
         
@@ -1053,15 +1053,11 @@ function goToContactWithCourse() {
             
             <!-- Carousel Controls -->
             <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
-                <div class="carousel-control-icon">
-                    <i class="fas fa-chevron-left fa-2x text-primary"></i>
-                </div>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
-                <div class="carousel-control-icon">
-                    <i class="fas fa-chevron-right fa-2x text-primary"></i>
-                </div>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
@@ -1074,7 +1070,7 @@ function goToContactWithCourse() {
         <!-- Section Header -->
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <h2 class="display-5 fw-bold text-dark mb-3">
+                <h2 class="display-2 fw-bold text-dark mb-4">
                     KHÓA HỌC <span class="text-primary">TIẾNG ĐỨC</span> CHUYÊN NGHIỆP
                 </h2>
                 <p class="lead text-muted">Đăng ký ngay để nhận ưu đãi đặc biệt và tư vấn miễn phí</p>
