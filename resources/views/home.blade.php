@@ -1260,7 +1260,7 @@ function goToContactWithCourse() {
                                     ? $courseOffers
                                     : \App\Models\CourseOffer::active()->ordered()->take(6)->get();
                             @endphp
-gi                            <div class="benefits-grid">
+                            <div class="benefits-grid">
                                 @forelse($modalOffers as $offer)
                                     <div class="benefit-item">
                                         <div class="benefit-icon">
