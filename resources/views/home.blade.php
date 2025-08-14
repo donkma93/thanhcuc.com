@@ -368,18 +368,14 @@
                         @endforeach
                     </div>
                     
-                    <!-- Simple Navigation Controls -->
+                    <!-- Unified Navigation Controls -->
                     @if($featuredCourses->count() > 4)
                         <button class="carousel-control-prev" type="button" data-bs-target="#coursesSlider" data-bs-slide="prev">
-                            <div class="slider-nav-btn">
-                                <i class="fas fa-chevron-left"></i>
-                            </div>
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#coursesSlider" data-bs-slide="next">
-                            <div class="slider-nav-btn">
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
                     @endif
@@ -672,15 +668,11 @@ function goToContactWithCourse() {
                 <!-- Carousel Controls -->
                 @if($featuredTeachers->count() > 4)
                     <button class="carousel-control-prev" type="button" data-bs-target="#teachersSlider" data-bs-slide="prev">
-                        <div class="carousel-control-icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </div>
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#teachersSlider" data-bs-slide="next">
-                        <div class="carousel-control-icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 @endif

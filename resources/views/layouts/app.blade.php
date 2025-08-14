@@ -266,14 +266,14 @@
         }
         
         .navbar-brand .logo-img {
-            height: 55px;
+            height: 72px; /* larger, more prominent */
             width: auto;
             transition: transform 0.3s ease;
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
         }
         
         .navbar-brand:hover .logo-img {
-            transform: scale(1.1);
+            transform: scale(1.08) translateY(-1px);
         }
         
         /* Footer logo */
@@ -286,13 +286,13 @@
         /* Responsive design */
         @media (max-width: 992px) and (min-width: 769px) {
             .navbar-brand .logo-img {
-                height: 50px;
+                height: 64px;
             }
         }
         
         @media (max-width: 768px) {
             .navbar-brand .logo-img {
-                height: 45px;
+                height: 56px;
             }
             .footer-logo {
                 height: 35px;
@@ -660,7 +660,9 @@
         .navbar {
             z-index: 1030 !important;
             padding: 0.9rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            backdrop-filter: saturate(140%) blur(6px);
+            background: rgba(255,255,255,0.9) !important;
         }
         
         .navbar .container {
@@ -673,8 +675,83 @@
         }
         
         .navbar-nav .nav-item {
-            margin: 0 0.3rem;
+            margin: 0 0.8rem;
         }
+
+        .navbar-nav .nav-link {
+            padding: 0.9rem 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .navbar-nav .nav-link i { margin-right: 0.4rem; }
+
+        /* Spread out menu like the reference: more spacing and subtle separators */
+        @media (min-width: 992px) {
+            .navbar .container { max-width: 1440px; }
+            .navbar-nav { gap: 0.25rem; }
+            .navbar-nav .nav-link {
+                border-radius: 999px;
+                transition: background-color 0.2s ease, color 0.2s ease;
+            }
+            .navbar-nav .nav-link:hover {
+                background-color: rgba(1, 88, 98, 0.08);
+                color: var(--primary-color) !important;
+            }
+        }
+
+        /* Navbar action buttons: redesigned for harmony */
+        .navbar .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            padding: 0.5rem 0.95rem;
+            min-height: 40px;
+            border-radius: 999px;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .navbar .btn-nav:hover { transform: translateY(-1px); }
+
+        .navbar .btn-nav .btn-nav-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .navbar .btn-nav-outline {
+            border: 2px solid var(--primary-color, #015862);
+            color: var(--primary-color, #015862) !important;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(1, 88, 98, 0.08);
+        }
+        .navbar .btn-nav-outline .btn-nav-icon { background: rgba(1, 88, 98, 0.08); color: var(--primary-color, #015862); }
+        .navbar .btn-nav-outline:hover { background: rgba(1, 88, 98, 0.06); box-shadow: 0 4px 14px rgba(1, 88, 98, 0.14); }
+
+        .navbar .btn-nav-solid {
+            border: 0;
+            color: #fff !important;
+            background: linear-gradient(135deg, var(--primary-color, #015862), #3EB850);
+            box-shadow: 0 8px 18px rgba(1, 88, 98, 0.18);
+        }
+        .navbar .btn-nav-solid .btn-nav-icon { background: rgba(255, 255, 255, 0.2); color: #fff; }
+        .navbar .btn-nav-solid:hover { box-shadow: 0 10px 22px rgba(1, 88, 98, 0.22); }
+
+        /* Call button variant */
+        .navbar .btn-nav-call {
+            border: 0;
+            color: #fff !important;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            box-shadow: 0 10px 22px rgba(39, 174, 96, 0.22);
+        }
+        .navbar .btn-nav-call .btn-nav-icon { background: rgba(255,255,255,0.2); color: #fff; }
+        .navbar .btn-nav-call:hover { box-shadow: 0 12px 26px rgba(39, 174, 96, 0.28); }
         
         /* Modal Responsive */
         @media (max-width: 991.98px) {
@@ -1443,7 +1520,7 @@
                     <i class="fas fa-times"></i>
                 </button>
                 
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto align-items-lg-center">
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">
                             <i class="fas fa-home me-2"></i>TRANG CHỦ
@@ -1482,11 +1559,13 @@
                 </ul>
                 
                 <div class="d-flex align-items-center">
-                    <a href="tel:0975186230" class="btn btn-outline-primary me-3">
-                        <i class="fas fa-phone me-1"></i>HOTLINE
-                    </a>
-                    <a href="{{ route('contact') }}" class="btn btn-primary">
-                        <i class="fas fa-envelope me-1"></i>LIÊN HỆ
+                    @php 
+                        $hotlineRaw = $footerSettings['company_phone'] ?? '0975186230';
+                        $hotlineLabel = $footerSettings['company_phone_display'] ?? $hotlineRaw;
+                    @endphp
+                    <a href="tel:{{ $hotlineRaw }}" class="btn-nav btn-nav-call" title="Gọi: {{ $hotlineRaw }}">
+                        <span class="btn-nav-icon"><i class="fas fa-phone"></i></span>
+                        {{ $hotlineLabel }}
                     </a>
                 </div>
             </div>
