@@ -1256,13 +1256,31 @@ function goToContactWithCourse() {
                                 <i class="fas fa-star me-2"></i>{{ \App\Models\Setting::get('registration_modal_benefits_title', 'Ưu đãi đặc biệt:') }}
                             </h5>
                             @php
-                                $benefitsRaw = \App\Models\Setting::get('registration_modal_benefits', "Học thử 1 buổi hoàn toàn MIỄN PHÍ\nTặng tài liệu học tập trị giá 500K\nGiảm 20% học phí khóa đầu tiên\nTư vấn lộ trình học 1-1 miễn phí\nCam kết đầu ra hoặc học lại miễn phí");
-                                $benefits = array_filter(array_map('trim', preg_split("/(\r\n|\n|\r)/", (string) $benefitsRaw)));
+                                $modalOffers = isset($courseOffers) && $courseOffers->count() > 0
+                                    ? $courseOffers
+                                    : \App\Models\CourseOffer::active()->ordered()->take(6)->get();
                             @endphp
                             <ul class="benefits-list">
-                                @foreach($benefits as $line)
-                                    <li><i class="fas fa-check-circle text-success me-2"></i>{{ $line }}</li>
-                                @endforeach
+                                @forelse($modalOffers as $offer)
+                                    <li>
+                                        <i class="{{ $offer->icon ?: 'fas fa-check-circle text-success' }} me-2"></i>
+                                        {{ $offer->title }}
+                                        @if(!empty($offer->badge_text))
+                                            <span class="badge {{ Str::startsWith($offer->badge_color, 'bg-') ? $offer->badge_color : 'bg-' . ($offer->badge_color ?: 'success') }} ms-2">{{ $offer->badge_text }}</span>
+                                        @endif
+                                        @if(!empty($offer->description))
+                                            <div class="small text-muted ms-4">{{ $offer->description }}</div>
+                                        @endif
+                                    </li>
+                                @empty
+                                    @php
+                                        $benefitsRaw = \App\Models\Setting::get('registration_modal_benefits', "Học thử 1 buổi hoàn toàn MIỄN PHÍ\nTặng tài liệu học tập trị giá 500K\nGiảm 20% học phí khóa đầu tiên\nTư vấn lộ trình học 1-1 miễn phí\nCam kết đầu ra hoặc học lại miễn phí");
+                                        $benefits = array_filter(array_map('trim', preg_split("/(\r\n|\n|\r)/", (string) $benefitsRaw)));
+                                    @endphp
+                                    @foreach($benefits as $line)
+                                        <li><i class="fas fa-check-circle text-success me-2"></i>{{ $line }}</li>
+                                    @endforeach
+                                @endforelse
                             </ul>
                             
                             <div class="urgency-banner mt-4">
