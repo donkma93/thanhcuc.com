@@ -1137,6 +1137,11 @@
     cursor: pointer;
 }
 
+/* Ensure nav buttons are above images and overlays */
+.gallery-slider .slider-nav {
+    z-index: 6;
+}
+
 .slider-nav:hover {
     background: var(--primary-color);
     transform: translateY(-50%) scale(1.1);
@@ -1292,31 +1297,29 @@
 
 @push('scripts')
 <script>
-// Gallery data from database
+// Gallery data from database (safely JSON-encoded)
 @php
     $allClassrooms = \App\Models\Gallery::active()->classroom()->ordered()->get();
     $allFacilities = \App\Models\Gallery::active()->facility()->ordered()->get();
+    $classroomData = $allClassrooms->map(function($c) {
+        return [
+            'image' => $c->image_url,
+            'title' => $c->title,
+            'description' => $c->description ?? ''
+        ];
+    });
+    $facilityData = $allFacilities->map(function($f) {
+        return [
+            'image' => $f->image_url,
+            'title' => $f->title,
+            'description' => $f->description ?? ''
+        ];
+    });
 @endphp
 
 const galleryData = {
-    classroom: [
-        @foreach($allClassrooms as $classroom)
-        {
-            image: '{{ $classroom->image_url }}',
-            title: '{{ $classroom->title }}',
-            description: '{{ $classroom->description ?? '' }}'
-        }@if(!$loop->last),@endif
-        @endforeach
-    ],
-    facility: [
-        @foreach($allFacilities as $facility)
-        {
-            image: '{{ $facility->image_url }}',
-            title: '{{ $facility->title }}',
-            description: '{{ $facility->description ?? '' }}'
-        }@if(!$loop->last),@endif
-        @endforeach
-    ]
+    classroom: @json($classroomData),
+    facility: @json($facilityData)
 };
 
 // Slider positions
@@ -1332,28 +1335,32 @@ let currentImageIndex = 0;
 // Move slider function
 function moveSlider(sliderId, direction) {
     const slider = document.getElementById(sliderId);
+    if (!slider) return;
     const container = slider.querySelector('.slider-container');
+    if (!container) return;
     const items = container.querySelectorAll('.slider-item');
-    const itemWidth = 320; // 300px + 20px gap
-    const visibleItems = Math.floor(slider.offsetWidth / itemWidth);
-    const maxPosition = -(items.length - visibleItems) * itemWidth;
-    
-    // Only move if there are more items than visible
-    if (items.length <= visibleItems) {
-        return;
-    }
-    
-    sliderPositions[sliderId] += direction * itemWidth;
-    
+    if (!items || items.length === 0) return;
+
+    // Compute actual item width + gap dynamically
+    const firstItem = items[0];
+    const containerStyle = window.getComputedStyle(container);
+    const gapPx = parseInt(containerStyle.gap || containerStyle.columnGap || '0', 10) || 0;
+    const itemWidth = firstItem.offsetWidth + gapPx;
+    const visibleItems = Math.max(1, Math.floor(slider.clientWidth / itemWidth));
+    const maxPosition = -(Math.max(0, items.length - visibleItems) * itemWidth);
+
+    // Move by one item width per click
+    sliderPositions[sliderId] = (sliderPositions[sliderId] || 0) + (direction * itemWidth);
+
     // Boundary checks
     if (sliderPositions[sliderId] > 0) {
         sliderPositions[sliderId] = 0;
     } else if (sliderPositions[sliderId] < maxPosition) {
         sliderPositions[sliderId] = maxPosition;
     }
-    
+
     container.style.transform = `translateX(${sliderPositions[sliderId]}px)`;
-    
+
     // Update navigation button states
     updateNavigationButtons(sliderId);
 }
@@ -1361,27 +1368,34 @@ function moveSlider(sliderId, direction) {
 // Update navigation button states
 function updateNavigationButtons(sliderId) {
     const slider = document.getElementById(sliderId);
+    if (!slider) return;
     const container = slider.querySelector('.slider-container');
+    if (!container) return;
     const items = container.querySelectorAll('.slider-item');
-    const itemWidth = 320;
-    const visibleItems = Math.floor(slider.offsetWidth / itemWidth);
-    const maxPosition = -(items.length - visibleItems) * itemWidth;
-    
+    if (!items || items.length === 0) return;
+
+    const firstItem = items[0];
+    const containerStyle = window.getComputedStyle(container);
+    const gapPx = parseInt(containerStyle.gap || containerStyle.columnGap || '0', 10) || 0;
+    const itemWidth = firstItem.offsetWidth + gapPx;
+    const visibleItems = Math.max(1, Math.floor(slider.clientWidth / itemWidth));
+    const maxPosition = -(Math.max(0, items.length - visibleItems) * itemWidth);
+
     const prevBtn = slider.parentElement.querySelector('.slider-prev');
     const nextBtn = slider.parentElement.querySelector('.slider-next');
-    
+
     if (prevBtn && nextBtn) {
         // Disable/enable prev button
-        if (sliderPositions[sliderId] >= 0) {
+        if ((sliderPositions[sliderId] || 0) >= 0) {
             prevBtn.style.opacity = '0.5';
             prevBtn.style.pointerEvents = 'none';
         } else {
             prevBtn.style.opacity = '1';
             prevBtn.style.pointerEvents = 'auto';
         }
-        
+
         // Disable/enable next button
-        if (sliderPositions[sliderId] <= maxPosition) {
+        if ((sliderPositions[sliderId] || 0) <= maxPosition) {
             nextBtn.style.opacity = '0.5';
             nextBtn.style.pointerEvents = 'none';
         } else {
@@ -1536,10 +1550,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Initialize navigation buttons
-    ['classroomSlider', 'facilitiesSlider'].forEach(sliderId => {
-        updateNavigationButtons(sliderId);
-    });
+    // Initialize navigation buttons after first layout
+    setTimeout(() => {
+        ['classroomSlider', 'facilitiesSlider'].forEach(sliderId => updateNavigationButtons(sliderId));
+    }, 0);
     
     // Auto-resize sliders on window resize
     window.addEventListener('resize', function() {
@@ -1555,33 +1569,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-    
-    document.querySelectorAll('.gallery-slider').forEach(slider => {
+    // Touch/swipe support for mobile + mouse drag for desktop
+    document.querySelectorAll('.gallery-slider').forEach(function(slider) {
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        // Touch
         slider.addEventListener('touchstart', function(e) {
             startX = e.touches[0].clientX;
             isDragging = true;
         });
-        
         slider.addEventListener('touchmove', function(e) {
             if (!isDragging) return;
             currentX = e.touches[0].clientX;
         });
-        
-        slider.addEventListener('touchend', function(e) {
+        slider.addEventListener('touchend', function() {
             if (!isDragging) return;
             isDragging = false;
-            
             const diffX = startX - currentX;
             const threshold = 50;
-            
             if (Math.abs(diffX) > threshold) {
                 const direction = diffX > 0 ? 1 : -1;
-                moveSlider(this.id, direction);
+                moveSlider(slider.id, direction);
             }
+        });
+
+        // Mouse
+        slider.addEventListener('mousedown', function(e) {
+            startX = e.clientX;
+            currentX = e.clientX;
+            isDragging = true;
+        });
+        slider.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            currentX = e.clientX;
+        });
+        slider.addEventListener('mouseup', function() {
+            if (!isDragging) return;
+            isDragging = false;
+            const diffX = startX - currentX;
+            const threshold = 50;
+            if (Math.abs(diffX) > threshold) {
+                const direction = diffX > 0 ? 1 : -1;
+                moveSlider(slider.id, direction);
+            }
+        });
+        slider.addEventListener('mouseleave', function() {
+            isDragging = false;
         });
     });
 });

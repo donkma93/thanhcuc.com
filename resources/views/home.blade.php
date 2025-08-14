@@ -678,13 +678,7 @@ function goToContactWithCourse() {
                 @endif
             </div>
             
-            <!-- View All Button -->
-            <div class="text-center mt-4">
-                <a href="{{ route('teachers') }}" class="btn-view-all">
-                    XEM TẤT CẢ
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
+           
         @endif
         
         @if(!isset($featuredTeachers) || $featuredTeachers->count() == 0)
