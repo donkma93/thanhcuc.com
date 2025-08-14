@@ -224,6 +224,81 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    
+                    <!-- Requirements Section -->
+                    <div class="mb-3">
+                        <label class="form-label">Yêu cầu đầu vào</label>
+                        <div id="requirements-container">
+                            @if($schedule->requirements && count($schedule->requirements) > 0)
+                                @foreach($schedule->requirements as $requirement)
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="requirements[]" value="{{ $requirement }}">
+                                    <button type="button" class="btn btn-outline-danger btn-remove-field">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                @endforeach
+                            @else
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="requirements[]" placeholder="VD: Biết cơ bản tiếng Anh">
+                                    <button type="button" class="btn btn-outline-secondary btn-add-requirement">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-text">Nhấn + để thêm yêu cầu mới</div>
+                    </div>
+                    
+                    <!-- Benefits Section -->
+                    <div class="mb-3">
+                        <label class="form-label">Lợi ích khóa học</label>
+                        <div id="benefits-container">
+                            @if($schedule->benefits && count($schedule->benefits) > 0)
+                                @foreach($schedule->benefits as $benefit)
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="benefits[]" value="{{ $benefit }}">
+                                    <button type="button" class="btn btn-outline-danger btn-remove-field">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                @endforeach
+                            @else
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="benefits[]" placeholder="VD: Học với giáo viên bản xứ">
+                                    <button type="button" class="btn btn-outline-secondary btn-add-benefit">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-text">Nhấn + để thêm lợi ích mới</div>
+                    </div>
+                    
+                    <!-- Curriculum Section -->
+                    <div class="mb-3">
+                        <label class="form-label">Chương trình học</label>
+                        <div id="curriculum-container">
+                            @if($schedule->curriculum && count($schedule->curriculum) > 0)
+                                @foreach($schedule->curriculum as $curriculum)
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="curriculum[]" value="{{ $curriculum }}">
+                                    <button type="button" class="btn btn-outline-danger btn-remove-field">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                @endforeach
+                            @else
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="curriculum[]" placeholder="VD: Ngữ pháp cơ bản A1">
+                                    <button type="button" class="btn btn-outline-secondary btn-add-curriculum">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-text">Nhấn + để thêm chủ đề mới</div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-6">
@@ -497,6 +572,57 @@ document.addEventListener('DOMContentLoaded', function() {
     endDateInput.addEventListener('input', function() {
         this.dataset.manual = 'true';
     });
+    
+    // Dynamic fields management
+    function addDynamicField(containerId, fieldName) {
+        const container = document.getElementById(containerId);
+        const newField = document.createElement('div');
+        newField.className = 'input-group mb-2';
+        newField.innerHTML = `
+            <input type="text" class="form-control" name="${fieldName}[]" placeholder="Nhập thông tin...">
+            <button type="button" class="btn btn-outline-danger btn-remove-field">
+                <i class="fas fa-minus"></i>
+            </button>
+        `;
+        container.appendChild(newField);
+        
+        // Add remove event
+        newField.querySelector('.btn-remove-field').addEventListener('click', function() {
+            container.removeChild(newField);
+        });
+    }
+    
+    // Add requirement field
+    const addRequirementBtn = document.querySelector('.btn-add-requirement');
+    if (addRequirementBtn) {
+        addRequirementBtn.addEventListener('click', function() {
+            addDynamicField('requirements-container', 'requirements');
+        });
+    }
+    
+    // Add benefit field
+    const addBenefitBtn = document.querySelector('.btn-add-benefit');
+    if (addBenefitBtn) {
+        addBenefitBtn.addEventListener('click', function() {
+            addDynamicField('benefits-container', 'benefits');
+        });
+    }
+    
+    // Add curriculum field
+    const addCurriculumBtn = document.querySelector('.btn-add-curriculum');
+    if (addCurriculumBtn) {
+        addCurriculumBtn.addEventListener('click', function() {
+            addDynamicField('curriculum-container', 'curriculum');
+        });
+    }
+    
+    // Remove field functionality for existing fields
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn-remove-field')) {
+            e.target.closest('.input-group').remove();
+        }
+    });
+    
 });
 </script>
 @endpush

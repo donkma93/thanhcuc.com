@@ -166,8 +166,11 @@ class Schedule extends Model
      */
     public function scopeAvailable($query)
     {
-        return $query->whereRaw('current_students < max_students')
-                    ->where('status', 'published');
+        return $query->where(function($q) {
+            $q->whereRaw('current_students < max_students')
+              ->orWhereNull('current_students')
+              ->orWhereNull('max_students');
+        })->where('status', 'published');
     }
 
     /**
@@ -217,6 +220,14 @@ class Schedule extends Model
     public function getTypeNameAttribute()
     {
         return self::TYPES[$this->course_type] ?? $this->course_type;
+    }
+    
+    /**
+     * Get course type label (alias for type name)
+     */
+    public function getCourseTypeLabelAttribute()
+    {
+        return $this->type_name;
     }
 
     /**

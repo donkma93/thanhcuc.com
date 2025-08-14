@@ -24,7 +24,7 @@
             <div class="text-center mb-5">
                 <h2 class="fw-bold text-primary mb-3">Bảng Điểm Học Viên</h2>
                 <p class="text-muted">Những thành tích xuất sắc và điểm số ấn tượng của học viên Thanh Cúc</p>
-            </div>
+                            </div>
             
             <!-- Scores Slider -->
             <div class="position-relative">
@@ -40,31 +40,31 @@
                                         @if($score->level)
                                             <div class="slider-level-badge">
                                                 <span class="badge bg-primary">{{ $score->level }}</span>
-                                            </div>
+                        </div>
                                         @endif
                                         <div class="slider-overlay">
                                             <div class="slider-content">
                                                 <h6 class="text-white fw-bold mb-1">{{ $score->title }}</h6>
                                                 <p class="text-white-50 small mb-1">{{ Str::limit($score->description, 80) }}</p>
-                                                @if($score->student_name)
+                            @if($score->student_name)
                                                     <span class="badge bg-light text-dark small">
                                                         <i class="fas fa-user me-1"></i>{{ $score->student_name }}
                                                     </span>
-                                                @endif
-                                                @if($score->score)
+                                @endif
+                                @if($score->score)
                                                     <span class="badge bg-success small ms-1">
                                                         <i class="fas fa-chart-line me-1"></i>{{ $score->score }}
                                                     </span>
-                                                @endif
+                                @endif
                                             </div>
                                         </div>
                                         <div class="slider-click-overlay">
                                             <i class="fas fa-search-plus fa-2x text-white"></i>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endforeach
                     </div>
                 </div>
                 
@@ -88,7 +88,7 @@
                 <div class="text-center mb-5">
                     <h2 class="fw-bold text-primary mb-3">Phản Hồi Học Viên</h2>
                     <p class="text-muted">Những chia sẻ chân thực và đánh giá tích cực từ học viên</p>
-                </div>
+                            </div>
                 
                 <!-- Feedbacks Slider -->
                 <div class="position-relative">
@@ -104,33 +104,33 @@
                                             @if($feedback->level)
                                                 <div class="slider-level-badge">
                                                     <span class="badge bg-info">{{ $feedback->level }}</span>
-                                                </div>
+                        </div>
                                             @endif
                                             <div class="slider-overlay">
                                                 <div class="slider-content">
                                                     <h6 class="text-white fw-bold mb-1">{{ $feedback->title }}</h6>
                                                     <p class="text-white-50 small mb-1">{{ Str::limit($feedback->description, 80) }}</p>
-                                                    @if($feedback->student_name)
+                            @if($feedback->student_name)
                                                         <span class="badge bg-light text-dark small">
                                                             <i class="fas fa-user me-1"></i>{{ $feedback->student_name }}
                                                         </span>
-                                                    @endif
-                                                    @if($feedback->certificate_type)
+                            @endif
+                                @if($feedback->certificate_type)
                                                         <span class="badge bg-warning small ms-1">
                                                             <i class="fas fa-certificate me-1"></i>{{ $feedback->certificate_type }}
                                                         </span>
-                                                    @endif
+                                @endif
                                                 </div>
                                             </div>
                                             <div class="slider-click-overlay">
                                                 <i class="fas fa-search-plus fa-2x text-white"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                            </div>
                         </div>
                     </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
                     
                     <!-- Navigation Buttons -->
                     @if($feedbacks->count() >= 4)
@@ -140,10 +140,10 @@
                     <button class="slider-nav slider-next" onclick="moveSlider('feedbacksSlider', 1)">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                    @endif
-                </div>
+        @endif
+    </div>
+                    </div>
             </div>
-        </div>
         @endif
 
         <!-- Statistics Section -->
@@ -153,8 +153,8 @@
                     <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
                     <h3 class="fw-bold text-primary">{{ $totalScores }}</h3>
                     <p class="text-muted mb-0">Bảng Điểm</p>
-                </div>
-            </div>
+                        </div>
+                        </div>
             <div class="col-md-6 mb-4">
                 <div class="stat-card">
                     <i class="fas fa-comments fa-3x text-success mb-3"></i>
@@ -534,7 +534,7 @@
         opacity: 1;
         transform: translateY(0);
     }
-}
+    }
 </style>
 @endpush
 
@@ -646,39 +646,39 @@ function updateNavigationButtons(sliderId) {
     }
 }
 
-// Open gallery modal
-function openGallery(galleryType, imageIndex) {
+    // Open gallery modal
+    function openGallery(galleryType, imageIndex) {
     console.log('Opening gallery:', galleryType, imageIndex);
     console.log('Gallery data:', galleryData);
-    
+        
     currentGallery = galleryType;
-    currentImageIndex = imageIndex;
-    
+        currentImageIndex = imageIndex;
+        
     const modal = new bootstrap.Modal(document.getElementById('imageGalleryModal'));
-    updateGalleryModal();
-    modal.show();
-}
+            updateGalleryModal();
+            modal.show();
+    }
 
-// Update gallery modal content
-function updateGalleryModal() {
+    // Update gallery modal content
+    function updateGalleryModal() {
     console.log('Updating modal for:', currentGallery, currentImageIndex);
-    
+        
     if (!currentGallery || !galleryData[currentGallery]) {
         console.log('No gallery data found for:', currentGallery);
-        return;
-    }
-    
+            return;
+        }
+        
     const data = galleryData[currentGallery];
     const currentImage = data[currentImageIndex];
     
-    console.log('Current image data:', currentImage);
+        console.log('Current image data:', currentImage);
     
     if (!currentImage) {
         console.log('No image found at index:', currentImageIndex);
         return;
     }
-    
-    const modalImage = document.getElementById('galleryModalImage');
+        
+        const modalImage = document.getElementById('galleryModalImage');
     modalImage.src = currentImage.image;
     modalImage.alt = currentImage.title;
     
@@ -712,24 +712,24 @@ function updateGalleryModal() {
     // Update modal title
     const modalTitle = currentGallery === 'scores' ? 'Bảng Điểm Học Viên' : 'Phản Hồi Học Viên';
     document.getElementById('galleryModalTitle').textContent = modalTitle;
-}
-
-// Change gallery image
-function changeGalleryImage(direction) {
-    if (!currentGallery || !galleryData[currentGallery]) return;
-    
-    const data = galleryData[currentGallery];
-    currentImageIndex += direction;
-    
-    // Boundary checks with loop
-    if (currentImageIndex >= data.length) {
-        currentImageIndex = 0;
-    } else if (currentImageIndex < 0) {
-        currentImageIndex = data.length - 1;
     }
-    
-    updateGalleryModal();
-}
+
+    // Change gallery image
+    function changeGalleryImage(direction) {
+    if (!currentGallery || !galleryData[currentGallery]) return;
+        
+    const data = galleryData[currentGallery];
+        currentImageIndex += direction;
+        
+        // Boundary checks with loop
+    if (currentImageIndex >= data.length) {
+            currentImageIndex = 0;
+        } else if (currentImageIndex < 0) {
+        currentImageIndex = data.length - 1;
+        }
+        
+        updateGalleryModal();
+    }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -743,7 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 
-    
+
     // Keyboard navigation for gallery
     document.addEventListener('keydown', function(e) {
         const modal = document.getElementById('imageGalleryModal');

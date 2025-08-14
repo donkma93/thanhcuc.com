@@ -67,6 +67,33 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        // Normalize time fields to ensure consistent format
+        if ($request->has('start_time')) {
+            $startTime = $request->start_time;
+            if (strlen($startTime) === 5) { // H:i format
+                $startTime .= ':00'; // Add seconds
+            }
+            $request->merge(['start_time' => $startTime]);
+        }
+        
+        if ($request->has('end_time')) {
+            $endTime = $request->end_time;
+            if (strlen($endTime) === 5) { // H:i format
+                $endTime .= ':00'; // Add seconds
+            }
+            $request->merge(['end_time' => $endTime]);
+        }
+
+        // Custom validation for time fields
+        $request->validate([
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s|after:start_time',
+        ], [
+            'start_time.date_format' => 'Giờ bắt đầu phải có định dạng HH:MM:SS',
+            'end_time.date_format' => 'Giờ kết thúc phải có định dạng HH:MM:SS',
+            'end_time.after' => 'Giờ kết thúc phải sau giờ bắt đầu',
+        ]);
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'level' => 'required|string',
@@ -75,8 +102,8 @@ class ScheduleController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'schedule_days' => 'required|array',
             'schedule_days.*' => 'string',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s|after:start_time',
             'duration_months' => 'required|integer|min:1',
             'max_students' => 'required|integer|min:1',
             'current_students' => 'nullable|integer|min:0',
@@ -88,8 +115,8 @@ class ScheduleController extends Controller
             'teacher_avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'course_type' => 'required|string',
             'status' => 'required|string',
-            'is_featured' => 'boolean',
-            'is_popular' => 'boolean',
+            'is_featured' => 'nullable|boolean',
+            'is_popular' => 'nullable|boolean',
             'registration_deadline' => 'nullable|date',
             'location' => 'nullable|string|max:255',
             'requirements' => 'nullable|array',
@@ -100,6 +127,9 @@ class ScheduleController extends Controller
             'meta_description' => 'nullable|string',
             'slug' => 'nullable|string|max:255|unique:schedules,slug',
             'sort_order' => 'nullable|integer'
+        ], [
+            'is_featured.boolean' => 'Trường "Khóa học nổi bật" phải là true hoặc false',
+            'is_popular.boolean' => 'Trường "Khóa học phổ biến" phải là true hoặc false',
         ]);
 
         // Handle teacher avatar upload
@@ -125,9 +155,9 @@ class ScheduleController extends Controller
         // Set current students to 0 if not provided
         $validated['current_students'] = $validated['current_students'] ?? 0;
 
-        // Convert boolean fields
-        $validated['is_featured'] = $request->has('is_featured');
-        $validated['is_popular'] = $request->has('is_popular');
+        // Convert boolean fields - handle both checkbox and explicit values
+        $validated['is_featured'] = $request->boolean('is_featured');
+        $validated['is_popular'] = $request->boolean('is_popular');
 
         $schedule = Schedule::create($validated);
 
@@ -158,6 +188,33 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
+        // Normalize time fields to ensure consistent format
+        if ($request->has('start_time')) {
+            $startTime = $request->start_time;
+            if (strlen($startTime) === 5) { // H:i format
+                $startTime .= ':00'; // Add seconds
+            }
+            $request->merge(['start_time' => $startTime]);
+        }
+        
+        if ($request->has('end_time')) {
+            $endTime = $request->end_time;
+            if (strlen($endTime) === 5) { // H:i format
+                $endTime .= ':00'; // Add seconds
+            }
+            $request->merge(['end_time' => $endTime]);
+        }
+
+        // Custom validation for time fields
+        $request->validate([
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s|after:start_time',
+        ], [
+            'start_time.date_format' => 'Giờ bắt đầu phải có định dạng HH:MM:SS',
+            'end_time.date_format' => 'Giờ kết thúc phải có định dạng HH:MM:SS',
+            'end_time.after' => 'Giờ kết thúc phải sau giờ bắt đầu',
+        ]);
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'level' => 'required|string',
@@ -166,8 +223,8 @@ class ScheduleController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'schedule_days' => 'required|array',
             'schedule_days.*' => 'string',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s|after:start_time',
             'duration_months' => 'required|integer|min:1',
             'max_students' => 'required|integer|min:1',
             'current_students' => 'nullable|integer|min:0',
@@ -179,8 +236,8 @@ class ScheduleController extends Controller
             'teacher_avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'course_type' => 'required|string',
             'status' => 'required|string',
-            'is_featured' => 'boolean',
-            'is_popular' => 'boolean',
+            'is_featured' => 'nullable|boolean',
+            'is_popular' => 'nullable|boolean',
             'registration_deadline' => 'nullable|date',
             'location' => 'nullable|string|max:255',
             'requirements' => 'nullable|array',
@@ -191,6 +248,9 @@ class ScheduleController extends Controller
             'meta_description' => 'nullable|string',
             'slug' => 'nullable|string|max:255|unique:schedules,slug,' . $schedule->id,
             'sort_order' => 'nullable|integer'
+        ], [
+            'is_featured.boolean' => 'Trường "Khóa học nổi bật" phải là true hoặc false',
+            'is_popular.boolean' => 'Trường "Khóa học phổ biến" phải là true hoặc false',
         ]);
 
         // Handle teacher avatar upload
@@ -217,9 +277,9 @@ class ScheduleController extends Controller
             $validated['discount_percentage'] = 0;
         }
 
-        // Convert boolean fields
-        $validated['is_featured'] = $request->has('is_featured');
-        $validated['is_popular'] = $request->has('is_popular');
+        // Convert boolean fields - handle both checkbox and explicit values
+        $validated['is_featured'] = $request->boolean('is_featured');
+        $validated['is_popular'] = $request->boolean('is_popular');
 
         $schedule->update($validated);
 

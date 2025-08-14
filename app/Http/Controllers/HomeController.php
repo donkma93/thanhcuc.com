@@ -111,31 +111,27 @@ class HomeController extends Controller
     public function schedule()
     {
         // Get published schedules ordered by start date
-        $schedules = Schedule::published()
-            ->available()
+        $schedules = Schedule::where('status', 'published')
             ->orderBy('start_date')
             ->orderBy('sort_order')
             ->get();
             
         // Get featured schedules for highlights
-        $featuredSchedules = Schedule::published()
-            ->featured()
-            ->available()
+        $featuredSchedules = Schedule::where('status', 'published')
+            ->where('is_featured', true)
             ->orderBy('sort_order')
             ->take(3)
             ->get();
             
         // Get popular schedules
-        $popularSchedules = Schedule::published()
-            ->popular()
-            ->available()
+        $popularSchedules = Schedule::where('status', 'published')
+            ->where('is_popular', true)
             ->orderBy('sort_order')
             ->take(3)
             ->get();
             
         // Get schedules starting soon (within 7 days)
-        $upcomingSchedules = Schedule::published()
-            ->available()
+        $upcomingSchedules = Schedule::where('status', 'published')
             ->where('start_date', '<=', now()->addDays(7))
             ->where('start_date', '>=', now())
             ->orderBy('start_date')
