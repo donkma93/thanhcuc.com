@@ -947,7 +947,7 @@
             <div class="col-lg-6">
                 <div class="company-overview">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold text-primary mb-2">TỔNG QUAN</h2>
+                        <h2 class="fw-bold text-primary mb-2">{{ $aboutData['overview_title'] ?? 'TỔNG QUAN' }}</h2>
                         <p class="text-muted">Những định hướng và giá trị cốt lõi của SEC</p>
                     </div>
                     
@@ -982,15 +982,19 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <p class="text-muted mb-3">
-                                            SEC Tiếng Anh Đơn Giản ra đời vào ngày 23/03/2017, với những phương pháp học tiếng Anh cực kỳ đơn giản và hiệu quả. Ngay từ khi thành lập, SEC đã trở thành nơi uy tín của hàng ngàn học sinh, sinh viên. Mỗi tháng, SEC tuyển sinh từ 600 đến 700 học viên mới, minh chứng cho chất lượng giảng dạy của trung tâm.
-                                        </p>
-                                        <p class="text-muted mb-3">
-                                            Tên thương hiệu SEC (Simple English Center) phản ánh kim chỉ nam của chúng tôi: biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Với phương pháp đơn giản và hiệu quả, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo.
-                                        </p>
-                                        <p class="text-muted mb-4">
-                                            SEC có khát vọng mãnh liệt lan tỏa phương pháp này mạnh mẽ hơn nữa, giúp hàng triệu người vượt qua môn học Tiếng Anh dễ dàng, một lần và mãi mãi. Hãy đến với SEC để trải nghiệm và chinh phục tiếng Anh ngay hôm nay!
-                                        </p>
+                                        @if(isset($aboutData['overview_content']) && !empty($aboutData['overview_content']))
+                                            {!! $aboutData['overview_content'] !!}
+                                        @else
+                                            <p class="text-muted mb-3">
+                                                SEC Tiếng Anh Đơn Giản ra đời vào ngày 23/03/2017, với những phương pháp học tiếng Anh cực kỳ đơn giản và hiệu quả. Ngay từ khi thành lập, SEC đã trở thành nơi uy tín của hàng ngàn học sinh, sinh viên. Mỗi tháng, SEC tuyển sinh từ 600 đến 700 học viên mới, minh chứng cho chất lượng giảng dạy của trung tâm.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Tên thương hiệu SEC (Simple English Center) phản ánh kim chỉ nam của chúng tôi: biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Với phương pháp đơn giản và hiệu quả, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo.
+                                            </p>
+                                            <p class="text-muted mb-4">
+                                                SEC có khát vọng mãnh liệt lan tỏa phương pháp này mạnh mẽ hơn nữa, giúp hàng triệu người vượt qua môn học Tiếng Anh dễ dàng, một lần và mãi mãi. Hãy đến với SEC để trải nghiệm và chinh phục tiếng Anh ngay hôm nay!
+                                            </p>
+                                        @endif
                                     </div>
                                     <div class="mt-4">
                                         <div class="d-flex flex-wrap gap-3 justify-content-center">
@@ -1006,15 +1010,19 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <p class="text-muted mb-3">
-                                            SEC có sứ mệnh biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Chúng tôi cam kết mang đến phương pháp học đơn giản, hiệu quả và khoa học.
-                                        </p>
-                                        <p class="text-muted mb-3">
-                                            Với kim chỉ nam rõ ràng, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo, đảm bảo kiến thức được ghi nhớ lâu dài.
-                                        </p>
-                                        <p class="text-muted">
-                                            Chúng tôi tin rằng mọi người đều có thể chinh phục tiếng Anh một cách tự nhiên và bền vững thông qua phương pháp đúng đắn.
-                                        </p>
+                                        @if(isset($aboutData['mission']) && !empty($aboutData['mission']))
+                                            {!! $aboutData['mission'] !!}
+                                        @else
+                                            <p class="text-muted mb-3">
+                                                SEC có sứ mệnh biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Chúng tôi cam kết mang đến phương pháp học đơn giản, hiệu quả và khoa học.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Với kim chỉ nam rõ ràng, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo, đảm bảo kiến thức được ghi nhớ lâu dài.
+                                            </p>
+                                            <p class="text-muted">
+                                                Chúng tôi tin rằng mọi người đều có thể chinh phục tiếng Anh một cách tự nhiên và bền vững thông qua phương pháp đúng đắn.
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1025,15 +1033,19 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <p class="text-muted mb-3">
-                                            SEC định hướng phát triển thành Trung tâm Anh ngữ số 1 Việt Nam về phổ cập phương pháp Tiếng Anh đơn giản đến mọi lứa tuổi.
-                                        </p>
-                                        <p class="text-muted mb-3">
-                                            Chúng tôi mong muốn trở thành đối tác tin cậy của các tổ chức giáo dục, doanh nghiệp và cá nhân trong việc nâng cao trình độ tiếng Anh.
-                                        </p>
-                                        <p class="text-muted">
-                                            SEC sẽ mở rộng mạng lưới trung tâm trên toàn quốc, mang phương pháp học tiếng Anh đơn giản đến mọi miền đất nước.
-                                        </p>
+                                        @if(isset($aboutData['vision']) && !empty($aboutData['vision']))
+                                            {!! $aboutData['vision'] !!}
+                                        @else
+                                            <p class="text-muted mb-3">
+                                                SEC định hướng phát triển thành Trung tâm Anh ngữ số 1 Việt Nam về phổ cập phương pháp Tiếng Anh đơn giản đến mọi lứa tuổi.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Chúng tôi mong muốn trở thành đối tác tin cậy của các tổ chức giáo dục, doanh nghiệp và cá nhân trong việc nâng cao trình độ tiếng Anh.
+                                            </p>
+                                            <p class="text-muted">
+                                                SEC sẽ mở rộng mạng lưới trung tâm trên toàn quốc, mang phương pháp học tiếng Anh đơn giản đến mọi miền đất nước.
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1044,48 +1056,115 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <div class="row g-3">
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-graduation-cap text-white"></i>
+                                        @if(isset($aboutData['core_values']) && !empty($aboutData['core_values']))
+                                            @php
+                                                $coreValues = is_string($aboutData['core_values']) ? json_decode($aboutData['core_values'], true) : $aboutData['core_values'];
+                                            @endphp
+                                            @if(is_array($coreValues) && count($coreValues) > 0)
+                                                <div class="row g-3">
+                                                    @foreach($coreValues as $value)
+                                                        <div class="col-6">
+                                                            <div class="text-center p-3 bg-light rounded core-value-item">
+                                                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                     style="width: 50px; height: 50px;">
+                                                                    <i class="{{ $value['icon'] ?? 'fas fa-star' }} text-white"></i>
+                                                                </div>
+                                                                <h6 class="fw-bold mb-2 small text-primary">{{ $value['title'] ?? 'Giá trị' }}</h6>
+                                                                <p class="text-muted small mb-0">{{ $value['description'] ?? 'Mô tả giá trị' }}</p>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @else
+                                                <!-- Fallback values if no data -->
+                                                <div class="row g-3">
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-graduation-cap text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
+                                                            <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
+                                                        </div>
                                                     </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
-                                                    <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-heart text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
+                                                            <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-lightbulb text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
+                                                            <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-chart-line text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
+                                                            <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @else
+                                            <!-- Fallback values if no data -->
+                                            <div class="row g-3">
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-graduation-cap text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
+                                                        <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-heart text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
+                                                        <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-lightbulb text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
+                                                        <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-chart-line text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
+                                                        <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-heart text-white"></i>
-                                                    </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
-                                                    <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-lightbulb text-white"></i>
-                                                    </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
-                                                    <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-chart-line text-white"></i>
-                                                    </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
-                                                    <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
