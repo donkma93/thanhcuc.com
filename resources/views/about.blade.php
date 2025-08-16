@@ -421,7 +421,7 @@
 
 .teacher-card .badge {
     font-size: 0.8rem;
-    padding: 0.5rem 1rem;
+        padding: 0.5rem 1rem;
     border-radius: 20px;
 }
 
@@ -1019,9 +1019,9 @@
                                             <p class="text-muted mb-3">
                                                 Với kim chỉ nam rõ ràng, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo, đảm bảo kiến thức được ghi nhớ lâu dài.
                                             </p>
-                                            <p class="text-muted">
+                                    <p class="text-muted">
                                                 Chúng tôi tin rằng mọi người đều có thể chinh phục tiếng Anh một cách tự nhiên và bền vững thông qua phương pháp đúng đắn.
-                                            </p>
+                                    </p>
                                         @endif
                                     </div>
                                 </div>
@@ -1042,9 +1042,9 @@
                                             <p class="text-muted mb-3">
                                                 Chúng tôi mong muốn trở thành đối tác tin cậy của các tổ chức giáo dục, doanh nghiệp và cá nhân trong việc nâng cao trình độ tiếng Anh.
                                             </p>
-                                            <p class="text-muted">
+                                    <p class="text-muted">
                                                 SEC sẽ mở rộng mạng lưới trung tâm trên toàn quốc, mang phương pháp học tiếng Anh đơn giản đến mọi miền đất nước.
-                                            </p>
+                                    </p>
                                         @endif
                                     </div>
                                 </div>
@@ -1059,23 +1059,23 @@
                                         @if(isset($aboutData['core_values']) && !empty($aboutData['core_values']))
                                             @php
                                                 $coreValues = is_string($aboutData['core_values']) ? json_decode($aboutData['core_values'], true) : $aboutData['core_values'];
-                                            @endphp
+                                    @endphp
                                             @if(is_array($coreValues) && count($coreValues) > 0)
-                                                <div class="row g-3">
-                                                    @foreach($coreValues as $value)
-                                                        <div class="col-6">
-                                                            <div class="text-center p-3 bg-light rounded core-value-item">
-                                                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                                     style="width: 50px; height: 50px;">
-                                                                    <i class="{{ $value['icon'] ?? 'fas fa-star' }} text-white"></i>
-                                                                </div>
+                                        <div class="row g-3">
+                                            @foreach($coreValues as $value)
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="{{ $value['icon'] ?? 'fas fa-star' }} text-white"></i>
+                                                        </div>
                                                                 <h6 class="fw-bold mb-2 small text-primary">{{ $value['title'] ?? 'Giá trị' }}</h6>
                                                                 <p class="text-muted small mb-0">{{ $value['description'] ?? 'Mô tả giá trị' }}</p>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                    </div>
                                                 </div>
-                                            @else
+                                            @endforeach
+                                        </div>
+                                    @else
                                                 <!-- Fallback values if no data -->
                                                 <div class="row g-3">
                                                     <div class="col-6">
@@ -1118,8 +1118,8 @@
                                                             <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endif
+                                        </div>
+                                    @endif
                                         @else
                                             <!-- Fallback values if no data -->
                                             <div class="row g-3">
@@ -1128,11 +1128,11 @@
                                                         <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
                                                              style="width: 50px; height: 50px;">
                                                             <i class="fas fa-graduation-cap text-white"></i>
-                                                        </div>
+                                </div>
                                                         <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
                                                         <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
-                                                    </div>
-                                                </div>
+                            </div>
+                        </div>
                                                 <div class="col-6">
                                                     <div class="text-center p-3 bg-light rounded core-value-item">
                                                         <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
@@ -1205,15 +1205,15 @@
             <p class="text-muted">Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Anh nhiều năm</p>
         </div>
         
-        <div class="row">
-            @php
-                $teachers = \App\Models\Teacher::where('is_active', true)
-                    ->orderBy('sort_order')
-                    ->orderBy('name')
-                    ->get();
-            @endphp
-            
-            @forelse($teachers as $teacher)
+                 <div class="row">
+             @php
+                 $teachers = \App\Models\Teacher::where('is_active', true)
+                     ->orderBy('sort_order')
+                     ->orderBy('name')
+                     ->get();
+             @endphp
+             
+             @forelse($teachers as $teacher)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="teacher-card card h-100 border-0 shadow-sm" 
                      data-teacher-id="{{ $teacher->id }}"
@@ -1227,51 +1227,51 @@
                      style="cursor: pointer;">
                     <div class="card-body p-4 text-center">
                         <div class="mb-3">
-                            @if($teacher->avatar)
-                                <img src="{{ asset('storage/' . $teacher->avatar) }}" 
-                                     alt="{{ $teacher->name }}" 
+                                     @if($teacher->avatar)
+                                         <img src="{{ asset('storage/' . $teacher->avatar) }}" 
+                                              alt="{{ $teacher->name }}" 
                                      class="rounded-circle teacher-avatar"
                                      width="120" height="120">
-                            @else
+                                     @else
                                 <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center teacher-avatar-placeholder" 
                                      style="width: 120px; height: 120px;">
                                     <i class="fas fa-user fa-3x text-white"></i>
-                                </div>
-                            @endif
-                        </div>
+                                         </div>
+                                     @endif
+                                         </div>
                         
                         <h5 class="fw-bold text-primary mb-2">{{ $teacher->name }}</h5>
                         <p class="text-muted mb-2">{{ $teacher->specialization }}</p>
-                        
-                        @if($teacher->certification)
+                                     
+                                     @if($teacher->certification)
                         <span class="badge bg-light text-primary border mb-3">{{ $teacher->certification }}</span>
-                        @endif
-                        
-                        @if($teacher->experience_years)
+                                     @endif
+                                     
+                                     @if($teacher->experience_years)
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <i class="fas fa-clock text-primary me-2"></i>
                             <small class="text-muted">{{ $teacher->experience_years }}+ năm kinh nghiệm</small>
-                        </div>
-                        @endif
-                        
-                        @if($teacher->bio)
+                                     </div>
+                                     @endif
+                                     
+                                     @if($teacher->bio)
                             <p class="text-muted small mb-3">{!! Str::limit(strip_tags($teacher->bio), 120) !!}</p>
-                        @endif
-                        
+                                     @endif
+                                     
                         <button class="btn btn-outline-primary btn-sm teacher-detail-btn">
                             <i class="fas fa-eye me-1"></i>Xem Chi Tiết
                         </button>
+                        </div>
                     </div>
                 </div>
-            </div>
             @empty
-            <div class="col-12">
-                <div class="text-center py-5">
-                    <i class="fas fa-users fa-4x text-muted mb-3"></i>
-                    <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
-                    <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="fas fa-users fa-4x text-muted mb-3"></i>
+                        <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
+                        <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
+                    </div>
                 </div>
-            </div>
             @endforelse
         </div>
     </div>

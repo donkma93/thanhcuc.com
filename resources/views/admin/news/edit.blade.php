@@ -50,10 +50,17 @@
                         <div class="mb-3">
                             <label for="content" class="form-label">Nội dung <span class="text-danger">*</span></label>
                             <textarea class="form-control @error('content') is-invalid @enderror" 
-                                      id="content" name="content" rows="15" required>{{ old('content', $news->content) }}</textarea>
+                                      id="content" name="content" rows="15" style="display: none;">{{ old('content', $news->content) }}</textarea>
+                            <div id="content-editor" class="border rounded p-3 @error('content') border-danger @enderror" style="min-height: 400px;">
+                                <div class="text-muted text-center py-5">
+                                    <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                                    <p>Đang tải editor...</p>
+                                </div>
+                            </div>
                             @error('content')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
+                            <div class="form-text">Nhập nội dung tin tức vào editor bên trên</div>
                         </div>
                     </div>
 
@@ -157,19 +164,136 @@
 </div>
 @endsection
 
+@push('styles')
+<style>
+#content-editor {
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#content-editor:focus-within {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#content-editor.border-danger {
+    border-color: #dc3545;
+}
+
+#content-editor.border-danger:focus-within {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.ck-editor__editable {
+    min-height: 350px !important;
+}
+</style>
+@endpush
+
 @push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize CKEditor
+let editor = null;
+let editorReady = false;
+
+// Function to initialize CKEditor
+function initCKEditor() {
+    console.log('Initializing CKEditor...');
+    
     ClassicEditor
-        .create(document.querySelector('#content'), {
+        .create(document.querySelector('#content-editor'), {
             toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'],
-            language: 'vi'
+            language: 'vi',
+            placeholder: 'Nhập nội dung tin tức...'
+        })
+        .then(newEditor => {
+            editor = newEditor;
+            editorReady = true;
+            console.log('CKEditor initialized successfully');
+            
+            // Clear loading message
+            const editorContainer = document.getElementById('content-editor');
+            editorContainer.innerHTML = '';
+            
+            // Set initial content from existing news
+            const existingContent = document.getElementById('content').value;
+            if (existingContent) {
+                editor.setData(existingContent);
+            }
+            
+            // Add change event listener to sync content
+            editor.model.document.on('change:data', () => {
+                const content = editor.getData();
+                document.getElementById('content').value = content;
+                console.log('Content synced to textarea:', content);
+            });
         })
         .catch(error => {
-            console.error(error);
+            console.error('CKEditor error:', error);
+            // Fallback: show textarea if CKEditor fails
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('content-editor').style.display = 'none';
         });
-});
+}
+
+// Function to handle form submission
+function handleFormSubmit(e) {
+    console.log('Form submitting...');
+    
+    if (editorReady && editor) {
+        // Get content from CKEditor
+        const content = editor.getData();
+        console.log('CKEditor content:', content);
+        
+        // Update hidden textarea
+        document.getElementById('content').value = content;
+        
+        // Validate content
+        if (!content.trim()) {
+            e.preventDefault();
+            alert('Vui lòng nhập nội dung tin tức!');
+            return false;
+        }
+        
+        console.log('Content validation passed, form will submit');
+        return true;
+    } else {
+        console.log('Editor not ready, checking textarea directly');
+        // Fallback validation
+        const textareaContent = document.getElementById('content').value;
+        if (!textareaContent.trim()) {
+            e.preventDefault();
+            alert('Vui lòng nhập nội dung tin tức!');
+            return false;
+        }
+        return true;
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        initCKEditor();
+        setupFormHandling();
+    });
+} else {
+    // DOM is already ready
+    initCKEditor();
+    setupFormHandling();
+}
+
+// Setup form handling
+function setupFormHandling() {
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+        console.log('Form submit handler attached');
+    }
+}
+
+// Debug: Check if script is loaded
+console.log('News edit script loaded');
 </script>
 @endpush

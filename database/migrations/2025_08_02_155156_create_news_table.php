@@ -27,7 +27,8 @@ return new class extends Migration
             $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
             
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
+            // Comment out foreign key for now since we're using admin auth
+            // $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

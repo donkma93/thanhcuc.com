@@ -16,6 +16,16 @@
             <h6 class="m-0 font-weight-bold text-primary">Thông tin tin tức</h6>
         </div>
         <div class="card-body">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
             <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
@@ -44,10 +54,18 @@
                         <div class="mb-3">
                             <label for="content" class="form-label">Nội dung <span class="text-danger">*</span></label>
                             <textarea class="form-control @error('content') is-invalid @enderror" 
-                                      id="content" name="content" rows="15" required>{{ old('content') }}</textarea>
+                                      id="content" name="content" rows="15" style="display: none;">{{ old('content') }}</textarea>
+                            <div id="content-editor" class="border rounded p-3 @error('content') border-danger @enderror" style="min-height: 400px;">
+                                <div class="text-muted text-center py-5">
+                                    <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                                    <p>Đang tải editor...</p>
+                                </div>
+                            </div>
                             @error('content')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
+                            <div class="form-text">Nhập nội dung tin tức vào editor bên trên</div>
+                            <div id="content-debug" class="mt-2 small text-muted"></div>
                         </div>
                     </div>
 
@@ -92,7 +110,7 @@
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="is_published" name="is_published" 
-                                       value="1" {{ old('is_published') ? 'checked' : '' }}>
+                                       value="1" {{ old('is_published', false) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_published">
                                     Xuất bản ngay
                                 </label>
@@ -102,7 +120,7 @@
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" 
-                                       value="1" {{ old('is_featured') ? 'checked' : '' }}>
+                                       value="1" {{ old('is_featured', false) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_featured">
                                     Tin tức nổi bật
                                 </label>
@@ -125,26 +143,177 @@
 </div>
 @endsection
 
+@push('styles')
+<style>
+#content-editor {
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#content-editor:focus-within {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#content-editor.border-danger {
+    border-color: #dc3545;
+}
+
+#content-editor.border-danger:focus-within {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.ck-editor__editable {
+    min-height: 350px !important;
+}
+</style>
+@endpush
+
 @push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize CKEditor
+let editor = null;
+let editorReady = false;
+
+// Function to initialize CKEditor
+function initCKEditor() {
+    console.log('Initializing CKEditor...');
+    updateDebugInfo('Đang khởi tạo CKEditor...');
+    
+    const editorElement = document.querySelector('#content-editor');
+    if (!editorElement) {
+        console.error('Content editor element not found');
+        updateDebugInfo('Không tìm thấy element content-editor');
+        return;
+    }
+    
     ClassicEditor
-        .create(document.querySelector('#content'), {
+        .create(editorElement, {
             toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'],
-            language: 'vi'
+            language: 'vi',
+            placeholder: 'Nhập nội dung tin tức...'
+        })
+        .then(newEditor => {
+            editor = newEditor;
+            editorReady = true;
+            console.log('CKEditor initialized successfully');
+            updateDebugInfo('CKEditor đã khởi tạo thành công');
+            
+            // Clear loading message
+            const editorContainer = document.getElementById('content-editor');
+            editorContainer.innerHTML = '';
+            
+            // Set initial content if there's old input
+            const oldContent = document.getElementById('content').value;
+            if (oldContent) {
+                editor.setData(oldContent);
+                console.log('Set initial content:', oldContent);
+            }
+            
+            // Add change event listener to sync content
+            editor.model.document.on('change:data', () => {
+                const content = editor.getData();
+                document.getElementById('content').value = content;
+                console.log('Content synced to textarea:', content);
+                updateDebugInfo('Nội dung đã được sync: ' + (content ? 'Có dữ liệu' : 'Trống'));
+            });
         })
         .catch(error => {
-            console.error(error);
+            console.error('CKEditor error:', error);
+            updateDebugInfo('Lỗi CKEditor: ' + error.message);
+            // Fallback: show textarea if CKEditor fails
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('content-editor').style.display = 'none';
         });
+}
 
+// Function to update debug info
+function updateDebugInfo(message) {
+    const debugElement = document.getElementById('content-debug');
+    if (debugElement) {
+        debugElement.innerHTML = '<strong>Debug:</strong> ' + message;
+    }
+}
+
+// Function to handle form submission
+function handleFormSubmit(e) {
+    console.log('Form submitting...');
+    updateDebugInfo('Đang submit form...');
+    
+    if (editorReady && editor) {
+        // Get content from CKEditor
+        const content = editor.getData();
+        console.log('CKEditor content:', content);
+        updateDebugInfo('Lấy nội dung từ CKEditor: ' + (content ? 'Có dữ liệu' : 'Trống'));
+        
+        // Update hidden textarea
+        document.getElementById('content').value = content;
+        console.log('Updated textarea value:', document.getElementById('content').value);
+        
+        // Validate content
+        if (!content.trim()) {
+            e.preventDefault();
+            updateDebugInfo('Lỗi: Nội dung trống, không cho phép submit');
+            alert('Vui lòng nhập nội dung tin tức!');
+            return false;
+        }
+        
+        console.log('Content validation passed, form will submit');
+        updateDebugInfo('Validation thành công, form sẽ submit');
+        return true;
+    } else {
+        console.log('Editor not ready, checking textarea directly');
+        updateDebugInfo('Editor chưa sẵn sàng, kiểm tra textarea trực tiếp');
+        
+        // Fallback validation
+        const textareaContent = document.getElementById('content').value;
+        console.log('Textarea content:', textareaContent);
+        
+        if (!textareaContent.trim()) {
+            e.preventDefault();
+            updateDebugInfo('Lỗi: Textarea trống, không cho phép submit');
+            alert('Vui lòng nhập nội dung tin tức!');
+            return false;
+        }
+        
+        updateDebugInfo('Validation fallback thành công, form sẽ submit');
+        return true;
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        initCKEditor();
+        setupFormHandling();
+    });
+} else {
+    // DOM is already ready
+    initCKEditor();
+    setupFormHandling();
+}
+
+// Setup form handling
+function setupFormHandling() {
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+        console.log('Form submit handler attached');
+    }
+    
     // Auto-generate slug from title
     const titleInput = document.getElementById('title');
-    titleInput.addEventListener('input', function() {
-        const title = this.value;
-        // You can add slug generation logic here if needed
-    });
-});
+    if (titleInput) {
+        titleInput.addEventListener('input', function() {
+            const title = this.value;
+            // You can add slug generation logic here if needed
+        });
+    }
+}
+
+// Debug: Check if script is loaded
+console.log('News create script loaded');
 </script>
 @endpush
