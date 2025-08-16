@@ -1195,7 +1195,11 @@
 
 
 
-
+<style>
+    .py-5 .teacher-card ul {
+        text-align: left;
+    }
+</style>
 
 <!-- Teaching Staff -->
 <section class="py-5">
@@ -1221,7 +1225,7 @@
                      data-teacher-specialization="{{ $teacher->specialization }}"
                      data-teacher-certification="{{ $teacher->certification }}"
                      data-teacher-experience="{{ $teacher->experience_years }}"
-                     data-teacher-bio="{{ strip_tags($teacher->bio) }}"
+                     data-teacher-bio="{!! $teacher->bio !!}"
                      data-teacher-achievements="{{ json_encode($teacher->achievements) }}"
                      data-teacher-avatar="{{ $teacher->avatar ? asset('storage/' . $teacher->avatar) : '' }}"
                      style="cursor: pointer;">
@@ -1248,14 +1252,14 @@
                                      @endif
                                      
                                      @if($teacher->experience_years)
-                        <div class="d-flex justify-content-center align-items-center mb-3">
+                        <div class="d-flex justify-content-center align-items-center mb-3 text-left" >
                             <i class="fas fa-clock text-primary me-2"></i>
                             <small class="text-muted">{{ $teacher->experience_years }}+ năm kinh nghiệm</small>
                                      </div>
                                      @endif
                                      
                                      @if($teacher->bio)
-                            <p class="text-muted small mb-3">{!! Str::limit(strip_tags($teacher->bio), 120) !!}</p>
+                                        {!! $teacher->bio !!}
                                      @endif
                                      
                         <button class="btn btn-outline-primary btn-sm teacher-detail-btn">
