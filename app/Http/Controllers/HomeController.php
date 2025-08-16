@@ -145,7 +145,17 @@ class HomeController extends Controller
             ->orderBy('start_date')
             ->get();
             
-        return view('schedule', compact('schedules', 'featuredSchedules', 'popularSchedules', 'upcomingSchedules'));
+        // Lấy thông tin liên hệ từ database (Settings)
+        $contactInfo = \App\Models\Setting::where('key', 'company_phone_display')->first();
+        $contactPhone = $contactInfo ? $contactInfo->value : '';
+        
+        return view('schedule', compact(
+            'schedules', 
+            'featuredSchedules', 
+            'popularSchedules', 
+            'upcomingSchedules',
+            'contactPhone'
+        ));
     }
     
     public function results()
