@@ -301,6 +301,10 @@ function setupFormHandling() {
     if (form) {
         form.addEventListener('submit', handleFormSubmit);
         console.log('Form submit handler attached');
+        updateDebugInfo('Form submit handler đã được gắn');
+    } else {
+        console.error('Form not found');
+        updateDebugInfo('Không tìm thấy form');
     }
     
     // Auto-generate slug from title
@@ -310,6 +314,16 @@ function setupFormHandling() {
             const title = this.value;
             // You can add slug generation logic here if needed
         });
+    }
+    
+    // Test if content field exists
+    const contentField = document.getElementById('content');
+    if (contentField) {
+        console.log('Content field found, current value:', contentField.value);
+        updateDebugInfo('Content field đã tìm thấy, giá trị hiện tại: ' + (contentField.value ? 'Có dữ liệu' : 'Trống'));
+    } else {
+        console.error('Content field not found');
+        updateDebugInfo('Không tìm thấy content field');
     }
 }
 
