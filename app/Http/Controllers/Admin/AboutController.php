@@ -131,15 +131,29 @@ class AboutController extends Controller
             $setting = Setting::where('key', $key)->first();
             
             if ($setting) {
-                // Handle JSON fields
-                if ($setting->type === 'json') {
+                // Handle JSON fields - check both type and known JSON keys
+                $isJsonField = $setting->type === 'json' || 
+                              in_array($key, ['about_core_values', 'about_achievements', 'about_header_stats', 'about_locations']);
+                
+                if ($isJsonField) {
                     // Validate JSON format
-                    $decoded = json_decode($value, true);
-                    if (json_last_error() !== JSON_ERROR_NONE) {
-                        return $this->errorAndRedirect('Dữ liệu JSON không hợp lệ cho trường: ' . $setting->label, 'admin.about.index');
+                    if (empty($value)) {
+                        // If empty, set default empty array
+                        $value = json_encode([]);
+                    } else {
+                        $decoded = json_decode($value, true);
+                        if (json_last_error() !== JSON_ERROR_NONE) {
+                            \Log::error('JSON validation failed for key: ' . $key . ', value: ' . $value . ', error: ' . json_last_error_msg());
+                            return $this->errorAndRedirect('Dữ liệu JSON không hợp lệ cho trường: ' . ($setting->label ?: $key), 'admin.about.index');
+                        }
+                        // Ensure value is a valid JSON string
+                        $value = json_encode($decoded);
                     }
-                    // Ensure value is a valid JSON string
-                    $value = json_encode($decoded);
+                    
+                    // Update setting type to json if not already set
+                    if ($setting->type !== 'json') {
+                        $setting->update(['type' => 'json']);
+                    }
                 }
                 
                 // Handle file uploads
