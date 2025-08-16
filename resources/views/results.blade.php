@@ -116,54 +116,7 @@
             </div>
         @endif
 
-        <!-- Featured Courses Section -->
-        @if($featuredCourses->count() > 0)
-        <section class="py-5 bg-light">
-            <div class="container">
-                <div class="text-center mb-5">
-                    <h2 class="display-2 fw-bold text-primary mb-4">KHÓA HỌC NỔI BẬT</h2>
-                    <p class="lead text-muted">Khám phá các khóa học tiếng Đức chất lượng cao với phương pháp giảng dạy hiện đại</p>
-                </div>
-                
-                <!-- Courses Grid -->
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                    @foreach($featuredCourses as $course)
-                        <div class="col">
-                            <div class="sec-course-card position-relative overflow-hidden rounded shadow-lg" style="cursor: pointer;" 
-                                 onclick="openCourseModal({{ $course->id }}, '{{ $course->name }}', false)">
-                                <!-- Course Image as Background -->
-                                @if($course->image)
-                                    <img src="/storage/{{ $course->image }}" 
-                                         alt="{{ $course->name }}" 
-                                         class="w-100 h-100 object-fit-cover position-absolute top-0 start-0">
-                                @else
-                                    <!-- Fallback gradient if no image -->
-                                    <div class="sec-bg-gradient position-absolute top-0 start-0 w-100 h-100" 
-                                         style="background: linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF4500 100%);">
-                                    </div>
-                                @endif
-                                
-                                <!-- Course Name -->
-                                <div class="sec-roadmap position-absolute bottom-0 start-0 w-100 text-center pb-2">
-                                    <small class="text-white fw-bold" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
-                                        {{ $course->name }}
-                                    </small>
-                                </div>
-                            </div>
-                            
-                            <!-- View More Button -->
-                            <div class="text-center mt-2">
-                                <button class="btn btn-outline-warning btn-sm sec-view-more" 
-                                        onclick="openCourseModal({{ $course->id }}, '{{ $course->name }}', false)">
-                                    XEM THÊM <i class="fas fa-chevron-right ms-1"></i>
-                                </button>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        @endif
+
 
         <!-- Course Registration Section (moved from homepage) -->
         <section class="py-5 bg-light position-relative registration-section">
@@ -456,53 +409,7 @@
 
 
 
-/* Featured Courses Styles */
-.sec-course-card {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
 
-.sec-course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.sec-bg-gradient {
-    background: linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF4500 100%);
-}
-
-.sec-roadmap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-    padding: 20px 10px 10px;
-    text-align: center;
-}
-
-.sec-view-more {
-    border: 2px solid #FF8C00;
-    color: #FF8C00;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    background: transparent;
-}
-
-.sec-view-more:hover {
-    background: #FF8C00;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-}
 
 /* Course Modal Styles */
 .modal-header {

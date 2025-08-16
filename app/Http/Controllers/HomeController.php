@@ -201,13 +201,6 @@ class HomeController extends Controller
         $totalFeedbacks = \App\Models\StudentResult::feedbacks()->active()->count();
         $featuredResults = \App\Models\StudentResult::active()->featured()->ordered()->take(6)->get();
         
-        // Lấy khóa học nổi bật từ database (giống trang chủ)
-        $featuredCourses = Course::where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->take(8)
-            ->get();
-            
         // Lấy ưu đãi khóa học từ database
         $courseOffers = CourseOffer::active()->ordered()->take(4)->get();
         
@@ -217,7 +210,6 @@ class HomeController extends Controller
             'totalScores', 
             'totalFeedbacks', 
             'featuredResults',
-            'featuredCourses',
             'courseOffers'
         ));
     }
