@@ -4,6 +4,7 @@
 
 @push('styles')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
 /* ===== TRADITIONAL TAB DESIGN ===== */
 .company-overview {
@@ -421,7 +422,7 @@
 
 .teacher-card .badge {
     font-size: 0.8rem;
-    padding: 0.5rem 1rem;
+        padding: 0.5rem 1rem;
     border-radius: 20px;
 }
 
@@ -813,7 +814,6 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1050;
     left: 0;
     top: 0;
     width: 100%;
@@ -947,8 +947,8 @@
             <div class="col-lg-6">
                 <div class="company-overview">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold text-primary mb-2">TỔNG QUAN</h2>
-                        <p class="text-muted">Những sứ mệnh, tầm nhìn và giá trị cốt lõi của THANH CÚC</p>
+                        <h2 class="fw-bold text-primary mb-2">{{ $aboutData['overview_title'] ?? 'TỔNG QUAN' }}</h2>
+                        <p class="text-muted">Những định hướng và giá trị cốt lõi của SEC</p>
                     </div>
                     
                     <!-- Tab Navigation -->
@@ -982,15 +982,19 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <p class="text-muted mb-3">
-                                            SEC Tiếng Anh Đơn Giản ra đời vào ngày 23/03/2017, với những phương pháp học tiếng Anh cực kỳ đơn giản và hiệu quả. Ngay từ khi thành lập, SEC đã trở thành nơi uy tín của hàng ngàn học sinh, sinh viên. Mỗi tháng, SEC tuyển sinh từ 600 đến 700 học viên mới, minh chứng cho chất lượng giảng dạy của trung tâm.
-                                        </p>
-                                        <p class="text-muted mb-3">
-                                            Tên thương hiệu SEC (Simple English Center) phản ánh kim chỉ nam của chúng tôi: biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Với phương pháp đơn giản và hiệu quả, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo.
-                                        </p>
-                                        <p class="text-muted mb-4">
-                                            SEC có khát vọng mãnh liệt lan tỏa phương pháp này mạnh mẽ hơn nữa, giúp hàng triệu người vượt qua môn học Tiếng Anh dễ dàng, một lần và mãi mãi. Hãy đến với SEC để trải nghiệm và chinh phục tiếng Anh ngay hôm nay!
-                                        </p>
+                                        @if(isset($aboutData['overview_content']) && !empty($aboutData['overview_content']))
+                                            {!! $aboutData['overview_content'] !!}
+                                        @else
+                                            <p class="text-muted mb-3">
+                                                SEC Tiếng Anh Đơn Giản ra đời vào ngày 23/03/2017, với những phương pháp học tiếng Anh cực kỳ đơn giản và hiệu quả. Ngay từ khi thành lập, SEC đã trở thành nơi uy tín của hàng ngàn học sinh, sinh viên. Mỗi tháng, SEC tuyển sinh từ 600 đến 700 học viên mới, minh chứng cho chất lượng giảng dạy của trung tâm.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Tên thương hiệu SEC (Simple English Center) phản ánh kim chỉ nam của chúng tôi: biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Với phương pháp đơn giản và hiệu quả, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo.
+                                            </p>
+                                            <p class="text-muted mb-4">
+                                                SEC có khát vọng mãnh liệt lan tỏa phương pháp này mạnh mẽ hơn nữa, giúp hàng triệu người vượt qua môn học Tiếng Anh dễ dàng, một lần và mãi mãi. Hãy đến với SEC để trải nghiệm và chinh phục tiếng Anh ngay hôm nay!
+                                            </p>
+                                        @endif
                                     </div>
                                     <div class="mt-4">
                                         <div class="d-flex flex-wrap gap-3 justify-content-center">
@@ -1006,15 +1010,19 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <p class="text-muted mb-3">
-                                            SEC có sứ mệnh biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Chúng tôi cam kết mang đến phương pháp học đơn giản, hiệu quả và khoa học.
-                                        </p>
-                                        <p class="text-muted mb-3">
-                                            Với kim chỉ nam rõ ràng, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo, đảm bảo kiến thức được ghi nhớ lâu dài.
-                                        </p>
-                                        <p class="text-muted">
-                                            Chúng tôi tin rằng mọi người đều có thể chinh phục tiếng Anh một cách tự nhiên và bền vững thông qua phương pháp đúng đắn.
-                                        </p>
+                                        @if(isset($aboutData['mission']) && !empty($aboutData['mission']))
+                                            {!! $aboutData['mission'] !!}
+                                        @else
+                                            <p class="text-muted mb-3">
+                                                SEC có sứ mệnh biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Chúng tôi cam kết mang đến phương pháp học đơn giản, hiệu quả và khoa học.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Với kim chỉ nam rõ ràng, SEC giúp học viên không chỉ hiểu sâu bản chất ngôn ngữ mà còn tránh học vẹt và học mẹo, đảm bảo kiến thức được ghi nhớ lâu dài.
+                                            </p>
+                                    <p class="text-muted">
+                                                Chúng tôi tin rằng mọi người đều có thể chinh phục tiếng Anh một cách tự nhiên và bền vững thông qua phương pháp đúng đắn.
+                                    </p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1025,15 +1033,19 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
-                                        <p class="text-muted mb-3">
-                                            SEC định hướng phát triển thành Trung tâm Anh ngữ số 1 Việt Nam về phổ cập phương pháp Tiếng Anh đơn giản đến mọi lứa tuổi.
-                                        </p>
-                                        <p class="text-muted mb-3">
-                                            Chúng tôi mong muốn trở thành đối tác tin cậy của các tổ chức giáo dục, doanh nghiệp và cá nhân trong việc nâng cao trình độ tiếng Anh.
-                                        </p>
-                                        <p class="text-muted">
-                                            SEC sẽ mở rộng mạng lưới trung tâm trên toàn quốc, mang phương pháp học tiếng Anh đơn giản đến mọi miền đất nước.
-                                        </p>
+                                        @if(isset($aboutData['vision']) && !empty($aboutData['vision']))
+                                            {!! $aboutData['vision'] !!}
+                                        @else
+                                            <p class="text-muted mb-3">
+                                                SEC định hướng phát triển thành Trung tâm Anh ngữ số 1 Việt Nam về phổ cập phương pháp Tiếng Anh đơn giản đến mọi lứa tuổi.
+                                            </p>
+                                            <p class="text-muted mb-3">
+                                                Chúng tôi mong muốn trở thành đối tác tin cậy của các tổ chức giáo dục, doanh nghiệp và cá nhân trong việc nâng cao trình độ tiếng Anh.
+                                            </p>
+                                    <p class="text-muted">
+                                                SEC sẽ mở rộng mạng lưới trung tâm trên toàn quốc, mang phương pháp học tiếng Anh đơn giản đến mọi miền đất nước.
+                                    </p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1044,48 +1056,115 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body p-4">
                                     <div class="text-start">
+                                        @if(isset($aboutData['core_values']) && !empty($aboutData['core_values']))
+                                            @php
+                                                $coreValues = is_string($aboutData['core_values']) ? json_decode($aboutData['core_values'], true) : $aboutData['core_values'];
+                                    @endphp
+                                            @if(is_array($coreValues) && count($coreValues) > 0)
                                         <div class="row g-3">
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-graduation-cap text-white"></i>
+                                            @foreach($coreValues as $value)
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="{{ $value['icon'] ?? 'fas fa-star' }} text-white"></i>
+                                                        </div>
+                                                                <h6 class="fw-bold mb-2 small text-primary">{{ $value['title'] ?? 'Giá trị' }}</h6>
+                                                                <p class="text-muted small mb-0">{{ $value['description'] ?? 'Mô tả giá trị' }}</p>
                                                     </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
-                                                    <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-heart text-white"></i>
-                                                    </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
-                                                    <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-lightbulb text-white"></i>
-                                                    </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
-                                                    <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-center p-3 bg-light rounded core-value-item">
-                                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                                                         style="width: 50px; height: 50px;">
-                                                        <i class="fas fa-chart-line text-white"></i>
-                                                    </div>
-                                                    <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
-                                                    <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
+                                    @else
+                                                <!-- Fallback values if no data -->
+                                                <div class="row g-3">
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-graduation-cap text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
+                                                            <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-heart text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
+                                                            <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-lightbulb text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
+                                                            <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="text-center p-3 bg-light rounded core-value-item">
+                                                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                                 style="width: 50px; height: 50px;">
+                                                                <i class="fas fa-chart-line text-white"></i>
+                                                            </div>
+                                                            <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
+                                                            <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                    @endif
+                                        @else
+                                            <!-- Fallback values if no data -->
+                                            <div class="row g-3">
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-graduation-cap text-white"></i>
+                                </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Chất Lượng</h6>
+                                                        <p class="text-muted small mb-0">Cam kết chất lượng giảng dạy cao nhất</p>
+                            </div>
+                        </div>
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-heart text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Tận Tâm</h6>
+                                                        <p class="text-muted small mb-0">Đặt lợi ích học viên lên hàng đầu</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-lightbulb text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Sáng Tạo</h6>
+                                                        <p class="text-muted small mb-0">Phương pháp học tập đổi mới</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="text-center p-3 bg-light rounded core-value-item">
+                                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 50px; height: 50px;">
+                                                            <i class="fas fa-chart-line text-white"></i>
+                                                        </div>
+                                                        <h6 class="fw-bold mb-2 small text-primary">Hiệu Quả</h6>
+                                                        <p class="text-muted small mb-0">Kết quả học tập rõ ràng</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1116,7 +1195,11 @@
 
 
 
-
+<style>
+    .py-5 .teacher-card ul {
+        text-align: left;
+    }
+</style>
 
 <!-- Teaching Staff -->
 <section class="py-5">
@@ -1126,15 +1209,15 @@
             <p class="text-muted">Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Anh nhiều năm</p>
         </div>
         
-        <div class="row">
-            @php
-                $teachers = \App\Models\Teacher::where('is_active', true)
-                    ->orderBy('sort_order')
-                    ->orderBy('name')
-                    ->get();
-            @endphp
-            
-            @forelse($teachers as $teacher)
+                 <div class="row">
+             @php
+                 $teachers = \App\Models\Teacher::where('is_active', true)
+                     ->orderBy('sort_order')
+                     ->orderBy('name')
+                     ->get();
+             @endphp
+             
+             @forelse($teachers as $teacher)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="teacher-card card h-100 border-0 shadow-sm" 
                      data-teacher-id="{{ $teacher->id }}"
@@ -1142,57 +1225,57 @@
                      data-teacher-specialization="{{ $teacher->specialization }}"
                      data-teacher-certification="{{ $teacher->certification }}"
                      data-teacher-experience="{{ $teacher->experience_years }}"
-                     data-teacher-bio="{{ strip_tags($teacher->bio) }}"
+                     data-teacher-bio="{!! $teacher->bio !!}"
                      data-teacher-achievements="{{ json_encode($teacher->achievements) }}"
                      data-teacher-avatar="{{ $teacher->avatar ? asset('storage/' . $teacher->avatar) : '' }}"
                      style="cursor: pointer;">
                     <div class="card-body p-4 text-center">
                         <div class="mb-3">
-                            @if($teacher->avatar)
-                                <img src="{{ asset('storage/' . $teacher->avatar) }}" 
-                                     alt="{{ $teacher->name }}" 
+                                     @if($teacher->avatar)
+                                         <img src="{{ asset('storage/' . $teacher->avatar) }}" 
+                                              alt="{{ $teacher->name }}" 
                                      class="rounded-circle teacher-avatar"
                                      width="120" height="120">
-                            @else
+                                     @else
                                 <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center teacher-avatar-placeholder" 
                                      style="width: 120px; height: 120px;">
                                     <i class="fas fa-user fa-3x text-white"></i>
-                                </div>
-                            @endif
-                        </div>
+                                         </div>
+                                     @endif
+                                         </div>
                         
                         <h5 class="fw-bold text-primary mb-2">{{ $teacher->name }}</h5>
                         <p class="text-muted mb-2">{{ $teacher->specialization }}</p>
-                        
-                        @if($teacher->certification)
+                                     
+                                     @if($teacher->certification)
                         <span class="badge bg-light text-primary border mb-3">{{ $teacher->certification }}</span>
-                        @endif
-                        
-                        @if($teacher->experience_years)
-                        <div class="d-flex justify-content-center align-items-center mb-3">
+                                     @endif
+                                     
+                                     @if($teacher->experience_years)
+                        <div class="d-flex justify-content-center align-items-center mb-3 text-left" >
                             <i class="fas fa-clock text-primary me-2"></i>
                             <small class="text-muted">{{ $teacher->experience_years }}+ năm kinh nghiệm</small>
-                        </div>
-                        @endif
-                        
-                        @if($teacher->bio)
-                            <p class="text-muted small mb-3">{!! Str::limit(strip_tags($teacher->bio), 120) !!}</p>
-                        @endif
-                        
+                                     </div>
+                                     @endif
+                                     
+                                     @if($teacher->bio)
+                                        {!! $teacher->bio !!}
+                                     @endif
+                                     
                         <button class="btn btn-outline-primary btn-sm teacher-detail-btn">
                             <i class="fas fa-eye me-1"></i>Xem Chi Tiết
                         </button>
+                        </div>
                     </div>
                 </div>
-            </div>
             @empty
-            <div class="col-12">
-                <div class="text-center py-5">
-                    <i class="fas fa-users fa-4x text-muted mb-3"></i>
-                    <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
-                    <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="fas fa-users fa-4x text-muted mb-3"></i>
+                        <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
+                        <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
+                    </div>
                 </div>
-            </div>
             @endforelse
         </div>
     </div>
@@ -1211,35 +1294,34 @@
             <p class="text-muted">Không gian học tập sinh động và hiện đại, nơi học viên trải nghiệm phương pháp học tiếng Đức độc đáo</p>
         </div>
         
-        <!-- Classroom Slider -->
-        <div class="position-relative">
-            <div class="gallery-slider" id="classroomSlider">
-                
-                <div class="slider-container">
+                <!-- Classroom Card Slider -->
+        <div class="card-slider-container">
+            <div class="swiper classroom-swiper">
+                <div class="swiper-wrapper">
                     @foreach($classrooms as $index => $classroom)
-                        <div class="slider-item" data-gallery="classroom" data-index="{{ $index }}">
-                            <div class="slider-card">
-                                <div class="slider-image-container">
+                        <div class="swiper-slide">
+                            <div class="card-slider-card" onclick="openGallery('classroom', {{ $index }})">
+                                <div class="card-image-container">
                                     <img src="{{ $classroom->image_url }}" 
                                          alt="{{ $classroom->title }}" 
-                                         class="slider-image">
+                                         class="card-image">
                                     @if($classroom->level)
-                                        <div class="slider-level-badge">
+                                        <div class="card-badge">
                                             <span class="badge bg-primary">{{ $classroom->level }}</span>
                                         </div>
                                     @endif
-                                    <div class="slider-overlay">
-                                        <div class="slider-content">
-                                            <h6 class="text-white fw-bold mb-1">{{ $classroom->title }}</h6>
-                                            <p class="text-white-50 small mb-1">{{ $classroom->description }}</p>
+                                    <div class="card-overlay">
+                                        <div class="card-content">
+                                            <h6 class="text-white fw-bold mb-2">{{ $classroom->title }}</h6>
+                                            <p class="text-white-50 mb-2">{{ $classroom->description }}</p>
                                             @if($classroom->students)
-                                                <span class="badge bg-light text-dark small">
+                                                <span class="badge bg-light text-dark">
                                                     <i class="fas fa-users me-1"></i>{{ $classroom->students }}
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="slider-click-overlay">
+                                    <div class="card-click-overlay">
                                         <i class="fas fa-search-plus fa-2x text-white"></i>
                                     </div>
                                 </div>
@@ -1247,15 +1329,12 @@
                         </div>
                     @endforeach
                 </div>
+                <!-- Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
-            
-            <!-- Navigation Buttons -->
-            <button class="slider-nav slider-prev" onclick="moveSlider('classroomSlider', -1)">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="slider-nav slider-next" onclick="moveSlider('classroomSlider', 1)">
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </div>
     </div>
 </section>
@@ -1274,25 +1353,24 @@
             <p class="text-muted">Không gian học tập hiện đại, trang thiết bị đầy đủ cho việc học tiếng Đức hiệu quả</p>
         </div>
         
-        <!-- Facilities Slider -->
-        <div class="position-relative">
-            <div class="gallery-slider" id="facilitiesSlider">
-            
-                <div class="slider-container">
+                        <!-- Facilities Card Slider -->
+        <div class="card-slider-container">
+            <div class="swiper facilities-swiper">
+                <div class="swiper-wrapper">
             @foreach($facilities as $index => $facility)
-                        <div class="slider-item" data-gallery="facility" data-index="{{ $index }}">
-                            <div class="slider-card">
-                                <div class="slider-image-container">
+                        <div class="swiper-slide">
+                            <div class="card-slider-card" onclick="openGallery('facility', {{ $index }})">
+                                <div class="card-image-container">
                                     <img src="{{ $facility->image_url }}" 
                                          alt="{{ $facility->title }}" 
-                                         class="slider-image">
-                                    <div class="slider-overlay">
-                                        <div class="slider-content">
-                                            <h6 class="text-white fw-bold mb-1">{{ $facility->title }}</h6>
-                                            <p class="text-white-50 small mb-0">{{ $facility->description }}</p>
+                                         class="card-image">
+                                    <div class="card-overlay">
+                                        <div class="card-content">
+                                            <h6 class="text-white fw-bold mb-2">{{ $facility->title }}</h6>
+                                            <p class="text-white-50 mb-0">{{ $facility->description }}</p>
                                 </div>
                             </div>
-                                    <div class="slider-click-overlay">
+                                    <div class="card-click-overlay">
                                         <i class="fas fa-search-plus fa-2x text-white"></i>
                             </div>
                         </div>
@@ -1300,15 +1378,13 @@
                 </div>
             @endforeach
                 </div>
+                <!-- Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
-            
-            <!-- Navigation Buttons -->
-            <button class="slider-nav slider-prev" onclick="moveSlider('facilitiesSlider', -1)">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="slider-nav slider-next" onclick="moveSlider('facilitiesSlider', 1)">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        </div>
         </div>
         
 
@@ -1343,7 +1419,7 @@
             <div class="modal-header border-0">
                 <h5 class="modal-title text-white" id="galleryModalTitle">Gallery</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
+            </div>
             <div class="modal-body p-0">
                 <div class="position-relative">
                     <img id="galleryModalImage" src="" alt="" class="img-fluid w-100" style="max-height: 70vh; object-fit: contain;">
@@ -1359,16 +1435,16 @@
                     <!-- Image counter -->
                     <div class="gallery-counter">
                         <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
-                        </div>
                     </div>
+                </div>
                 
                 <!-- Image info -->
                 <div class="p-4">
                     <h6 class="text-white mb-2" id="galleryImageTitle">Title</h6>
                     <p class="text-light mb-0" id="galleryImageDescription">Description</p>
                 </div>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 
@@ -1598,164 +1674,500 @@
     margin-bottom: 0.25rem;
 }
 
-/* Gallery Slider Styles */
-.gallery-slider {
-    overflow: hidden;
+/* Professional Card Slider Styles */
+.card-slider-container {
+    width: 100%;
     position: relative;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-/* Improve drag UX */
-.gallery-slider {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.swiper {
+    width: 100%;
+    padding: 20px 0 60px 0;
 }
 
-.gallery-slider .slider-container.dragging {
-    cursor: grabbing;
-    transition: none !important;
-}
-
-.slider-container {
+.swiper-slide {
+    height: 320px;
     display: flex;
-    transition: transform 0.5s ease;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.slider-item {
-    flex: 0 0 300px;
-    height: 250px;
-    cursor: pointer;
-}
-
-.slider-card {
-    height: 100%;
-    border-radius: 15px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.slider-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-}
-
-.slider-image-container {
-    position: relative;
+.card-slider-card {
     width: 100%;
     height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background: white;
+}
+
+.card-slider-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.card-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
     overflow: hidden;
 }
 
-.slider-image {
+.card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.slider-card:hover .slider-image {
+.card-slider-card:hover .card-image {
     transform: scale(1.1);
 }
 
-.slider-level-badge {
+.card-badge {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 3;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
 }
 
-.slider-level-badge .badge {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-    border-radius: 15px;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.slider-overlay {
+.card-overlay {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(1, 88, 98, 0.8), rgba(62, 184, 80, 0.8));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    align-items: end;
-    padding: 1.5rem;
-    z-index: 2;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+    padding: 2rem;
+    transform: translateY(100%);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
 }
 
-.slider-card:hover .slider-overlay {
-    opacity: 1;
-}
-
-.slider-content {
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-    width: 100%;
-}
-
-.slider-card:hover .slider-content {
+.card-slider-card:hover .card-overlay {
     transform: translateY(0);
 }
 
-.slider-click-overlay {
+.card-content h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: white;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+.card-click-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 4;
-    pointer-events: auto;
-    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(5px);
 }
 
-.slider-card:hover .slider-click-overlay {
+.card-slider-card:hover .card-click-overlay {
     opacity: 1;
 }
 
-/* Slider Navigation */
-.slider-nav {
+/* Swiper Navigation Buttons */
+.swiper-button-next,
+.swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    color: #333;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: white;
+    color: #dc3545;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Swiper Pagination */
+.swiper-pagination {
+    bottom: 20px;
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #dc3545;
+    transform: scale(1.2);
+}
+
+/* Gallery Modal Navigation Styles */
+.gallery-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(1, 88, 98, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     color: white;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 5;
+    z-index: 10;
     cursor: pointer;
 }
 
-/* Ensure nav buttons are above images and overlays */
-.gallery-slider .slider-nav {
-    z-index: 6;
-}
-
-.slider-nav:hover {
-    background: var(--primary-color);
+.gallery-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
     transform: translateY(-50%) scale(1.1);
     color: white;
 }
 
-.slider-prev {
-    left: -25px;
+.gallery-prev {
+    left: 20px;
 }
 
-.slider-next {
-    right: -25px;
+.gallery-next {
+    right: 20px;
+}
+
+.gallery-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+/* Gallery Modal Responsive */
+@media (max-width: 768px) {
+    .gallery-nav {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-nav {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .gallery-prev {
+        left: 10px;
+    }
+    
+    .gallery-next {
+        right: 10px;
+    }
+}
+
+
+
+.gallery-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.gallery-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    border-color: rgba(220, 53, 69, 0.3);
+}
+
+.gallery-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 20px;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.gallery-card:hover .gallery-image {
+    transform: scale(1.08);
+    filter: brightness(1) contrast(1.2);
+}
+
+.gallery-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.gallery-badge .badge {
+    font-size: 0.75rem;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(220, 53, 69, 0.9) 0%, 
+        rgba(253, 126, 20, 0.8) 50%, 
+        rgba(0, 0, 0, 0.7) 100%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    z-index: 5;
+    backdrop-filter: blur(5px);
+}
+
+.gallery-card:hover .gallery-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-content {
+    transform: translateY(30px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 100%;
+    text-align: center;
+}
+
+.gallery-card:hover .gallery-content {
+    transform: translateY(0);
+}
+
+.gallery-content h6 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.75rem;
+}
+
+.gallery-content p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.gallery-content .badge {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-click-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 8;
+    pointer-events: auto;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.gallery-card:hover .gallery-click-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.gallery-click-overlay i {
+    color: #dc3545;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Professional Carousel Navigation */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    border: none;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 15;
+    cursor: pointer;
+    font-size: 1.4rem;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.carousel-nav:hover {
+    background: linear-gradient(135deg, #c82333 0%, #e55a00 100%);
+    transform: translateY(-50%) scale(1.15);
+    color: white;
+    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.6);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.carousel-nav:disabled {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: translateY(-50%) scale(0.9);
+}
+
+.carousel-nav:disabled:hover {
+    transform: translateY(-50%) scale(0.9);
+    box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+}
+
+.carousel-prev {
+    left: -30px;
+}
+
+.carousel-next {
+    right: -30px;
+}
+
+/* Professional Carousel Pagination */
+.carousel-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 12px;
+    padding: 0 20px;
+}
+
+.pagination-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.3) 0%, rgba(253, 126, 20, 0.3) 100%);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.pagination-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pagination-dot.active {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    transform: scale(1.3);
+    border-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+.pagination-dot.active::before {
+    width: 100%;
+    height: 100%;
+}
+
+.pagination-dot:hover {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.6) 0%, rgba(253, 126, 20, 0.6) 100%);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Gallery Modal Styles */
@@ -1805,37 +2217,71 @@
 
 
 
-/* Responsive Design */
+/* Professional Responsive Card Slider Design */
+@media (max-width: 1200px) {
+    .swiper-slide {
+        height: 300px;
+    }
+    
+    .card-content h6 {
+        font-size: 1rem;
+    }
+    
+    .card-content p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .swiper-slide {
+        height: 280px;
+    }
+    
+    .card-overlay {
+        padding: 1.5rem;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
 @media (max-width: 768px) {
-    .teacher-image-container {
-        height: 150px;
+    .card-slider-container {
+        padding: 30px 0;
     }
     
-    .slider-item {
-        flex: 0 0 250px;
-        height: 200px;
+    .swiper-slide {
+        height: 260px;
     }
     
-    .slider-overlay {
-        padding: 1rem;
+    .card-overlay {
+        padding: 1.25rem;
     }
     
-    .slider-nav {
+    .card-content h6 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-content p {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .card-badge .badge {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
         width: 40px;
         height: 40px;
-    }
-    
-    .slider-prev {
-        left: -20px;
-    }
-    
-    .slider-next {
-        right: -20px;
-    }
-    
-    .gallery-nav {
-        width: 50px;
-        height: 50px;
+        font-size: 1rem;
     }
     
     .teacher-card .card-body {
@@ -1844,26 +2290,44 @@
 }
 
 @media (max-width: 576px) {
-    .slider-item {
-        flex: 0 0 200px;
-        height: 180px;
+    .card-slider-container {
+        padding: 25px 0;
+        border-radius: 15px;
     }
     
-    .slider-container {
-        gap: 15px;
+    .swiper-slide {
+        height: 240px;
     }
     
-    .gallery-nav {
-        width: 45px;
-        height: 45px;
+    .card-overlay {
+        padding: 1rem;
     }
     
-    .gallery-prev {
-        left: 10px;
+    .card-content h6 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
     }
     
-    .gallery-next {
-        right: 10px;
+    .card-content p {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-badge .badge {
+        font-size: 0.65rem;
+        padding: 5px 8px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
     }
 }
 
@@ -1898,6 +2362,7 @@
 @endpush
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 // Gallery data from database (safely JSON-encoded)
 @php
@@ -1907,7 +2372,9 @@
         return [
             'image' => $c->image_url,
             'title' => $c->title,
-            'description' => $c->description ?? ''
+            'description' => $c->description ?? '',
+            'level' => $c->level ?? null,
+            'students' => $c->students ?? null
         ];
     });
     $facilityData = $allFacilities->map(function($f) {
@@ -1924,124 +2391,119 @@ const galleryData = {
     facility: @json($facilityData)
 };
 
-// Slider state
-const sliderState = {
-    classroomSlider: { position: 0, autoplayId: null },
-    facilitiesSlider: { position: 0, autoplayId: null }
-};
+
 
 // Current gallery state
 let currentGallery = null;
 let currentImageIndex = 0;
 
-// Move slider function
-function moveSlider(sliderId, direction) {
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-    const container = slider.querySelector('.slider-container');
-    if (!container) return;
-    const items = container.querySelectorAll('.slider-item');
-    if (!items || items.length === 0) return;
+// Professional Card Slider Initialization
+document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Classroom Swiper
+        const classroomSwiper = new Swiper('.classroom-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+                1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+            },
+            effect: 'slide',
+            speed: 600,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            watchSlidesVisibility: true,
+        });
 
-    // Compute actual item width + gap dynamically
-    const firstItem = items[0];
-    const containerStyle = window.getComputedStyle(container);
-    const gapPx = parseInt(containerStyle.gap || containerStyle.columnGap || '0', 10) || 0;
-    const itemWidth = firstItem.offsetWidth + gapPx;
-    const visibleItems = Math.max(1, Math.floor(slider.clientWidth / itemWidth));
-    const maxPosition = -(Math.max(0, items.length - visibleItems) * itemWidth);
+            // Initialize Facilities Swiper
+        const facilitiesSwiper = new Swiper('.facilities-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+                1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+            },
+            effect: 'slide',
+            speed: 600,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            watchSlidesVisibility: true,
+        });
 
-    // Move by one item width per click
-    const current = sliderState[sliderId]?.position || 0;
-    sliderState[sliderId] = sliderState[sliderId] || { position: 0, autoplayId: null };
-    sliderState[sliderId].position = current + (direction * itemWidth);
+    // Add hover pause functionality
+    const swipers = [classroomSwiper, facilitiesSwiper];
+    
+    swipers.forEach(swiper => {
+        const container = swiper.el;
+        
+        container.addEventListener('mouseenter', () => {
+            swiper.autoplay.stop();
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            swiper.autoplay.start();
+        });
+    });
+});
 
-    // Boundary checks
-    if (sliderState[sliderId].position > 0) {
-        sliderState[sliderId].position = 0;
-    } else if (sliderState[sliderId].position < maxPosition) {
-        sliderState[sliderId].position = maxPosition;
-    }
 
-    container.style.transform = `translateX(${sliderState[sliderId].position}px)`;
 
-    // Update navigation button states
-    updateNavigationButtons(sliderId);
-}
 
-// Update navigation button states
-function updateNavigationButtons(sliderId) {
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-    const container = slider.querySelector('.slider-container');
-    if (!container) return;
-    const items = container.querySelectorAll('.slider-item');
-    if (!items || items.length === 0) return;
-
-    const firstItem = items[0];
-    const containerStyle = window.getComputedStyle(container);
-    const gapPx = parseInt(containerStyle.gap || containerStyle.columnGap || '0', 10) || 0;
-    const itemWidth = firstItem.offsetWidth + gapPx;
-    const visibleItems = Math.max(1, Math.floor(slider.clientWidth / itemWidth));
-    const maxPosition = -(Math.max(0, items.length - visibleItems) * itemWidth);
-
-    const prevBtn = slider.parentElement.querySelector('.slider-prev');
-    const nextBtn = slider.parentElement.querySelector('.slider-next');
-
-    if (prevBtn && nextBtn) {
-        // Disable/enable prev button
-        const pos = sliderState[sliderId]?.position || 0;
-        if (pos >= 0) {
-            prevBtn.style.opacity = '0.5';
-            prevBtn.style.pointerEvents = 'none';
-        } else {
-            prevBtn.style.opacity = '1';
-            prevBtn.style.pointerEvents = 'auto';
-        }
-
-        // Disable/enable next button
-        if (pos <= maxPosition) {
-            nextBtn.style.opacity = '0.5';
-            nextBtn.style.pointerEvents = 'none';
-        } else {
-            nextBtn.style.opacity = '1';
-            nextBtn.style.pointerEvents = 'auto';
-        }
-    }
-}
-
-// Autoplay per slider
-function startAutoplay(sliderId, intervalMs = 4000) {
-    stopAutoplay(sliderId);
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-    const container = slider.querySelector('.slider-container');
-    if (!container) return;
-    const items = container.querySelectorAll('.slider-item');
-    if (!items || items.length <= 1) return;
-    sliderState[sliderId] = sliderState[sliderId] || { position: 0, autoplayId: null };
-    sliderState[sliderId].autoplayId = setInterval(() => {
-        // If next is disabled (at end), jump back to start for loop effect
-        const prevBtn = slider.parentElement.querySelector('.slider-prev');
-        const nextBtn = slider.parentElement.querySelector('.slider-next');
-        if (nextBtn && nextBtn.style.pointerEvents === 'none') {
-            // reset to start
-            sliderState[sliderId].position = 0;
-            container.style.transform = `translateX(0px)`;
-            updateNavigationButtons(sliderId);
-        } else {
-            moveSlider(sliderId, 1);
-        }
-    }, intervalMs);
-}
-
-function stopAutoplay(sliderId) {
-    const state = sliderState[sliderId];
-    if (state && state.autoplayId) {
-        clearInterval(state.autoplayId);
-        state.autoplayId = null;
-    }
-}
 
 // Open gallery modal
 function openGallery(galleryType, imageIndex) {
@@ -2055,6 +2517,8 @@ function openGallery(galleryType, imageIndex) {
     updateGalleryModal();
     modal.show();
 }
+
+
 
 // Update gallery modal content
 function updateGalleryModal() {
@@ -2143,20 +2607,37 @@ function initializeScrollAnimations() {
 
 // Change gallery image
 function changeGalleryImage(direction) {
-    if (!currentGallery || !galleryData[currentGallery]) return;
+    console.log('changeGalleryImage called with direction:', direction);
+    console.log('currentGallery:', currentGallery);
+    console.log('currentImageIndex:', currentImageIndex);
+    
+    if (!currentGallery || !galleryData[currentGallery]) {
+        console.log('No gallery data found for:', currentGallery);
+        return;
+    }
     
     const data = galleryData[currentGallery];
+    console.log('Gallery data:', data);
+    
     currentImageIndex += direction;
+    console.log('New index:', currentImageIndex);
     
     // Boundary checks with loop
     if (currentImageIndex >= data.length) {
         currentImageIndex = 0;
+        console.log('Wrapped to beginning, new index:', currentImageIndex);
     } else if (currentImageIndex < 0) {
         currentImageIndex = data.length - 1;
+        console.log('Wrapped to end, new index:', currentImageIndex);
     }
     
+    console.log('Final index:', currentImageIndex);
     updateGalleryModal();
 }
+
+
+
+
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -2165,21 +2646,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize scroll animations
     initializeScrollAnimations();
-    // Add click event listeners to slider items
-    document.querySelectorAll('.slider-item').forEach(item => {
-        item.addEventListener('click', function() {
-            const galleryType = this.getAttribute('data-gallery');
-            const imageIndex = parseInt(this.getAttribute('data-index'));
-            openGallery(galleryType, imageIndex);
-        });
-    });
-    
     // Expose functions globally for inline onclick handlers
-    window.moveSlider = moveSlider;
     window.changeGalleryImage = changeGalleryImage;
     window.openGallery = openGallery;
-    window.startAutoplay = startAutoplay;
-    window.stopAutoplay = stopAutoplay;
+    window.updateGalleryModal = updateGalleryModal;
 
     // Keyboard navigation for gallery
     document.addEventListener('keydown', function(e) {
@@ -2195,94 +2665,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Initialize navigation buttons and autoplay after first layout
-    setTimeout(() => {
-        ['classroomSlider', 'facilitiesSlider'].forEach(sliderId => {
-            updateNavigationButtons(sliderId);
-            startAutoplay(sliderId, 4000);
-        });
-    }, 0);
-    
-    // Auto-resize sliders on window resize
-    window.addEventListener('resize', function() {
-        // Reset slider positions on resize
-        Object.keys(sliderState).forEach(sliderId => {
-            sliderState[sliderId].position = 0;
-            const slider = document.getElementById(sliderId);
-            if (slider) {
-                const container = slider.querySelector('.slider-container');
-                container.style.transform = 'translateX(0px)';
-                updateNavigationButtons(sliderId);
-            }
-        });
-    });
-    
-    // Touch/swipe support for mobile + mouse drag for desktop
-    document.querySelectorAll('.gallery-slider').forEach(function(slider) {
-        let startX = 0;
-        let currentX = 0;
-        let isDragging = false;
-        const container = slider.querySelector('.slider-container');
 
-        // Touch
-        slider.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            if (container) container.classList.add('dragging');
-            stopAutoplay(slider.id);
-        });
-        slider.addEventListener('touchmove', function(e) {
-            if (!isDragging) return;
-            currentX = e.touches[0].clientX;
-        });
-        slider.addEventListener('touchend', function() {
-            if (!isDragging) return;
-            isDragging = false;
-            if (container) container.classList.remove('dragging');
-            const diffX = startX - currentX;
-            const threshold = 50;
-            if (Math.abs(diffX) > threshold) {
-                const direction = diffX > 0 ? 1 : -1;
-                moveSlider(slider.id, direction);
-            }
-            startAutoplay(slider.id);
-        });
-
-        // Mouse
-        slider.addEventListener('mousedown', function(e) {
-            startX = e.clientX;
-            currentX = e.clientX;
-            isDragging = true;
-            if (container) container.classList.add('dragging');
-            stopAutoplay(slider.id);
-        });
-        slider.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            currentX = e.clientX;
-        });
-        slider.addEventListener('mouseup', function() {
-            if (!isDragging) return;
-            isDragging = false;
-            if (container) container.classList.remove('dragging');
-            const diffX = startX - currentX;
-            const threshold = 50;
-            if (Math.abs(diffX) > threshold) {
-                const direction = diffX > 0 ? 1 : -1;
-                moveSlider(slider.id, direction);
-            }
-            startAutoplay(slider.id);
-        });
-        slider.addEventListener('mouseleave', function() {
-            if (isDragging) {
-                isDragging = false;
-                if (container) container.classList.remove('dragging');
-            }
-        });
-
-        // Pause autoplay on hover, resume on leave
-        slider.addEventListener('mouseenter', function() { stopAutoplay(slider.id); });
-        slider.addEventListener('mouseleave', function() { startAutoplay(slider.id); });
-    });
     
     // Teacher Detail Modal Functionality
     function setupTeacherModal() {

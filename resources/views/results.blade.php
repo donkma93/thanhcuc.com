@@ -116,6 +116,8 @@
             </div>
         @endif
 
+
+
         <!-- Course Registration Section (moved from homepage) -->
         <section class="py-5 bg-light position-relative registration-section">
             <div class="container">
@@ -140,59 +142,85 @@
                             <p class="text-muted">Chỉ áp dụng cho 50 học viên đăng ký đầu tiên trong tháng này!</p>
                         </div>
 
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="offer-card h-100">
-                                    <div class="offer-icon">
-                                        <i class="fas fa-percentage"></i>
+                        @if($courseOffers->count() > 0)
+                            <div class="row g-4">
+                                @foreach($courseOffers as $offer)
+                                    <div class="col-md-6">
+                                        <div class="offer-card h-100">
+                                            <div class="offer-icon">
+                                                @if(!empty($offer->icon))
+                                                    <i class="{{ $offer->icon }}"></i>
+                                                @else
+                                                    <i class="fas fa-gift"></i>
+                                                @endif
+                                            </div>
+                                            <h5 class="fw-bold mb-2 text-danger">{{ $offer->title }}</h5>
+                                            <p class="text-muted mb-0">{{ $offer->description }}</p>
+                                            @if($offer->badge_text)
+                                                <div class="offer-badge">
+                                                    <span class="badge bg-danger">{{ $offer->badge_text }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
-                                    <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
-                                    <div class="offer-badge">
-                                        <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
+                                @endforeach
+                            </div>
+                        @else
+                            <!-- Fallback offers if no database offers -->
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="offer-card h-100">
+                                        <div class="offer-icon">
+                                            <i class="fas fa-percentage"></i>
+                                        </div>
+                                        <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
+                                        <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
+                                        <div class="offer-badge">
+                                            <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="offer-card h-100">
-                                    <div class="offer-icon">
-                                        <i class="fas fa-book"></i>
-                                    </div>
-                                    <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
-                                    <p class="text-muted mb-0">BỘ SÁCH TIẾNG ĐỨC CHUYÊN NGHIỆP + AUDIO CD TRỊ GIÁ 800.000Đ</p>
-                                    <div class="offer-badge">
-                                        <span class="badge bg-success">Miễn phí</span>
+                                <div class="col-md-6">
+                                    <div class="offer-card h-100">
+                                        <div class="offer-icon">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
+                                        <p class="text-muted mb-0">BỘ SÁCH TIẾNG ĐỨC CHUYÊN NGHIỆP + AUDIO CD TRỊ GIÁ 800.000Đ</p>
+                                        <div class="offer-badge">
+                                            <span class="badge bg-success">Miễn phí</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="offer-card h-100">
-                                    <div class="offer-icon">
-                                        <i class="fas fa-chalkboard-teacher"></i>
-                                    </div>
-                                    <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
-                                    <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
-                                    <div class="offer-badge">
-                                        <span class="badge bg-info">Không mất phí</span>
+                                <div class="col-md-6">
+                                    <div class="offer-card h-100">
+                                        <div class="offer-icon">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                        </div>
+                                        <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
+                                        <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
+                                        <div class="offer-badge">
+                                            <span class="badge bg-info">Không mất phí</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="offer-card h-100">
-                                    <div class="offer-icon">
-                                        <i class="fas fa-certificate"></i>
-                                    </div>
-                                    <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
-                                    <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
-                                    <div class="offer-badge">
-                                        <span class="badge bg-warning">Bảo đảm</span>
+                                <div class="col-md-12">
+                                    <div class="offer-card h-100">
+                                        <div class="offer-icon">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                        <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
+                                        <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
+                                        <div class="offer-badge">
+                                            <span class="badge bg-warning">Bảo đảm</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         <div class="urgency-notice mt-4 p-3 bg-warning bg-opacity-10 border border-warning rounded-3">
                             <div class="d-flex align-items-center">
@@ -315,6 +343,30 @@
     </div>
 </div>
 
+<!-- Course Modal -->
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="courseModalLabel">Chi tiết khóa học</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="courseModalBody">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <a href="{{ route('contact') }}" class="btn btn-primary" id="contactBtn">
+                    <i class="fas fa-envelope me-1"></i>Liên Hệ Ngay
+                </a>
+                <a href="{{ route('trial') }}" class="btn btn-primary" id="trialBtn">
+                    <i class="fas fa-calendar-check me-1"></i>Đăng ký học thử
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('styles')
@@ -356,6 +408,18 @@
 }
 
 
+
+
+
+/* Course Modal Styles */
+.modal-header {
+    background: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+    color: white;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #015862 0%, #3EB850 100%);
+}
 
 /* Gallery Slider Styles */
 .gallery-slider {
@@ -921,6 +985,113 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Course Modal Functionality
+    window.openCourseModal = function(courseId, courseName, isFromHomepage = false) {
+        // Show loading spinner
+        document.getElementById('courseModalBody').innerHTML = `
+            <div class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Đang tải thông tin khóa học...</p>
+            </div>
+        `;
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('courseModal'));
+        modal.show();
+        
+        // Update modal title
+        document.getElementById('courseModalLabel').textContent = courseName;
+        
+        // Fetch course details from API
+        fetch(`/api/courses/${courseId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const course = data.course;
+                    
+                    // Build course content HTML
+                    const courseContent = `
+                        <div class="row">
+                            <div class="col-md-4 text-center mb-3">
+                                ${course.image ? 
+                                    `<img src="/storage/${course.image}" alt="${course.name}" class="img-fluid rounded" style="max-width: 200px;">` :
+                                    `<div class="bg-gradient-primary text-white rounded p-4" style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                        <i class="fas fa-book fa-3x"></i>
+                                    </div>`
+                                }
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="text-primary mb-3">${course.name}</h4>
+                                <p class="text-muted mb-3">${course.short_description || course.description || 'Khóa học chất lượng cao'}</p>
+                                
+                                ${course.duration ? `
+                                    <div class="row mb-2">
+                                        <div class="col-2"><i class="fas fa-clock text-primary"></i></div>
+                                        <div class="col-10">
+                                            <small class="text-muted">Thời lượng</small><br>
+                                            <strong>${course.duration}</strong>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${course.price ? `
+                                    <div class="row mb-2">
+                                        <div class="col-2"><i class="fas fa-tag text-primary"></i></div>
+                                        <div class="col-10">
+                                            <small class="text-muted">Học phí</small><br>
+                                            <strong class="text-success">${course.price.toLocaleString('vi-VN')} VNĐ</strong>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${course.features ? `
+                                    <div class="mb-3">
+                                        <h6 class="text-primary mb-2">Tính năng nổi bật:</h6>
+                                        <div class="row">
+                                            ${JSON.parse(course.features).map(feature => 
+                                                `<div class="col-6 mb-1">
+                                                    <span class="badge bg-success">${feature}</span>
+                                                </div>`
+                                            ).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${course.description ? `
+                                    <div class="mb-3">
+                                        <h6 class="text-primary mb-2">Mô tả chi tiết:</h6>
+                                        <div class="border-start border-primary ps-3">
+                                            ${course.description}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('courseModalBody').innerHTML = courseContent;
+                } else {
+                    document.getElementById('courseModalBody').innerHTML = `
+                        <div class="text-center text-danger py-4">
+                            <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+                            <p>Không thể tải thông tin khóa học. Vui lòng thử lại sau.</p>
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching course details:', error);
+                document.getElementById('courseModalBody').innerHTML = `
+                    <div class="text-center text-danger py-4">
+                        <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+                        <p>Đã xảy ra lỗi khi tải thông tin khóa học.</p>
+                    </div>
+                `;
+            });
+    };
 });
 </script>
 @endpush

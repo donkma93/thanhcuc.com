@@ -26,6 +26,9 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        // Log the request data for debugging
+        \Log::info('News store request data:', $request->all());
+        
         $request->validate([
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string|max:500',
@@ -39,7 +42,11 @@ class NewsController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
-        $data['author_id'] = auth()->id();
+        $data['author_id'] = null; // Set to null for now since we're using admin auth
+        
+        // Handle boolean fields properly
+        $data['is_published'] = $request->has('is_published');
+        $data['is_featured'] = $request->has('is_featured');
 
         // Handle featured image upload
         if ($request->hasFile('featured_image')) {
@@ -47,15 +54,43 @@ class NewsController extends Controller
             $data['featured_image'] = $imagePath;
         }
 
-        // Set published_at if not provided
-        if ($request->is_published && !$request->published_at) {
+        // Set published_at if publishing for the first time
+        if ($data['is_published'] && !$request->published_at) {
             $data['published_at'] = now();
         }
+        
+        // Convert empty string to null for published_at
+        if (empty($data['published_at'])) {
+            $data['published_at'] = null;
+        }
+        
+        // Convert empty string to null for excerpt
+        if (empty($data['excerpt'])) {
+            $data['excerpt'] = null;
+        }
 
-        News::create($data);
-
-        return redirect()->route('admin.news.index')
-            ->with('success', 'Tin tức đã được tạo thành công.');
+        try {
+            // Log the data for debugging
+            \Log::info('Creating news with data:', $data);
+            
+            // Additional validation for content
+            if (empty(trim($data['content']))) {
+                return back()->withInput()
+                    ->withErrors(['content' => 'Nội dung tin tức không được để trống.']);
+            }
+            
+            $news = News::create($data);
+            
+            \Log::info('News created successfully with ID:', ['id' => $news->id]);
+            
+            return redirect()->route('admin.news.index')
+                ->with('success', 'Tin tức đã được tạo thành công.');
+        } catch (\Exception $e) {
+            \Log::error('Error creating news:', ['error' => $e->getMessage(), 'data' => $data]);
+            
+            return back()->withInput()
+                ->withErrors(['error' => 'Có lỗi xảy ra khi tạo tin tức: ' . $e->getMessage()]);
+        }
     }
 
     public function show(News $news)
@@ -70,6 +105,9 @@ class NewsController extends Controller
 
     public function update(Request $request, News $news)
     {
+        // Log the request data for debugging
+        \Log::info('News update request data:', $request->all());
+        
         $request->validate([
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string|max:500',
@@ -83,6 +121,10 @@ class NewsController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
+        
+        // Handle boolean fields properly
+        $data['is_published'] = $request->has('is_published');
+        $data['is_featured'] = $request->has('is_featured');
 
         // Handle featured image upload
         if ($request->hasFile('featured_image')) {
@@ -96,14 +138,42 @@ class NewsController extends Controller
         }
 
         // Set published_at if publishing for the first time
-        if ($request->is_published && !$news->published_at && !$request->published_at) {
+        if ($data['is_published'] && !$news->published_at && !$request->published_at) {
             $data['published_at'] = now();
         }
+        
+        // Convert empty string to null for published_at
+        if (empty($data['published_at'])) {
+            $data['published_at'] = null;
+        }
+        
+        // Convert empty string to null for excerpt
+        if (empty($data['excerpt'])) {
+            $data['excerpt'] = null;
+        }
 
-        $news->update($data);
-
-        return redirect()->route('admin.news.index')
-            ->with('success', 'Tin tức đã được cập nhật thành công.');
+        try {
+            // Log the data for debugging
+            \Log::info('Updating news with data:', ['news_id' => $news->id, 'data' => $data]);
+            
+            // Additional validation for content
+            if (empty(trim($data['content']))) {
+                return back()->withInput()
+                    ->withErrors(['content' => 'Nội dung tin tức không được để trống.']);
+            }
+            
+            $news->update($data);
+            
+            \Log::info('News updated successfully');
+            
+            return redirect()->route('admin.news.index')
+                ->with('success', 'Tin tức đã được cập nhật thành công.');
+        } catch (\Exception $e) {
+            \Log::error('Error updating news:', ['error' => $e->getMessage(), 'news_id' => $news->id, 'data' => $data]);
+            
+            return back()->withInput()
+                ->withErrors(['error' => 'Có lỗi xảy ra khi cập nhật tin tức: ' . $e->getMessage()]);
+        }
     }
 
     public function destroy(News $news)

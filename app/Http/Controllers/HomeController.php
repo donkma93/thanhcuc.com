@@ -87,7 +87,37 @@ class HomeController extends Controller
     
     public function about()
     {
-        return view('about');
+        // Lấy thông tin từ Settings cho trang About
+        $aboutData = [
+            'overview_title' => \App\Models\Setting::get('about_overview_title', 'TỔNG QUAN TRUNG TÂM ANH NGỮ SEC'),
+            'overview_content' => \App\Models\Setting::get('about_overview_content', 'SEC Tiếng Anh Đơn Giản ra đời vào ngày 23/03/2017, với những phương pháp học tiếng Anh cực kỳ đơn giản và hiệu quả. Ngay từ khi thành lập, SEC đã trở thành nơi uy tín của hàng ngàn học sinh, sinh viên. Mỗi tháng, SEC tuyển sinh từ 600 đến 700 học viên mới, minh chứng cho chất lượng giảng dạy của trung tâm.'),
+            'mission' => \App\Models\Setting::get('about_mission', 'SEC có sứ mệnh biến Tiếng Anh thành môn học dễ dàng chinh phục cho mọi trình độ. Chúng tôi cam kết mang đến phương pháp học đơn giản, hiệu quả và khoa học.'),
+            'vision' => \App\Models\Setting::get('about_vision', 'SEC định hướng phát triển thành Trung tâm Anh ngữ số 1 Việt Nam về phổ cập phương pháp Tiếng Anh đơn giản đến mọi lứa tuổi.'),
+            'core_values' => \App\Models\Setting::get('about_core_values', json_encode([
+                [
+                    'title' => 'Chất Lượng',
+                    'description' => 'Cam kết chất lượng giảng dạy cao nhất',
+                    'icon' => 'fas fa-graduation-cap'
+                ],
+                [
+                    'title' => 'Tận Tâm',
+                    'description' => 'Đặt lợi ích học viên lên hàng đầu',
+                    'icon' => 'fas fa-heart'
+                ],
+                [
+                    'title' => 'Sáng Tạo',
+                    'description' => 'Phương pháp học tập đổi mới',
+                    'icon' => 'fas fa-lightbulb'
+                ],
+                [
+                    'title' => 'Hiệu Quả',
+                    'description' => 'Kết quả học tập rõ ràng',
+                    'icon' => 'fas fa-chart-line'
+                ]
+            ]))
+        ];
+        
+        return view('about', compact('aboutData'));
     }
     
     public function news()
@@ -145,7 +175,17 @@ class HomeController extends Controller
             ->orderBy('start_date')
             ->get();
             
-        return view('schedule', compact('schedules', 'featuredSchedules', 'popularSchedules', 'upcomingSchedules'));
+        // Lấy thông tin liên hệ từ database (Settings)
+        $contactInfo = \App\Models\Setting::where('key', 'company_phone_display')->first();
+        $contactPhone = $contactInfo ? $contactInfo->value : '';
+        
+        return view('schedule', compact(
+            'schedules', 
+            'featuredSchedules', 
+            'popularSchedules', 
+            'upcomingSchedules',
+            'contactPhone'
+        ));
     }
     
     public function results()
@@ -161,7 +201,17 @@ class HomeController extends Controller
         $totalFeedbacks = \App\Models\StudentResult::feedbacks()->active()->count();
         $featuredResults = \App\Models\StudentResult::active()->featured()->ordered()->take(6)->get();
         
-        return view('results', compact('scores', 'feedbacks', 'totalScores', 'totalFeedbacks', 'featuredResults'));
+        // Lấy ưu đãi khóa học từ database
+        $courseOffers = CourseOffer::active()->ordered()->take(4)->get();
+        
+        return view('results', compact(
+            'scores', 
+            'feedbacks', 
+            'totalScores', 
+            'totalFeedbacks', 
+            'featuredResults',
+            'courseOffers'
+        ));
     }
     
     public function trial()

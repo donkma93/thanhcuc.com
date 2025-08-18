@@ -35,7 +35,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data" id="aboutForm">
+    <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data" id="aboutForm" onsubmit="return validateForm()">
         @csrf
         @method('PUT')
         
@@ -651,31 +651,95 @@
     function updateCoreValuesJson() {
         const coreValues = [];
         document.querySelectorAll('.core-value-item').forEach((item, index) => {
-            const icon = item.querySelector(`input[name="core_values[${index}][icon]"]`).value;
-            const title = item.querySelector(`input[name="core_values[${index}][title]"]`).value;
-            const description = item.querySelector(`textarea[name="core_values[${index}][description]"]`).value;
+            const iconInput = item.querySelector(`input[name="core_values[${index}][icon]"]`);
+            const titleInput = item.querySelector(`input[name="core_values[${index}][title]"]`);
+            const descriptionInput = item.querySelector(`textarea[name="core_values[${index}][description]"]`);
             
-            if (title.trim()) {
-                coreValues.push({ icon, title, description });
+            if (iconInput && titleInput && descriptionInput) {
+                const icon = iconInput.value.trim();
+                const title = titleInput.value.trim();
+                const description = descriptionInput.value.trim();
+                
+                if (title) { // Chỉ thêm nếu có tiêu đề
+                    coreValues.push({ 
+                        icon: icon || 'fas fa-star', // Default icon if empty
+                        title: title, 
+                        description: description || title // Use title as description if empty
+                    });
+                }
             }
         });
         
-        document.getElementById('core_values_json').value = JSON.stringify(coreValues);
+        // Đảm bảo luôn có ít nhất 1 giá trị mặc định
+        if (coreValues.length === 0) {
+            coreValues.push({
+                icon: 'fas fa-heart',
+                title: 'Tận Tâm',
+                description: 'Luôn đặt lợi ích của học viên lên hàng đầu'
+            });
+        }
+        
+        try {
+            const jsonString = JSON.stringify(coreValues);
+            document.getElementById('core_values_json').value = jsonString;
+            console.log('Core values JSON updated:', jsonString);
+        } catch (error) {
+            console.error('Error creating JSON:', error);
+            // Fallback to default
+            const defaultValues = [{
+                icon: 'fas fa-heart',
+                title: 'Tận Tâm',
+                description: 'Luôn đặt lợi ích của học viên lên hàng đầu'
+            }];
+            document.getElementById('core_values_json').value = JSON.stringify(defaultValues);
+        }
     }
     
     function updateAchievementsJson() {
         const achievements = [];
         document.querySelectorAll('.achievement-item').forEach((item, index) => {
-            const number = item.querySelector(`input[name="achievements[${index}][number]"]`).value;
-            const title = item.querySelector(`input[name="achievements[${index}][title]"]`).value;
-            const description = item.querySelector(`textarea[name="achievements[${index}][description]"]`).value;
+            const numberInput = item.querySelector(`input[name="achievements[${index}][number]"]`);
+            const titleInput = item.querySelector(`input[name="achievements[${index}][title]"]`);
+            const descriptionInput = item.querySelector(`textarea[name="achievements[${index}][description]"]`);
             
-            if (title.trim()) {
-                achievements.push({ number, title, description });
+            if (numberInput && titleInput && descriptionInput) {
+                const number = numberInput.value.trim();
+                const title = titleInput.value.trim();
+                const description = descriptionInput.value.trim();
+                
+                if (title) { // Chỉ thêm nếu có tiêu đề
+                    achievements.push({ 
+                        number: number || '0', // Default number if empty
+                        title: title, 
+                        description: description || title // Use title as description if empty
+                    });
+                }
             }
         });
         
-        document.getElementById('achievements_json').value = JSON.stringify(achievements);
+        // Đảm bảo luôn có ít nhất 1 thành tựu mặc định
+        if (achievements.length === 0) {
+            achievements.push({
+                number: '1000+',
+                title: 'Học Viên',
+                description: 'Đã tin tưởng và lựa chọn chúng tôi'
+            });
+        }
+        
+        try {
+            const jsonString = JSON.stringify(achievements);
+            document.getElementById('achievements_json').value = jsonString;
+            console.log('Achievements JSON updated:', jsonString);
+        } catch (error) {
+            console.error('Error creating JSON:', error);
+            // Fallback to default
+            const defaultValues = [{
+                number: '1000+',
+                title: 'Học Viên',
+                description: 'Đã tin tưởng và lựa chọn chúng tôi'
+            }];
+            document.getElementById('achievements_json').value = JSON.stringify(defaultValues);
+        }
     }
     
     // Header statistics functions
@@ -771,13 +835,31 @@
             );
         }
         
-        document.getElementById('header_stats_json').value = JSON.stringify(headerStats);
+        try {
+            const jsonString = JSON.stringify(headerStats);
+            document.getElementById('header_stats_json').value = jsonString;
+            console.log('Header stats JSON updated:', jsonString);
+        } catch (error) {
+            console.error('Error creating JSON:', error);
+            // Fallback to default
+            const defaultValues = [
+                { number: '25+', label: 'Giảng viên' },
+                { number: '4+', label: 'Năm kinh nghiệm' },
+                { number: '1000+', label: 'Học viên thành công' }
+            ];
+            document.getElementById('header_stats_json').value = JSON.stringify(defaultValues);
+        }
     }
     
     // Form validation function
     function validateForm() {
         let isValid = true;
         const errors = [];
+        
+        // Update all JSON fields before validation
+        updateCoreValuesJson();
+        updateAchievementsJson();
+        updateHeaderStatsJson();
         
         // Validate header stats
         const headerStatsContainer = document.getElementById('header-stats-container');
@@ -866,5 +948,18 @@
             });
         }
     }
+    
+    // Initialize JSON fields when page loads
+    function initializeJsonFields() {
+        updateCoreValuesJson();
+        updateAchievementsJson();
+        updateHeaderStatsJson();
+        console.log('JSON fields initialized');
+    }
+    
+    // Call initialization when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeJsonFields();
+    });
 </script>
 @endpush

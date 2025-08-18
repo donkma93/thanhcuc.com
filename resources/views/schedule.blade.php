@@ -335,14 +335,14 @@
 <!-- Call to Action -->
 <section class="py-5 bg-primary text-white">
     <div class="container text-center">
-        <h3 class="fw-bold mb-3">Bạn có câu hỏi về khóa học?</h3>
+        <h3 class="fw-bold mb-3">BẠN CÓ CÂU HỎI VỀ KHÓA HỌC?</h3>
         <p class="lead mb-4">Hãy liên hệ với chúng tôi để được tư vấn miễn phí và chọn khóa học phù hợp nhất</p>
         <div class="d-flex flex-wrap justify-content-center gap-3">
             <a href="{{ route('contact') }}" class="btn btn-warning btn-lg px-4 py-3">
                 <i class="fas fa-envelope me-2"></i>Liên Hệ Tư Vấn
             </a>
-            <a href="tel:0975186230" class="btn btn-light btn-lg px-4 py-3">
-                <i class="fas fa-phone me-2"></i>Gọi Ngay: 0975.186.230
+            <a href="tel:{{ str_replace('.', '', $contactPhone) }}" class="btn btn-light btn-lg px-4 py-3">
+                <i class="fas fa-phone me-2"></i>Gọi Ngay: {{ $contactPhone }}
             </a>
         </div>
     </div>
