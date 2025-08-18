@@ -948,7 +948,7 @@
                 <div class="company-overview">
                     <div class="text-center mb-4">
                         <h2 class="fw-bold text-primary mb-2">{{ $aboutData['overview_title'] ?? 'TỔNG QUAN' }}</h2>
-                        <p class="text-muted">Những định hướng và giá trị cốt lõi của SEC</p>
+                        <p class="text-muted">Những sứ mệnh, tầm nhìn và giá trị cốt lõi của THANH CÚC</p>
                     </div>
                     
                     <!-- Tab Navigation -->
