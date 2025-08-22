@@ -74,3 +74,20 @@
 .carousel-fade .carousel-item.active {
     opacity: 1;
 }
+
+/* Mobile adjustments for indicators */
+@media (max-width: 576px) {
+    .carousel-indicators {
+        bottom: 1rem;
+    }
+    .carousel-indicators button {
+        width: 7px;
+        height: 7px;
+        margin: 0 4px;
+        border-width: 1px;
+    }
+    .carousel-indicators button.active {
+        transform: scale(0.6);
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+    }
+}

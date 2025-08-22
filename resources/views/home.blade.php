@@ -922,47 +922,113 @@ function goToContactWithCourse() {
         <div class="tab-content" id="achievementTabsContent">
             <!-- Exam Achievements -->
             <div class="tab-pane fade show active" id="exam" role="tabpanel">
-                <div class="row">
-                    @forelse($examAchievements as $achievement)
-                        @php
-                            $avatarUrl = $achievement->avatar
-                                ? asset('storage/' . $achievement->avatar)
-                                : asset('images/teachers/teacher-1.svg');
-                            $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
-                        @endphp
-                    <div class="col-lg-4 mb-4">
-                        <div class="achievement-card card border-0 shadow-lg h-100">
-                            <div class="card-body text-center p-4">
-                                    <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
-                                        <i class="fas {{ $rankIcon }}"></i>
-                                        <span class="rank-number">{{ $achievement->rank }}</span>
-                                </div>
-                                    <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
-                                    <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
-                                    @if($achievement->class_name)
-                                        <p class="text-muted mb-2">Lớp {{ $achievement->class_name }}</p>
-                                    @endif
-                                <div class="achievement-details mb-3">
-                                        @if(!is_null($achievement->score))
-                                    <div class="detail-item">
-                                        <i class="fas fa-star text-warning me-2"></i>
-                                                <span>Điểm thi: {{ number_format($achievement->score, 1) }}/10</span>
+                <!-- Desktop/Large screens: grid -->
+                <div class="d-none d-md-block">
+                    <div class="row">
+                        @forelse($examAchievements as $achievement)
+                            @php
+                                $avatarUrl = $achievement->avatar
+                                    ? asset('storage/' . $achievement->avatar)
+                                    : asset('images/teachers/teacher-1.svg');
+                                $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
+                            @endphp
+                        <div class="col-lg-4 mb-4">
+                            <div class="achievement-card card border-0 shadow-lg h-100">
+                                <div class="card-body text-center p-4">
+                                        <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
+                                            <i class="fas {{ $rankIcon }}"></i>
+                                            <span class="rank-number">{{ $achievement->rank }}</span>
                                     </div>
+                                        <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
+                                        <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
+                                        @if($achievement->class_name)
+                                            <p class="text-muted mb-2">Lớp {{ $achievement->class_name }}</p>
                                         @endif
-                                    <div class="detail-item">
-                                        <i class="fas fa-clock text-success me-2"></i>
-                                            <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                    <div class="achievement-details mb-3">
+                                            @if(!is_null($achievement->score))
+                                        <div class="detail-item">
+                                            <i class="fas fa-star text-warning me-2"></i>
+                                                    <span>Điểm thi: {{ number_format($achievement->score, 1) }}/10</span>
+                                        </div>
+                                            @endif
+                                        <div class="detail-item">
+                                            <i class="fas fa-clock text-success me-2"></i>
+                                                <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                        </div>
                                     </div>
+                                        <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                                 </div>
-                                    <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
                             </div>
                         </div>
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
+                            </div>
+                        @endforelse
                     </div>
-                    @empty
-                        <div class="col-12">
-                            <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
+                </div>
+
+                <!-- Mobile: 1-card-per-slide carousel -->
+                <div id="achievementsCarousel" class="carousel slide d-block d-md-none" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        @for ($i = 0; $i < $examAchievements->count(); $i++)
+                            <button type="button" data-bs-target="#achievementsCarousel" data-bs-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"></button>
+                        @endfor
+                    </div>
+                    <div class="carousel-inner">
+                        @forelse($examAchievements as $index => $achievement)
+                            @php
+                                $avatarUrl = $achievement->avatar
+                                    ? asset('storage/' . $achievement->avatar)
+                                    : asset('images/teachers/teacher-1.svg');
+                                $rankIcon = $achievement->rank == 1 ? 'fa-crown' : ($achievement->rank == 2 ? 'fa-medal' : ($achievement->rank == 3 ? 'fa-award' : 'fa-star'));
+                            @endphp
+                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                <div class="px-2">
+                                    <div class="achievement-card card border-0 shadow-lg h-100">
+                                        <div class="card-body text-center p-4">
+                                            <div class="achievement-rank rank-{{ $achievement->rank }} mb-3">
+                                                <i class="fas {{ $rankIcon }}"></i>
+                                                <span class="rank-number">{{ $achievement->rank }}</span>
+                                            </div>
+                                            <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
+                                            <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
+                                            @if($achievement->class_name)
+                                                <p class="text-muted mb-2">Lớp {{ $achievement->class_name }}</p>
+                                            @endif
+                                            <div class="achievement-details mb-3">
+                                                @if(!is_null($achievement->score))
+                                                    <div class="detail-item">
+                                                        <i class="fas fa-star text-warning me-2"></i>
+                                                        <span>Điểm thi: {{ number_format($achievement->score, 1) }}/10</span>
+                                                    </div>
+                                                @endif
+                                                <div class="detail-item">
+                                                    <i class="fas fa-clock text-success me-2"></i>
+                                                    <span>{{ optional($achievement->achievement_date)->format('m/Y') }}</span>
+                                                </div>
+                                            </div>
+                                            <span class="badge bg-{{ $achievement->rank == 1 ? 'warning text-dark' : 'light text-primary' }}">{{ $achievement->achievement_title }}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                    @endforelse
+                            </div>
+                        @empty
+                            <div class="carousel-item active">
+                                <div class="px-2">
+                                    <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
+                                </div>
+                            </div>
+                        @endforelse
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#achievementsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#achievementsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
         </div>
 

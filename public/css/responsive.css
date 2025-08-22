@@ -563,10 +563,10 @@
     .hero-slide-image { will-change: transform; }
     
     /* Improve touch targets */
-    .carousel-indicators button {
-        min-width: 44px;
-        min-height: 44px;
-    }
+    /* .carousel-indicators button {
+        /* min-width: 44px;
+        min-height: 44px; */
+    } */
 }
 
 /* High DPI displays */
