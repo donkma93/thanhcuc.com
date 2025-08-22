@@ -37,7 +37,7 @@
     margin: 0 2rem;
     backdrop-filter: none;
     transition: all 0.3s ease;
-    z-index: 5;
+    z-index: 10;
 }
 
 .carousel-control-prev:hover,
@@ -48,19 +48,21 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    width: 32px;
-    height: 32px;
-    filter: brightness(0) invert(1);
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    padding: 8px;
-    transition: all 0.3s ease;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    transition: all 0.25s ease;
 }
 
 .carousel-control-prev:hover .carousel-control-prev-icon,
 .carousel-control-next:hover .carousel-control-next-icon {
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
+    background-color: transparent;
+    transform: scale(1.18);
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.75));
 }
 
 /* Carousel Fade Effect */
