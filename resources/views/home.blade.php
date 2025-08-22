@@ -2966,10 +2966,10 @@ small, .small {
     
     /* Links */
     a:not(.btn) {
-        min-height: 44px !important;
-        display: inline-flex !important;
+        /* min-height: 44px !important;
+        display: inline-flex !important; */
         align-items: center !important;
-        padding: 0.5rem !important;
+        padding: 0.5rem !important; */
         margin: -0.5rem !important;
     }
     
