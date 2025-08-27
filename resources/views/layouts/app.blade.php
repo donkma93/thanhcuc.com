@@ -1587,6 +1587,7 @@
     </main>
 
     @include('partials.footer')
+    @include('partials.course-modal')
 
     <!-- Contact Widget Container - Completely Independent -->
     <div id="contact-widget-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999;">
@@ -1630,6 +1631,8 @@
     <script src="{{ asset('js/advanced-animations.js') }}"></script>
     <!-- Mobile Course Cards Optimization -->
     <script src="{{ asset('js/mobile-courses.js') }}"></script>
+    <!-- Global Course Modal Script -->
+    <script src="{{ asset('js/course-modal.js') }}"></script>
     
     <!-- Animation and Interaction Scripts -->
     <script>
