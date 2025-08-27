@@ -20,6 +20,44 @@
     </div>
 @endsection
 
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const overviewEl = document.querySelector('#setting_about_overview_content');
+    if (overviewEl && !overviewEl.classList.contains('ck-initialized')) {
+        ClassicEditor
+            .create(overviewEl, {
+                toolbar: {
+                    items: [
+                        'heading', '|', 'bold', 'italic', 'underline', 'link', '|',
+                        'bulletedList', 'numberedList', 'blockQuote', '|',
+                        'undo', 'redo'
+                    ]
+                },
+                link: {
+                    decorators: {
+                        addTargetToExternalLinks: {
+                            mode: 'automatic',
+                            callback: url => /^(https?:)?\/\//.test(url),
+                            attributes: {
+                                target: '_blank', rel: 'noopener noreferrer'
+                            }
+                        }
+                    }
+                }
+            })
+            .then(editor => {
+                overviewEl.classList.add('ck-initialized');
+            })
+            .catch(error => {
+                console.error('CKEditor init failed:', error);
+            });
+    }
+});
+</script>
+@endpush
+
 @section('content')
     @if(session('image_updated'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
