@@ -1493,6 +1493,22 @@
         .container, .container-fluid {
             opacity: 1;
         }
+
+        /* Mobile navbar menu: left-align items when opened */
+        @media (max-width: 991.98px) {
+            .navbar .navbar-collapse .navbar-nav {
+                align-items: flex-start !important;
+            }
+            .navbar-nav .nav-link {
+                justify-content: flex-start !important;
+                text-align: left !important;
+                width: 100%;
+            }
+            .navbar-nav {
+                margin-left: 0 !important;
+                margin-right: auto !important;
+            }
+        }
     </style>
     
     @stack('styles')
