@@ -1609,8 +1609,8 @@
     <div id="contact-widget-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999;">
         <!-- Contact Widget - Always Visible -->
         <div class="contact-widget">
-        @if(isset($settings['facebook_url']) && $settings['facebook_url'])
-            <a href="{{ $settings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
+        @if(isset($footerSettings['facebook_url']) && $footerSettings['facebook_url'])
+            <a href="{{ $footerSettings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
                 <i class="fab fa-facebook-f"></i>
             </a>
         @else
@@ -1619,9 +1619,15 @@
             </a>
         @endif
         
-        @if(isset($settings['zalo_url']) && $settings['zalo_url'])
-            <a href="{{ $settings['zalo_url'] }}" target="_blank" class="contact-btn zalo" title="Zalo">
+        @php
+            $widgetPhone = $footerSettings['company_phone'] ?? null;
+            $widgetPhoneDisplay = $footerSettings['company_phone_display'] ?? $widgetPhone;
+            $zaloHref = $footerSettings['zalo_url'] ?? ($widgetPhone ? 'https://zalo.me/' . preg_replace('/\D+/', '', $widgetPhone) : null);
+        @endphp
+        @if($zaloHref)
+            <a href="{{ $zaloHref }}" target="_blank" class="contact-btn zalo" title="Zalo{{ $widgetPhoneDisplay ? (': ' . $widgetPhoneDisplay) : '' }}">
                 <i class="fas fa-comments"></i>
+                <span class="visually-hidden">Zalo {{ $widgetPhoneDisplay }}</span>
             </a>
         @else
             <a href="https://zalo.me" target="_blank" class="contact-btn zalo" title="Zalo">
@@ -1629,8 +1635,12 @@
             </a>
         @endif
         
-        @if(isset($settings['phone']) && $settings['phone'])
-            <a href="tel:{{ $settings['phone'] }}" class="contact-btn phone" title="Gọi điện: {{ $settings['phone'] }}">
+        @php 
+            $widgetPhone = $footerSettings['company_phone'] ?? null;
+            $widgetPhoneDisplay = $footerSettings['company_phone_display'] ?? $widgetPhone;
+        @endphp
+        @if($widgetPhone)
+            <a href="tel:{{ $widgetPhone }}" class="contact-btn phone" title="Gọi điện: {{ $widgetPhone }}">
                 <i class="fas fa-phone"></i>
             </a>
         @else
