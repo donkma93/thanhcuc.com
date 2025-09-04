@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tin Tức - Trung Tâm Tiếng Đức Thanh Cúc')
+@section('title', 'Tin tức')
 @section('description', 'Cập nhật tin tức mới nhất về trung tâm tiếng Đức Thanh Cúc, lịch khai giảng, lịch thi và các hoạt động của trung tâm.')
 
 @section('content')

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Học Thử Miễn Phí - Trung Tâm Tiếng Đức Thanh Cúc')
+@section('title', 'Học thử miễn phí')
 
 @section('content')
 <!-- Hero Section -->

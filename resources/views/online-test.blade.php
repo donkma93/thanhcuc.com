@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kiểm Tra Trình Độ Online - Trung Tâm Tiếng Đức Thanh Cúc')
+@section('title', 'Kiểm tra trình độ online')
 
 @section('content')
 <!-- Hero Section -->

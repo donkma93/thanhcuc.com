@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $teacher->name . ' - Giảng viên tiếng Đức')
+@section('title', $teacher->name)
 
 @section('content')
 <div class="container-fluid p-0">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Trung Tâm Tiếng Đức Thanh Cúc - Học Tiếng Đức & Luyện Thi Chứng Chỉ')</title>
+    <title>@yield('title', 'Trang chủ')</title>
     <meta name="description" content="@yield('description', 'Trung tâm tiếng Đức Thanh Cúc - Học tiếng Đức chuyên nghiệp, luyện thi chứng chỉ Goethe, TestDaF. Lịch khai giảng, lịch thi và kết quả học viên.')">
     <meta name="keywords" content="học tiếng Đức, luyện thi Goethe, TestDaF, chứng chỉ tiếng Đức, trung tâm tiếng Đức, lịch khai giảng, lịch thi">
     
@@ -1493,22 +1493,6 @@
         .container, .container-fluid {
             opacity: 1;
         }
-
-        /* Mobile navbar menu: left-align items when opened */
-        @media (max-width: 991.98px) {
-            .navbar .navbar-collapse .navbar-nav {
-                align-items: flex-start !important;
-            }
-            .navbar-nav .nav-link {
-                justify-content: flex-start !important;
-                text-align: left !important;
-                width: 100%;
-            }
-            .navbar-nav {
-                margin-left: 0 !important;
-                margin-right: auto !important;
-            }
-        }
     </style>
     
     @stack('styles')
@@ -1603,14 +1587,13 @@
     </main>
 
     @include('partials.footer')
-    @include('partials.course-modal')
 
     <!-- Contact Widget Container - Completely Independent -->
     <div id="contact-widget-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999;">
         <!-- Contact Widget - Always Visible -->
         <div class="contact-widget">
-        @if(isset($footerSettings['facebook_url']) && $footerSettings['facebook_url'])
-            <a href="{{ $footerSettings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
+        @if(isset($settings['facebook_url']) && $settings['facebook_url'])
+            <a href="{{ $settings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
                 <i class="fab fa-facebook-f"></i>
             </a>
         @else
@@ -1619,15 +1602,9 @@
             </a>
         @endif
         
-        @php
-            $widgetPhone = $footerSettings['company_phone'] ?? null;
-            $widgetPhoneDisplay = $footerSettings['company_phone_display'] ?? $widgetPhone;
-            $zaloHref = $footerSettings['zalo_url'] ?? ($widgetPhone ? 'https://zalo.me/' . preg_replace('/\D+/', '', $widgetPhone) : null);
-        @endphp
-        @if($zaloHref)
-            <a href="{{ $zaloHref }}" target="_blank" class="contact-btn zalo" title="Zalo{{ $widgetPhoneDisplay ? (': ' . $widgetPhoneDisplay) : '' }}">
+        @if(isset($settings['zalo_url']) && $settings['zalo_url'])
+            <a href="{{ $settings['zalo_url'] }}" target="_blank" class="contact-btn zalo" title="Zalo">
                 <i class="fas fa-comments"></i>
-                <span class="visually-hidden">Zalo {{ $widgetPhoneDisplay }}</span>
             </a>
         @else
             <a href="https://zalo.me" target="_blank" class="contact-btn zalo" title="Zalo">
@@ -1635,12 +1612,8 @@
             </a>
         @endif
         
-        @php 
-            $widgetPhone = $footerSettings['company_phone'] ?? null;
-            $widgetPhoneDisplay = $footerSettings['company_phone_display'] ?? $widgetPhone;
-        @endphp
-        @if($widgetPhone)
-            <a href="tel:{{ $widgetPhone }}" class="contact-btn phone" title="Gọi điện: {{ $widgetPhone }}">
+        @if(isset($settings['phone']) && $settings['phone'])
+            <a href="tel:{{ $settings['phone'] }}" class="contact-btn phone" title="Gọi điện: {{ $settings['phone'] }}">
                 <i class="fas fa-phone"></i>
             </a>
         @else
@@ -1657,8 +1630,6 @@
     <script src="{{ asset('js/advanced-animations.js') }}"></script>
     <!-- Mobile Course Cards Optimization -->
     <script src="{{ asset('js/mobile-courses.js') }}"></script>
-    <!-- Global Course Modal Script -->
-    <script src="{{ asset('js/course-modal.js') }}"></script>
     
     <!-- Animation and Interaction Scripts -->
     <script>

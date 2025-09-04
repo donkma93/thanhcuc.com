@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Trung Tâm Tiếng Đức Thanh Cúc - Học Tiếng Đức & Luyện Thi Chứng Chỉ')
+@section('title', 'Trang chủ')
 
 @section('content')
 <!-- Hero Slider Section -->
@@ -433,7 +433,150 @@
 }
 </style>
 
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="courseModalLabel">Chi tiết khóa học</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="courseModalBody">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <a href="{{ route('schedule') }}" class="btn btn-primary" id="scheduleBtn">
+                    <i class="fas fa-calendar-alt me-1"></i>Đăng ký học thử
+                </a>
+                <a href="{{ route('contact') }}" class="btn btn-primary d-none" id="contactBtn" onclick="goToContactWithCourse()">
+                    <i class="fas fa-phone me-1"></i>Liên Hệ Ngay
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+function openCourseModal(courseId, courseName = null, fromFooter = false) {
+    // Show loading
+    document.getElementById('courseModalBody').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tải...</p></div>';
+    
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('courseModal'));
+    modal.show();
+    
+    // Hiển thị/ẩn nút tương ứng
+    const scheduleBtn = document.getElementById('scheduleBtn');
+    const contactBtn = document.getElementById('contactBtn');
+    
+    if (fromFooter) {
+        scheduleBtn.classList.add('d-none');
+        contactBtn.classList.remove('d-none');
+        
+        // Lưu thông tin khóa học để sử dụng khi chuyển đến trang liên hệ
+        window.currentCourseInfo = {
+            id: courseId,
+            name: courseName
+        };
+    } else {
+        scheduleBtn.classList.remove('d-none');
+        contactBtn.classList.add('d-none');
+        window.currentCourseInfo = null;
+    }
+    
+    // Load course data via AJAX
+    fetch(`/api/courses/${courseId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const course = data.course;
+                document.getElementById('courseModalLabel').textContent = course.name;
+                document.getElementById('courseModalBody').innerHTML = `
+                    <div class="row">
+                        <div class="col-md-4">
+                            ${course.image ? 
+                                `<img src="/storage/${course.image}" alt="${course.name}" class="img-fluid rounded">` :
+                                `<div class="bg-gradient rounded d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #015862 0%, #3EB850 100%);">
+                                    <i class="fas fa-graduation-cap fa-3x text-white opacity-75"></i>
+                                </div>`
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="text-primary mb-3">${course.name}</h4>
+                            ${course.short_description ? `<p class="text-muted mb-3">${course.short_description}</p>` : ''}
+                            
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-layer-group text-primary me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Trình độ</small>
+                                            <strong>${course.level || course.category}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-clock text-info me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Thời lượng</small>
+                                            <strong>${course.duration_hours}h</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${course.description ? `
+                                <div class="mb-3">
+                                    <h6 class="fw-bold">Mô tả chi tiết:</h6>
+                                    <div class="text-muted">${course.description}</div>
+                                </div>
+                            ` : ''}
+                            
+                            ${course.features && course.features.length > 0 ? `
+                                <div class="mb-3">
+                                    <h6 class="fw-bold">Đặc điểm nổi bật:</h6>
+                                    <div class="row">
+                                        ${course.features.map(feature => `
+                                            <div class="col-6 mb-1">
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="fas fa-check text-success me-1"></i>${feature}
+                                                </span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${course.target_score ? `
+                                <div class="mb-3">
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-target me-1"></i>Mục tiêu: ${course.target_score}
+                                    </span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Không thể tải thông tin khóa học</p></div>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Đã xảy ra lỗi khi tải dữ liệu</p></div>';
+        });
+}
+
+// Hàm chuyển đến trang liên hệ với thông tin khóa học
+function goToContactWithCourse() {
+    if (window.currentCourseInfo) {
+        localStorage.setItem('selectedCourseId', window.currentCourseInfo.id);
+        localStorage.setItem('selectedCourseName', window.currentCourseInfo.name);
+    }
+    window.location.href = '{{ route("contact") }}';
+}
+</script>
 
 <!-- Teachers Section -->
 <section class="py-5 teachers-section position-relative overflow-hidden">
@@ -907,68 +1050,69 @@
             <p class="lead text-muted animate-on-scroll animate-delay-1">Những chia sẻ chân thực từ các bạn đã thành công du học nghề Đức</p>
         </div>
         
-        <!-- Testimonials Carousel -->
+        <!-- Testimonials Carousel (4 per slide like Teachers) -->
         <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
             <div class="carousel-indicators">
-                @php $slides = $testimonials->chunk(3); @endphp
-                @foreach($slides as $index => $chunk)
+                @php $testimonialSlides = $testimonials->chunk(4); @endphp
+                @foreach($testimonialSlides as $index => $chunk)
                     <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
                 @endforeach
             </div>
             
             <div class="carousel-inner">
-                @php $slides = $testimonials->chunk(3); @endphp
-                @forelse($slides as $slideIndex => $chunk)
+                @php $testimonialSlides = $testimonials->chunk(4); @endphp
+                @forelse($testimonialSlides as $slideIndex => $chunk)
                     <div class="carousel-item {{ $slideIndex === 0 ? 'active' : '' }}">
-                    <div class="row">
+                        <div class="row">
                             @foreach($chunk as $testimonial)
-                        <div class="col-lg-4 mb-4">
-                            <div class="card border-0 shadow testimonial-card h-100">
-                                <div class="card-body p-4 text-center">
+                                <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                                    <div class="card border-0 shadow testimonial-card h-100">
+                                        <div class="card-body p-4 text-center">
                                             <img src="{{ $testimonial->avatar_url }}" alt="{{ $testimonial->name }}" class="rounded-circle testimonial-avatar mb-3" width="80" height="80">
-                                    <div class="mb-3">
-                                        <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
-                                    </div>
+                                            <div class="mb-3">
+                                                <i class="fas fa-quote-left text-primary opacity-50" style="font-size: 1.5rem;"></i>
+                                            </div>
                                             <p class="text-muted mb-3 fst-italic">"{{ $testimonial->content }}"</p>
                                             <h6 class="fw-bold text-primary mb-1">{{ $testimonial->name }}</h6>
                                             <small class="text-muted">{{ $testimonial->current_job }}{{ $testimonial->location ? ' - ' . $testimonial->location : '' }}</small>
-                                    <div class="mt-2">
+                                            <div class="mt-2">
                                                 @if($testimonial->program)
                                                     <span class="badge bg-info">{{ $testimonial->program }}</span>
                                                 @endif
                                                 @if($testimonial->company)
                                                     <span class="badge bg-success ms-1">{{ $testimonial->company }}</span>
                                                 @endif
-                                    </div>
-                                    <div class="text-warning mt-2">
+                                            </div>
+                                            <div class="text-warning mt-2">
                                                 {!! $testimonial->stars !!}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                             @endforeach
-                                    </div>
-                                    </div>
+                        </div>
+                    </div>
                 @empty
                     <div class="carousel-item active">
-                    <div class="row">
+                        <div class="row">
                             <div class="col-12">
                                 <div class="alert alert-light text-center mb-0">Chưa có nhận xét học viên nào được hiển thị.</div>
-                                    </div>
-                                    </div>
-                                    </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforelse
             </div>
             
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            @if($testimonials->count() > 4)
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            @endif
         </div>
     </div>
 </section>

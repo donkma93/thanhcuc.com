@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -14,17 +14,19 @@ return new class extends Migration
      */
     public function up()
     {
-        // Resolve the actual foreign key name (if any) before altering the table
-        $constraintName = DB::table('information_schema.KEY_COLUMN_USAGE')
-            ->where('TABLE_SCHEMA', DB::getDatabaseName())
-            ->where('TABLE_NAME', 'news')
-            ->where('COLUMN_NAME', 'author_id')
-            ->whereNotNull('REFERENCED_TABLE_NAME')
-            ->value('CONSTRAINT_NAME');
-
-        if ($constraintName) {
-            Schema::table('news', function (Blueprint $table) use ($constraintName) {
-                $table->dropForeign($constraintName);
+        // Check if foreign key exists before dropping
+        $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_SCHEMA = DATABASE() 
+            AND TABLE_NAME = 'news' 
+            AND COLUMN_NAME = 'author_id' 
+            AND CONSTRAINT_NAME != 'PRIMARY'
+        ");
+        
+        if (!empty($foreignKeys)) {
+            Schema::table('news', function (Blueprint $table) {
+                $table->dropForeign(['author_id']);
             });
         }
     }
@@ -36,18 +38,9 @@ return new class extends Migration
      */
     public function down()
     {
-        // Only re-add the foreign key if it does not already exist
-        $constraintName = DB::table('information_schema.KEY_COLUMN_USAGE')
-            ->where('TABLE_SCHEMA', DB::getDatabaseName())
-            ->where('TABLE_NAME', 'news')
-            ->where('COLUMN_NAME', 'author_id')
-            ->whereNotNull('REFERENCED_TABLE_NAME')
-            ->value('CONSTRAINT_NAME');
-
-        if (!$constraintName && Schema::hasTable('news') && Schema::hasTable('users')) {
-            Schema::table('news', function (Blueprint $table) {
-                $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
-            });
-        }
+        Schema::table('news', function (Blueprint $table) {
+            // Re-add the foreign key constraint
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
+        });
     }
 };

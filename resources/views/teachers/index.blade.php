@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Đội Ngũ Giảng Viên - Trung Tâm Tiếng Đức Thanh Cúc')
+@section('title', 'Đội ngũ giảng viên')
 
 @section('content')
 <!-- Page Header -->

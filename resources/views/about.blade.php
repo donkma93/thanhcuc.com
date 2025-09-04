@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Về Chúng Tôi - Trung Tâm Anh Ngữ SEC')
+@section('title', 'Về chúng tôi')
 
 @push('styles')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' - Trung Tâm Tiếng Đức Thanh Cúc')
+@section('title', $article->title)
 @section('description', $article->excerpt ?: 'Đọc tin tức chi tiết từ trung tâm tiếng Đức Thanh Cúc.')
 
 @section('content')
