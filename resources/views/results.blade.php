@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kết quả học viên')
+@section('title', __('general.student_results'))
 
 @section('content')
 
@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">KẾT QUẢ HỌC VIÊN</h1>
-                <p class="lead">Thành tích và phản hồi từ học viên Thanh Cúc</p>
+                <h1 class="display-4 fw-bold mb-3">{{ __('general.student_results_title') }}</h1>
+                <p class="lead">{{ __('general.achievements_feedback_thanh_cuc') }}</p>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
         @if($scores->count() > 0)
         <div class="mb-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bold text-primary mb-3">CHỨNG CHỈ B1 CỦA HỌC VIÊN THANH CÚC</h2>
+                <h2 class="fw-bold text-primary mb-3">{{ __('general.b1_certificates_thanh_cuc') }}</h2>
                 <p class="text-muted">Những tấm bằng B1 có điểm số ấn tượng trong thời gian qua của Thanh Cúc</p>
                             </div>
             
@@ -72,8 +72,8 @@
         <div class="mb-5 bg-light py-5">
             <div class="container">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bold text-primary mb-3">PHẢN HỒI HỌC VIÊN</h2>
-                    <p class="text-muted">Những chia sẻ chân thực và đánh giá tích cực từ học viên</p>
+                    <h2 class="fw-bold text-primary mb-3">{{ __('general.student_feedback') }}</h2>
+                    <p class="text-muted">{{ __('general.authentic_sharing_positive_reviews') }}</p>
                             </div>
                 
                 <!-- Feedbacks Grid -->
@@ -127,7 +127,7 @@
                         <h2 class="display-5 fw-bold text-dark mb-3">
                             KHÓA HỌC <span class="text-primary">TIẾNG ĐỨC</span> CHUYÊN NGHIỆP
                         </h2>
-                        <p class="lead text-muted">Đăng ký ngay để nhận ưu đãi đặc biệt và tư vấn miễn phí</p>
+                        <p class="lead text-muted">{{ __('general.register_special_offer') }}</p>
                     </div>
                 </div>
 
@@ -139,7 +139,7 @@
                                 <i class="fas fa-gift text-primary me-2"></i>
                                 ƯU ĐÃI ĐẶC BIỆT KHÓA HỌC TIẾNG ĐỨC
                             </h3>
-                            <p class="text-muted">Chỉ áp dụng cho 50 học viên đăng ký đầu tiên trong tháng này!</p>
+                            <p class="text-muted">{{ __('general.limited_first_50') }}</p>
                         </div>
 
                         @if($courseOffers->count() > 0)
@@ -200,7 +200,7 @@
                                             <i class="fas fa-chalkboard-teacher"></i>
                                         </div>
                                         <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
-                                        <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
+                                        <p class="text-muted mb-0">{{ __('general.experience_teaching_method') }}</p>
                                         <div class="offer-badge">
                                             <span class="badge bg-info">Không mất phí</span>
                                         </div>
@@ -212,7 +212,7 @@
                                         <div class="offer-icon">
                                             <i class="fas fa-certificate"></i>
                                         </div>
-                                        <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
+                                        <h5 class="fw-bold mb-2 text-warning">{{ __('general.output_commitment_a2_b1') }}</h5>
                                         <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
                                         <div class="offer-badge">
                                             <span class="badge bg-warning">Bảo đảm</span>
@@ -227,7 +227,7 @@
                                 <i class="fas fa-clock text-warning me-2"></i>
                                 <div>
                                     <strong class="text-warning">Ưu đãi có hạn!</strong>
-                                    <span class="text-muted ms-2">Chỉ còn <strong>7 ngày</strong> để nhận ưu đãi này</span>
+                                    <span class="text-muted ms-2">{!! __('general.only_days_left_offer', ['days' => '7']) !!}</span>
                                 </div>
                             </div>
                         </div>
@@ -240,8 +240,8 @@
                                 <div class="form-icon mb-3">
                                     <i class="fas fa-language"></i>
                                 </div>
-                                <h3 class="fw-bold text-white mb-2">ĐĂNG KÝ KHÓA HỌC TIẾNG ĐỨC</h3>
-                                <p class="text-white-50 mb-0">Nhận tư vấn miễn phí và ưu đãi đặc biệt</p>
+                                <h3 class="fw-bold text-white mb-2">{{ __('general.register_german_course_title') }}</h3>
+                                <p class="text-white-50 mb-0">{{ __('general.receive_free_consultation_special_offer') }}</p>
                             </div>
 
                             @if(session('success'))
@@ -263,39 +263,39 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('contact.submit') }}" method="POST" class="consultation-form">
+                            <form action="{{ route('contact.submit', ['locale' => app()->getLocale()]) }}" method="POST" class="consultation-form">
                                 @csrf
                                 <div class="mb-3">
-                                    <input type="text" class="form-control form-control-lg" name="name" placeholder="Họ và tên của bạn" required>
+                                    <input type="text" class="form-control form-control-lg" name="name" placeholder="{{ __('general.student_name_placeholder') }}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="tel" class="form-control form-control-lg" name="phone" placeholder="Số điện thoại" required>
+                                    <input type="tel" class="form-control form-control-lg" name="phone" placeholder="{{ __('general.phone_placeholder') }}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="email" class="form-control form-control-lg" name="email" placeholder="Địa chỉ email">
+                                    <input type="email" class="form-control form-control-lg" name="email" placeholder="{{ __('general.email_placeholder') }}">
                                 </div>
                                 <div class="mb-3">
                                     <select class="form-select form-select-lg" name="course" required>
-                                        <option value="">Chọn khóa học Tiếng Đức</option>
+                                        <option value="">{{ __('general.select_german_course') }}</option>
                                         <option value="Tiếng Đức A1 - Cơ bản">Tiếng Đức A1 - Cơ bản</option>
                                         <option value="Tiếng Đức A2 - Sơ cấp">Tiếng Đức A2 - Sơ cấp</option>
                                         <option value="Tiếng Đức B1 - Trung cấp">Tiếng Đức B1 - Trung cấp</option>
                                         <option value="Tiếng Đức B2 - Trung cấp cao">Tiếng Đức B2 - Trung cấp cao</option>
                                         <option value="Tiếng Đức giao tiếp">Tiếng Đức giao tiếp</option>
-                                        <option value="Tư vấn chọn khóa phù hợp">Tư vấn chọn khóa phù hợp</option>
+                                        <option value="Tư vấn chọn khóa phù hợp">{{ __('general.consultation_suitable_course') }}</option>
                                     </select>
                                 </div>
                                 
                                 
                                 
                                 <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold py-3">
-                                    <i class="fas fa-paper-plane me-2"></i>ĐĂNG KÝ NGAY
+                                    <i class="fas fa-paper-plane me-2"></i>{{ __('general.register_now') }}
                                 </button>
                                 
                                 <div class="text-center mt-3">
                                     <small class="text-white-50">
                                         <i class="fas fa-shield-alt me-1"></i>
-                                        Thông tin của bạn được bảo mật tuyệt đối
+                                        {{ __('general.info_security_guarantee') }}
                                     </small>
                                 </div>
                             </form>
@@ -356,10 +356,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="{{ route('contact') }}" class="btn btn-primary" id="contactBtn">
-                    <i class="fas fa-envelope me-1"></i>Liên Hệ Ngay
+                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary" id="contactBtn">
+                    <i class="fas fa-envelope me-1"></i>{{ __('general.contact_now') }}
                 </a>
-                <a href="{{ route('trial') }}" class="btn btn-primary" id="trialBtn">
+                <a href="{{ route('trial', ['locale' => app()->getLocale()]) }}" class="btn btn-primary" id="trialBtn">
                     <i class="fas fa-calendar-check me-1"></i>Đăng ký học thử
                 </a>
             </div>
@@ -875,7 +875,7 @@ function updateNavigationButtons(sliderId) {
     // Build description with additional info
     let description = currentImage.description || '';
     if (currentImage.student_name) {
-        description += (description ? ' | ' : '') + 'Học viên: ' + currentImage.student_name;
+        description += (description ? ' | ' : '') + '{{ __('general.student_description') }}' + currentImage.student_name;
     }
     if (currentImage.level) {
         description += (description ? ' | ' : '') + 'Cấp độ: ' + currentImage.level;
@@ -884,7 +884,7 @@ function updateNavigationButtons(sliderId) {
         description += (description ? ' | ' : '') + 'Điểm: ' + currentImage.score;
     }
     if (currentImage.certificate_type) {
-        description += (description ? ' | ' : '') + 'Chứng chỉ: ' + currentImage.certificate_type;
+        description += (description ? ' | ' : '') + '{{ __('general.certificate_description') }}' + currentImage.certificate_type;
     }
     
     document.getElementById('galleryImageDescription').textContent = description;
@@ -892,7 +892,7 @@ function updateNavigationButtons(sliderId) {
     document.getElementById('totalImages').textContent = data.length;
     
     // Update modal title
-    const modalTitle = currentGallery === 'scores' ? 'CHỨNG CHỈ B1 CỦA HỌC VIÊN THANH CÚC' : 'PHẢN HỒI HỌC VIÊN';
+    const modalTitle = currentGallery === 'scores' ? '{{ __('general.modal_title_certificates') }}' : '{{ __('general.modal_title_feedback') }}';
     document.getElementById('galleryModalTitle').textContent = modalTitle;
     }
 
@@ -1025,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="col-md-8">
                                 <h4 class="text-primary mb-3">${course.name}</h4>
-                                <p class="text-muted mb-3">${course.short_description || course.description || 'Khóa học chất lượng cao'}</p>
+                                <p class="text-muted mb-3">${course.short_description || course.description || '{{ __('general.high_quality_course') }}'}</p>
                                 
                                 ${course.duration ? `
                                     <div class="row mb-2">

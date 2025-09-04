@@ -417,7 +417,7 @@
                 <p class="mb-0">Liên hệ ngay với chúng tôi để được tư vấn và hỗ trợ thủ tục đăng ký thi!</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="{{ route('contact') }}" class="btn btn-light btn-lg me-3">Liên Hệ Ngay</a>
+                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-light btn-lg me-3">Liên Hệ Ngay</a>
                 <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
                     <i class="fas fa-phone me-2"></i>Hotline
                 </a>

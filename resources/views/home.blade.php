@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Trang chủ')
+@section('title', __('general.page_title_home'))
 
 @section('content')
 <!-- Hero Slider Section -->
@@ -83,11 +83,11 @@
             @if($sliders->count() > 1)
                 <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <span class="visually-hidden">{{ __('general.previous') }}</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                    <span class="visually-hidden">{{ __('general.next') }}</span>
                 </button>
             @endif
 
@@ -106,14 +106,14 @@
                                     <div class="row">
                                         <div class="col-lg-8 col-xl-6">
                                             <h1 class="hero-title animate-fade-in-up">
-                                                Trung Tâm Tiếng Đức Thanh Cúc
+                                                {{ __('general.company_name') }}
                                             </h1>
                                             <p class="hero-description animate-fade-in-up animate-delay-1">
-                                                Nơi ươm mầm tài năng, kiến tạo tương lai cho học viên Việt Nam
+                                                {{ __('general.hero_fallback_description') }}
                                             </p>
                                             <div class="hero-buttons animate-fade-in-up animate-delay-2">
-                                                <a href="{{ route('contact') }}" class="btn btn-primary btn-lg hero-btn">
-                                                    Học Thử Miễn Phí
+                                                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary btn-lg hero-btn">
+                                                    {{ __('general.trial') }}
                                                 </a>
                                                 <a href="tel:0975186230" class="btn btn-outline-light btn-lg hero-btn ms-3">
                                                     0975.186.230
@@ -159,17 +159,17 @@
             <div class="col-lg-6">
                 <div class="about-content">
                     <h2 class="section-title mb-4">
-                        {{ $overview->title }}
+                        {{ $overview->getLocalized('title') }}
                     </h2>
                     
                     <div class="about-text">
                         <p class="mb-3">
                             <i class="fas fa-bolt text-warning me-2"></i>
-                            {!! $overview->paragraph_1 !!}
+                            {!! $overview->getLocalized('paragraph_1') !!}
                         </p>
                         <p class="mb-4">
                             <i class="fas fa-bolt text-warning me-2"></i>
-                            {!! $overview->paragraph_2 !!}
+                            {!! $overview->getLocalized('paragraph_2') !!}
                         </p>
                     </div>
                     
@@ -177,17 +177,17 @@
                     <div class="action-buttons">
                         @if($overview->button_1_text && $overview->button_1_url)
                             <a href="{{ $overview->button_1_url }}" class="btn btn-secondary me-2 mb-2">
-                                <i class="fas fa-arrow-right me-1"></i>{{ $overview->button_1_text }}
+                                <i class="fas fa-arrow-right me-1"></i>{{ $overview->getLocalized('button_1_text') }}
                             </a>
                         @endif
                         @if($overview->button_2_text && $overview->button_2_url)
                             <a href="{{ $overview->button_2_url }}" class="btn btn-success me-2 mb-2">
-                                <i class="fas fa-phone me-1"></i>{{ $overview->button_2_text }}
+                                <i class="fas fa-phone me-1"></i>{{ $overview->getLocalized('button_2_text') }}
                             </a>
                         @endif
                         @if($overview->button_3_text && $overview->button_3_url)
                             <a href="{{ $overview->button_3_url }}" class="btn btn-primary mb-2">
-                                <i class="fas fa-arrow-right me-1"></i>{{ $overview->button_3_text }}
+                                <i class="fas fa-arrow-right me-1"></i>{{ $overview->getLocalized('button_3_text') }}
                             </a>
                         @endif
                     </div>
@@ -202,8 +202,8 @@
 <section class="py-5 d-none d-md-block">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 1px;">TẠI SAO CHỌN THANH CÚC?</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những ưu điểm vượt trội giúp bạn học tiếng Đức hiệu quả</p>
+            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 1px;">{{ __('general.learn_more') }}</h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">{{ __('general.page_description_home') }}</p>
         </div>
         
         @if(isset($reasons) && $reasons->count() > 0)
@@ -229,8 +229,8 @@
                                         <i class="fas fa-check-circle fa-3x text-primary"></i>
                                     @endif
                                 </div>
-                                <h5 class="fw-bold mb-3">{{ $reason->title }}</h5>
-                                <p class="text-muted">{{ $reason->description }}</p>
+                                <h5 class="fw-bold mb-3">{{ $reason->getLocalized('title') }}</h5>
+                                <p class="text-muted">{{ $reason->getLocalized('description') }}</p>
                             </div>
                         </div>
                     </div>
@@ -244,8 +244,8 @@
                             <div class="mb-3">
                                 <i class="fas fa-users fa-3x text-primary"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">Giảng Viên Bản Ngữ</h5>
-                            <p class="text-muted">Đội ngũ giảng viên người Đức với kinh nghiệm giảng dạy chuyên nghiệp</p>
+                            <h5 class="fw-bold mb-3">{{ __('general.native_teachers_title') }}</h5>
+                            <p class="text-muted">{{ __('general.native_teachers_description') }}</p>
                         </div>
                     </div>
                 </div>
@@ -256,8 +256,8 @@
                             <div class="mb-3">
                                 <i class="fas fa-certificate fa-3x text-secondary"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">Chứng Chỉ Quốc Tế</h5>
-                            <p class="text-muted">Luyện thi các chứng chỉ Goethe, TestDaF, DSH với tỷ lệ đậu cao</p>
+                            <h5 class="fw-bold mb-3">{{ __('general.international_certificates_title') }}</h5>
+                            <p class="text-muted">{{ __('general.international_certificates_description') }}</p>
                         </div>
                     </div>
                 </div>
@@ -268,8 +268,8 @@
                             <div class="mb-3">
                                 <i class="fas fa-laptop fa-3x text-accent-color"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">Học Online & Offline</h5>
-                            <p class="text-muted">Linh hoạt hình thức học tập phù hợp với lịch trình của bạn</p>
+                            <h5 class="fw-bold mb-3">{{ __('general.online_offline_learning_title') }}</h5>
+                            <p class="text-muted">{{ __('general.online_offline_learning_description') }}</p>
                         </div>
                     </div>
                 </div>
@@ -280,8 +280,8 @@
                             <div class="mb-3">
                                 <i class="fas fa-clock fa-3x text-success"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">Lịch Học Linh Hoạt</h5>
-                            <p class="text-muted">Nhiều khung giờ học từ sáng đến tối, phù hợp với mọi đối tượng</p>
+                            <h5 class="fw-bold mb-3">{{ __('general.flexible_schedule_title') }}</h5>
+                            <p class="text-muted">{{ __('general.flexible_schedule_description') }}</p>
                         </div>
                     </div>
                 </div>
@@ -292,8 +292,8 @@
                             <div class="mb-3">
                                 <i class="fas fa-handshake fa-3x text-primary"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">Hỗ Trợ Du Học</h5>
-                            <p class="text-muted">Tư vấn và hỗ trợ thủ tục du học Đức miễn phí cho học viên</p>
+                            <h5 class="fw-bold mb-3">{{ __('general.study_abroad_support_title') }}</h5>
+                            <p class="text-muted">{{ __('general.study_abroad_support_description') }}</p>
                         </div>
                     </div>
                 </div>
@@ -304,8 +304,8 @@
                             <div class="mb-3">
                                 <i class="fas fa-star fa-3x text-secondary"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">Chất Lượng Đảm Bảo</h5>
-                            <p class="text-muted">Cam kết chất lượng với chính sách hoàn tiền nếu không hài lòng</p>
+                            <h5 class="fw-bold mb-3">{{ __('general.quality_guarantee_title') }}</h5>
+                            <p class="text-muted">{{ __('general.quality_guarantee_description') }}</p>
                         </div>
                     </div>
                 </div>
@@ -320,8 +320,8 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll">KHÓA HỌC NỔI BẬT</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Khám phá các khóa học tiếng Đức chất lượng cao tại Thanh Cúc với phương pháp giảng dạy hiện đại</p>
+            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll">{{ __('general.courses') ?? 'Courses' }}</h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">{{ __('general.page_description_home') }}</p>
         </div>
         
         @if($featuredCourses->count() > 0)
@@ -358,7 +358,7 @@
                                             <div class="text-center mt-2">
                                                 <button class="btn btn-outline-warning btn-sm sec-view-more" 
                                                         onclick="openCourseModal({{ $course->id }}, '{{ $course->name }}', false)">
-                                                    XEM THÊM <i class="fas fa-chevron-right ms-1"></i>
+                                                    {{ __('general.view_details') }} <i class="fas fa-chevron-right ms-1"></i>
                                                 </button>
                                                                 </div>
                                                             </div>
@@ -372,11 +372,11 @@
                     @if($featuredCourses->count() > 4)
                         <button class="carousel-control-prev" type="button" data-bs-target="#coursesSlider" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                            <span class="visually-hidden">{{ __('general.previous') }}</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#coursesSlider" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
+                            <span class="visually-hidden">{{ __('general.next') }}</span>
                         </button>
                     @endif
                 </div>
@@ -385,8 +385,8 @@
             <!-- Empty State -->
             <div class="text-center py-5">
                 <i class="fas fa-book fa-4x text-muted mb-3"></i>
-                <h4 class="text-muted">Chưa có khóa học nào</h4>
-                <p class="text-muted">Các khóa học sẽ được cập nhật sớm</p>
+                <h4 class="text-muted">{{ __('general.no_courses') }}</h4>
+                <p class="text-muted">{{ __('general.please_try_again') }}</p>
             </div>
         @endif
     </div>
@@ -437,19 +437,19 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="courseModalLabel">Chi tiết khóa học</h5>
+                <h5 class="modal-title" id="courseModalLabel">{{ __('general.view_details') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="courseModalBody">
                 <!-- Content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="{{ route('schedule') }}" class="btn btn-primary" id="scheduleBtn">
-                    <i class="fas fa-calendar-alt me-1"></i>Đăng ký học thử
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('general.cancel') }}</button>
+                <a href="{{ route('schedule', ['locale' => app()->getLocale()]) }}" class="btn btn-primary" id="scheduleBtn">
+                    <i class="fas fa-calendar-alt me-1"></i>{{ __('general.register_now') }}
                 </a>
-                <a href="{{ route('contact') }}" class="btn btn-primary d-none" id="contactBtn" onclick="goToContactWithCourse()">
-                    <i class="fas fa-phone me-1"></i>Liên Hệ Ngay
+                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary d-none" id="contactBtn" onclick="goToContactWithCourse()">
+                    <i class="fas fa-phone me-1"></i>{{ __('general.contact_us') }}
                 </a>
             </div>
         </div>
@@ -459,7 +459,7 @@
 <script>
 function openCourseModal(courseId, courseName = null, fromFooter = false) {
     // Show loading
-    document.getElementById('courseModalBody').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tải...</p></div>';
+    document.getElementById('courseModalBody').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>{{ __('general.loading') ?? 'Loading...' }}</p></div>';
     
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('courseModal'));
@@ -559,12 +559,12 @@ function openCourseModal(courseId, courseName = null, fromFooter = false) {
                     </div>
                 `;
             } else {
-                document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Không thể tải thông tin khóa học</p></div>';
+                document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>{{ __('general.something_went_wrong') }}</p></div>';
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>Đã xảy ra lỗi khi tải dữ liệu</p></div>';
+            document.getElementById('courseModalBody').innerHTML = '<div class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i><p>{{ __('general.something_went_wrong') }}</p></div>';
         });
 }
 
@@ -574,7 +574,7 @@ function goToContactWithCourse() {
         localStorage.setItem('selectedCourseId', window.currentCourseInfo.id);
         localStorage.setItem('selectedCourseName', window.currentCourseInfo.name);
     }
-    window.location.href = '{{ route("contact") }}';
+            window.location.href = '{{ route("contact", ["locale" => app()->getLocale()]) }}';
 }
 </script>
 
@@ -592,16 +592,13 @@ function goToContactWithCourse() {
         <div class="text-center mb-5">
             <div class="section-badge mb-3 animate-on-scroll">
                 <i class="fas fa-chalkboard-teacher me-2"></i>
-                <span>Đội Ngũ Chuyên Nghiệp</span>
+                <span>{{ __('general.teachers_title') }}</span>
             </div>
             <h2 class="display-2 fw-bold mb-4 animate-on-scroll animate-delay-1">
-                <span class="text-gradient">ĐỘI NGŨ GIẢNG VIÊN</span>
-                <br>
-                <span class="text-primary">ĐÀO TẠO</span>
+                <span class="text-gradient">{{ __('general.teachers_title') }}</span>
             </h2>
             <p class="lead text-muted animate-on-scroll animate-delay-2 mx-auto" style="max-width: 600px;">
-                Đội ngũ giảng viên chuyên nghiệp với kinh nghiệm giảng dạy tiếng Đức nhiều năm, 
-                cam kết mang đến chất lượng giáo dục tốt nhất
+                {{ __('general.teachers_subtitle') }}
             </p>
         </div>
         
@@ -639,7 +636,7 @@ function goToContactWithCourse() {
                                                 <!-- Teacher Info -->
                                                 <div class="teacher-info-new">
                                                     <h5 class="teacher-name-new">{{ $teacher->name }}</h5>
-                                                    <p class="teacher-role-new">GIẢNG VIÊN</p>
+                                                    <p class="teacher-role-new">{{ __('general.teacher_role') }}</p>
                                                     
                                                     <!-- Social Icons -->
                                                     <div class="teacher-social-new">
@@ -669,11 +666,11 @@ function goToContactWithCourse() {
                 @if($featuredTeachers->count() > 4)
                     <button class="carousel-control-prev" type="button" data-bs-target="#teachersSlider" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span class="visually-hidden">{{ __('general.previous') }}</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#teachersSlider" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <span class="visually-hidden">{{ __('general.next') }}</span>
                     </button>
                 @endif
             </div>
@@ -702,14 +699,14 @@ function goToContactWithCourse() {
                                     </div>
                                 </div>
                                 <div class="teacher-info-enhanced">
-                                    <h5 class="fw-bold mb-2 teacher-name">Thầy Minh</h5>
+                                    <h5 class="fw-bold mb-2 teacher-name">{{ __('general.teacher_minh') }}</h5>
                                     <p class="text-muted mb-3 teacher-specialization">
                                         <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
-                                        Giảng viên tiếng Đức A1-A2
+                                        {{ __('general.german_teacher_a1_a2') }}
                                     </p>
                                     <div class="certification-badge mb-3">
                                         <i class="fas fa-certificate me-2"></i>
-                                        <span>Cử nhân Ngôn ngữ Đức</span>
+                                        <span>{{ __('general.bachelor_german_language') }}</span>
                                     </div>
                                     <div class="teacher-rating mb-3">
                                         <div class="stars">
@@ -719,7 +716,7 @@ function goToContactWithCourse() {
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <small class="text-muted">5.0 (32 đánh giá)</small>
+                                        <small class="text-muted">5.0 (32 {{ __('general.reviews_count') }})</small>
                                     </div>
                                     <div class="teacher-actions">
                                         <a href="#" class="btn btn-teacher-primary">
@@ -750,14 +747,14 @@ function goToContactWithCourse() {
                                     </div>
                                 </div>
                                 <div class="teacher-info-enhanced">
-                                    <h5 class="fw-bold mb-2 teacher-name">Cô Lan</h5>
+                                    <h5 class="fw-bold mb-2 teacher-name">{{ __('general.teacher_lan') }}</h5>
                                     <p class="text-muted mb-3 teacher-specialization">
                                         <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
-                                        Giảng viên tiếng Đức B1-B2
+                                        {{ __('general.german_teacher_b1_b2') }}
                                     </p>
                                     <div class="certification-badge mb-3">
                                         <i class="fas fa-certificate me-2"></i>
-                                        <span>Thạc sĩ Đức học</span>
+                                        <span>{{ __('general.master_german_studies') }}</span>
                                     </div>
                                     <div class="teacher-rating mb-3">
                                         <div class="stars">
@@ -767,7 +764,7 @@ function goToContactWithCourse() {
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <small class="text-muted">5.0 (28 đánh giá)</small>
+                                        <small class="text-muted">5.0 (28 {{ __('general.reviews_count') }})</small>
                                     </div>
                                     <div class="teacher-actions">
                                         <a href="#" class="btn btn-teacher-primary">
@@ -799,14 +796,14 @@ function goToContactWithCourse() {
                                     </div>
                                 </div>
                                 <div class="teacher-info-enhanced">
-                                    <h5 class="fw-bold mb-2 teacher-name">Thầy Tuấn</h5>
+                                    <h5 class="fw-bold mb-2 teacher-name">{{ __('general.teacher_tuan') }}</h5>
                                     <p class="text-muted mb-3 teacher-specialization">
                                         <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
-                                        Giảng viên tiếng Đức C1-C2
+                                        {{ __('general.german_teacher_c1_c2') }}
                                     </p>
                                     <div class="certification-badge mb-3">
                                         <i class="fas fa-certificate me-2"></i>
-                                        <span>Chứng chỉ Goethe C2</span>
+                                        <span>{{ __('general.goethe_c2_certificate') }}</span>
                                     </div>
                                     <div class="teacher-rating mb-3">
                                         <div class="stars">
@@ -816,7 +813,7 @@ function goToContactWithCourse() {
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <small class="text-muted">5.0 (41 đánh giá)</small>
+                                        <small class="text-muted">5.0 (41 {{ __('general.reviews_count') }})</small>
                                     </div>
                                     <div class="teacher-actions">
                                         <a href="#" class="btn btn-teacher-primary">
@@ -848,14 +845,14 @@ function goToContactWithCourse() {
                                     </div>
                                 </div>
                                 <div class="teacher-info-enhanced">
-                                    <h5 class="fw-bold mb-2 teacher-name">Cô Hương</h5>
+                                    <h5 class="fw-bold mb-2 teacher-name">{{ __('general.teacher_huong') }}</h5>
                                     <p class="text-muted mb-3 teacher-specialization">
                                         <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>
-                                        Giảng viên tiếng Đức Giao tiếp
+                                        {{ __('general.german_conversation_teacher') }}
                                     </p>
                                     <div class="certification-badge mb-3">
                                         <i class="fas fa-certificate me-2"></i>
-                                        <span>Cử nhân Sư phạm Đức</span>
+                                        <span>{{ __('general.bachelor_german_pedagogy') }}</span>
                                     </div>
                                     <div class="teacher-rating mb-3">
                                         <div class="stars">
@@ -865,7 +862,7 @@ function goToContactWithCourse() {
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                         </div>
-                                        <small class="text-muted">5.0 (37 đánh giá)</small>
+                                        <small class="text-muted">5.0 (37 {{ __('general.reviews_count') }})</small>
                                     </div>
                                     <div class="teacher-actions">
                                         <a href="#" class="btn btn-teacher-primary">
@@ -883,9 +880,9 @@ function goToContactWithCourse() {
         @endif
         
         <div class="text-center mt-5">
-            <a href="{{ route('about') }}" class="btn btn-view-all-teachers btn-lg">
+                            <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="btn btn-view-all-teachers btn-lg">
                 <i class="fas fa-users me-2"></i>
-                Xem tất cả giảng viên
+                {{ __('general.view_details') }}
                 <i class="fas fa-arrow-right ms-2"></i>
             </a>
         </div>
@@ -898,10 +895,10 @@ function goToContactWithCourse() {
         <div class="text-center mb-5">
             <h2 class="display-2 fw-bold text-white mb-4 animate-on-scroll">
                 <i class="fas fa-medal text-warning me-3"></i>
-                BẢNG VÀNG THÀNH TÍCH THI CỬ
+                {{ __('general.results_title') }}
             </h2>
             <p class="lead text-white-50 animate-on-scroll animate-delay-1">
-                Vinh danh những học viên xuất sắc đạt thành tích cao trong các kỳ thi và chứng chỉ
+                {{ __('general.results_subtitle') }}
             </p>
         </div>
 
@@ -911,7 +908,7 @@ function goToContactWithCourse() {
                 <ul class="nav nav-pills justify-content-center achievement-tabs" id="achievementTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="exam-tab" data-bs-toggle="pill" data-bs-target="#exam" type="button" role="tab">
-                            <i class="fas fa-medal me-2"></i>Thành tích thi cử
+                            <i class="fas fa-medal me-2"></i>{{ __('general.results_title') }}
                         </button>
                     </li>
                 </ul>
@@ -942,13 +939,13 @@ function goToContactWithCourse() {
                                         <img src="{{ $avatarUrl }}" alt="{{ $achievement->student_name }}" class="rounded-circle achievement-avatar mb-3" width="80" height="80">
                                         <h5 class="fw-bold text-primary mb-2">{{ $achievement->student_name }}</h5>
                                         @if($achievement->class_name)
-                                            <p class="text-muted mb-2">Lớp {{ $achievement->class_name }}</p>
+                                            <p class="text-muted mb-2">{{ __('general.class_label') }} {{ $achievement->class_name }}</p>
                                         @endif
                                     <div class="achievement-details mb-3">
                                             @if(!is_null($achievement->score))
                                         <div class="detail-item">
                                             <i class="fas fa-star text-warning me-2"></i>
-                                                    <span>Điểm thi: {{ number_format($achievement->score, 1) }}/10</span>
+                                                    <span>{{ __('general.exam_score') }}: {{ number_format($achievement->score, 1) }}/10</span>
                                         </div>
                                             @endif
                                         <div class="detail-item">
@@ -962,7 +959,7 @@ function goToContactWithCourse() {
                         </div>
                         @empty
                             <div class="col-12">
-                                <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
+                                <div class="alert alert-light text-center mb-0">{{ __('general.no_exam_achievements') }}</div>
                             </div>
                         @endforelse
                     </div>
@@ -1016,27 +1013,27 @@ function goToContactWithCourse() {
                         @empty
                             <div class="carousel-item active">
                                 <div class="px-2">
-                                    <div class="alert alert-light text-center mb-0">Chưa có thành tích thi cử nào được cập nhật.</div>
+                                    <div class="alert alert-light text-center mb-0">{{ __('general.no_exam_achievements_updated') }}</div>
                                 </div>
                             </div>
                         @endforelse
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#achievementsCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span class="visually-hidden">{{ __('general.previous') }}</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#achievementsCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <span class="visually-hidden">{{ __('general.next') }}</span>
                     </button>
                 </div>
         </div>
 
         <!-- View More Button -->
         <div class="text-center mt-4">
-            <a href="{{ route('results') }}" class="btn btn-outline-light btn-lg">
+                            <a href="{{ route('results', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-light btn-lg">
                 <i class="fas fa-trophy me-2"></i>
-                Xem tất cả thành tích
+                {{ __('general.view_all_achievements') }}
             </a>
         </div>
     </div>
@@ -1046,8 +1043,8 @@ function goToContactWithCourse() {
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll">HỌC VIÊN NÓI GÌ VỀ CHÚNG TÔI</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những chia sẻ chân thực từ các bạn đã thành công du học nghề Đức</p>
+            <h2 class="display-2 fw-bold text-primary mb-4 animate-on-scroll">{{ __('general.testimonials_title') ?? 'Testimonials' }}</h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">{{ __('general.testimonials_subtitle') ?? '' }}</p>
         </div>
         
         <!-- Testimonials Carousel (4 per slide like Teachers) -->
@@ -1096,7 +1093,7 @@ function goToContactWithCourse() {
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-12">
-                                <div class="alert alert-light text-center mb-0">Chưa có nhận xét học viên nào được hiển thị.</div>
+                                <div class="alert alert-light text-center mb-0">{{ __('general.no_testimonials') ?? 'No testimonials yet' }}</div>
                             </div>
                         </div>
                     </div>
@@ -1124,9 +1121,9 @@ function goToContactWithCourse() {
         <div class="row mb-5">
             <div class="col-12 text-center">
                 <h2 class="display-2 fw-bold text-dark mb-4">
-                    KHÓA HỌC <span class="text-primary">TIẾNG ĐỨC</span> CHUYÊN NGHIỆP
+                    {{ __('general.courses') ?? 'Courses' }}
                 </h2>
-                <p class="lead text-muted">Đăng ký ngay để nhận ưu đãi đặc biệt và tư vấn miễn phí</p>
+                <p class="lead text-muted">{{ __('general.register_now') }}</p>
             </div>
         </div>
 
@@ -1136,9 +1133,9 @@ function goToContactWithCourse() {
                 <div class="offers-header mb-4">
                     <h3 class="fw-bold text-dark mb-2">
                         <i class="fas fa-gift text-primary me-2"></i>
-                        ƯU ĐÃI ĐẶC BIỆT KHÓA HỌC TIẾNG ĐỨC
+                        {{ __('general.featured_positions') ?? 'Offers' }}
                     </h3>
-                    <p class="text-muted">Chỉ áp dụng cho 50 học viên đăng ký đầu tiên trong tháng này!</p>
+                    <p class="text-muted">{{ __('general.info') }}</p>
                 </div>
                 
                 <div class="row g-4">
@@ -1166,10 +1163,10 @@ function goToContactWithCourse() {
                                 <div class="offer-icon">
                                     <i class="fas fa-percentage"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2 text-danger">Giảm 30% học phí</h5>
-                                <p class="text-muted mb-0">Ưu đãi đặc biệt cho khóa học Tiếng Đức cơ bản và nâng cao</p>
+                                <h5 class="fw-bold mb-2 text-danger">{{ __('general.percent_discount_tuition') }}</h5>
+                                <p class="text-muted mb-0">{{ __('general.special_offer_description') }}</p>
                                 <div class="offer-badge">
-                                    <span class="badge bg-danger">Tiết kiệm 3.000.000đ</span>
+                                    <span class="badge bg-danger">{{ __('general.save_amount') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -1179,10 +1176,10 @@ function goToContactWithCourse() {
                                 <div class="offer-icon">
                                     <i class="fas fa-book"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2 text-success">Tặng tài liệu miễn phí</h5>
-                                <p class="text-muted mb-0">BỘ SÁCH TIẾNG ĐỨC CHUYÊN NGHIỆP + AUDIO CD TRỊ GIÁ 800.000Đ</p>
+                                <h5 class="fw-bold mb-2 text-success">{{ __('general.free_materials_title') }}</h5>
+                                <p class="text-muted mb-0">{{ __('general.free_materials_description') }}</p>
                                 <div class="offer-badge">
-                                    <span class="badge bg-success">Miễn phí</span>
+                                    <span class="badge bg-success">{{ __('general.free') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -1192,10 +1189,10 @@ function goToContactWithCourse() {
                                 <div class="offer-icon">
                                     <i class="fas fa-chalkboard-teacher"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2 text-info">Học thử 2 buổi miễn phí</h5>
-                                <p class="text-muted mb-0">Trải nghiệm phương pháp giảng dạy trước khi quyết định đăng ký</p>
+                                <h5 class="fw-bold mb-2 text-info">{{ __('general.free_trial_lessons') }}</h5>
+                                <p class="text-muted mb-0">{{ __('general.free_trial_description') }}</p>
                                 <div class="offer-badge">
-                                    <span class="badge bg-info">Không mất phí</span>
+                                    <span class="badge bg-info">{{ __('general.no_charge') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -1205,10 +1202,10 @@ function goToContactWithCourse() {
                                 <div class="offer-icon">
                                     <i class="fas fa-certificate"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2 text-warning">Cam kết đầu ra A2-B1</h5>
-                                <p class="text-muted mb-0">Không đạt chuẩn sẽ được học lại miễn phí hoặc hoàn tiền 100%</p>
+                                <h5 class="fw-bold mb-2 text-warning">{{ __('general.output_commitment_title') }}</h5>
+                                <p class="text-muted mb-0">{{ __('general.output_commitment_description') }}</p>
                                 <div class="offer-badge">
-                                    <span class="badge bg-warning">Bảo đảm</span>
+                                    <span class="badge bg-warning">{{ __('general.guarantee_label') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -1219,8 +1216,8 @@ function goToContactWithCourse() {
                     <div class="d-flex align-items-center">
                         <i class="fas fa-clock text-warning me-2"></i>
                         <div>
-                            <strong class="text-warning">Ưu đãi có hạn!</strong>
-                            <span class="text-muted ms-2">Chỉ còn <strong>7 ngày</strong> để nhận ưu đãi này</span>
+                            <strong class="text-warning">{{ __('general.limited_offer') }}</strong>
+                            <span class="text-muted ms-2">{{ __('general.days_remaining') }}</span>
                         </div>
                     </div>
                 </div>
@@ -1233,8 +1230,8 @@ function goToContactWithCourse() {
                         <div class="form-icon mb-3">
                             <i class="fas fa-language"></i>
                         </div>
-                        <h3 class="fw-bold text-white mb-2">ĐĂNG KÝ KHÓA HỌC TIẾNG ĐỨC</h3>
-                        <p class="text-white-50 mb-0">Nhận tư vấn miễn phí và ưu đãi đặc biệt</p>
+                        <h3 class="fw-bold text-white mb-2">{{ __('general.register_german_course') }}</h3>
+                        <p class="text-white-50 mb-0">{{ __('general.free_consultation_offer') }}</p>
                     </div>
                     
                     @if(session('success'))
@@ -1256,39 +1253,39 @@ function goToContactWithCourse() {
                         </div>
                     @endif
                     
-                    <form action="{{ route('contact.submit') }}" method="POST" class="consultation-form">
+                    <form action="{{ route('contact.submit', ['locale' => app()->getLocale()]) }}" method="POST" class="consultation-form">
                         @csrf
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" name="name" placeholder="Họ và tên của bạn" required>
+                            <input type="text" class="form-control form-control-lg" name="name" placeholder="{{ __('general.name_placeholder') }}" required>
                         </div>
                         <div class="mb-3">
-                            <input type="tel" class="form-control form-control-lg" name="phone" placeholder="Số điện thoại" required>
+                            <input type="tel" class="form-control form-control-lg" name="phone" placeholder="{{ __('general.phone_placeholder') }}" required>
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control form-control-lg" name="email" placeholder="Địa chỉ email">
+                            <input type="email" class="form-control form-control-lg" name="email" placeholder="{{ __('general.email_address_placeholder') }}">
                         </div>
                         <div class="mb-3">
                             <select class="form-select form-select-lg" name="course" required>
-                                <option value="">Chọn khóa học Tiếng Đức</option>
+                                <option value="">{{ __('general.select_german_course') }}</option>
                                 <option value="Tiếng Đức A1 - Cơ bản">Tiếng Đức A1 - Cơ bản</option>
                                 <option value="Tiếng Đức A2 - Sơ cấp">Tiếng Đức A2 - Sơ cấp</option>
                                 <option value="Tiếng Đức B1 - Trung cấp">Tiếng Đức B1 - Trung cấp</option>
                                 <option value="Tiếng Đức B2 - Trung cấp cao">Tiếng Đức B2 - Trung cấp cao</option>
                                 <option value="Tiếng Đức giao tiếp">Tiếng Đức giao tiếp</option>
-                                <option value="Tư vấn chọn khóa phù hợp">Tư vấn chọn khóa phù hợp</option>
+                                <option value="Tư vấn chọn khóa phù hợp">{{ __('general.consultation_suitable_course') }}</option>
                             </select>
                         </div>
                         
                         
                         
                         <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold py-3">
-                            <i class="fas fa-paper-plane me-2"></i>ĐĂNG KÝ NGAY
+                            <i class="fas fa-paper-plane me-2"></i>{{ __('general.register_now') }}
                         </button>
                         
                         <div class="text-center mt-3">
                             <small class="text-white-50">
                                 <i class="fas fa-shield-alt me-1"></i>
-                                Thông tin của bạn được bảo mật tuyệt đối
+                                {{ __('general.info_security_guarantee') }}
                             </small>
                         </div>
                     </form>
@@ -1386,31 +1383,31 @@ function goToContactWithCourse() {
                                 </div>
                             @endif
                             
-                            <form action="{{ route('contact.submit') }}" method="POST" class="modal-registration-form">
+                            <form action="{{ route('contact.submit', ['locale' => app()->getLocale()]) }}" method="POST" class="modal-registration-form">
                                 @csrf
                                 <div class="mb-3">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                        <input type="text" class="form-control" name="name" placeholder="Họ và tên *" required>
+                                        <input type="text" class="form-control" name="name" placeholder="{{ __('general.name_required') }}" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        <input type="tel" class="form-control" name="phone" placeholder="Số điện thoại *" required>
+                                        <input type="tel" class="form-control" name="phone" placeholder="{{ __('general.phone_required') }}" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" class="form-control" name="email" placeholder="Email">
+                                        <input type="email" class="form-control" name="email" placeholder="{{ __('general.email_label') }}">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-book"></i></span>
                                         <select class="form-select" name="course" required>
-                                            <option value="">Chọn khóa học quan tâm *</option>
+                                            <option value="">{{ __('general.select_course_interested') }}</option>
                                             <option value="A1-A2">Cơ bản A1-A2</option>
                                             <option value="B1-B2">Trung cấp B1-B2</option>
                                             <option value="C1-C2">Nâng cao C1-C2</option>
@@ -4074,7 +4071,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="teacherModalLabel">Thông tin Giảng viên</h5>
+                <h5 class="modal-title" id="teacherModalLabel">{{ __('general.teacher_information') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="teacherModalBody">

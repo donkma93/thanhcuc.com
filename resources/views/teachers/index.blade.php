@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Đội ngũ giảng viên')
+@section('title', __('general.page_title_teachers'))
 
 @section('content')
 <!-- Page Header -->
@@ -8,10 +8,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">Đội Ngũ Giảng Viên Tiếng Đức</h1>
+                <h1 class="display-4 fw-bold mb-3">{{ __('general.teachers_title') }}</h1>
                 <p class="lead">
-                    Đội ngũ giảng viên giàu kinh nghiệm với chứng chỉ quốc tế, 
-                    cam kết mang đến chất lượng giảng dạy tiếng Đức tốt nhất cho học viên
+                    {{ __('general.teachers_subtitle') }}
                 </p>
             </div>
         </div>
@@ -50,7 +49,7 @@
                         @if($teacher->experience_years)
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <i class="fas fa-clock text-primary me-2"></i>
-                            <small class="text-muted">{{ $teacher->experience_years }}+ năm kinh nghiệm</small>
+                            <small class="text-muted">{{ __('general.years_experience_short', ['years' => $teacher->experience_years]) }}</small>
                         </div>
                         @endif
                         
@@ -58,7 +57,7 @@
                             <p class="text-muted small mb-3">{!! Str::limit(strip_tags($teacher->bio), 120) !!}</p>
                         @endif
                         
-                        <a href="{{ route('teachers.show', $teacher->slug) }}" class="btn btn-outline-primary btn-sm">
+                        <a href="{{ route('teachers.show', ['locale' => app()->getLocale(), 'slug' => $teacher->slug]) }}" class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-eye me-1"></i>Xem Chi Tiết
                         </a>
                     </div>
@@ -68,8 +67,8 @@
             <div class="col-12">
                 <div class="text-center py-5">
                     <i class="fas fa-users fa-4x text-muted mb-3"></i>
-                    <h4 class="text-muted">Chưa có thông tin giảng viên</h4>
-                    <p class="text-muted">Thông tin đội ngũ giảng viên sẽ được cập nhật sớm.</p>
+                    <h4 class="text-muted">{{ __('general.no_teacher_information') }}</h4>
+                    <p class="text-muted">{{ __('general.teacher_info_updated_soon') }}</p>
                 </div>
             </div>
             @endforelse
@@ -89,13 +88,13 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h3 class="fw-bold mb-3">Muốn học với đội ngũ giảng viên tiếng Đức chuyên nghiệp?</h3>
+                <h3 class="fw-bold mb-3">{{ __('general.want_learn_professional_german_teachers') }}</h3>
                 <p class="text-muted mb-0">
-                    Đăng ký tư vấn miễn phí để được tư vấn lộ trình học tiếng Đức phù hợp và gặp gỡ giảng viên
+                    {{ __('general.consultation_registration_free') }}
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3">Học Thử Miễn Phí</a>
+                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary btn-lg me-3">Học Thử Miễn Phí</a>
                 <a href="tel:0975186230" class="btn btn-outline-primary btn-lg">
                     <i class="fas fa-phone me-2"></i>Gọi Ngay
                 </a>

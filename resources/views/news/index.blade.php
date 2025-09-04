@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Tin tức')
-@section('description', 'Cập nhật tin tức mới nhất về trung tâm tiếng Đức Thanh Cúc, lịch khai giảng, lịch thi và các hoạt động của trung tâm.')
+@section('title', __('general.page_title_news'))
+@section('description', __('general.page_description_news'))
 
 @section('content')
 <!-- Page Header -->
@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">TIN TỨC</h1>
-                <p class="lead">Cập nhật những tin tức mới nhất về trung tâm và các hoạt động học tập</p>
+                <h1 class="display-4 fw-bold mb-3">{{ __('general.news_title') }}</h1>
+                <p class="lead">{{ __('general.news_subtitle') }}</p>
             </div>
         </div>
     </div>
@@ -21,8 +21,8 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">tin tức</li>
+                    <li class="breadcrumb-item"><a href="{{ route('home', ['locale' => app()->getLocale()]) }}">{{ __('general.home') }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('general.news') }}</li>
                 </ol>
             </nav>
             
@@ -38,7 +38,7 @@
                              style="width: 50px; height: 50px;">
                             <i class="fas fa-graduation-cap fa-lg"></i>
                         </div>
-                        <h2 class="mb-0 text-primary fw-bold">KIẾN THỨC TIẾNG ĐỨC</h2>
+                        <h2 class="mb-0 text-primary fw-bold">{{ __('general.german_knowledge') }}</h2>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                                 </div>
                                 
                                 <h5 class="card-title">
-                                    <a href="{{ route('news.detail', $article->slug) }}" 
+                                    <a href="{{ route('news.detail', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" 
                                        class="text-decoration-none text-dark">
                                         {{ $article->title }}
                                     </a>
@@ -87,7 +87,7 @@
                                         {{ $article->published_at ? $article->published_at->format('d/m/Y') : 'Chưa xuất bản' }}
                                     </small>
                                     
-                                    <a href="{{ route('news.detail', $article->slug) }}" 
+                                    <a href="{{ route('news.detail', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" 
                                        class="btn btn-outline-primary btn-sm mt-2">
                                         Đọc thêm <i class="fas fa-arrow-right ms-1"></i>
                                     </a>
@@ -118,7 +118,7 @@
                              style="width: 50px; height: 50px;">
                             <i class="fas fa-building fa-lg"></i>
                         </div>
-                        <h2 class="mb-0 text-success fw-bold">HOẠT ĐỘNG CÔNG TY</h2>
+                        <h2 class="mb-0 text-success fw-bold">{{ __('general.company_activities') }}</h2>
                     </div>
                 </div>
             </div>
@@ -149,7 +149,7 @@
                                 </div>
                                 
                                 <h5 class="card-title">
-                                    <a href="{{ route('news.detail', $article->slug) }}" 
+                                    <a href="{{ route('news.detail', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" 
                                        class="text-decoration-none text-dark">
                                         {{ $article->title }}
                                     </a>
@@ -167,7 +167,7 @@
                                         {{ $article->published_at ? $article->published_at->format('d/m/Y') : 'Chưa xuất bản' }}
                                     </small>
                                     
-                                    <a href="{{ route('news.detail', $article->slug) }}" 
+                                    <a href="{{ route('news.detail', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" 
                                        class="btn btn-outline-success btn-sm mt-2">
                                         Đọc thêm <i class="fas fa-arrow-right ms-1"></i>
                                     </a>
@@ -182,8 +182,8 @@
                 <div class="col-12 text-center">
                     <div class="py-4">
                         <i class="fas fa-building fa-3x text-muted mb-3"></i>
-                        <h4 class="text-muted">Chưa có tin tức về hoạt động công ty</h4>
-                        <p class="text-muted">Hãy quay lại sau để xem những tin tức mới nhất!</p>
+                        <h4 class="text-muted">{{ __('general.no_company_news') }}</h4>
+                        <p class="text-muted">{{ __('general.come_back_latest_news') }}</p>
                     </div>
                 </div>
             </div>

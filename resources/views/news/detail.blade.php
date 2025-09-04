@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $article->title)
-@section('description', $article->excerpt ?: 'Đọc tin tức chi tiết từ trung tâm tiếng Đức Thanh Cúc.')
+@section('description', $article->excerpt ?: __('general.read_detailed_news'))
 
 @section('content')
 <div class="container py-5">
@@ -9,8 +9,8 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('news') }}">Tin tức</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('home', ['locale' => app()->getLocale()]) }}">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('news', ['locale' => app()->getLocale()]) }}">{{ __('general.news') }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($article->title, 50) }}</li>
                 </ol>
             </nav>
@@ -71,7 +71,7 @@
                 <footer class="mt-5 pt-4 border-top">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <a href="{{ route('news') }}" class="btn btn-outline-primary">
+                            <a href="{{ route('news', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-primary">
                                 <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
                             </a>
                         </div>
@@ -94,7 +94,7 @@
                 <div class="card mb-4">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">
-                            <i class="fas fa-newspaper me-2"></i>Tin tức liên quan
+                            <i class="fas fa-newspaper me-2"></i>{{ __('general.related_news') }}
                         </h5>
                     </div>
                     <div class="card-body">
@@ -109,7 +109,7 @@
                         @if($relatedNews->count() > 0)
                             <div class="list-group list-group-flush">
                                 @foreach($relatedNews as $related)
-                                    <a href="{{ route('news.detail', $related->slug) }}" 
+                                    <a href="{{ route('news.detail', ['locale' => app()->getLocale(), 'slug' => $related->slug]) }}" 
                                        class="list-group-item list-group-item-action border-0 px-0">
                                         <div class="d-flex align-items-center">
                                             @if($related->featured_image)
@@ -148,16 +148,16 @@
                     </div>
                     <div class="card-body">
                         <div class="list-group list-group-flush">
-                            <a href="{{ route('schedule') }}" class="list-group-item list-group-item-action border-0 px-0">
+                            <a href="{{ route('schedule', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action border-0 px-0">
                                 <i class="fas fa-calendar-alt me-2 text-primary"></i>Lịch khai giảng
                             </a>
-                            <a href="{{ route('exam-schedule') }}" class="list-group-item list-group-item-action border-0 px-0">
+                            <a href="{{ route('exam-schedule', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action border-0 px-0">
                                 <i class="fas fa-calendar-check me-2 text-success"></i>Lịch thi
                             </a>
-                            <a href="{{ route('results') }}" class="list-group-item list-group-item-action border-0 px-0">
+                            <a href="{{ route('results', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action border-0 px-0">
                                 <i class="fas fa-trophy me-2 text-warning"></i>Kết quả học viên
                             </a>
-                            <a href="{{ route('contact') }}" class="list-group-item list-group-item-action border-0 px-0">
+                            <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action border-0 px-0">
                                 <i class="fas fa-phone me-2 text-info"></i>Liên hệ
                             </a>
                         </div>

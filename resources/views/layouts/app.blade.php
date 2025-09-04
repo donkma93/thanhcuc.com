@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Trang chủ')</title>
-    <meta name="description" content="@yield('description', 'Trung tâm tiếng Đức Thanh Cúc - Học tiếng Đức chuyên nghiệp, luyện thi chứng chỉ Goethe, TestDaF. Lịch khai giảng, lịch thi và kết quả học viên.')">
+    <title>@yield('title', __('general.page_title_home'))</title>
+    <meta name="description" content="@yield('description', __('general.page_description_home'))">
     <meta name="keywords" content="học tiếng Đức, luyện thi Goethe, TestDaF, chứng chỉ tiếng Đức, trung tâm tiếng Đức, lịch khai giảng, lịch thi">
     
     <!-- Cache and Navigation Meta Tags -->
@@ -1501,7 +1501,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style="z-index: 1050;">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
+                            <a class="navbar-brand" href="{{ route('home', ['locale' => app()->getLocale()]) }}">
                 <img src="{{ asset('images/logo/thanh-cuc-logo.png') }}" alt="Thanh Cúc Logo" class="logo-img">
             </a>
             
@@ -1522,54 +1522,57 @@
                 
                 <ul class="navbar-nav me-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="fas fa-home me-2"></i>TRANG CHỦ
+                        <a class="nav-link {{ Request::is('*/') || Request::is('/') ? 'active' : '' }}" href="{{ route('home', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-home me-2"></i>{{ __('general.home') }}
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('ve-chung-toi') ? 'active' : '' }}" href="{{ route('about') }}">
-                            <i class="fas fa-users me-2"></i>VỀ CHÚNG TÔI
+                        <a class="nav-link {{ Request::is('*/ve-chung-toi') ? 'active' : '' }}" href="{{ route('about', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-users me-2"></i>{{ __('general.about') }}
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('lich-khai-giang') ? 'active' : '' }}" href="{{ route('schedule') }}">
-                            <i class="fas fa-calendar-alt me-2"></i>LỊCH KHAI GIẢNG
+                        <a class="nav-link {{ Request::is('*/lich-khai-giang') ? 'active' : '' }}" href="{{ route('schedule', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-calendar-alt me-2"></i>{{ __('general.schedule') }}
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('lich-thi') ? 'active' : '' }}" href="{{ route('exam-schedule') }}">
-                            <i class="fas fa-calendar-check me-2"></i>LỊCH THI
+                        <a class="nav-link {{ Request::is('*/lich-thi') ? 'active' : '' }}" href="{{ route('exam-schedule', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-calendar-check me-2"></i>{{ __('general.exam_schedule') }}
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('ket-qua-hoc-vien') ? 'active' : '' }}" href="{{ route('results') }}">
-                            <i class="fas fa-trophy me-2"></i>KẾT QUẢ HỌC VIÊN
+                        <a class="nav-link {{ Request::is('*/ket-qua-hoc-vien') ? 'active' : '' }}" href="{{ route('results', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-trophy me-2"></i>{{ __('general.results') }}
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('tin-tuc*') ? 'active' : '' }}" href="{{ route('news') }}">
-                            <i class="fas fa-newspaper me-2"></i>TIN TỨC
+                        <a class="nav-link {{ Request::is('*/tin-tuc*') ? 'active' : '' }}" href="{{ route('news', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-newspaper me-2"></i>{{ __('general.news') }}
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('lien-he') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            <i class="fas fa-phone-alt me-2"></i>LIÊN HỆ
+                        <a class="nav-link {{ Request::is('*/lien-he') ? 'active' : '' }}" href="{{ route('contact', ['locale' => app()->getLocale()]) }}">
+                            <i class="fas fa-phone-alt me-2"></i>{{ __('general.contact') }}
                         </a>
                     </li>
                 </ul>
                 
                 <div class="d-flex align-items-center">
+                    <!-- Language Switcher -->
+                    <x-language-switcher />
+                    
                     @php 
                         $hotlineRaw = $footerSettings['company_phone'] ?? '0975186230';
                         $hotlineLabel = $footerSettings['company_phone_display'] ?? $hotlineRaw;
                     @endphp
-                    <a href="tel:{{ $hotlineRaw }}" class="btn-nav btn-nav-call" title="Gọi: {{ $hotlineRaw }}">
+                    <a href="tel:{{ $hotlineRaw }}" class="btn-nav btn-nav-call ms-2" title="Gọi: {{ $hotlineRaw }}">
                         <span class="btn-nav-icon"><i class="fas fa-phone"></i></span>
                         {{ $hotlineLabel }}
                     </a>

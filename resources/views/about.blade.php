@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Về chúng tôi')
+@section('title', __('general.about_us'))
 
 @push('styles')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
@@ -948,7 +948,7 @@
                 <div class="company-overview">
                     <div class="text-center mb-4">
                         <h2 class="fw-bold text-primary mb-2">{{ $aboutData['overview_title'] ?? 'TỔNG QUAN' }}</h2>
-                        <p class="text-muted">Những sứ mệnh, tầm nhìn và giá trị cốt lõi của THANH CÚC</p>
+                        <p class="text-muted">{{ __('general.mission_vision_core_values_thanh_cuc') }}</p>
                     </div>
                     
                     <!-- Tab Navigation -->
@@ -998,7 +998,7 @@
                                     </div>
                                     <div class="mt-4">
                                         <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">Đăng kí học ngay ></a>
+                                            <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-danger btn-lg">Đăng kí học ngay ></a>
                                         </div>
                                     </div>
                                 </div>
@@ -1459,7 +1459,7 @@
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="{{ route('contact') }}" class="btn btn-light btn-lg me-3">Học Thử Miễn Phí</a>
+                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-light btn-lg me-3">Học Thử Miễn Phí</a>
                 <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
                     <i class="fas fa-phone me-2"></i>Liên Hệ Ngay
                 </a>

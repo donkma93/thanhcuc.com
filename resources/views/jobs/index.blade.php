@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">Cơ Hội Nghề Nghiệp Tại SEC</h1>
+                <h1 class="display-4 fw-bold mb-3">{{ __('general.jobs_title') }}</h1>
                 <p class="lead">
                     Gia nhập đội ngũ SEC - Nơi bạn có thể phát triển sự nghiệp trong lĩnh vực giáo dục 
                     với môi trường làm việc chuyên nghiệp và cơ hội thăng tiến
@@ -23,8 +23,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Vị Trí Tuyển Dụng Nổi Bật</h2>
-            <p class="text-muted">Những vị trí đang cần tuyển gấp với mức lương hấp dẫn</p>
+            <h2 class="fw-bold text-primary mb-3">{{ __('general.featured_positions') }}</h2>
+            <p class="text-muted">{{ __('general.featured_positions_subtitle') }}</p>
         </div>
         
         <div class="row">
@@ -59,7 +59,7 @@
                             <small class="text-muted">
                                 <i class="fas fa-calendar me-1"></i>{{ $job->created_at->format('d/m/Y') }}
                             </small>
-                            <a href="{{ route('jobs.show', $job->slug) }}" class="btn btn-primary">
+                            <a href="{{ route('jobs.show', ['locale' => app()->getLocale(), 'slug' => $job->slug]) }}" class="btn btn-primary">
                                 Xem Chi Tiết
                             </a>
                         </div>
@@ -76,7 +76,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary mb-3">Tất Cả Vị Trí Tuyển Dụng</h2>
+            <h2 class="fw-bold text-primary mb-3">{{ __('general.all_positions') }}</h2>
             <p class="text-muted">Khám phá các cơ hội nghề nghiệp theo từng bộ phận</p>
         </div>
         
@@ -114,7 +114,7 @@
                                 @endif
                             </div>
                             
-                            <a href="{{ route('jobs.show', $job->slug) }}" class="btn btn-outline-primary w-100">
+                            <a href="{{ route('jobs.show', ['locale' => app()->getLocale(), 'slug' => $job->slug]) }}" class="btn btn-outline-primary w-100">
                                 Xem Chi Tiết & Ứng Tuyển
                             </a>
                         </div>

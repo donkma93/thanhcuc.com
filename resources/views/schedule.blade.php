@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lịch khai giảng')
+@section('title', __('general.page_title_schedule'))
 
 @section('content')
 
@@ -9,8 +9,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mx-auto text-center">
-				<h1 class="display-4 fw-bold mb-3">LỊCH KHAI GIẢNG</h1>
-				<p class="lead">Lịch khai giảng các khóa học tiếng Đức tại Trung Tâm Thanh Cúc</p>
+				<h1 class="display-4 fw-bold mb-3">{{ __('general.schedule_title') }}</h1>
+				<p class="lead">{{ __('general.schedule_subtitle') }}</p>
 			</div>
 		</div>
 	</div>
@@ -22,10 +22,10 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold text-primary mb-3">
-                <i class="fas fa-table me-2"></i>LỊCH KHAI GIẢNG CHI TIẾT
+                <i class="fas fa-table me-2"></i>{{ __('general.detailed_schedule') }}
             </h2>
             <p class="lead text-muted">
-                Thông tin đầy đủ về các khóa học tiếng Đức tại Trung Tâm Thanh Cúc
+                {{ __('general.schedule_description') }}
             </p>
             
 
@@ -37,22 +37,22 @@
                 <div class="row g-3">
                     <div class="col-md-3">
                         <label class="form-label fw-semibold text-primary small mb-1">
-                            <i class="fas fa-search me-1"></i>Tìm kiếm
+                            <i class="fas fa-search me-1"></i>{{ __('general.search') }}
                         </label>
-                        <input type="text" class="form-control" id="searchInput" placeholder="Tên khóa học...">
+                        <input type="text" class="form-control" id="searchInput" placeholder="{{ __('general.search_placeholder') }}">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold text-primary small mb-1">
-                            <i class="fas fa-layer-group me-1"></i>Trình độ
+                            <i class="fas fa-layer-group me-1"></i>{{ __('general.level_filter') }}
                         </label>
                         <select class="form-select" id="levelFilter">
-                            <option value="">Tất cả trình độ</option>
-                            <option value="a1-a2">Cơ bản (A1-A2)</option>
-                            <option value="b1-b2">Trung cấp (B1-B2)</option>
-                            <option value="c1-c2">Nâng cao (C1-C2)</option>
-                            <option value="business">Thương mại</option>
-                            <option value="exam">Luyện thi</option>
-                            <option value="online">Online</option>
+                            <option value="">{{ __('general.all_levels') }}</option>
+                            <option value="a1-a2">{{ __('general.basic_level_filter') }}</option>
+                            <option value="b1-b2">{{ __('general.intermediate_level_filter') }}</option>
+                            <option value="c1-c2">{{ __('general.advanced_level_filter') }}</option>
+                            <option value="business">{{ __('general.business_german') }}</option>
+                            <option value="exam">{{ __('general.exam_preparation') }}</option>
+                            <option value="online">{{ __('general.online_test') }}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -261,7 +261,7 @@
                                         </span>
                                         @if($schedule->registration_deadline)
                                             <br><small class="text-muted">
-                                                Hạn đăng ký: {{ $schedule->registration_deadline->format('d/m/Y') }}
+                                                {{ __('general.registration_deadline') }}: {{ $schedule->registration_deadline->format('d/m/Y') }}
                                             </small>
                                         @endif
                                     </div>
@@ -276,9 +276,9 @@
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         @if($schedule->status === 'published' && $schedule->available_spots > 0)
-                                            <a href="{{ route('contact') }}?course={{ $schedule->id }}" 
+                                            <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}?course={{ $schedule->id }}" 
                                                class="btn btn-sm btn-success"
-                                               title="Đăng ký ngay">
+                                               title="{{ __('general.register_immediately') }}">
                                                 <i class="fas fa-user-plus"></i>
                                             </a>
                                         @endif
@@ -296,7 +296,7 @@
                                     <div class="text-muted">
                                         <i class="fas fa-inbox fa-3x mb-3"></i>
                                         <h5>Chưa có khóa học nào</h5>
-                                        <p>Vui lòng quay lại sau hoặc liên hệ với chúng tôi để được tư vấn</p>
+                                        <p>{{ __('general.contact_us_consultation') }}</p>
                                     </div>
                                 </td>
                             </tr>
@@ -322,8 +322,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <a href="{{ route('contact') }}" class="btn btn-primary">
-                            <i class="fas fa-calendar-plus me-2"></i>Đăng Ký Ngay
+                        <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>{{ __('general.register_now_schedule') }}
                         </a>
                     </div>
                 </div>
@@ -336,10 +336,10 @@
 <section class="py-5 bg-primary text-white">
     <div class="container text-center">
         <h3 class="fw-bold mb-3">BẠN CÓ CÂU HỎI VỀ KHÓA HỌC?</h3>
-        <p class="lead mb-4">Hãy liên hệ với chúng tôi để được tư vấn miễn phí và chọn khóa học phù hợp nhất</p>
+        <p class="lead mb-4">{{ __('general.contact_consultation_description_schedule') }}</p>
         <div class="d-flex flex-wrap justify-content-center gap-3">
-            <a href="{{ route('contact') }}" class="btn btn-warning btn-lg px-4 py-3">
-                <i class="fas fa-envelope me-2"></i>Liên Hệ Tư Vấn
+                            <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-warning btn-lg px-4 py-3">
+                <i class="fas fa-envelope me-2"></i>{{ __('general.contact_consultation_btn') }}
             </a>
             <a href="tel:{{ str_replace('.', '', $contactPhone) }}" class="btn btn-light btn-lg px-4 py-3">
                 <i class="fas fa-phone me-2"></i>Gọi Ngay: {{ $contactPhone }}
@@ -460,8 +460,8 @@ function showCourseDetails(courseId) {
                     <p>Chi tiết khóa học sẽ được hiển thị ở đây...</p>
                 </div>
                 <div class="col-md-6">
-                    <h6 class="fw-bold text-primary">Thông tin giảng viên</h6>
-                    <p>Thông tin về giảng viên sẽ được hiển thị ở đây...</p>
+                    <h6 class="fw-bold text-primary">{{ __('general.teacher_info_schedule') }}</h6>
+                    <p>{{ __('general.teacher_info_will_be_displayed') }}</p>
                 </div>
             </div>
         `;

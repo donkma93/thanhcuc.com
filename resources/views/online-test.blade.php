@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kiểm tra trình độ online')
+@section('title', __('general.online_level_test'))
 
 @section('content')
 <!-- Hero Section -->
@@ -9,16 +9,16 @@
         <div class="row align-items-center">
             <div class="col-lg-8 mx-auto text-center">
                 <h1 class="display-4 fw-bold mb-4 text-white animate-fade-in-up">
-                    KIỂM TRA TRÌNH ĐỘ ONLINE
+                    {{ __('general.online_level_test_title') }}
                 </h1>
                 <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
-                    Đánh giá trình độ tiếng Đức hiện tại của bạn một cách nhanh chóng và chính xác
+                    {{ __('general.assess_german_level_quickly') }}
                 </p>
                 <div class="d-flex justify-content-center gap-3 animate-fade-in-up animate-delay-2">
                     <a href="#test-section" class="btn btn-light btn-lg btn-liquid">
-                        <i class="fas fa-play me-2"></i>Bắt Đầu Kiểm Tra
+                        <i class="fas fa-play me-2"></i>{{ __('general.start_test') }}
                     </a>
-                    <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
+                    <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-light btn-lg">
                         <i class="fas fa-user-tie me-2"></i>Tư Vấn Trực Tiếp
                     </a>
                 </div>
@@ -31,8 +31,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">THÔNG TIN BÀI KIỂM TRA</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Hiểu rõ về bài kiểm tra trước khi bắt đầu</p>
+            <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">{{ __('general.test_information') }}</h2>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">{{ __('general.understand_test_before_start') }}</p>
         </div>
         
         <div class="row">
@@ -61,7 +61,7 @@
                     <div class="card-body p-4">
                         <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
                         <h5 class="fw-bold mb-2">A1 - C2</h5>
-                        <p class="text-muted mb-0">Đánh giá theo CEFR</p>
+                        <p class="text-muted mb-0">{{ __('general.assessment_according_cefr') }}</p>
                     </div>
                 </div>
             </div>
@@ -98,8 +98,8 @@
                             <h5 class="fw-bold text-success">A1 - Khởi đầu</h5>
                             <p class="small text-muted mb-2">Hiểu và sử dụng các cụm từ quen thuộc hàng ngày</p>
                             <ul class="small text-muted">
-                                <li>Giới thiệu bản thân</li>
-                                <li>Hỏi thông tin cá nhân cơ bản</li>
+                                <li>{{ __('general.introduce_yourself') }}</li>
+                                <li>{{ __('general.ask_basic_personal_info') }}</li>
                                 <li>Giao tiếp đơn giản</li>
                             </ul>
                         </div>
@@ -128,7 +128,7 @@
                             <ul class="small text-muted">
                                 <li>Công việc, trường học, giải trí</li>
                                 <li>Xử lý tình huống khi du lịch</li>
-                                <li>Mô tả kinh nghiệm, sự kiện</li>
+                                <li>{{ __('general.describe_experience_events') }}</li>
                             </ul>
                         </div>
                         <div class="level-item">
@@ -154,7 +154,7 @@
                             <h5 class="fw-bold text-danger">C1 - Nâng cao</h5>
                             <p class="small text-muted mb-2">Hiểu nhiều loại văn bản dài và phức tạp</p>
                             <ul class="small text-muted">
-                                <li>Nhận ra ý nghĩa ngụ ý</li>
+                                <li>{{ __('general.recognize_implied_meaning') }}</li>
                                 <li>Diễn đạt lưu loát và tự nhiên</li>
                                 <li>Sử dụng ngôn ngữ hiệu quả</li>
                             </ul>
@@ -201,7 +201,7 @@
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
-                                        <label for="testPhone" class="form-label">Số điện thoại *</label>
+                                        <label for="testPhone" class="form-label">{{ __('general.phone_number_required') }}</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             <input type="tel" class="form-control" id="testPhone" required>
@@ -289,7 +289,7 @@
                                     </p>
                                 </div>
                                 <div class="result-actions">
-                                    <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3">
+                                    <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary btn-lg me-3">
                                         <i class="fas fa-user-tie me-2"></i>Tư Vấn Lộ Trình
                                     </a>
                                     <button type="button" class="btn btn-outline-primary btn-lg" onclick="location.reload()">
@@ -310,7 +310,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold text-primary mb-3 animate-on-scroll">SAU KHI KIỂM TRA</h2>
-            <p class="lead text-muted animate-on-scroll animate-delay-1">Những gì bạn nhận được từ kết quả kiểm tra</p>
+            <p class="lead text-muted animate-on-scroll animate-delay-1">{{ __('general.what_you_get_from_test_results') }}</p>
         </div>
         
         <div class="row">
@@ -329,7 +329,7 @@
                     <div class="card-body p-4">
                         <i class="fas fa-book-open fa-3x text-success mb-3"></i>
                         <h5 class="fw-bold mb-3">Tài Liệu Học Tập</h5>
-                        <p class="text-muted">Nhận tài liệu ôn tập phù hợp với cấp độ của bạn</p>
+                        <p class="text-muted">{{ __('general.receive_study_materials_suitable_level') }}</p>
                     </div>
                 </div>
             </div>

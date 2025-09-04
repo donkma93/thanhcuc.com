@@ -30,7 +30,7 @@
                     <div class="teacher-hero-info">
                         <div class="teacher-badge mb-3">
                             <i class="fas fa-chalkboard-teacher me-2"></i>
-                            Giảng viên tiếng Đức chính thức
+                            {{ __('general.official_german_teacher') }}
                         </div>
                         <h1 class="display-4 fw-bold mb-3 text-gradient">{{ $teacher->name }}</h1>
                         <p class="lead text-muted mb-4">
@@ -53,7 +53,7 @@
                         <div class="experience-info mb-4">
                             <div class="experience-badge-large">
                                 <i class="fas fa-clock me-2"></i>
-                                <span>{{ $teacher->experience_years }}+ năm kinh nghiệm giảng dạy tiếng Đức</span>
+                                <span>{{ __('general.years_german_teaching_experience', ['years' => $teacher->experience_years]) }}</span>
                             </div>
                         </div>
                         @endif
@@ -68,16 +68,16 @@
                                 <i class="fas fa-star text-warning"></i>
                                 <span class="ms-2 fw-bold">5.0</span>
                             </div>
-                            <small class="text-muted">Dựa trên {{ rand(50, 200) }} đánh giá từ học viên</small>
+                            <small class="text-muted">{{ __('general.based_on_reviews', ['count' => rand(50, 200)]) }}</small>
                         </div>
                         
                         <!-- Contact Actions -->
                         <div class="teacher-actions-large">
-                            <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3">
-                                <i class="fas fa-envelope me-2"></i>Liên hệ tư vấn
+                            <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-envelope me-2"></i>{{ __('general.contact_consultation') }}
                             </a>
-                            <a href="{{ route('trial') }}" class="btn btn-outline-primary btn-lg">
-                                <i class="fas fa-calendar-check me-2"></i>Đăng ký học thử
+                            <a href="{{ route('trial', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-calendar-check me-2"></i>{{ __('general.register_trial_lesson') }}
                             </a>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="card-body p-4">
                             <h3 class="card-title mb-4">
                                 <i class="fas fa-user-circle text-primary me-2"></i>
-                                Giới thiệu về {{ $teacher->name }}
+                                {{ __('general.introduction_about_teacher', ['name' => $teacher->name]) }}
                             </h3>
                             @if($teacher->bio)
                                 <div class="teacher-bio">
@@ -105,12 +105,12 @@
                                 </div>
                             @else
                                 <p class="text-muted">
-                                    {{ $teacher->name }} là một giảng viên giàu kinh nghiệm trong lĩnh vực {{ $teacher->specialization }}. 
+                                    {{ __('general.experienced_teacher_in_field', ['name' => $teacher->name, 'specialization' => $teacher->specialization]) }} 
                                     @if($teacher->certification)
-                                    Với chứng chỉ {{ $teacher->certification }}, 
+                                    {{ __('general.with_certificate', ['certificate' => $teacher->certification]) }} 
                                     @endif
-                                    {{ $teacher->name }} cam kết mang đến 
-                                    chất lượng giảng dạy tiếng Đức tốt nhất cho học viên.
+                                    {{ __('general.teacher_committed_to_bring', ['name' => $teacher->name]) }} 
+                                    {{ __('general.best_german_teaching_quality') }}
                                 </p>
                             @endif
                         </div>
@@ -122,7 +122,7 @@
                         <div class="card-body p-4">
                             <h3 class="card-title mb-4">
                                 <i class="fas fa-trophy text-warning me-2"></i>
-                                Thành tích & Kinh nghiệm
+                                {{ __('general.achievements_experience') }}
                             </h3>
                             <div class="achievements-list">
                                 @foreach($teacher->achievements as $achievement)
@@ -147,7 +147,7 @@
                         <div class="card-body p-4">
                             <h3 class="card-title mb-4">
                                 <i class="fas fa-lightbulb text-info me-2"></i>
-                                Phương pháp giảng dạy tiếng Đức
+                                {{ __('general.german_teaching_method') }}
                             </h3>
                             <div class="teaching-methods">
                                 <div class="row">
@@ -202,7 +202,7 @@
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-certificate text-success me-3"></i>
                                         <div>
-                                            <strong>Chứng chỉ:</strong><br>
+                                            <strong>{{ __('general.certificate_label') }}</strong><br>
                                             <span class="text-muted">{{ $teacher->certification }}</span>
                                         </div>
                                     </div>
@@ -214,7 +214,7 @@
                                         <i class="fas fa-clock text-info me-3"></i>
                                         <div>
                                             <strong>Kinh nghiệm:</strong><br>
-                                            <span class="text-muted">{{ $teacher->experience_years }}+ năm giảng dạy</span>
+                                            <span class="text-muted">{{ __('general.years_teaching', ['years' => $teacher->experience_years]) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -223,8 +223,8 @@
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-users text-warning me-3"></i>
                                         <div>
-                                            <strong>Học viên:</strong><br>
-                                            <span class="text-muted">{{ rand(100, 500) }}+ học viên đã học</span>
+                                            <strong>{{ __('general.students_label') }}</strong><br>
+                                            <span class="text-muted">{{ __('general.students_studied', ['count' => rand(100, 500)]) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -236,12 +236,12 @@
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4 text-center">
                             <h4 class="card-title mb-3">Bạn muốn học tiếng Đức với {{ $teacher->name }}?</h4>
-                            <p class="text-muted mb-4">Liên hệ ngay để được tư vấn lộ trình học tiếng Đức phù hợp</p>
+                            <p class="text-muted mb-4">{{ __('general.contact_consultation_description') }}</p>
                             <div class="d-grid gap-2">
-                                <a href="{{ route('contact') }}" class="btn btn-primary">
+                                <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-primary">
                                     <i class="fas fa-phone me-2"></i>Liên hệ tư vấn
                                 </a>
-                                <a href="{{ route('trial') }}" class="btn btn-outline-primary">
+                                <a href="{{ route('trial', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-primary">
                                     <i class="fas fa-calendar-check me-2"></i>Đăng ký học thử
                                 </a>
                             </div>
@@ -256,8 +256,8 @@
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold text-primary mb-3">Giảng viên tiếng Đức khác</h2>
-                <p class="lead text-muted">Khám phá đội ngũ giảng viên tiếng Đức chuyên nghiệp của chúng tôi</p>
+                <h2 class="display-5 fw-bold text-primary mb-3">{{ __('general.other_german_teachers') }}</h2>
+                <p class="lead text-muted">{{ __('general.explore_professional_german_teachers') }}</p>
             </div>
             
             <div class="row">
@@ -291,7 +291,7 @@
                             <span class="badge bg-light text-primary border mb-3">{{ $otherTeacher->certification }}</span>
                             @endif
                             <div class="mt-3">
-                                <a href="{{ route('teachers.show', $otherTeacher->slug) }}" class="btn btn-outline-primary btn-sm">
+                                <a href="{{ route('teachers.show', ['locale' => app()->getLocale(), 'slug' => $otherTeacher->slug]) }}" class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-eye me-1"></i>Xem chi tiết
                                 </a>
                             </div>
@@ -302,8 +302,8 @@
             </div>
             
             <div class="text-center mt-4">
-                <a href="{{ route('teachers') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-users me-2"></i>Xem tất cả giảng viên
+                <a href="{{ route('teachers', ['locale' => app()->getLocale()]) }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-users me-2"></i>{{ __('general.view_all_teachers') }}
                 </a>
             </div>
         </div>

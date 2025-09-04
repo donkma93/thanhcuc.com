@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Liên hệ')
+@section('title', __('general.page_title_contact'))
 
 @section('content')
 <!-- Page Header -->
@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-3">Liên Hệ</h1>
+                <h1 class="display-4 fw-bold mb-3">{{ __('general.contact_title') }}</h1>
                 <p class="lead">
-                    Hãy liên hệ với chúng tôi để được tư vấn miễn phí về các khóa học tiếng Đức
+                    {{ __('general.contact_subtitle') }}
                 </p>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <div class="card border-0 shadow-lg">
                     <div class="card-header bg-primary text-white py-4">
                         <h4 class="mb-0">
-                            <i class="fas fa-envelope me-2"></i>Gửi Tin Nhắn
+                            <i class="fas fa-envelope me-2"></i>{{ __('general.send_message') }}
                         </h4>
                     </div>
                     <div class="card-body p-4">
@@ -38,11 +38,11 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('contact.submit') }}" method="POST">
+                        <form action="{{ route('contact.submit', ['locale' => app()->getLocale()]) }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label fw-bold">Họ và Tên <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label fw-bold">{{ __('general.full_name') }} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                            id="name" name="name" value="{{ old('name') }}" required>
                                     @error('name')
@@ -51,7 +51,7 @@
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label fw-bold">Số Điện Thoại <span class="text-danger">*</span></label>
+                                    <label for="phone" class="form-label fw-bold">{{ __('general.phone_number_label') }} <span class="text-danger">*</span></label>
                                     <input type="tel" class="form-control @error('phone') is-invalid @enderror" 
                                            id="phone" name="phone" value="{{ old('phone') }}" required>
                                     @error('phone')
@@ -61,7 +61,7 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="email" class="form-label fw-bold">Email</label>
+                                <label for="email" class="form-label fw-bold">{{ __('general.email_label') }}</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" 
                                        id="email" name="email" value="{{ old('email') }}">
                                 @error('email')
@@ -70,15 +70,15 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="course" class="form-label fw-bold">Khóa Học Quan Tâm <span class="text-danger">*</span></label>
+                                <label for="course" class="form-label fw-bold">{{ __('general.course_interested') }} <span class="text-danger">*</span></label>
                                 <select class="form-select @error('course') is-invalid @enderror" id="course" name="course" required>
-                                    <option value="">-- Chọn khóa học --</option>
-                                    <option value="A1-A2" {{ old('course') == 'A1-A2' ? 'selected' : '' }}>Cơ Bản A1-A2</option>
-                                    <option value="B1-B2" {{ old('course') == 'B1-B2' ? 'selected' : '' }}>Trung Cấp B1-B2</option>
-                                    <option value="C1-C2" {{ old('course') == 'C1-C2' ? 'selected' : '' }}>Nâng Cao C1-C2</option>
-                                    <option value="Business" {{ old('course') == 'Business' ? 'selected' : '' }}>Tiếng Đức Thương Mại</option>
-                                    <option value="Exam" {{ old('course') == 'Exam' ? 'selected' : '' }}>Luyện Thi Chứng Chỉ</option>
-                                    <option value="Other" {{ old('course') == 'Other' ? 'selected' : '' }}>Khác</option>
+                                    <option value="">{{ __('general.select_course') }}</option>
+                                    <option value="A1-A2" {{ old('course') == 'A1-A2' ? 'selected' : '' }}>{{ __('general.basic_level') }}</option>
+                                    <option value="B1-B2" {{ old('course') == 'B1-B2' ? 'selected' : '' }}>{{ __('general.intermediate_level') }}</option>
+                                    <option value="C1-C2" {{ old('course') == 'C1-C2' ? 'selected' : '' }}>{{ __('general.advanced_level') }}</option>
+                                    <option value="Business" {{ old('course') == 'Business' ? 'selected' : '' }}>{{ __('general.business_german') }}</option>
+                                    <option value="Exam" {{ old('course') == 'Exam' ? 'selected' : '' }}>{{ __('general.exam_preparation') }}</option>
+                                    <option value="Other" {{ old('course') == 'Other' ? 'selected' : '' }}>{{ __('general.other_course') }}</option>
                                 </select>
                                 @error('course')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -86,17 +86,17 @@
                             </div>
                             
                             <div class="mb-4">
-                                <label for="message" class="form-label fw-bold">Tin Nhắn</label>
+                                <label for="message" class="form-label fw-bold">{{ __('general.message') }}</label>
                                 <textarea class="form-control @error('message') is-invalid @enderror" 
                                           id="message" name="message" rows="5" 
-                                          placeholder="Chia sẻ với chúng tôi về mục tiêu học tiếng Đức của bạn...">{{ old('message') }}</textarea>
+                                          placeholder="{{ __('general.message_placeholder') }}">{{ old('message') }}</textarea>
                                 @error('message')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             
                             <button type="submit" class="btn btn-primary btn-lg w-100">
-                                <i class="fas fa-paper-plane me-2"></i>Gửi Tin Nhắn
+                                <i class="fas fa-paper-plane me-2"></i>{{ __('general.send_message_button') }}
                             </button>
                         </form>
                     </div>
@@ -109,7 +109,7 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-secondary text-white py-3">
                         <h5 class="mb-0">
-                            <i class="fas fa-map-marker-alt me-2"></i>Thông Tin Liên Hệ
+                            <i class="fas fa-map-marker-alt me-2"></i>{{ __('general.contact_info') }}
                         </h5>
                     </div>
                     <div class="card-body p-4">
@@ -120,9 +120,9 @@
                                     <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
                                 <div>
-                                    <h6 class="fw-bold mb-1">Địa Chỉ</h6>
+                                    <h6 class="fw-bold mb-1">{{ __('general.address_label') }}</h6>
                                     <p class="text-muted mb-0">
-                                        {{ $footerSettings['company_address'] ?? 'Đang cập nhật' }}
+                                        {{ $footerSettings['company_address'] ?? __('general.updating') }}
                                     </p>
                                 </div>
                             </div>
@@ -133,10 +133,10 @@
                                     <i class="fas fa-phone text-white"></i>
                                 </div>
                                 <div>
-                                    <h6 class="fw-bold mb-1">Điện Thoại</h6>
+                                    <h6 class="fw-bold mb-1">{{ __('general.phone_label') }}</h6>
                                     <p class="text-muted mb-0">
                                         <a href="tel:{{ $footerSettings['company_phone'] ?? '' }}" class="text-decoration-none">
-                                            {{ $footerSettings['company_phone_display'] ?? ($footerSettings['company_phone'] ?? 'Đang cập nhật') }}
+                                            {{ $footerSettings['company_phone_display'] ?? ($footerSettings['company_phone'] ?? __('general.updating')) }}
                                         </a>
                                     </p>
                                 </div>
@@ -153,7 +153,7 @@
                                         @if(!empty($footerSettings['company_email']))
                                             <a href="mailto:{{ $footerSettings['company_email'] }}" class="text-decoration-none">{{ $footerSettings['company_email'] }}</a>
                                         @else
-                                            Đang cập nhật
+                                            {{ __('general.updating') }}
                                         @endif
                                     </p>
                                 </div>
@@ -165,9 +165,9 @@
                                     <i class="fas fa-clock text-white"></i>
                                 </div>
                                 <div>
-                                    <h6 class="fw-bold mb-1">Giờ Làm Việc</h6>
+                                    <h6 class="fw-bold mb-1">{{ __('general.working_hours') }}</h6>
                                     <p class="text-muted mb-0">
-                                        {{ $footerSettings['working_hours'] ?? 'Đang cập nhật' }}
+                                        {{ $footerSettings['working_hours'] ?? __('general.updating') }}
                                     </p>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-dark text-white py-3">
                         <h5 class="mb-0">
-                            <i class="fas fa-share-alt me-2"></i>Kết Nối Với Chúng Tôi
+                            <i class="fas fa-share-alt me-2"></i>{{ __('general.connect_with_us') }}
                         </h5>
                     </div>
                     <div class="card-body p-4 text-center">
@@ -206,7 +206,7 @@
                             @endif
                         </div>
                         <p class="text-muted mt-3 mb-0">
-                            Theo dõi chúng tôi để cập nhật thông tin mới nhất về các khóa học và sự kiện!
+                            {{ __('general.follow_us_for_updates') }}
                         </p>
                     </div>
                 </div>
@@ -219,8 +219,8 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3">Vị Trí Trung Tâm</h2>
-            <p class="lead text-muted">Tìm đường đến trung tâm Thanh Cúc</p>
+            <h2 class="display-5 fw-bold text-primary mb-3">{{ __('general.center_location') }}</h2>
+            <p class="lead text-muted">{{ __('general.find_way_to_center') }}</p>
         </div>
         
         <div class="row">
@@ -270,8 +270,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold text-primary mb-3">Câu Hỏi Thường Gặp</h2>
-            <p class="lead text-muted">Những thắc mắc phổ biến về việc học tiếng Đức</p>
+            <h2 class="display-5 fw-bold text-primary mb-3">{{ __('general.frequently_asked_questions') }}</h2>
+            <p class="lead text-muted">{{ __('general.common_questions_about_german') }}</p>
         </div>
         
         <div class="row">
@@ -280,13 +280,12 @@
                     <div class="accordion-item border-0 shadow-sm mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                Tôi chưa biết gì về tiếng Đức, có thể học được không?
+                                {{ __('general.faq_beginner_question') }}
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Hoàn toàn có thể! Chúng tôi có khóa học A1 dành riêng cho người mới bắt đầu. 
-                                Giảng viên sẽ hướng dẫn từ bảng chữ cái, phát âm cơ bản đến giao tiếp đơn giản.
+                                {{ __('general.faq_beginner_answer') }}
                             </div>
                         </div>
                     </div>
@@ -294,13 +293,12 @@
                     <div class="accordion-item border-0 shadow-sm mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Học phí có thể trả góp không?
+                                {{ __('general.faq_payment_question') }}
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Có, chúng tôi hỗ trợ trả góp 2-3 đợt trong suốt khóa học. 
-                                Bạn có thể liên hệ để được tư vấn chi tiết về các phương thức thanh toán.
+                                {{ __('general.faq_payment_answer') }}
                             </div>
                         </div>
                     </div>
@@ -308,13 +306,12 @@
                     <div class="accordion-item border-0 shadow-sm mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                Có được học thử trước khi đăng ký không?
+                                {{ __('general.faq_trial_question') }}
                             </button>
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Có! Chúng tôi có buổi học thử miễn phí để bạn trải nghiệm phương pháp giảng dạy 
-                                và môi trường học tập trước khi quyết định đăng ký.
+                                {{ __('general.faq_trial_answer') }}
                             </div>
                         </div>
                     </div>
@@ -322,13 +319,12 @@
                     <div class="accordion-item border-0 shadow-sm">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                Sau khi học xong có hỗ trợ tìm việc không?
+                                {{ __('general.faq_job_support_question') }}
                             </button>
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Chúng tôi có mạng lưới đối tác doanh nghiệp và sẽ giới thiệu cơ hội việc làm 
-                                phù hợp cho học viên đã hoàn thành khóa học với kết quả tốt.
+                                {{ __('general.faq_job_support_answer') }}
                             </div>
                         </div>
                     </div>
@@ -343,15 +339,15 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h3 class="fw-bold mb-3">Sẵn sàng bắt đầu hành trình học tiếng Đức?</h3>
-                <p class="mb-0">Liên hệ ngay với chúng tôi để được tư vấn miễn phí và đăng ký học thử!</p>
+                <h3 class="fw-bold mb-3">{{ __('general.ready_to_start_german_journey') }}</h3>
+                <p class="mb-0">{{ __('general.contact_for_free_consultation') }}</p>
             </div>
             <div class="col-lg-4 text-lg-end">
                 <a href="tel:{{ $footerSettings['company_phone'] ?? '' }}" class="btn btn-light btn-lg me-3">
-                    <i class="fas fa-phone me-2"></i>Gọi Ngay
+                    <i class="fas fa-phone me-2"></i>{{ __('general.call_now') }}
                 </a>
                 <a href="#" class="btn btn-outline-light btn-lg" onclick="document.getElementById('name').focus(); return false;">
-                    <i class="fas fa-edit me-2"></i>Đăng Ký
+                    <i class="fas fa-edit me-2"></i>{{ __('general.register') }}
                 </a>
             </div>
         </div>

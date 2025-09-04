@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav aria-label="Pagination Navigation">
+    <nav aria-label="{{ __('general.pagination_navigation') }}">
         <ul class="pagination pagination-sm justify-content-end mb-0">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
@@ -18,7 +18,7 @@
 
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
+                {{-- "{{ __('general.three_dots_separator') }}" Separator --}}
                 @if (is_string($element))
                     <li class="page-item disabled" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>
                 @endif

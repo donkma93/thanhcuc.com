@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Translatable;
 
 class News extends Model
 {
-    use HasFactory;
+    use HasFactory, Translatable;
     
     protected $fillable = [
         'title',
@@ -33,5 +34,29 @@ class News extends Model
         return $this->belongsTo(User::class, 'author_id')->withDefault([
             'name' => 'Admin'
         ]);
+    }
+
+    /**
+     * Get the localized title
+     */
+    public function getLocalizedTitleAttribute()
+    {
+        return $this->getLocalized('title');
+    }
+
+    /**
+     * Get the localized content
+     */
+    public function getLocalizedContentAttribute()
+    {
+        return $this->getLocalized('content');
+    }
+
+    /**
+     * Get the localized excerpt
+     */
+    public function getLocalizedExcerptAttribute()
+    {
+        return $this->getLocalized('excerpt');
     }
 }

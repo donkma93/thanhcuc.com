@@ -12,11 +12,11 @@
                     HỌC THỬ MIỄN PHÍ
                 </h1>
                 <p class="lead mb-4 text-white animate-fade-in-up animate-delay-1">
-                    Trải nghiệm phương pháp giảng dạy tiếng Đức hiệu quả tại Thanh Cúc hoàn toàn miễn phí
+                    {{ __('general.experience_german_teaching_method') }}
                 </p>
                 <div class="d-flex justify-content-center gap-3 animate-fade-in-up animate-delay-2">
                     <a href="#trial-form" class="btn btn-light btn-lg btn-liquid">
-                        <i class="fas fa-play me-2"></i>Đăng Ký Ngay
+                        <i class="fas fa-play me-2"></i>{{ __('general.register_now') }}
                     </a>
                     <a href="tel:0975186230" class="btn btn-outline-light btn-lg">
                         <i class="fas fa-phone me-2"></i>Hotline: 0975.186.230
@@ -43,7 +43,7 @@
                             <i class="fas fa-eye fa-3x text-primary"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Trải Nghiệm Thực Tế</h5>
-                        <p class="text-muted">Tham gia buổi học thực tế với giảng viên bản ngữ, hiểu rõ phương pháp giảng dạy</p>
+                        <p class="text-muted">{{ __('general.join_real_lesson_native_teacher') }}</p>
                     </div>
                 </div>
             </div>
@@ -54,8 +54,8 @@
                         <div class="mb-3">
                             <i class="fas fa-user-check fa-3x text-success"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Đánh Giá Trình Độ</h5>
-                        <p class="text-muted">Kiểm tra trình độ tiếng Đức hiện tại và nhận tư vấn lộ trình học phù hợp</p>
+                        <h5 class="fw-bold mb-3">{{ __('general.level_assessment') }}</h5>
+                        <p class="text-muted">{{ __('general.check_german_level_consultation') }}</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                         <div class="mb-3">
                             <i class="fas fa-gift fa-3x text-warning"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Nhận Quà Tặng</h5>
+                        <h5 class="fw-bold mb-3">{{ __('general.receive_gifts') }}</h5>
                         <p class="text-muted">Tài liệu học tập miễn phí và voucher giảm giá cho khóa học chính thức</p>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                             <i class="fas fa-users fa-3x text-info"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Gặp Gỡ Bạn Học</h5>
-                        <p class="text-muted">Kết nối với những người cùng đam mê học tiếng Đức</p>
+                        <p class="text-muted">{{ __('general.connect_with_german_learners') }}</p>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                             <i class="fas fa-clock fa-3x text-secondary"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Linh Hoạt Thời Gian</h5>
-                        <p class="text-muted">Nhiều khung giờ học thử để bạn lựa chọn phù hợp với lịch trình</p>
+                        <p class="text-muted">{{ __('general.multiple_trial_slots') }}</p>
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                             <i class="fas fa-handshake fa-3x text-primary"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Không Ràng Buộc</h5>
-                        <p class="text-muted">Hoàn toàn miễn phí, không có bất kỳ ràng buộc hay cam kết nào</p>
+                        <p class="text-muted">{{ __('general.completely_free_no_commitment') }}</p>
                     </div>
                 </div>
             </div>
@@ -210,9 +210,9 @@
                     <div class="card-body p-5">
                         <div class="text-center mb-4">
                             <h3 class="fw-bold text-primary mb-3">
-                                <i class="fas fa-graduation-cap me-2"></i>ĐĂNG KÝ HỌC THỬ MIỄN PHÍ
+                                <i class="fas fa-graduation-cap me-2"></i>{{ __('general.register_free_trial') }}
                             </h3>
-                            <p class="text-muted">Điền thông tin để nhận tư vấn và đăng ký buổi học thử phù hợp</p>
+                            <p class="text-muted">{{ __('general.trial_consultation_info') }}</p>
                         </div>
                         
                         @if(session('success'))
@@ -234,13 +234,13 @@
                             </div>
                         @endif
                         
-                        <form action="{{ route('contact.submit') }}" method="POST" class="trial-form">
+                        <form action="{{ route('contact.submit', ['locale' => app()->getLocale()]) }}" method="POST" class="trial-form">
                             @csrf
                             <input type="hidden" name="form_type" value="trial">
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Họ và tên *</label>
+                                    <label for="name" class="form-label">{{ __('general.name_required') }}</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         <input type="text" class="form-control" id="name" name="name" required>
@@ -248,7 +248,7 @@
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Số điện thoại *</label>
+                                    <label for="phone" class="form-label">{{ __('general.phone_required') }}</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                         <input type="tel" class="form-control" id="phone" name="phone" required>
@@ -258,7 +258,7 @@
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label">{{ __('general.email_label') }}</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                         <input type="email" class="form-control" id="email" name="email">
@@ -270,8 +270,8 @@
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-level-up-alt"></i></span>
                                         <select class="form-select" id="level" name="level">
-                                            <option value="">Chọn trình độ</option>
-                                            <option value="Chưa học">Chưa học tiếng Đức</option>
+                                            <option value="">{{ __('general.select_level') }}</option>
+                                            <option value="Chưa học">{{ __('general.never_learned_german') }}</option>
                                             <option value="A1">A1 - Sơ cấp</option>
                                             <option value="A2">A2 - Cơ bản</option>
                                             <option value="B1">B1 - Trung cấp</option>
@@ -288,7 +288,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
                                     <select class="form-select" id="program" name="program" required>
-                                        <option value="">Chọn chương trình</option>
+                                        <option value="">{{ __('general.select_program') }}</option>
                                         <option value="IT">IT & Công nghệ</option>
                                         <option value="Healthcare">Y tế & Chăm sóc</option>
                                         <option value="Engineering">Kỹ thuật & Cơ khí</option>
@@ -304,7 +304,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                     <select class="form-select" id="schedule" name="schedule">
-                                        <option value="">Chọn thời gian</option>
+                                        <option value="">{{ __('general.select_time') }}</option>
                                         <option value="Sáng">Buổi sáng (9:00 - 12:00)</option>
                                         <option value="Chiều">Buổi chiều (14:00 - 17:00)</option>
                                         <option value="Tối">Buổi tối (18:00 - 21:00)</option>
@@ -317,15 +317,15 @@
                             <div class="mb-4">
                                 <label for="message" class="form-label">Ghi chú thêm</label>
                                 <textarea class="form-control" id="message" name="message" rows="3" 
-                                          placeholder="Mục tiêu học tập, thời gian mong muốn, câu hỏi khác..."></textarea>
+                                          placeholder="{{ __('general.learning_goals') }}"></textarea>
                             </div>
                             
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-lg btn-liquid px-5">
-                                    <i class="fas fa-paper-plane me-2"></i>ĐĂNG KÝ HỌC THỬ MIỄN PHÍ
+                                    <i class="fas fa-paper-plane me-2"></i>{{ __('general.register_free_trial_long') }}
                                 </button>
                                 <p class="text-muted mt-3 small">
-                                    <i class="fas fa-shield-alt me-1"></i>Thông tin của bạn được bảo mật tuyệt đối
+                                    <i class="fas fa-shield-alt me-1"></i>{{ __('general.info_security_guarantee') }}
                                 </p>
                             </div>
                         </form>
@@ -368,7 +368,7 @@
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Bạn chỉ cần mang theo tinh thần học hỏi và một cuốn sổ ghi chép. Trung tâm sẽ cung cấp tài liệu và dụng cụ học tập cần thiết.
+                                {{ __('general.bring_learning_spirit_notebook') }}
                             </div>
                         </div>
                     </div>
@@ -381,7 +381,7 @@
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Mỗi buổi học thử kéo dài 90 phút, bao gồm 60 phút học thực tế và 30 phút tư vấn, đánh giá trình độ.
+                                {{ __('general.trial_lesson_duration') }}
                             </div>
                         </div>
                     </div>
@@ -389,12 +389,12 @@
                     <div class="accordion-item animate-on-scroll animate-delay-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                Tôi có thể học thử nhiều lần không?
+                                {{ __('general.can_i_trial_multiple_times') }}
                             </button>
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Mỗi học viên được tham gia học thử 1 lần cho mỗi cấp độ. Bạn có thể học thử các cấp độ khác nhau để tìm lớp phù hợp nhất.
+                                {{ __('general.trial_limit_per_level') }}
                             </div>
                         </div>
                     </div>

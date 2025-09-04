@@ -6,7 +6,7 @@
             <div class="col-lg-4 mb-4">
                 <h5 class="text-white mb-4 fw-bold text-uppercase">
                     <i class="fas fa-phone-alt me-2 text-warning"></i>
-                    Liên hệ chúng tôi
+                    {{ __('general.contact_us') }}
                 </h5>
 
                 <div class="contact-info">
@@ -31,13 +31,13 @@
                     
                     <div class="contact-item mb-3">
                         <i class="fas fa-clock me-3 text-warning"></i>
-                        <span class="text-light">{{ $footerSettings['working_hours'] ?? 'T2-T7: 8:00 - 20:00, CN: 8:00 - 17:00' }}</span>
+                        <span class="text-light">{{ $footerSettings['working_hours'] ?? __('general.working_hours') }}</span>
                     </div>
                 </div>
                 
                 <!-- Social Media -->
                 <div class="social-links">
-                    <h6 class="text-white mb-3">Theo dõi chúng tôi</h6>
+                    <h6 class="text-white mb-3">{{ __('general.follow_us') }}</h6>
                     <div class="d-flex">
                         @if(isset($footerSettings['facebook_url']) && $footerSettings['facebook_url'])
                             <a href="{{ $footerSettings['facebook_url'] }}" class="text-light me-3 social-link" target="_blank">
@@ -70,7 +70,7 @@
             <div class="col-lg-4 mb-4">
                 <h5 class="text-white mb-4 fw-bold text-uppercase">
                     <i class="fas fa-building me-2 text-warning"></i>
-                    Hệ thống chi nhánh
+                    {{ __('general.branch_system') }}
                 </h5>
                 @if(isset($footerBranches) && $footerBranches->count() > 0)
                    
@@ -117,7 +117,7 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted">Chưa có khóa học nào</p>
+                    <p class="text-muted">{{ __('general.no_courses') }}</p>
                 @endif
             </div>
         </div>
@@ -128,14 +128,14 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <p class="text-light mb-0 small">
-                    &copy; {{ date('Y') }} {{ $footerSettings['company_name'] ?? 'Trung Tâm Tiếng Đức Thanh Cúc' }}. All rights reserved.
+                    &copy; {{ date('Y') }} {{ $footerSettings['company_name'] ?? __('general.company_name') }}. {{ __('general.all_rights_reserved') }}
                 </p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="footer-links">
-                    <a href="{{ route('home') }}" class="text-light text-decoration-none me-3 small">Trang Chủ</a>
-                    <a href="{{ route('about') }}" class="text-light text-decoration-none me-3 small">Về Chúng Tôi</a>
-                    <a href="{{ route('contact') }}" class="text-light text-decoration-none small">Liên Hệ</a>
+                    <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="text-light text-decoration-none me-3 small">{{ __('general.home') }}</a>
+                    <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="text-light text-decoration-none me-3 small">{{ __('general.about') }}</a>
+                    <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="text-light text-decoration-none small">{{ __('general.contact') }}</a>
                 </div>
             </div>
         </div>

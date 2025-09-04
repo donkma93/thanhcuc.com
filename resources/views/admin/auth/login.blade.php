@@ -198,7 +198,7 @@
     </style>
 </head>
 <body>
-    <a href="{{ route('home') }}" class="back-to-site">
+                    <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="back-to-site">
         <i class="fas fa-arrow-left me-2"></i>
         Về trang chủ
     </a>
@@ -239,7 +239,7 @@
                             <input type="email" 
                                    class="form-control @error('email') is-invalid @enderror" 
                                    name="email" 
-                                   placeholder="Email đăng nhập"
+                                   placeholder="{{ __('general.login_email_placeholder') }}"
                                    value="{{ old('email') }}"
                                    required>
                         </div>
@@ -249,7 +249,7 @@
                             <input type="password" 
                                    class="form-control @error('password') is-invalid @enderror" 
                                    name="password" 
-                                   placeholder="Mật khẩu"
+                                   placeholder="{{ __('general.login_password_placeholder') }}"
                                    required>
                         </div>
                         

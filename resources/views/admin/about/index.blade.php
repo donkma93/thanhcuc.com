@@ -1,20 +1,20 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Quản lý Về Chúng Tôi')
+@section('title', __('general.admin_about_management'))
 
 @section('header')
     <div class="d-flex justify-content-between align-items-center">
         <div>
             <h1 class="h3 mb-0">
                 <i class="fas fa-users me-2"></i>
-                Quản lý Về Chúng Tôi
+                {{ __('general.admin_about_management') }}
             </h1>
-            <p class="text-muted mb-0">Quản lý thông tin trang Về chúng tôi</p>
+            <p class="text-muted mb-0">{{ __('general.admin_about_description') }}</p>
         </div>
         <div>
             <button type="button" class="btn btn-warning" onclick="resetToDefault()">
                 <i class="fas fa-undo me-2"></i>
-                Khôi phục mặc định
+                {{ __('general.restore_default') }}
             </button>
         </div>
     </div>
@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="fas fa-undo me-2"></i>
                             Khôi phục
                         </button>
-                        <a href="{{ route('about') }}" target="_blank" class="btn btn-info btn-lg ms-2">
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" target="_blank" class="btn btn-info btn-lg ms-2">
                             <i class="fas fa-eye me-2"></i>
                             Xem trang
                         </a>

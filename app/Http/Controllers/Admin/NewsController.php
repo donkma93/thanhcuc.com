@@ -38,6 +38,11 @@ class NewsController extends Controller
             'is_published' => 'boolean',
             'is_featured' => 'boolean',
             'published_at' => 'nullable|date',
+            'translations' => 'nullable|array',
+            'translations.*.locale' => 'required|string|in:vi,en,de',
+            'translations.*.title' => 'nullable|string|max:255',
+            'translations.*.excerpt' => 'nullable|string|max:500',
+            'translations.*.content' => 'nullable|string',
         ]);
 
         $data = $request->all();
@@ -81,6 +86,21 @@ class NewsController extends Controller
             
             $news = News::create($data);
             
+            // Handle translations
+            if ($request->has('translations')) {
+                foreach ($request->translations as $translation) {
+                    if (!empty($translation['locale']) && !empty($translation['title'])) {
+                        $news->setTranslated('title', $translation['title'], $translation['locale']);
+                    }
+                    if (!empty($translation['locale']) && !empty($translation['excerpt'])) {
+                        $news->setTranslated('excerpt', $translation['excerpt'], $translation['locale']);
+                    }
+                    if (!empty($translation['locale']) && !empty($translation['content'])) {
+                        $news->setTranslated('content', $translation['content'], $translation['locale']);
+                    }
+                }
+            }
+            
             \Log::info('News created successfully with ID:', ['id' => $news->id]);
             
             return redirect()->route('admin.news.index')
@@ -117,6 +137,11 @@ class NewsController extends Controller
             'is_published' => 'boolean',
             'is_featured' => 'boolean',
             'published_at' => 'nullable|date',
+            'translations' => 'nullable|array',
+            'translations.*.locale' => 'required|string|in:vi,en,de',
+            'translations.*.title' => 'nullable|string|max:255',
+            'translations.*.excerpt' => 'nullable|string|max:500',
+            'translations.*.content' => 'nullable|string',
         ]);
 
         $data = $request->all();
@@ -163,6 +188,21 @@ class NewsController extends Controller
             }
             
             $news->update($data);
+            
+            // Handle translations
+            if ($request->has('translations')) {
+                foreach ($request->translations as $translation) {
+                    if (!empty($translation['locale']) && !empty($translation['title'])) {
+                        $news->setTranslated('title', $translation['title'], $translation['locale']);
+                    }
+                    if (!empty($translation['locale']) && !empty($translation['excerpt'])) {
+                        $news->setTranslated('excerpt', $translation['excerpt'], $translation['locale']);
+                    }
+                    if (!empty($translation['locale']) && !empty($translation['content'])) {
+                        $news->setTranslated('content', $translation['content'], $translation['locale']);
+                    }
+                }
+            }
             
             \Log::info('News updated successfully');
             

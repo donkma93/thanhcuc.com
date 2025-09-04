@@ -4,330 +4,246 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Thêm tin tức mới</h1>
-        <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Quay lại
-        </a>
-    </div>
-
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Thông tin tin tức</h6>
-        </div>
-        <div class="card-body">
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Thêm tin tức mới</h4>
                 </div>
-            @endif
-            
-            <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Tiêu đề <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" 
-                                   id="title" name="title" value="{{ old('title') }}" required>
-                            @error('title')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                <div class="card-body">
+                    <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        
+                        <!-- Language Tabs -->
+                        <ul class="nav nav-tabs mb-4" id="languageTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="vi-tab" data-bs-toggle="tab" data-bs-target="#vi" type="button" role="tab">
+                                    🇻🇳 Tiếng Việt
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab">
+                                    🇺🇸 English
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="de-tab" data-bs-toggle="tab" data-bs-target="#de" type="button" role="tab">
+                                    🇩🇪 Deutsch
+                                </button>
+                            </li>
+                        </ul>
 
-                        <div class="mb-3">
-                            <label for="excerpt" class="form-label">Tóm tắt</label>
-                            <textarea class="form-control @error('excerpt') is-invalid @enderror" 
-                                      id="excerpt" name="excerpt" rows="3" 
-                                      placeholder="Tóm tắt ngắn gọn về nội dung tin tức...">{{ old('excerpt') }}</textarea>
-                            @error('excerpt')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">Tối đa 500 ký tự</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="content" class="form-label">Nội dung <span class="text-danger">*</span></label>
-                            <textarea class="form-control @error('content') is-invalid @enderror" 
-                                      id="content" name="content" rows="15" style="display: none;">{{ old('content') }}</textarea>
-                            <div id="content-editor" class="border rounded p-3 @error('content') border-danger @enderror" style="min-height: 400px;">
-                                <div class="text-muted text-center py-5">
-                                    <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
-                                    <p>Đang tải editor...</p>
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="languageTabContent">
+                            <!-- Vietnamese Tab -->
+                            <div class="tab-pane fade show active" id="vi" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="title" class="form-label">Tiêu đề (Tiếng Việt) *</label>
+                                            <input type="text" class="form-control @error('title') is-invalid @enderror" 
+                                                   id="title" name="title" value="{{ old('title') }}" required>
+                                            @error('title')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="excerpt" class="form-label">Tóm tắt (Tiếng Việt)</label>
+                                            <textarea class="form-control @error('excerpt') is-invalid @enderror" 
+                                                      id="excerpt" name="excerpt" rows="3">{{ old('excerpt') }}</textarea>
+                                            @error('excerpt')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="content" class="form-label">Nội dung (Tiếng Việt) *</label>
+                                            <textarea class="form-control @error('content') is-invalid @enderror" 
+                                                      id="content" name="content" rows="10" required>{{ old('content') }}</textarea>
+                                            @error('content')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="category" class="form-label">Danh mục *</label>
+                                            <select class="form-select @error('category') is-invalid @enderror" 
+                                                    id="category" name="category" required>
+                                                <option value="">Chọn danh mục</option>
+                                                <option value="KIẾN THỨC TIẾNG ĐỨC" {{ old('category') == 'KIẾN THỨC TIẾNG ĐỨC' ? 'selected' : '' }}>
+                                                    Kiến thức tiếng Đức
+                                                </option>
+                                                <option value="HOẠT ĐỘNG CÔNG TY" {{ old('category') == 'HOẠT ĐỘNG CÔNG TY' ? 'selected' : '' }}>
+                                                    Hoạt động công ty
+                                                </option>
+                                            </select>
+                                            @error('category')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="featured_image" class="form-label">Hình ảnh nổi bật</label>
+                                            <input type="file" class="form-control @error('featured_image') is-invalid @enderror" 
+                                                   id="featured_image" name="featured_image" accept="image/*">
+                                            @error('featured_image')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="is_published" name="is_published" {{ old('is_published') ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="is_published">
+                                                    Xuất bản ngay
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" {{ old('is_featured') ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="is_featured">
+                                                    Tin nổi bật
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="published_at" class="form-label">Ngày xuất bản</label>
+                                            <input type="datetime-local" class="form-control @error('published_at') is-invalid @enderror" 
+                                                   id="published_at" name="published_at" value="{{ old('published_at') }}">
+                                            @error('published_at')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            @error('content')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">Nhập nội dung tin tức vào editor bên trên</div>
-                            <div id="content-debug" class="mt-2 small text-muted"></div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Danh mục</label>
-                            <select class="form-select @error('category') is-invalid @enderror" 
-                                    id="category" name="category" required>
-                                <option value="">-- Chọn danh mục --</option>
-                                <option value="KIẾN THỨC TIẾNG ĐỨC" {{ old('category') == 'KIẾN THỨC TIẾNG ĐỨC' ? 'selected' : '' }}>
-                                    KIẾN THỨC TIẾNG ĐỨC
-                                </option>
-                                <option value="HOẠT ĐỘNG CÔNG TY" {{ old('category') == 'HOẠT ĐỘNG CÔNG TY' ? 'selected' : '' }}>
-                                    HOẠT ĐỘNG CÔNG TY
-                                </option>
-                            </select>
-                            @error('category')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                            <!-- English Tab -->
+                            <div class="tab-pane fade" id="en" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="title_en" class="form-label">Title (English)</label>
+                                            <input type="text" class="form-control" id="title_en" name="translations[en][title]" 
+                                                   placeholder="Enter title in English">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="excerpt_en" class="form-label">Excerpt (English)</label>
+                                            <textarea class="form-control" id="excerpt_en" name="translations[en][excerpt]" 
+                                                      rows="3" placeholder="Enter excerpt in English"></textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="content_en" class="form-label">Content (English)</label>
+                                            <textarea class="form-control" id="content_en" name="translations[en][content]" 
+                                                      rows="10" placeholder="Enter content in English"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>Note:</strong> English translations are optional. If not provided, the Vietnamese content will be used as fallback.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="featured_image" class="form-label">Hình ảnh đại diện</label>
-                            <input type="file" class="form-control @error('featured_image') is-invalid @enderror" 
-                                   id="featured_image" name="featured_image" accept="image/*">
-                            @error('featured_image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">Định dạng: JPG, PNG, GIF. Tối đa 2MB</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="published_at" class="form-label">Ngày xuất bản</label>
-                            <input type="datetime-local" class="form-control @error('published_at') is-invalid @enderror" 
-                                   id="published_at" name="published_at" value="{{ old('published_at') }}">
-                            @error('published_at')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">Để trống để xuất bản ngay</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_published" name="is_published" 
-                                       value="1" {{ old('is_published', false) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_published">
-                                    Xuất bản ngay
-                                </label>
+                            <!-- German Tab -->
+                            <div class="tab-pane fade" id="de" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="title_de" class="form-label">Titel (Deutsch)</label>
+                                            <input type="text" class="form-control" id="title_de" name="translations[de][title]" 
+                                                   placeholder="Titel auf Deutsch eingeben">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="excerpt_de" class="form-label">Zusammenfassung (Deutsch)</label>
+                                            <textarea class="form-control" id="excerpt_de" name="translations[de][excerpt]" 
+                                                      rows="3" placeholder="Zusammenfassung auf Deutsch eingeben"></textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="content_de" class="form-label">Inhalt (Deutsch)</label>
+                                            <textarea class="form-control" id="content_de" name="translations[de][content]" 
+                                                      rows="10" placeholder="Inhalt auf Deutsch eingeben"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>Hinweis:</strong> Deutsche Übersetzungen sind optional. Falls nicht angegeben, wird der vietnamesische Inhalt als Fallback verwendet.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" 
-                                       value="1" {{ old('is_featured', false) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_featured">
-                                    Tin tức nổi bật
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <!-- Hidden fields for translations -->
+                        <input type="hidden" name="translations[en][locale]" value="en">
+                        <input type="hidden" name="translations[de][locale]" value="de">
 
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">
-                        <i class="fas fa-times"></i> Hủy
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Lưu tin tức
-                    </button>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Lưu tin tức
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
-@endsection
 
-@push('styles')
 <style>
-#content-editor {
-    border: 1px solid #ced4da;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.nav-tabs .nav-link {
+    border-radius: 8px 8px 0 0;
+    margin-right: 5px;
+    font-weight: 500;
 }
 
-#content-editor:focus-within {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+.nav-tabs .nav-link.active {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    border-color: var(--primary-color);
 }
 
-#content-editor.border-danger {
-    border-color: #dc3545;
+.tab-content {
+    padding: 20px 0;
 }
 
-#content-editor.border-danger:focus-within {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-}
-
-.ck-editor__editable {
-    min-height: 350px !important;
+.alert-info {
+    background-color: rgba(1, 88, 98, 0.1);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
 }
 </style>
-@endpush
 
-@push('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
 <script>
-let editor = null;
-let editorReady = false;
-
-// Function to initialize CKEditor
-function initCKEditor() {
-    console.log('Initializing CKEditor...');
-    updateDebugInfo('Đang khởi tạo CKEditor...');
-    
-    const editorElement = document.querySelector('#content-editor');
-    if (!editorElement) {
-        console.error('Content editor element not found');
-        updateDebugInfo('Không tìm thấy element content-editor');
-        return;
-    }
-    
-    ClassicEditor
-        .create(editorElement, {
-            toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'],
-            language: 'vi',
-            placeholder: 'Nhập nội dung tin tức...'
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap tabs
+    var triggerTabList = [].slice.call(document.querySelectorAll('#languageTabs button'))
+    triggerTabList.forEach(function (triggerEl) {
+        var tabTrigger = new bootstrap.Tab(triggerEl)
+        
+        triggerEl.addEventListener('click', function (event) {
+            event.preventDefault()
+            tabTrigger.show()
         })
-        .then(newEditor => {
-            editor = newEditor;
-            editorReady = true;
-            console.log('CKEditor initialized successfully');
-            updateDebugInfo('CKEditor đã khởi tạo thành công');
-            
-            // Clear loading message
-            const editorContainer = document.getElementById('content-editor');
-            editorContainer.innerHTML = '';
-            
-            // Set initial content if there's old input
-            const oldContent = document.getElementById('content').value;
-            if (oldContent) {
-                editor.setData(oldContent);
-                console.log('Set initial content:', oldContent);
-            }
-            
-            // Add change event listener to sync content
-            editor.model.document.on('change:data', () => {
-                const content = editor.getData();
-                document.getElementById('content').value = content;
-                console.log('Content synced to textarea:', content);
-                updateDebugInfo('Nội dung đã được sync: ' + (content ? 'Có dữ liệu' : 'Trống'));
-            });
-        })
-        .catch(error => {
-            console.error('CKEditor error:', error);
-            updateDebugInfo('Lỗi CKEditor: ' + error.message);
-            // Fallback: show textarea if CKEditor fails
-            document.getElementById('content').style.display = 'block';
-            document.getElementById('content-editor').style.display = 'none';
-        });
-}
-
-// Function to update debug info
-function updateDebugInfo(message) {
-    const debugElement = document.getElementById('content-debug');
-    if (debugElement) {
-        debugElement.innerHTML = '<strong>Debug:</strong> ' + message;
-    }
-}
-
-// Function to handle form submission
-function handleFormSubmit(e) {
-    console.log('Form submitting...');
-    updateDebugInfo('Đang submit form...');
-    
-    if (editorReady && editor) {
-        // Get content from CKEditor
-        const content = editor.getData();
-        console.log('CKEditor content:', content);
-        updateDebugInfo('Lấy nội dung từ CKEditor: ' + (content ? 'Có dữ liệu' : 'Trống'));
-        
-        // Update hidden textarea
-        document.getElementById('content').value = content;
-        console.log('Updated textarea value:', document.getElementById('content').value);
-        
-        // Validate content
-        if (!content.trim()) {
-            e.preventDefault();
-            updateDebugInfo('Lỗi: Nội dung trống, không cho phép submit');
-            alert('Vui lòng nhập nội dung tin tức!');
-            return false;
-        }
-        
-        console.log('Content validation passed, form will submit');
-        updateDebugInfo('Validation thành công, form sẽ submit');
-        return true;
-    } else {
-        console.log('Editor not ready, checking textarea directly');
-        updateDebugInfo('Editor chưa sẵn sàng, kiểm tra textarea trực tiếp');
-        
-        // Fallback validation
-        const textareaContent = document.getElementById('content').value;
-        console.log('Textarea content:', textareaContent);
-        
-        if (!textareaContent.trim()) {
-            e.preventDefault();
-            updateDebugInfo('Lỗi: Textarea trống, không cho phép submit');
-            alert('Vui lòng nhập nội dung tin tức!');
-            return false;
-        }
-        
-        updateDebugInfo('Validation fallback thành công, form sẽ submit');
-        return true;
-    }
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-        initCKEditor();
-        setupFormHandling();
-    });
-} else {
-    // DOM is already ready
-    initCKEditor();
-    setupFormHandling();
-}
-
-// Setup form handling
-function setupFormHandling() {
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', handleFormSubmit);
-        console.log('Form submit handler attached');
-        updateDebugInfo('Form submit handler đã được gắn');
-    } else {
-        console.error('Form not found');
-        updateDebugInfo('Không tìm thấy form');
-    }
-    
-    // Auto-generate slug from title
-    const titleInput = document.getElementById('title');
-    if (titleInput) {
-        titleInput.addEventListener('input', function() {
-            const title = this.value;
-            // You can add slug generation logic here if needed
-        });
-    }
-    
-    // Test if content field exists
-    const contentField = document.getElementById('content');
-    if (contentField) {
-        console.log('Content field found, current value:', contentField.value);
-        updateDebugInfo('Content field đã tìm thấy, giá trị hiện tại: ' + (contentField.value ? 'Có dữ liệu' : 'Trống'));
-    } else {
-        console.error('Content field not found');
-        updateDebugInfo('Không tìm thấy content field');
-    }
-}
-
-// Debug: Check if script is loaded
-console.log('News create script loaded');
+    })
+});
 </script>
-@endpush
+@endsection

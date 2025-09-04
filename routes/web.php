@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,92 +18,136 @@ use App\Http\Controllers\JobController;
 |
 */
 
-// Trang chủ
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Language switching route
+Route::get('/language/{locale}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
 
-// Về chúng tôi
-Route::get('/ve-chung-toi', [HomeController::class, 'about'])->name('about');
-Route::get('/tin-tuc', [HomeController::class, 'news'])->name('news');
-Route::get('/tin-tuc/{slug}', [HomeController::class, 'newsDetail'])->name('news.detail');
-
-// Khóa học tiếng Đức
-Route::prefix('khoa-hoc')->name('courses.')->group(function () {
-    Route::get('/', [CourseController::class, 'index'])->name('index');
+// Multilingual routes
+Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'vi|en|de']], function () {
+    // Trang chủ
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     
-    // Các khóa học tiếng Đức theo CEFR
-    Route::get('/co-ban-a1-a2', [CourseController::class, 'foundation'])->name('foundation');
-    Route::get('/trung-cap-b1-b2', [CourseController::class, 'intermediate'])->name('intermediate');
-    Route::get('/nang-cao-c1-c2', [CourseController::class, 'advanced'])->name('advanced');
-    Route::get('/giao-tiep', [CourseController::class, 'conversation'])->name('conversation');
-    Route::get('/thuong-mai', [CourseController::class, 'business'])->name('business');
-    Route::get('/luyen-thi-chung-chi', [CourseController::class, 'exam'])->name('exam');
+    // Về chúng tôi
+    Route::get('/ve-chung-toi', [HomeController::class, 'about'])->name('about');
+    Route::get('/tin-tuc', [HomeController::class, 'news'])->name('news');
+    Route::get('/tin-tuc/{slug}', [HomeController::class, 'newsDetail'])->name('news.detail');
     
-    // Giữ lại các routes cũ để tránh 404 (có thể redirect sau)
-    // German course routes will be added here if needed
-    Route::get('/kien-thuc-nen', [CourseController::class, 'foundation'])->name('foundation_old');
-    Route::get('/thcs-thpt', [CourseController::class, 'intermediate'])->name('secondary');
-});
-
-// Giảng viên
-Route::get('/giang-vien', [TeacherController::class, 'index'])->name('teachers');
-Route::get('/giang-vien/{slug}', [TeacherController::class, 'show'])->name('teachers.show');
-
-// Tuyển dụng
-Route::prefix('tuyen-dung')->name('jobs.')->group(function () {
-    Route::get('/', [JobController::class, 'index'])->name('index');
-    Route::get('/{slug}', [JobController::class, 'show'])->name('show');
-    Route::post('/ung-tuyen', [JobController::class, 'apply'])->name('apply');
-});
-
-// Các trang chính
-Route::get('/lich-khai-giang', [HomeController::class, 'schedule'])->name('schedule');
-Route::get('/lich-thi', [HomeController::class, 'examSchedule'])->name('exam-schedule');
-Route::get('/ket-qua-hoc-vien', [HomeController::class, 'results'])->name('results');
-Route::get('/lien-he', [HomeController::class, 'contactPage'])->name('contact');
-
-// Form liên hệ
-Route::post('/lien-he', [HomeController::class, 'contactSubmit'])->name('contact.submit');
-
-// Đăng ký lịch thi
-Route::post('/dang-ky-lich-thi', [App\Http\Controllers\ExamRegistrationController::class, 'store'])->name('exam-registration.store');
-Route::get('/api/lich-thi/{id}', [App\Http\Controllers\ExamRegistrationController::class, 'getExamSchedule'])->name('exam-registration.get-exam-schedule');
-
-// Trang học thử miễn phí
-Route::get('/hoc-thu-mien-phi', [HomeController::class, 'trial'])->name('trial');
-Route::post('/hoc-thu-mien-phi', [HomeController::class, 'trialSubmit'])->name('trial.submit');
-
-// Trang kiểm tra trình độ online
-Route::get('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTest'])->name('online-test');
-Route::post('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTestSubmit'])->name('online-test.submit');
-
-// API Routes
-Route::get('/api/courses/{id}', function($id) {
-    $course = \App\Models\Course::find($id);
-    if ($course) {
+    // Khóa học tiếng Đức
+    Route::prefix('khoa-hoc')->name('courses.')->group(function () {
+        Route::get('/', [CourseController::class, 'index'])->name('index');
+        
+        // Các khóa học tiếng Đức theo CEFR
+        Route::get('/co-ban-a1-a2', [CourseController::class, 'foundation'])->name('foundation');
+        Route::get('/trung-cap-b1-b2', [CourseController::class, 'intermediate'])->name('intermediate');
+        Route::get('/nang-cao-c1-c2', [CourseController::class, 'advanced'])->name('advanced');
+        Route::get('/giao-tiep', [CourseController::class, 'conversation'])->name('conversation');
+        Route::get('/thuong-mai', [CourseController::class, 'business'])->name('business');
+        Route::get('/luyen-thi-chung-chi', [CourseController::class, 'exam'])->name('exam');
+        
+        // Giữ lại các routes cũ để tránh 404 (có thể redirect sau)
+        Route::get('/kien-thuc-nen', [CourseController::class, 'foundation'])->name('foundation_old');
+        Route::get('/thcs-thpt', [CourseController::class, 'intermediate'])->name('secondary');
+    });
+    
+    // Giảng viên
+    Route::get('/giang-vien', [TeacherController::class, 'index'])->name('teachers');
+    Route::get('/giang-vien/{slug}', [TeacherController::class, 'show'])->name('teachers.show');
+    
+    // Tuyển dụng
+    Route::prefix('tuyen-dung')->name('jobs.')->group(function () {
+        Route::get('/', [JobController::class, 'index'])->name('index');
+        Route::get('/{slug}', [JobController::class, 'show'])->name('show');
+        Route::post('/ung-tuyen', [JobController::class, 'apply'])->name('apply');
+    });
+    
+    // Các trang chính
+    Route::get('/lich-khai-giang', [HomeController::class, 'schedule'])->name('schedule');
+    Route::get('/lich-thi', [HomeController::class, 'examSchedule'])->name('exam-schedule');
+    Route::get('/ket-qua-hoc-vien', [HomeController::class, 'results'])->name('results');
+    Route::get('/lien-he', [HomeController::class, 'contactPage'])->name('contact');
+    
+    // Form liên hệ
+    Route::post('/lien-he', [HomeController::class, 'contactSubmit'])->name('contact.submit');
+    
+    // Đăng ký lịch thi
+    Route::post('/dang-ky-lich-thi', [App\Http\Controllers\ExamRegistrationController::class, 'store'])->name('exam-registration.store');
+    Route::get('/api/lich-thi/{id}', [App\Http\Controllers\ExamRegistrationController::class, 'getExamSchedule'])->name('exam-registration.get-exam-schedule');
+    
+    // Trang học thử miễn phí
+    Route::get('/hoc-thu-mien-phi', [HomeController::class, 'trial'])->name('trial');
+    Route::post('/hoc-thu-mien-phi', [HomeController::class, 'trialSubmit'])->name('trial.submit');
+    
+    // Trang kiểm tra trình độ online
+    Route::get('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTest'])->name('online-test');
+    Route::post('/kiem-tra-trinh-do-online', [HomeController::class, 'onlineTestSubmit'])->name('online-test.submit');
+    
+    // API Routes
+    Route::get('/api/courses/{id}', function($id) {
+        $course = \App\Models\Course::find($id);
+        if ($course) {
+            return response()->json([
+                'success' => true,
+                'course' => $course
+            ]);
+        }
         return response()->json([
-            'success' => true,
-            'course' => $course
-        ]);
-    }
-    return response()->json([
-        'success' => false,
-        'message' => 'Khóa học không tồn tại'
-    ], 404);
+            'success' => false,
+            'message' => 'Khóa học không tồn tại'
+        ], 404);
+    });
+    
+    Route::get('/api/teachers/{id}', function($id) {
+        $teacher = \App\Models\Teacher::find($id);
+        if ($id) {
+            return response()->json([
+                'success' => true,
+                'teacher' => $teacher
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Giảng viên không tồn tại'
+        ], 404);
+    });
 });
 
-Route::get('/api/teachers/{id}', function($id) {
-    $teacher = \App\Models\Teacher::find($id);
-    if ($teacher) {
-        return response()->json([
-            'success' => true,
-            'teacher' => $teacher
-        ]);
-    }
-    return response()->json([
-        'success' => false,
-        'message' => 'Giảng viên không tồn tại'
-    ], 404);
+// Legacy routes (redirect to default language)
+Route::get('/', function() {
+    return redirect('/' . config('app.locale'));
 });
+
+Route::get('/ve-chung-toi', function() {
+    return redirect('/' . config('app.locale') . '/ve-chung-toi');
+});
+
+Route::get('/tin-tuc', function() {
+    return redirect('/' . config('app.locale') . '/tin-tuc');
+});
+
+Route::get('/lich-khai-giang', function() {
+    return redirect('/' . config('app.locale') . '/lich-khai-giang');
+});
+
+Route::get('/lich-thi', function() {
+    return redirect('/' . config('app.locale') . '/lich-thi');
+});
+
+Route::get('/ket-qua-hoc-vien', function() {
+    return redirect('/' . config('app.locale') . '/ket-qua-hoc-vien');
+});
+
+Route::get('/lien-he', function() {
+    return redirect('/' . config('app.locale') . '/lien-he');
+});
+
+Route::get('/hoc-thu-mien-phi', function() {
+    return redirect('/' . config('app.locale') . '/hoc-thu-mien-phí');
+});
+
+Route::get('/kiem-tra-trinh-do-online', function() {
+    return redirect('/' . config('app.locale') . '/kiem-tra-trinh-do-online');
+});
+
+
 
 /*
 |--------------------------------------------------------------------------

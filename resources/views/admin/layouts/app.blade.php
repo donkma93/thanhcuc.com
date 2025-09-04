@@ -369,7 +369,7 @@
                             <hr class="text-white-50">
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}" target="_blank">
+                            <a class="nav-link" href="{{ route('home', ['locale' => app()->getLocale()]) }}" target="_blank">
                                 <i class="fas fa-external-link-alt"></i>
                                 Xem website
                             </a>
