@@ -1592,32 +1592,20 @@
     <div id="contact-widget-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999;">
         <!-- Contact Widget - Always Visible -->
         <div class="contact-widget">
-        @if(isset($settings['facebook_url']) && $settings['facebook_url'])
-            <a href="{{ $settings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-        @else
-            <a href="https://facebook.com" target="_blank" class="contact-btn facebook" title="Facebook">
+        @if(isset($footerSettings['facebook_url']) && $footerSettings['facebook_url'])
+            <a href="{{ $footerSettings['facebook_url'] }}" target="_blank" class="contact-btn facebook" title="Facebook">
                 <i class="fab fa-facebook-f"></i>
             </a>
         @endif
-        
-        @if(isset($settings['zalo_url']) && $settings['zalo_url'])
-            <a href="{{ $settings['zalo_url'] }}" target="_blank" class="contact-btn zalo" title="Zalo">
-                <i class="fas fa-comments"></i>
-            </a>
-        @else
-            <a href="https://zalo.me" target="_blank" class="contact-btn zalo" title="Zalo">
+
+        @if(isset($footerSettings['company_phone_display']) && $footerSettings['company_phone_display'])
+            <a href="https://zalo.me/{{ preg_replace('/[^0-9]/', '', $footerSettings['company_phone_display']) }}" target="_blank" class="contact-btn zalo" title="Zalo">
                 <i class="fas fa-comments"></i>
             </a>
         @endif
-        
-        @if(isset($settings['phone']) && $settings['phone'])
-            <a href="tel:{{ $settings['phone'] }}" class="contact-btn phone" title="Gọi điện: {{ $settings['phone'] }}">
-                <i class="fas fa-phone"></i>
-            </a>
-        @else
-            <a href="tel:0975186230" class="contact-btn phone" title="Gọi điện: 0975186230">
+
+        @if(isset($footerSettings['company_phone_display']) && $footerSettings['company_phone_display'])
+            <a href="tel:{{ $footerSettings['company_phone_display'] }}" class="contact-btn phone" title="Gọi điện: {{ $footerSettings['company_phone_display'] }}">
                 <i class="fas fa-phone"></i>
             </a>
         @endif
