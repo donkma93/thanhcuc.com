@@ -151,8 +151,8 @@
                             <a href="{{ route('schedule') }}" class="list-group-item list-group-item-action border-0 px-0">
                                 <i class="fas fa-calendar-alt me-2 text-primary"></i>Lịch khai giảng
                             </a>
-                            <a href="{{ route('exam-schedule') }}" class="list-group-item list-group-item-action border-0 px-0">
-                                <i class="fas fa-calendar-check me-2 text-success"></i>Lịch thi
+                            <a href="{{ route('du-hoc-duc') }}" class="list-group-item list-group-item-action border-0 px-0">
+                                <i class="fas fa-graduation-cap me-2 text-success"></i>Du học Đức
                             </a>
                             <a href="{{ route('results') }}" class="list-group-item list-group-item-action border-0 px-0">
                                 <i class="fas fa-trophy me-2 text-warning"></i>Kết quả học viên

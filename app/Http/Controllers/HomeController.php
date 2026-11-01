@@ -224,33 +224,59 @@ class HomeController extends Controller
         return view('online-test');
     }
     
+    public function duHocDuc()
+    {
+        $settings = \App\Services\DuHocDucService::getSettings();
+        return view('du-hoc-duc', compact('settings'));
+    }
+
+    public function duHocDieuDuong()
+    {
+        $settings = \App\Services\DuHocDucService::getSettings();
+        return view('du-hoc-dieu-duong', compact('settings'));
+    }
+
+    public function duHocDucSubmit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'message' => 'nullable|string|max:1000',
+        ], [
+            'name.required' => 'Vui lòng nhập họ và tên.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'email.email' => 'Email không đúng định dạng.',
+        ]);
+
+        $fullMessage = '';
+        if ($request->filled('address')) {
+            $fullMessage .= "Địa chỉ: " . $request->address . "\n";
+        }
+        if ($request->filled('message')) {
+            $fullMessage .= "Nội dung quan tâm: " . $request->message;
+        }
+
+        try {
+            Contact::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'program' => 'Du học nghề CHLB Đức',
+                'message' => trim($fullMessage) ?: 'Đăng ký tư vấn chương trình Du học nghề CHLB Đức',
+                'status' => 'new',
+            ]);
+        } catch (\Throwable $e) {
+            \Log::error('DuHocDuc submission DB note: ' . $e->getMessage());
+        }
+
+        return back()->with('success', 'Cảm ơn bạn đã gửi thông tin đăng ký tư vấn du học Đức! Trung tâm sẽ liên hệ với bạn trong thời gian sớm nhất.');
+    }
+
     public function examSchedule()
     {
-        // Lấy lịch thi từ database, nhóm theo loại thi
-        $goetheExams = \App\Models\ExamSchedule::where('exam_type', 'Goethe')
-            ->where('status', 'active')
-            ->orderBy('level')
-            ->orderBy('exam_date')
-            ->get();
-            
-        $testdafExams = \App\Models\ExamSchedule::where('exam_type', 'TestDaF')
-            ->where('status', 'active')
-            ->orderBy('exam_date')
-            ->get();
-            
-        $telcExams = \App\Models\ExamSchedule::where('exam_type', 'Telc')
-            ->where('status', 'active')
-            ->orderBy('level')
-            ->orderBy('exam_date')
-            ->get();
-            
-        $otherExams = \App\Models\ExamSchedule::whereNotIn('exam_type', ['Goethe', 'TestDaF', 'Telc'])
-            ->where('status', 'active')
-            ->orderBy('exam_type')
-            ->orderBy('exam_date')
-            ->get();
-            
-        return view('exam-schedule', compact('goetheExams', 'testdafExams', 'telcExams', 'otherExams'));
+        return redirect()->route('du-hoc-duc');
     }
     
     public function contactPage()

@@ -56,6 +56,12 @@ Route::prefix('tuyen-dung')->name('jobs.')->group(function () {
 
 // Các trang chính
 Route::get('/lich-khai-giang', [HomeController::class, 'schedule'])->name('schedule');
+Route::get('/du-hoc-duc', [HomeController::class, 'duHocDuc'])->name('du-hoc-duc');
+Route::get('/du-hoc-nghe-dieu-duong-duc-chat-luong-cao-tai-ha-noi', [HomeController::class, 'duHocDieuDuong'])->name('du-hoc-duc.dieu-duong');
+Route::get('/du-hoc-duc/dieu-duong', function() {
+    return redirect()->route('du-hoc-duc.dieu-duong');
+});
+Route::post('/du-hoc-duc/dang-ky', [HomeController::class, 'duHocDucSubmit'])->name('du-hoc-duc.submit');
 Route::get('/lich-thi', [HomeController::class, 'examSchedule'])->name('exam-schedule');
 Route::get('/ket-qua-hoc-vien', [HomeController::class, 'results'])->name('results');
 Route::get('/lien-he', [HomeController::class, 'contactPage'])->name('contact');
@@ -176,6 +182,11 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::put('about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
     Route::get('about/reset', [\App\Http\Controllers\Admin\AboutController::class, 'reset'])->name('about.reset');
     Route::post('about/clear-cache', [\App\Http\Controllers\Admin\AboutController::class, 'clearCache'])->name('about.clear-cache');
+    
+    // Du Hoc Duc Page Management
+    Route::get('du-hoc-duc', [\App\Http\Controllers\Admin\DuHocDucController::class, 'index'])->name('du-hoc-duc.index');
+    Route::put('du-hoc-duc', [\App\Http\Controllers\Admin\DuHocDucController::class, 'update'])->name('du-hoc-duc.update');
+    Route::get('du-hoc-duc/reset', [\App\Http\Controllers\Admin\DuHocDucController::class, 'reset'])->name('du-hoc-duc.reset');
     
     // Schedule Management
     Route::resource('schedules', \App\Http\Controllers\Admin\ScheduleController::class);

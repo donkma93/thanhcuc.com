@@ -26,11 +26,29 @@ class FooterServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             // Only load footer data for non-admin views
             if (!request()->is('admin*')) {
-                $view->with([
-                    'footerSettings' => $this->getFooterSettings(),
-                    'footerCourses' => $this->getFooterCourses(),
-                    'footerBranches' => $this->getFooterBranches(),
-                ]);
+                try {
+                    $view->with([
+                        'footerSettings' => $this->getFooterSettings(),
+                        'footerCourses' => $this->getFooterCourses(),
+                        'footerBranches' => $this->getFooterBranches(),
+                    ]);
+                } catch (\Throwable $e) {
+                    $view->with([
+                        'footerSettings' => [
+                            'company_name' => 'Trung Tâm Tiếng Đức Thanh Cúc',
+                            'company_address' => 'Số 12 Ngõ 1150 Đường Láng, Đống Đa, Hà Nội',
+                            'company_phone' => '0975186230',
+                            'company_phone_display' => '0975.186.230',
+                            'company_email' => 'info@thanhcuc.edu.vn',
+                            'working_hours' => 'T2-T7: 8:00 - 20:00, CN: 8:00 - 17:00',
+                            'facebook_url' => 'https://facebook.com',
+                            'youtube_url' => 'https://youtube.com',
+                            'tiktok_url' => 'https://tiktok.com',
+                        ],
+                        'footerCourses' => collect([]),
+                        'footerBranches' => collect([]),
+                    ]);
+                }
             }
         });
     }

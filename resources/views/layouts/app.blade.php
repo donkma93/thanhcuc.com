@@ -1539,10 +1539,28 @@
                         </a>
                     </li>
                     
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('lich-thi') ? 'active' : '' }}" href="{{ route('exam-schedule') }}">
-                            <i class="fas fa-calendar-check me-2"></i>LỊCH THI
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ Request::is('du-hoc*') ? 'active' : '' }}" 
+                           href="{{ route('du-hoc-duc') }}" 
+                           id="duHocDucDropdown" 
+                           role="button" 
+                           data-bs-toggle="dropdown" 
+                           aria-expanded="false">
+                            <i class="fas fa-graduation-cap me-2"></i>DU HỌC ĐỨC
                         </a>
+                        <ul class="dropdown-menu shadow-lg border-0" aria-labelledby="duHocDucDropdown">
+                            <li>
+                                <a class="dropdown-item fw-semibold py-2 text-wrap" href="{{ route('du-hoc-duc') }}">
+                                    <i class="fas fa-graduation-cap me-2 text-primary"></i>Tổng quan Du học nghề Đức
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li>
+                                <a class="dropdown-item fw-semibold py-2 text-wrap" href="{{ route('du-hoc-duc.dieu-duong') }}" style="max-width: 320px;">
+                                    <i class="fas fa-user-nurse me-2 text-warning"></i>Du học nghề điều dưỡng Đức chất lượng cao tại Hà Nội
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     
                     <li class="nav-item">

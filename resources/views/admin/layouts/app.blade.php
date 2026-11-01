@@ -310,6 +310,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.du-hoc-duc*') ? 'active' : '' }}" 
+                               href="{{ route('admin.du-hoc-duc.index') }}">
+                                <i class="fas fa-graduation-cap"></i>
+                                Quản lý Du học Đức
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.about*') ? 'active' : '' }}" 
                                href="{{ route('admin.about.index') }}">
                                 <i class="fas fa-users"></i>
