@@ -15,6 +15,8 @@ class Overview extends Model
         'paragraph_2',
         'video_url',
         'video_title',
+        'image_path',
+        'image_title',
         'button_1_text',
         'button_1_url',
         'button_2_text',
@@ -48,5 +50,24 @@ class Overview extends Model
         }
 
         return $videoId ? "https://www.youtube.com/embed/{$videoId}?start=58&feature=oembed" : null;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        $path = $this->image_path ?: 'images/about/team-photo.jpg';
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        if (file_exists(public_path($path))) {
+            return asset($path);
+        }
+
+        if (file_exists(public_path('storage/' . $path))) {
+            return asset('storage/' . $path);
+        }
+
+        return asset('images/about/team-photo.jpg');
     }
 }

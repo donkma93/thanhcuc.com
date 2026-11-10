@@ -1539,19 +1539,31 @@
                         </a>
                     </li>
                     
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('du-hoc-duc*') ? 'active' : '' }}" href="{{ route('du-hoc-duc') }}">
+                            <i class="fas fa-graduation-cap me-2"></i>DU HỌC ĐỨC
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('ket-qua-hoc-vien') ? 'active' : '' }}" href="{{ route('results') }}">
+                            <i class="fas fa-trophy me-2"></i>KẾT QUẢ HỌC VIÊN
+                        </a>
+                    </li>
+                    
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ Request::is('du-hoc*') ? 'active' : '' }}" 
-                           href="{{ route('du-hoc-duc') }}" 
-                           id="duHocDucDropdown" 
+                        <a class="nav-link dropdown-toggle {{ Request::is('tin-tuc*') || Request::is('du-hoc-nghe-dieu-duong*') ? 'active' : '' }}" 
+                           href="{{ route('news') }}" 
+                           id="tinTucDropdown" 
                            role="button" 
                            data-bs-toggle="dropdown" 
                            aria-expanded="false">
-                            <i class="fas fa-graduation-cap me-2"></i>DU HỌC ĐỨC
+                            <i class="fas fa-newspaper me-2"></i>TIN TỨC
                         </a>
-                        <ul class="dropdown-menu shadow-lg border-0" aria-labelledby="duHocDucDropdown">
+                        <ul class="dropdown-menu shadow-lg border-0" aria-labelledby="tinTucDropdown">
                             <li>
-                                <a class="dropdown-item fw-semibold py-2 text-wrap" href="{{ route('du-hoc-duc') }}">
-                                    <i class="fas fa-graduation-cap me-2 text-primary"></i>Tổng quan Du học nghề Đức
+                                <a class="dropdown-item fw-semibold py-2 text-wrap" href="{{ route('news') }}">
+                                    <i class="fas fa-newspaper me-2 text-primary"></i>Tin tức &amp; Kiến thức
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider my-1"></li>
@@ -1561,18 +1573,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('ket-qua-hoc-vien') ? 'active' : '' }}" href="{{ route('results') }}">
-                            <i class="fas fa-trophy me-2"></i>KẾT QUẢ HỌC VIÊN
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('tin-tuc*') ? 'active' : '' }}" href="{{ route('news') }}">
-                            <i class="fas fa-newspaper me-2"></i>TIN TỨC
-                        </a>
                     </li>
                     
                     <li class="nav-item">

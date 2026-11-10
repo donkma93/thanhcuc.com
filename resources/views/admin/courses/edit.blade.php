@@ -75,7 +75,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Mô tả chi tiết <span class="text-danger">*</span></label>
                         <textarea class="form-control @error('description') is-invalid @enderror" 
-                                  id="description" name="description" required 
+                                  id="description" name="description" 
                                   placeholder="Mô tả chi tiết về khóa học, nội dung, mục tiêu...">{{ old('description', $course->description) }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -221,7 +221,7 @@
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <div class="form-text">Định dạng: JPG, PNG, GIF, SVG. Tối đa 2MB.</div>
+                        <div class="form-text">Định dạng: JPG, PNG, GIF, SVG, WEBP. Tối đa 5MB.</div>
                     </div>
                     
                     <div id="image-preview" class="text-center" style="display: none;">

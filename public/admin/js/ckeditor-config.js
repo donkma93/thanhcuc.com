@@ -37,6 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Generic CKEditor initialization function
 function initializeCKEditor(element, config = {}) {
+    // Prevent HTML5 "invalid form control is not focusable" on hidden textarea
+    const wasRequired = element.hasAttribute('required');
+    if (wasRequired) {
+        element.removeAttribute('required');
+    }
+
     const defaultConfig = {
         toolbar: {
             items: config.toolbarItems || [
@@ -71,9 +77,10 @@ function initializeCKEditor(element, config = {}) {
             editorElement.style.borderRadius = '8px';
             editorElement.style.overflow = 'hidden';
 
-            // Auto-resize functionality
+            // Keep underlying textarea synchronized on every change and on submit
             editor.model.document.on('change:data', () => {
                 const data = editor.getData();
+                element.value = data;
                 if (data.length > 1000) {
                     editorElement.style.minHeight = '300px';
                 } else {
@@ -81,11 +88,22 @@ function initializeCKEditor(element, config = {}) {
                 }
             });
 
+            const form = element.closest('form');
+            if (form) {
+                form.addEventListener('submit', () => {
+                    element.value = editor.getData();
+                });
+            }
+
             // Store editor instance for later use
             element.ckeditorInstance = editor;
         })
         .catch(error => {
             console.error('CKEditor initialization error:', error);
+            // Restore required if CKEditor failed to load and fallback textarea is visible
+            if (wasRequired) {
+                element.setAttribute('required', 'required');
+            }
             // Fallback to regular textarea if CKEditor fails
             element.style.minHeight = '200px';
             element.style.resize = 'vertical';

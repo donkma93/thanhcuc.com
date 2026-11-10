@@ -28,11 +28,11 @@
                             <thead>
                                 <tr>
                                     <th width="5%">ID</th>
-                                    <th width="20%">Tiêu đề</th>
-                                    <th width="15%">Video</th>
-                                    <th width="10%">Trạng thái</th>
-                                    <th width="15%">Ngày tạo</th>
-                                    <th width="15%">Thao tác</th>
+                                    <th width="25%">Tiêu đề</th>
+                                    <th width="20%">Hình ảnh</th>
+                                    <th width="12%">Trạng thái</th>
+                                    <th width="18%">Ngày tạo</th>
+                                    <th width="20%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,13 +46,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if($overview->video_url)
-                                                <a href="{{ $overview->video_url }}" target="_blank" class="btn btn-sm btn-info">
-                                                    <i class="fas fa-play"></i> Xem video
-                                                </a>
-                                            @else
-                                                <span class="text-muted">Không có video</span>
-                                            @endif
+                                            <img src="{{ $overview->image_url }}"
+                                                 alt="{{ $overview->image_title ?: $overview->title }}"
+                                                 class="img-thumbnail"
+                                                 style="max-width: 120px; max-height: 75px; object-fit: cover;">
                                         </td>
                                         <td>
                                             @if($overview->is_active)

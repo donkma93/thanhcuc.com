@@ -45,40 +45,6 @@
         </div>
     </section>
 
-    <!-- Featured Program: Điều Dưỡng Đức -->
-    <section class="duhoc_featured_program py-4" data-aos="fade-up" data-aos-duration="1000">
-        <div class="container">
-            <div class="card border-0 rounded-4 shadow-sm overflow-hidden" style="background: linear-gradient(135deg, #14244c 0%, #1e3a8a 100%);">
-                <div class="card-body p-4 p-md-5">
-                    <div class="row align-items-center">
-                        <div class="col-lg-5 mb-4 mb-lg-0 text-center">
-                            <img src="{{ asset($settings['nursing_banner_image'] ?? 'images/du-hoc-duc/dieu_duong_banner.png') }}" 
-                                 alt="{{ $settings['nursing_title'] ?? 'Du học nghề điều dưỡng Đức' }}" 
-                                 class="img-fluid rounded-3 shadow">
-                        </div>
-                        <div class="col-lg-7 text-white ps-lg-4">
-                            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">
-                                <i class="fas fa-fire me-1"></i> CHƯƠNG TRÌNH NỔI BẬT
-                            </span>
-                            <h3 class="h3 fw-bold text-white mb-3">{{ $settings['nursing_title'] ?? 'Du học nghề điều dưỡng Đức chất lượng cao tại Hà Nội' }}</h3>
-                            <p class="text-light opacity-90 mb-4">
-                                {{ Str::limit($settings['nursing_subtitle'] ?? 'Chương trình du học nghề Điều dưỡng tại CHLB Đức: Miễn 100% học phí, trợ cấp học nghề từ 1.100 – 1.400 €/tháng, lương sau tốt nghiệp lên đến 3.500 €/tháng, cơ hội định cư vĩnh viễn sau 5 năm.', 220) }}
-                            </p>
-                            <div class="d-flex flex-wrap gap-3">
-                                <a href="{{ route('du-hoc-duc.dieu-duong') }}" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm">
-                                    <i class="fas fa-arrow-right me-2"></i>Xem chi tiết ngành Điều Dưỡng
-                                </a>
-                                <a href="#form-dang-ky" class="btn btn-outline-light fw-bold px-4 py-2 rounded-pill">
-                                    <i class="fas fa-envelope me-2"></i>Đăng ký tư vấn
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Values Section -->
     <section class="duhoc_value py-5" data-aos="zoom-in-up" data-aos-duration="1000">
         <div class="container">

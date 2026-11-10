@@ -134,7 +134,9 @@ class HomeController extends Controller
             ->take(6)
             ->get();
             
-        return view('news.index', compact('germanKnowledge', 'companyActivities'));
+        $settings = \App\Services\DuHocDucService::getSettings();
+
+        return view('news.index', compact('germanKnowledge', 'companyActivities', 'settings'));
     }
     
     public function newsDetail($slug)

@@ -121,46 +121,31 @@
                         </div>
 
                         <div class="col-md-4">
-                            <!-- Video Information -->
-                            @if($overview->video_url)
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Thông tin Video</h5>
+                            <!-- Image Information -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Hình ảnh Tổng quan</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3 text-center">
+                                        <img src="{{ $overview->image_url }}"
+                                             alt="{{ $overview->image_title ?: $overview->title }}"
+                                             class="img-fluid rounded border">
                                     </div>
-                                    <div class="card-body">
-                                        @if($overview->video_embed_url)
-                                            <div class="mb-3">
-                                                <div class="video-wrapper" style="padding-top: 56.25%; position: relative;">
-                                                    <iframe src="{{ $overview->video_embed_url }}" 
-                                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                                            frameborder="0" allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        @endif
-                                        <div class="mb-3">
-                                            <strong>URL Video:</strong><br>
-                                            <a href="{{ $overview->video_url }}" target="_blank" class="text-primary">
-                                                {{ $overview->video_url }}
-                                            </a>
+                                    @if($overview->image_path)
+                                        <div class="mb-2">
+                                            <strong>Đường dẫn ảnh:</strong><br>
+                                            <small class="text-muted">{{ $overview->image_path }}</small>
                                         </div>
-                                        @if($overview->video_title)
-                                            <div class="mb-3">
-                                                <strong>Tiêu đề Video:</strong><br>
-                                                <span class="text-muted">{{ $overview->video_title }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
+                                    @endif
+                                    @if($overview->image_title)
+                                        <div class="mb-0">
+                                            <strong>Mô tả hình ảnh:</strong><br>
+                                            <span class="text-muted">{{ $overview->image_title }}</span>
+                                        </div>
+                                    @endif
                                 </div>
-                            @else
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Thông tin Video</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="text-muted">Chưa có video được cấu hình</p>
-                                    </div>
-                                </div>
-                            @endif
+                            </div>
 
                             <!-- Preview -->
                             <div class="card mt-3">

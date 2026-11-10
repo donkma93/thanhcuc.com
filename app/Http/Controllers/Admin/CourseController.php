@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class CourseController extends Controller
 {
     use HasMessagebox;
+
     public function index(Request $request)
     {
         $query = Course::query();
@@ -47,69 +48,22 @@ class CourseController extends Controller
 
     public function create()
     {
-        $categories = [
-            'A1-A2' => 'A1-A2 (Cơ bản)',
-            'B1-B2' => 'B1-B2 (Trung cấp)',
-            'C1-C2' => 'C1-C2 (Nâng cao)',
-            'Giao tiếp' => 'Giao tiếp',
-            'Chuyên ngành' => 'Chuyên ngành',
-            'Luyện thi' => 'Luyện thi'
-        ];
-
-        $levels = [
-            'Beginner' => 'Cơ bản',
-            'Intermediate' => 'Trung cấp', 
-            'Advanced' => 'Nâng cao',
-            'All levels' => 'Tất cả trình độ'
-        ];
+        $categories = $this->getCategories();
+        $levels = $this->getLevels();
 
         return view('admin.courses.create', compact('categories', 'levels'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'description' => 'required|string',
-            'short_description' => 'nullable|string',
-            'level' => 'nullable|string|max:255',
-            'price' => 'nullable|numeric|min:0',
-            'duration_hours' => 'nullable|integer|min:1',
-            'target_score' => 'nullable|string|max:255',
-            'features' => 'nullable|array',
-            'features.*' => 'string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'is_active' => 'boolean',
-            'sort_order' => 'nullable|integer|min:0'
-        ]);
+        $this->validateCourse($request);
 
-        $data = $request->all();
-        
-        // Generate slug
-        $data['slug'] = Str::slug($request->name);
-        
-        // Ensure unique slug
-        $originalSlug = $data['slug'];
-        $counter = 1;
-        while (Course::where('slug', $data['slug'])->exists()) {
-            $data['slug'] = $originalSlug . '-' . $counter;
-            $counter++;
-        }
+        $data = $this->prepareCourseData($request);
+        $data['slug'] = $this->generateUniqueSlug($request->name);
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . Str::slug($request->name) . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('courses', $imageName, 'public');
-            $data['image'] = $imagePath;
-        }
-
-        // Handle features array
-        if ($request->filled('features')) {
-            $data['features'] = array_filter($request->features);
-        } else {
-            $data['features'] = [];
+            $data['image'] = $this->uploadCourseImage($request->file('image'), $request->name);
         }
 
         // Set default sort order
@@ -133,76 +87,29 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        $categories = [
-            'A1-A2' => 'A1-A2 (Cơ bản)',
-            'B1-B2' => 'B1-B2 (Trung cấp)',
-            'C1-C2' => 'C1-C2 (Nâng cao)',
-            'Giao tiếp' => 'Giao tiếp',
-            'Chuyên ngành' => 'Chuyên ngành',
-            'Luyện thi' => 'Luyện thi'
-        ];
-
-        $levels = [
-            'Beginner' => 'Cơ bản',
-            'Intermediate' => 'Trung cấp', 
-            'Advanced' => 'Nâng cao',
-            'All levels' => 'Tất cả trình độ'
-        ];
+        $categories = $this->getCategories();
+        $levels = $this->getLevels();
 
         return view('admin.courses.edit', compact('course', 'categories', 'levels'));
     }
 
     public function update(Request $request, Course $course)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'description' => 'required|string',
-            'short_description' => 'nullable|string',
-            'level' => 'nullable|string|max:255',
-            'price' => 'nullable|numeric|min:0',
-            'duration_hours' => 'nullable|integer|min:1',
-            'target_score' => 'nullable|string|max:255',
-            'features' => 'nullable|array',
-            'features.*' => 'string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'is_active' => 'boolean',
-            'sort_order' => 'nullable|integer|min:0'
-        ]);
+        $this->validateCourse($request);
 
-        $data = $request->all();
-        
+        $data = $this->prepareCourseData($request);
+
         // Update slug if name changed
         if ($request->name !== $course->name) {
-            $data['slug'] = Str::slug($request->name);
-            
-            // Ensure unique slug
-            $originalSlug = $data['slug'];
-            $counter = 1;
-            while (Course::where('slug', $data['slug'])->where('id', '!=', $course->id)->exists()) {
-                $data['slug'] = $originalSlug . '-' . $counter;
-                $counter++;
-            }
+            $data['slug'] = $this->generateUniqueSlug($request->name, $course->id);
         }
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image
             if ($course->image && Storage::disk('public')->exists($course->image)) {
                 Storage::disk('public')->delete($course->image);
             }
-            
-            $image = $request->file('image');
-            $imageName = time() . '_' . Str::slug($request->name) . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('courses', $imageName, 'public');
-            $data['image'] = $imagePath;
-        }
-
-        // Handle features array
-        if ($request->filled('features')) {
-            $data['features'] = array_filter($request->features);
-        } else {
-            $data['features'] = [];
+            $data['image'] = $this->uploadCourseImage($request->file('image'), $request->name);
         }
 
         $course->update($data);
@@ -288,5 +195,104 @@ class CourseController extends Controller
         }
 
         return $this->jsonSuccess('Thứ tự khóa học đã được cập nhật thành công!');
+    }
+
+    private function getCategories(): array
+    {
+        return [
+            'A1-A2' => 'A1-A2 (Cơ bản)',
+            'B1-B2' => 'B1-B2 (Trung cấp)',
+            'C1-C2' => 'C1-C2 (Nâng cao)',
+            'Giao tiếp' => 'Giao tiếp',
+            'Chuyên ngành' => 'Chuyên ngành',
+            'Luyện thi' => 'Luyện thi'
+        ];
+    }
+
+    private function getLevels(): array
+    {
+        return [
+            'Beginner' => 'Cơ bản',
+            'Intermediate' => 'Trung cấp',
+            'Advanced' => 'Nâng cao',
+            'All levels' => 'Tất cả trình độ'
+        ];
+    }
+
+    private function validateCourse(Request $request): void
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'description' => 'required|string',
+            'short_description' => 'nullable|string',
+            'level' => 'nullable|string|max:255',
+            'price' => 'nullable|numeric|min:0|max:99999999.99',
+            'duration_hours' => 'nullable|integer|min:1',
+            'target_score' => 'nullable|string|max:255',
+            'features' => 'nullable|array',
+            'features.*' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'is_active' => 'nullable|boolean',
+            'sort_order' => 'nullable|integer|min:0'
+        ], [
+            'name.required' => 'Vui lòng nhập tên khóa học.',
+            'category.required' => 'Vui lòng chọn danh mục khóa học.',
+            'description.required' => 'Vui lòng nhập mô tả chi tiết khóa học.',
+            'price.max' => 'Giá khóa học tối đa là 99,999,999 VNĐ.',
+            'image.image' => 'File tải lên phải là hình ảnh.',
+            'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, svg hoặc webp.',
+            'image.max' => 'Dung lượng hình ảnh không được vượt quá 5MB.',
+        ]);
+    }
+
+    private function prepareCourseData(Request $request): array
+    {
+        $data = $request->only([
+            'name',
+            'category',
+            'description',
+            'short_description',
+            'level',
+            'price',
+            'duration_hours',
+            'target_score',
+            'sort_order',
+        ]);
+
+        $data['is_active'] = $request->boolean('is_active');
+        $data['features'] = array_values(array_filter(
+            (array) $request->input('features', []),
+            fn ($item) => filled($item)
+        ));
+
+        return $data;
+    }
+
+    private function generateUniqueSlug(string $name, ?int $ignoreId = null): string
+    {
+        $slug = Str::slug($name);
+        if (empty($slug)) {
+            $slug = 'khoa-hoc';
+        }
+
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Course::where('slug', $slug)
+            ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
+            ->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    private function uploadCourseImage($image, string $name): string
+    {
+        $slugName = Str::slug($name) ?: 'course';
+        $imageName = time() . '_' . $slugName . '.' . $image->getClientOriginalExtension();
+        return $image->storeAs('courses', $imageName, 'public');
     }
 }

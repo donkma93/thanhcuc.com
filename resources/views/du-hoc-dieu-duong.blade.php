@@ -10,7 +10,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 small">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-decoration-none text-muted"><i class="fas fa-home me-1"></i>Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('du-hoc-duc') }}" class="text-decoration-none text-muted">Du học Đức</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('news') }}" class="text-decoration-none text-muted">Tin tức</a></li>
                 <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">{{ $settings['nursing_title'] ?? 'Du học nghề điều dưỡng Đức' }}</li>
             </ol>
         </nav>

@@ -27,7 +27,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin.overviews.store') }}" method="POST">
+                    <form action="{{ route('admin.overviews.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="row">
@@ -65,32 +65,49 @@
                             </div>
 
                             <div class="col-md-4">
-                                <!-- Video Information -->
-                                <div class="form-group">
-                                    <label for="video_url">URL Video YouTube</label>
-                                    <input type="url" class="form-control @error('video_url') is-invalid @enderror" 
-                                           id="video_url" name="video_url" value="{{ old('video_url') }}" 
-                                           placeholder="https://www.youtube.com/watch?v=...">
-                                    <small class="form-text text-muted">Nhập URL video YouTube</small>
-                                    @error('video_url')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                <!-- Image Information -->
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Hình ảnh Tổng quan</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3 text-center">
+                                            <img id="overviewImagePreview"
+                                                 src="{{ asset('images/about/team-photo.jpg') }}"
+                                                 alt="Xem trước hình ảnh tổng quan"
+                                                 class="img-fluid rounded border"
+                                                 style="max-height: 200px; object-fit: cover;">
+                                        </div>
 
-                                <div class="form-group">
-                                    <label for="video_title">Tiêu đề Video</label>
-                                    <input type="text" class="form-control @error('video_title') is-invalid @enderror" 
-                                           id="video_title" name="video_title" value="{{ old('video_title') }}" 
-                                           placeholder="Tiêu đề hiển thị cho video">
-                                    @error('video_title')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
+                                        <div class="form-group">
+                                            <label for="image" class="form-label">Chọn hình ảnh</label>
+                                            <input type="file"
+                                                   class="form-control @error('image') is-invalid @enderror"
+                                                   id="image"
+                                                   name="image"
+                                                   accept="image/*">
+                                            <small class="form-text text-muted">Định dạng: JPG, PNG, GIF, WEBP (tối đa 5MB). Nếu không chọn sẽ dùng ảnh mặc định.</small>
+                                            @error('image')
+                                                <span class="invalid-feedback d-block">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group mb-0">
+                                            <label for="image_title">Mô tả hình ảnh (Alt)</label>
+                                            <input type="text" class="form-control @error('image_title') is-invalid @enderror" 
+                                                   id="image_title" name="image_title" value="{{ old('image_title') }}" 
+                                                   placeholder="Mô tả ngắn cho hình ảnh">
+                                            @error('image_title')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Buttons Configuration -->
-                                <div class="card">
+                                <div class="card mb-3">
                                     <div class="card-header">
-                                        <h5 class="card-title">Cấu hình Nút</h5>
+                                        <h5 class="card-title mb-0">Cấu hình Nút</h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
@@ -120,7 +137,7 @@
                                             <input type="text" class="form-control" id="button_3_text" name="button_3_text" 
                                                    value="{{ old('button_3_text', 'Đăng ký tư vấn') }}" placeholder="Văn bản nút">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mb-0">
                                             <label for="button_3_url">Nút 3 - URL</label>
                                             <input type="text" class="form-control" id="button_3_url" name="button_3_url" 
                                                    value="{{ old('button_3_url', route('contact')) }}" placeholder="URL nút">
@@ -154,3 +171,17 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.getElementById('image')?.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        document.getElementById('overviewImagePreview').src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+</script>
+@endpush

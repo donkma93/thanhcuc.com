@@ -131,27 +131,18 @@
                                 </div>
 </section>
 
-<!-- Video & About Section -->
+<!-- Image & About Section -->
 @if($overview)
 <section class="py-5">
     <div class="container">
         <div class="row align-items-center">
-            <!-- Video Column -->
+            <!-- Image Column -->
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="video-container">
-                    <div class="video-wrapper" style="padding-top: 56.25%; position: relative;">
-                        <iframe loading="lazy" 
-                                title="{{ $overview->video_title }}" 
-                                width="100%" 
-                                height="100%" 
-                                src="{{ $overview->video_embed_url }}" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen=""
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                        </iframe>
-                    </div>
+                <div class="overview-image-container">
+                    <img src="{{ $overview->image_url }}"
+                         alt="{{ $overview->image_title ?: $overview->title }}"
+                         class="img-fluid overview-image"
+                         loading="lazy">
                 </div>
             </div>
 
@@ -3719,21 +3710,25 @@ small, .small {
     }
 }
 
-/* Video & About Section Styles */
-.video-container {
+/* Image & About Section Styles */
+.overview-image-container {
     position: relative;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: #fff;
 }
 
-.video-wrapper {
-    background: #000;
-    border-radius: 10px;
+.overview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.35s ease;
 }
 
-.video-wrapper iframe {
-    border-radius: 10px;
+.overview-image-container:hover .overview-image {
+    transform: scale(1.02);
 }
 
 .about-content {
@@ -3866,15 +3861,8 @@ small, .small {
 }
 
 @media (max-width: 576px) {
-    .video-container {
-        border-radius: 8px;
-    }
-    
-    .video-wrapper {
-        border-radius: 8px;
-    }
-    
-    .video-wrapper iframe {
+    .overview-image-container,
+    .overview-image {
         border-radius: 8px;
     }
     

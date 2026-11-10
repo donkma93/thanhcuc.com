@@ -71,7 +71,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Mô tả chi tiết <span class="text-danger">*</span></label>
                         <textarea class="form-control @error('description') is-invalid @enderror" 
-                                  id="description" name="description" required 
+                                  id="description" name="description" 
                                   placeholder="Mô tả chi tiết về khóa học, nội dung, mục tiêu...">{{ old('description') }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -153,15 +153,18 @@
                 </div>
                 <div class="card-body">
                     <div id="features-container">
-                        <div class="feature-item mb-3">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="features[]" 
-                                       placeholder="VD: Học 1-1 với giáo viên bản ngữ" value="{{ old('features.0') }}">
-                                <button type="button" class="btn btn-outline-danger remove-feature" disabled>
-                                    <i class="fas fa-times"></i>
-                                </button>
+                        @php $oldFeatures = old('features', ['']); @endphp
+                        @foreach($oldFeatures as $feature)
+                            <div class="feature-item mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="features[]" 
+                                           placeholder="VD: Học 1-1 với giáo viên bản ngữ" value="{{ $feature }}">
+                                    <button type="button" class="btn btn-outline-danger remove-feature" {{ $loop->count === 1 ? 'disabled' : '' }}>
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                     <button type="button" class="btn btn-outline-primary btn-sm" id="add-feature">
                         <i class="fas fa-plus me-1"></i>Thêm tính năng
@@ -186,7 +189,7 @@
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <div class="form-text">Định dạng: JPG, PNG, GIF, SVG. Tối đa 2MB.</div>
+                        <div class="form-text">Định dạng: JPG, PNG, GIF, SVG, WEBP. Tối đa 5MB.</div>
                     </div>
                     
                     <div id="image-preview" class="text-center" style="display: none;">
