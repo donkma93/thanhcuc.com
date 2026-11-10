@@ -60,8 +60,11 @@ class DuHocDucController extends Controller
         $articles = [];
         if (is_array($rawArticles)) {
             foreach ($rawArticles as $idx => $art) {
-                if (!empty($art['title'])) {
-                    $artImg = $art['image'] ?? ($current['blog_articles'][$idx]['image'] ?? 'images/du-hoc-duc/blog_berlin.png');
+                if (is_array($art) && !empty($art['title'])) {
+                    $fallbackImg = is_array($current['blog_articles'][$idx] ?? null)
+                        ? ($current['blog_articles'][$idx]['image'] ?? 'images/du-hoc-duc/blog_berlin.png')
+                        : 'images/du-hoc-duc/blog_berlin.png';
+                    $artImg = !empty($art['image']) ? $art['image'] : $fallbackImg;
                     // Check if new article image was uploaded
                     if ($request->hasFile("blog_articles.{$idx}.new_image")) {
                         $file = $request->file("blog_articles.{$idx}.new_image");
@@ -70,11 +73,11 @@ class DuHocDucController extends Controller
                         $artImg = 'images/du-hoc-duc/' . $name;
                     }
                     $articles[] = [
-                        'title' => trim($art['title']),
-                        'date' => trim($art['date'] ?? date('d/m/Y')),
-                        'summary' => trim($art['summary'] ?? ''),
+                        'title' => trim((string) $art['title']),
+                        'date' => trim((string) ($art['date'] ?? date('d/m/Y'))),
+                        'summary' => trim((string) ($art['summary'] ?? '')),
                         'image' => $artImg,
-                        'link' => trim($art['link'] ?? '#form-dang-ky'),
+                        'link' => trim((string) ($art['link'] ?? '#form-dang-ky')) ?: '#form-dang-ky',
                     ];
                 }
             }

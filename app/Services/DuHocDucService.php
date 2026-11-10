@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Cache;
 
 class DuHocDucService
 {
-    const CACHE_KEY = 'du_hoc_duc_settings_data';
+    const CACHE_KEY = 'du_hoc_duc_settings_data_v2';
+    const LEGACY_CACHE_KEY = 'du_hoc_duc_settings_data';
     const CACHE_TTL = 3600;
 
     /**
@@ -115,7 +116,7 @@ class DuHocDucService
     }
 
     /**
-     * Get all merged settings
+     * Get all merged settings safely normalized for PHP 8.1+
      */
     public static function getSettings(): array
     {
@@ -125,18 +126,80 @@ class DuHocDucService
 
             $result = $defaults;
             foreach ($dbSettings as $k => $v) {
-                if (is_string($v) && (str_starts_with($v, '{') || str_starts_with($v, '['))) {
-                    $decoded = json_decode($v, true);
-                    if (json_last_error() === JSON_ERROR_NONE) {
-                        $result[$k] = $decoded;
-                        continue;
+                if (is_string($v)) {
+                    $trimmed = trim($v);
+                    if (str_starts_with($trimmed, '{') || str_starts_with($trimmed, '[')) {
+                        $decoded = json_decode($trimmed, true);
+                        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                            $result[$k] = $decoded;
+                            continue;
+                        }
                     }
                 }
-                $result[$k] = $v;
+                if ($v !== null) {
+                    $result[$k] = $v;
+                }
             }
 
-            return $result;
+            return self::normalizeSettings($result, $defaults);
         });
+    }
+
+    /**
+     * Normalize settings so malformed DB rows or null entries never cause array-offset errors
+     */
+    private static function normalizeSettings(array $result, array $defaults): array
+    {
+        $listKeys = ['values_items', 'conditions_items', 'nursing_advantages', 'nursing_challenges'];
+        foreach ($listKeys as $key) {
+            if (!is_array($result[$key] ?? null)) {
+                $result[$key] = $defaults[$key];
+                continue;
+            }
+            $result[$key] = array_values(array_filter(
+                $result[$key],
+                fn ($item) => is_scalar($item) && trim((string) $item) !== ''
+            ));
+        }
+
+        $imageKeys = ['banner_image', 'about_image', 'roadmap_image', 'nursing_banner_image'];
+        foreach ($imageKeys as $key) {
+            if (!is_string($result[$key] ?? null) || trim($result[$key]) === '') {
+                $result[$key] = $defaults[$key];
+            }
+        }
+
+        if (!is_array($result['blog_articles'] ?? null)) {
+            $result['blog_articles'] = $defaults['blog_articles'];
+        } else {
+            $articles = $result['blog_articles'];
+            if (isset($articles['title']) && is_string($articles['title'])) {
+                $articles = [$articles];
+            }
+
+            $normalizedArticles = [];
+            foreach ($articles as $art) {
+                if (!is_array($art)) {
+                    continue;
+                }
+                $title = trim((string) ($art['title'] ?? ''));
+                $summary = trim((string) ($art['summary'] ?? ''));
+                if ($title === '' && $summary === '') {
+                    continue;
+                }
+                $image = trim((string) ($art['image'] ?? ''));
+                $normalizedArticles[] = [
+                    'title' => $title,
+                    'date' => trim((string) ($art['date'] ?? date('d/m/Y'))),
+                    'summary' => $summary,
+                    'image' => $image !== '' ? $image : 'images/du-hoc-duc/blog_berlin.png',
+                    'link' => trim((string) ($art['link'] ?? '#form-dang-ky')) ?: '#form-dang-ky',
+                ];
+            }
+            $result['blog_articles'] = $normalizedArticles;
+        }
+
+        return $result;
     }
 
     /**
@@ -160,6 +223,7 @@ class DuHocDucService
         }
 
         Cache::forget(self::CACHE_KEY);
+        Cache::forget(self::LEGACY_CACHE_KEY);
     }
 
     /**
@@ -169,5 +233,6 @@ class DuHocDucService
     {
         Setting::byGroup('du_hoc_duc')->delete();
         Cache::forget(self::CACHE_KEY);
+        Cache::forget(self::LEGACY_CACHE_KEY);
     }
 }

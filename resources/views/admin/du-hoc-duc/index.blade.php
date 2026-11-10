@@ -208,7 +208,8 @@
 
                         <label class="form-label fw-bold mb-2">Danh sách các giá trị nổi bật (Kèm icon check):</label>
                         <div id="values-list-container">
-                            @foreach($settings['values_items'] as $index => $item)
+                            @foreach(($settings['values_items'] ?? []) as $index => $item)
+                                @continue(!is_scalar($item))
                                 <div class="input-group mb-2 value-item-row">
                                     <span class="input-group-text bg-warning text-dark fw-bold">{{ $index + 1 }}</span>
                                     <input type="text" name="values_items[]" class="form-control" value="{{ $item }}" required>
@@ -240,7 +241,8 @@
 
                         <label class="form-label fw-bold mb-2">Danh sách điều kiện tham gia (Đánh số tròn 1, 2, 3...):</label>
                         <div id="conditions-list-container">
-                            @foreach($settings['conditions_items'] as $index => $item)
+                            @foreach(($settings['conditions_items'] ?? []) as $index => $item)
+                                @continue(!is_scalar($item))
                                 <div class="input-group mb-2 condition-item-row">
                                     <span class="input-group-text bg-success text-white fw-bold">{{ $index + 1 }}</span>
                                     <input type="text" name="conditions_items[]" class="form-control" value="{{ $item }}" required>
@@ -384,7 +386,8 @@
                                         </button>
                                     </div>
                                     <div id="adv-container">
-                                        @foreach($settings['nursing_advantages'] as $adv)
+                                        @foreach(($settings['nursing_advantages'] ?? []) as $adv)
+                                            @continue(!is_scalar($adv))
                                             <div class="input-group input-group-sm mb-2">
                                                 <input type="text" name="nursing_advantages[]" class="form-control" value="{{ $adv }}">
                                                 <button type="button" class="btn btn-outline-danger" onclick="removeRow(this)"><i class="fas fa-times"></i></button>
@@ -401,7 +404,8 @@
                                         </button>
                                     </div>
                                     <div id="chal-container">
-                                        @foreach($settings['nursing_challenges'] as $chal)
+                                        @foreach(($settings['nursing_challenges'] ?? []) as $chal)
+                                            @continue(!is_scalar($chal))
                                             <div class="input-group input-group-sm mb-2">
                                                 <input type="text" name="nursing_challenges[]" class="form-control" value="{{ $chal }}">
                                                 <button type="button" class="btn btn-outline-danger" onclick="removeRow(this)"><i class="fas fa-times"></i></button>
@@ -431,12 +435,13 @@
                         </div>
 
                         <div id="articles-container">
-                            @foreach($settings['blog_articles'] as $index => $art)
+                            @foreach(($settings['blog_articles'] ?? []) as $index => $art)
+                                @continue(!is_array($art))
                                 <div class="border rounded p-3 mb-3 bg-light article-card" id="article_card_{{ $index }}">
                                     <div class="d-flex justify-content-between align-items-center mb-2 border-bottom pb-2">
                                         <h6 class="fw-bold mb-0 text-dark">
                                             <span class="badge bg-secondary me-2">Bài #{{ $index + 1 }}</span>
-                                            <span class="article-title-preview">{{ $art['title'] }}</span>
+                                            <span class="article-title-preview">{{ $art['title'] ?? '' }}</span>
                                         </h6>
                                         <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this.closest('.article-card'))">
                                             <i class="fas fa-trash me-1"></i> Xóa bài này
@@ -446,12 +451,12 @@
                                         <div class="col-md-8">
                                             <div class="mb-2">
                                                 <label class="form-label small fw-bold">Tiêu đề bài viết:</label>
-                                                <input type="text" name="blog_articles[{{ $index }}][title]" class="form-control form-control-sm" value="{{ $art['title'] }}" required>
+                                                <input type="text" name="blog_articles[{{ $index }}][title]" class="form-control form-control-sm" value="{{ $art['title'] ?? '' }}" required>
                                             </div>
                                             <div class="row g-2 mb-2">
                                                 <div class="col-md-6">
                                                     <label class="form-label small fw-bold">Ngày đăng:</label>
-                                                    <input type="text" name="blog_articles[{{ $index }}][date]" class="form-control form-control-sm" value="{{ $art['date'] }}">
+                                                    <input type="text" name="blog_articles[{{ $index }}][date]" class="form-control form-control-sm" value="{{ $art['date'] ?? date('d/m/Y') }}">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label small fw-bold">Liên kết nút Xem thêm:</label>
@@ -460,15 +465,15 @@
                                             </div>
                                             <div class="mb-2">
                                                 <label class="form-label small fw-bold">Tóm tắt nội dung bài viết:</label>
-                                                <textarea name="blog_articles[{{ $index }}][summary]" class="form-control form-control-sm" rows="3">{{ $art['summary'] }}</textarea>
+                                                <textarea name="blog_articles[{{ $index }}][summary]" class="form-control form-control-sm" rows="3">{{ $art['summary'] ?? '' }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-4 text-center">
                                             <label class="form-label small fw-bold">Ảnh bài viết:</label>
                                             <div class="bg-white p-2 rounded border mb-2">
-                                                <img src="{{ asset($art['image']) }}?v={{ time() }}" id="art_img_prev_{{ $index }}" alt="Ảnh bài viết" class="img-fluid rounded" style="max-height: 120px;">
+                                                <img src="{{ asset($art['image'] ?? 'images/du-hoc-duc/blog_berlin.png') }}?v={{ time() }}" id="art_img_prev_{{ $index }}" alt="Ảnh bài viết" class="img-fluid rounded" style="max-height: 120px;">
                                             </div>
-                                            <input type="hidden" name="blog_articles[{{ $index }}][image]" value="{{ $art['image'] }}">
+                                            <input type="hidden" name="blog_articles[{{ $index }}][image]" value="{{ $art['image'] ?? 'images/du-hoc-duc/blog_berlin.png' }}">
                                             <input type="file" name="blog_articles[{{ $index }}][new_image]" class="form-control form-control-sm" accept="image/*" onchange="previewFile(this, 'art_img_prev_{{ $index }}')">
                                         </div>
                                     </div>
@@ -580,7 +585,7 @@
         div.querySelector('input').focus();
     }
 
-    let articleCount = {{ count($settings['blog_articles']) }};
+    let articleCount = {{ count($settings['blog_articles'] ?? []) }};
     function addArticleItem() {
         const container = document.getElementById('articles-container');
         const idx = articleCount++;

@@ -53,7 +53,8 @@
             </div>
             <div class="block-content mt-4">
                 <div class="row g-4">
-                    @foreach($settings['values_items'] as $val)
+                    @foreach(($settings['values_items'] ?? []) as $val)
+                        @continue(!is_scalar($val))
                         <div class="col-12 col-lg-6">
                             <div class="item">
                                 <img src="{{ asset('images/du-hoc-duc/check.png') }}" alt="check">
@@ -99,7 +100,8 @@
                         </div>
                         <div class="block-list">
                             <ul>
-                                @foreach($settings['conditions_items'] as $cond)
+                                @foreach(($settings['conditions_items'] ?? []) as $cond)
+                                    @continue(!is_scalar($cond))
                                     <li>{{ $cond }}</li>
                                 @endforeach
                             </ul>
@@ -163,24 +165,25 @@
                 <h2>{{ $settings['blog_title'] ?? 'KIẾN THỨC DU HỌC' }}</h2>
             </div>
             <div class="block-content mt-4">
-                @foreach($settings['blog_articles'] as $art)
+                @foreach(($settings['blog_articles'] ?? []) as $art)
+                    @continue(!is_array($art))
                     <div class="duhoc_blog_item shadow-sm mb-4" data-aos="fade-up" data-aos-duration="800">
                         <div class="row duhoc_blog_item_row align-items-center">
                             <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                                 <div class="blog-thumb">
-                                    <img src="{{ asset($art['image']) }}" alt="{{ $art['title'] }}" class="img-fluid rounded w-100">
+                                    <img src="{{ asset($art['image'] ?? 'images/du-hoc-duc/blog_berlin.png') }}" alt="{{ $art['title'] ?? '' }}" class="img-fluid rounded w-100">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="blog-content">
                                     <h3>
-                                        <a href="{{ $art['link'] ?? '#form-dang-ky' }}" title="{{ $art['title'] }}">{{ $art['title'] }}</a>
+                                        <a href="{{ $art['link'] ?? '#form-dang-ky' }}" title="{{ $art['title'] ?? '' }}">{{ $art['title'] ?? '' }}</a>
                                     </h3>
                                     <div class="time-post text-muted mb-2">
                                         <i class="far fa-calendar-alt me-1 text-warning"></i> {{ $art['date'] ?? date('d/m/Y') }}
                                     </div>
                                     <p class="justify text-muted">
-                                        {{ $art['summary'] }}
+                                        {{ $art['summary'] ?? '' }}
                                     </p>
                                     <div class="duhoc_blog_item-btn mt-3">
                                         <a class="dub_btn dub_blog_btn" href="{{ $art['link'] ?? '#form-dang-ky' }}" title="Tìm hiểu thêm">

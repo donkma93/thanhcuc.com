@@ -188,7 +188,8 @@
                                 <div class="p-3 bg-white rounded-3 border h-100">
                                     <h5 class="fw-bold text-success mb-2"><i class="fas fa-thumbs-up me-2"></i>Thuận lợi</h5>
                                     <ul class="small ps-3 mb-0 text-muted space-y-1">
-                                        @foreach($settings['nursing_advantages'] as $adv)
+                                        @foreach(($settings['nursing_advantages'] ?? []) as $adv)
+                                            @continue(!is_scalar($adv))
                                             <li>{{ $adv }}</li>
                                         @endforeach
                                     </ul>
@@ -198,7 +199,8 @@
                                 <div class="p-3 bg-white rounded-3 border h-100">
                                     <h5 class="fw-bold text-danger mb-2"><i class="fas fa-exclamation-circle me-2"></i>Thử thách</h5>
                                     <ul class="small ps-3 mb-0 text-muted space-y-1">
-                                        @foreach($settings['nursing_challenges'] as $chal)
+                                        @foreach(($settings['nursing_challenges'] ?? []) as $chal)
+                                            @continue(!is_scalar($chal))
                                             <li>{{ $chal }}</li>
                                         @endforeach
                                     </ul>
